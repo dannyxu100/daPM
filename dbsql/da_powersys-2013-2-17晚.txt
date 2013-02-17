@@ -1,0 +1,438 @@
+-- phpMyAdmin SQL Dump
+-- version 3.2.0.1
+-- httpwww.phpmyadmin.net
+--
+-- 主机 localhost
+-- 生成日期 2013 年 02 月 17 日 1514
+-- 服务器版本 5.5.8
+-- PHP 版本 5.3.3
+
+SET SQL_MODE=NO_AUTO_VALUE_ON_ZERO;
+
+--
+-- 数据库 `da_powersys`
+--
+CREATE DATABASE `da_powersys` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `da_powersys`;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_group`
+--
+
+CREATE TABLE IF NOT EXISTS `p_group` (
+  `pg_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '组id',
+  `pg_pid` int(10) NOT NULL COMMENT '所属父组id',
+  `pg_sort` int(10) NOT NULL COMMENT '排序',
+  `pg_name` varchar(50) NOT NULL COMMENT '组名称',
+  `pg_date` datetime NOT NULL COMMENT '组创建时间',
+  `pg_remark` text NOT NULL COMMENT '备注',
+  PRIMARY KEY (`pg_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- 转存表中的数据 `p_group`
+--
+
+INSERT INTO `p_group` (`pg_id`, `pg_pid`, `pg_sort`, `pg_name`, `pg_date`, `pg_remark`) VALUES
+(1, -1, 0, '成都网联天下（工作组）', '0000-00-00 000000', ''),
+(2, 1, 10, '行政1组', '0000-00-00 000000', ''),
+(3, 1, 0, '总监1组', '0000-00-00 000000', ''),
+(4, 1, 5, '经理1组', '0000-00-00 000000', ''),
+(5, 1, 30, '普通员工', '0000-00-00 000000', ''),
+(6, 1, 1, '总监2组', '0000-00-00 000000', ''),
+(7, 1, 11, '行政2组', '0000-00-00 000000', ''),
+(8, 1, 6, '经理2组', '0000-00-00 000000', '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_group2role`
+--
+
+CREATE TABLE IF NOT EXISTS `p_group2role` (
+  `g2r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '组映射角色id',
+  `g2r_pgid` int(10) NOT NULL COMMENT '组id',
+  `g2r_prid` int(10) NOT NULL COMMENT '角色id',
+  PRIMARY KEY (`g2r_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+
+--
+-- 转存表中的数据 `p_group2role`
+--
+
+INSERT INTO `p_group2role` (`g2r_id`, `g2r_pgid`, `g2r_prid`) VALUES
+(5, 3, 2),
+(11, 6, 2);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_log`
+--
+
+CREATE TABLE IF NOT EXISTS `p_log` (
+  `pl_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '日志id',
+  `pl_type` varchar(20) NOT NULL COMMENT '操作类型',
+  `pl_conent` varchar(2000) NOT NULL COMMENT '操作内容',
+  `pl_puid` int(10) NOT NULL COMMENT '操作人',
+  `pl_date` datetime NOT NULL COMMENT '操作时间',
+  PRIMARY KEY (`pl_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `p_log`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_menu`
+--
+
+CREATE TABLE IF NOT EXISTS `p_menu` (
+  `m_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '菜单id',
+  `m_pid` int(10) NOT NULL COMMENT '菜单父id',
+  `m_name` varchar(50) CHARACTER SET utf8 NOT NULL COMMENT '菜单名',
+  `m_level` int(10) NOT NULL COMMENT '菜单级别',
+  `m_sort` int(10) NOT NULL COMMENT '排序',
+  `m_url` varchar(1000) CHARACTER SET utf8 NOT NULL COMMENT '页面链接地址',
+  `m_img` varchar(1000) CHARACTER SET utf8 NOT NULL COMMENT '图标文件地址',
+  `m_remark` text CHARACTER SET utf8 NOT NULL COMMENT '备注',
+  PRIMARY KEY (`m_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='系统菜单表' AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `p_menu`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_menu2role`
+--
+
+CREATE TABLE IF NOT EXISTS `p_menu2role` (
+  `m2r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '菜单角色映射id',
+  `m2r_pmid` int(10) NOT NULL COMMENT '菜单id',
+  `m2r_prid` int(10) NOT NULL COMMENT '角色id',
+  PRIMARY KEY (`m2r_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='菜单角色映射表' AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `p_menu2role`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_org`
+--
+
+CREATE TABLE IF NOT EXISTS `p_org` (
+  `po_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '部门id',
+  `po_pid` int(10) NOT NULL COMMENT '父级部门id',
+  `po_sort` int(10) NOT NULL COMMENT '排序',
+  `po_name` varchar(50) NOT NULL COMMENT '部门名称',
+  `po_date` datetime NOT NULL COMMENT '创建时间',
+  `po_remark` text NOT NULL COMMENT '备注',
+  PRIMARY KEY (`po_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=70 ;
+
+--
+-- 转存表中的数据 `p_org`
+--
+
+INSERT INTO `p_org` (`po_id`, `po_pid`, `po_sort`, `po_name`, `po_date`, `po_remark`) VALUES
+(0, -1, 0, '成都网联天下（部门）', '0000-00-00 000000', ''),
+(1, 0, 1, '技术部', '2013-01-30 160942', '网联天下技术部，网页设计、SHOPEX、人人帮。'),
+(2, 0, 10, '客服部', '2013-01-23 161050', 'SEO网络优化推广。'),
+(3, 1, 0, '程序组', '2013-01-29 161147', 'PHP,ASP,切片。'),
+(38, 1, 0, '设计组', '0000-00-00 000000', ''),
+(57, 2, 0, '商友客服组', '0000-00-00 000000', ''),
+(58, 0, 0, '总经办', '0000-00-00 000000', ''),
+(59, 0, 0, '财务部', '0000-00-00 000000', ''),
+(60, 66, 0, '商友市场部', '0000-00-00 000000', ''),
+(61, 66, 0, '商派市场部', '0000-00-00 000000', ''),
+(62, 2, 0, 'SEO客服组', '0000-00-00 000000', ''),
+(64, 0, 0, '人事行政部', '0000-00-00 000000', ''),
+(65, 2, 0, 'ShopEx客服组', '0000-00-00 000000', ''),
+(66, 0, 5, '市场部', '0000-00-00 000000', ''),
+(68, 1, 0, '新建部门', '0000-00-00 000000', ''),
+(69, 66, 0, '新建部门', '0000-00-00 000000', '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_power`
+--
+
+CREATE TABLE IF NOT EXISTS `p_power` (
+  `pp_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '权限id',
+  `pp_pid` int(10) NOT NULL COMMENT '父权限id',
+  `pp_name` varchar(50) NOT NULL COMMENT '权限名称',
+  `pp_code` varchar(50) NOT NULL COMMENT '权限编码',
+  `pp_sort` int(10) NOT NULL COMMENT '排序',
+  `pp_date` datetime NOT NULL COMMENT '创建日期',
+  `pp_remark` text NOT NULL COMMENT '备注',
+  PRIMARY KEY (`pp_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
+
+--
+-- 转存表中的数据 `p_power`
+--
+
+INSERT INTO `p_power` (`pp_id`, `pp_pid`, `pp_name`, `pp_code`, `pp_sort`, `pp_date`, `pp_remark`) VALUES
+(1, -1, '成都网联天下（权限模块）', 'rootpower', 0, '0000-00-00 000000', ''),
+(3, 1, '系统功能', 'sys', 0, '2013-02-12 000000', ''),
+(4, 3, '桌面', 'sys_desk', 0, '2013-02-12 000000', '工作桌面'),
+(5, 3, '部门管理', 'sys_depart', 0, '2013-02-12 000000', ''),
+(6, 3, '人员管理', 'sys_user', 0, '2013-02-12 000000', ''),
+(7, 3, '工作组管理', 'sys_group', 0, '2013-02-12 000000', ''),
+(8, 3, '角色管理', 'sys_role', 0, '2013-02-12 000000', ''),
+(9, 3, '权限管理', 'sys_power', 0, '2013-02-12 000000', ''),
+(10, 1, '业务功能', 'biz', 10, '2013-02-12 000000', ''),
+(11, 10, '创建项目', 'biz_project', 0, '2013-02-12 000000', ''),
+(12, 10, '创建日志', 'biz_log', 0, '2013-02-12 000000', ''),
+(13, 3, '权限类型管理', 'sys_powertype', 0, '2013-02-12 000000', ''),
+(14, 10, '修改密码', 'biz_updatepwd', 0, '2013-02-13 000000', ''),
+(15, 1, '业务流程', '', 20, '2013-02-13 000000', ''),
+(16, 15, '人事请假', '', 0, '2013-02-13 000000', ''),
+(17, 15, '企业网建', '', 10, '0000-00-00 000000', ''),
+(18, 15, '商派项目', '', 30, '0000-00-00 000000', '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_power2group`
+--
+
+CREATE TABLE IF NOT EXISTS `p_power2group` (
+  `p2g_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '组映射权限id',
+  `p2g_pgid` int(10) NOT NULL COMMENT '组id',
+  `p2g_ppid` int(10) NOT NULL COMMENT '权限id',
+  `p2g_ptid` int(10) NOT NULL COMMENT '权限类型id',
+  PRIMARY KEY (`p2g_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `p_power2group`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_power2role`
+--
+
+CREATE TABLE IF NOT EXISTS `p_power2role` (
+  `p2r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '角色映射权限id',
+  `p2r_prid` int(10) NOT NULL COMMENT '角色id',
+  `p2r_ppid` int(10) NOT NULL COMMENT '权限id',
+  `p2r_ptid` int(10) NOT NULL COMMENT '权限类型id',
+  PRIMARY KEY (`p2r_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
+
+--
+-- 转存表中的数据 `p_power2role`
+--
+
+INSERT INTO `p_power2role` (`p2r_id`, `p2r_prid`, `p2r_ppid`, `p2r_ptid`) VALUES
+(7, 5, 5, 1),
+(8, 5, 6, 1),
+(9, 5, 7, 4),
+(10, 5, 7, 3),
+(11, 5, 13, 2),
+(12, 5, 13, 3),
+(13, 5, 9, 2),
+(15, 2, 4, 2),
+(16, 2, 5, 2),
+(17, 2, 7, 2),
+(18, 2, 6, 2),
+(19, 2, 8, 2),
+(20, 2, 9, 2),
+(21, 2, 13, 2),
+(23, 2, 11, 2),
+(24, 2, 12, 2),
+(25, 2, 14, 2),
+(29, 6, 6, 4),
+(30, 3, 7, 3),
+(31, 3, 8, 3),
+(32, 3, 9, 4),
+(33, 3, 13, 4),
+(34, 5, 18, 1),
+(35, 5, 17, 1),
+(37, 5, 16, 1);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_power2user`
+--
+
+CREATE TABLE IF NOT EXISTS `p_power2user` (
+  `p2u_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户映射权限id',
+  `p2u_puid` int(10) NOT NULL COMMENT '用户id',
+  `p2u_ppid` int(10) NOT NULL COMMENT '权限id',
+  `p2u_ptid` int(10) NOT NULL COMMENT '权限类型id',
+  PRIMARY KEY (`p2u_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `p_power2user`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_powertype`
+--
+
+CREATE TABLE IF NOT EXISTS `p_powertype` (
+  `pt_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '权限类型id',
+  `pt_code` varchar(20) NOT NULL COMMENT '权限类型编码',
+  `pt_name` varchar(100) NOT NULL COMMENT '权限类型名称',
+  `pt_sort` int(10) NOT NULL COMMENT '排序',
+  `pt_remark` text NOT NULL COMMENT '备注',
+  PRIMARY KEY (`pt_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- 转存表中的数据 `p_powertype`
+--
+
+INSERT INTO `p_powertype` (`pt_id`, `pt_code`, `pt_name`, `pt_sort`, `pt_remark`) VALUES
+(1, 'read', '可访问', 0, ''),
+(2, 'manage', '可管理', 30, ''),
+(3, 'delete', '可删除', 20, ''),
+(4, 'create', '可新建', 10, '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_role`
+--
+
+CREATE TABLE IF NOT EXISTS `p_role` (
+  `pr_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '角色id',
+  `pr_pid` int(10) NOT NULL COMMENT '父级角色id',
+  `pr_name` varchar(50) NOT NULL COMMENT '角色名称',
+  `pr_sort` int(10) NOT NULL COMMENT '排序',
+  `pr_date` datetime NOT NULL COMMENT '角色创建时间',
+  `pr_remark` text NOT NULL COMMENT '备注',
+  PRIMARY KEY (`pr_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- 转存表中的数据 `p_role`
+--
+
+INSERT INTO `p_role` (`pr_id`, `pr_pid`, `pr_name`, `pr_sort`, `pr_date`, `pr_remark`) VALUES
+(1, -1, '成都网联天下（角色）', 0, '0000-00-00 000000', ''),
+(2, 1, '总经理', 10, '2013-02-13 000000', ''),
+(3, 1, '项目经理', 20, '2013-02-13 000000', ''),
+(4, 1, '新建角色', 30, '2013-02-13 000000', ''),
+(5, 1, '超级管理员', 0, '2013-02-13 000000', ''),
+(6, 2, '新建角色', 0, '0000-00-00 000000', '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_user`
+--
+
+CREATE TABLE IF NOT EXISTS `p_user` (
+  `pu_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户id号',
+  `pu_oid` int(10) NOT NULL COMMENT '所属组织id号',
+  `pu_code` varchar(50) NOT NULL COMMENT '账号',
+  `pu_pwd` varchar(50) NOT NULL COMMENT '密码',
+  `pu_name` varchar(20) NOT NULL COMMENT '姓名',
+  `pu_gender` varchar(4) NOT NULL COMMENT '性别',
+  `pu_phone` varchar(50) NOT NULL COMMENT '手机',
+  `pu_telephone` varchar(50) NOT NULL COMMENT '电话',
+  `pu_address` varchar(500) NOT NULL COMMENT '地址',
+  `pu_lastlogin` datetime NOT NULL COMMENT '最后一次登陆系统',
+  `pu_logincount` int(11) NOT NULL COMMENT '登陆系统次数',
+  `pu_remark` text NOT NULL COMMENT '备注',
+  PRIMARY KEY (`pu_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
+
+--
+-- 转存表中的数据 `p_user`
+--
+
+INSERT INTO `p_user` (`pu_id`, `pu_oid`, `pu_code`, `pu_pwd`, `pu_name`, `pu_gender`, `pu_phone`, `pu_telephone`, `pu_address`, `pu_lastlogin`, `pu_logincount`, `pu_remark`) VALUES
+(1, 1, 'xufei', '1', '徐飞', '男', '13688387776', '', '成都市青羊区八宝街', '0000-00-00 000000', 0, '设计，项目进度，营销策划'),
+(2, 3, 'yangjun', '', '杨俊', '男', '', '', '', '0000-00-00 000000', 0, ''),
+(3, 3, 'zhangkai', '', '张凯', '男', '', '', '', '0000-00-00 000000', 0, 'php,进度管理'),
+(4, 38, 'xiaodan', '', '肖丹', '女', '', '', '', '0000-00-00 000000', 0, '设计'),
+(5, 1, 'gaoyan', '', '高燕', '女', '', '', '', '0000-00-00 000000', 0, ''),
+(6, 38, 'jiujun', '', '刘峻', '男', '', '', '', '0000-00-00 000000', 0, '设计组  '),
+(7, 1, 'wangzheng', '', '王正', '', '', '', '', '0000-00-00 000000', 0, ''),
+(8, 1, 'wangyuting', '', '王钰婷', '', '', '', '', '0000-00-00 000000', 0, ''),
+(9, 38, 'wangxiujuan', '', '王秀娟', '女', '', '', '', '0000-00-00 000000', 0, '王秀娟'),
+(10, 1, 'dongting', '', '董婷', '', '', '', '', '0000-00-00 000000', 0, ''),
+(11, 1, 'chencong', '', '陈聪', '', '', '', '', '0000-00-00 000000', 0, ''),
+(12, 58, 'gaosiwei', '', '高思伟', '', '', '', '', '0000-00-00 000000', 0, '总经办'),
+(13, 1, 'zhuyunsheng', '', '朱芸生', '', '', '', '', '0000-00-00 000000', 0, ''),
+(14, 1, 'yantao', '', '闫涛', '', '', '', '', '0000-00-00 000000', 0, ''),
+(15, 1, 'zhouwei', '', '周维', '', '', '', '', '0000-00-00 000000', 0, ''),
+(16, 1, 'dengshuai', '', '邓帅', '', '', '', '', '0000-00-00 000000', 0, ''),
+(17, 1, 'lidan', '', '李丹', '', '', '', '', '0000-00-00 000000', 0, ''),
+(18, 58, '666', '3213sfdsf', '测试数据', '', '12312321321', '321321321', 'fdsfdsfds发的身份的', '0000-00-00 000000', 0, 'fdsfdsafd '),
+(19, 58, '666', '3213sfdsf', '测试数据', '', '12312321321', '321321321', 'fdsfdsfds发的身份的', '0000-00-00 000000', 0, 'fdsfdsafd '),
+(20, 64, 'zhangxiang', '666', '张祥', '', '13688387777', '13688387777', '北京12318文化市场举报热线药品服务许可证(京)-经营-2010-0048', '0000-00-00 000000', 0, '北京12318文化市场举报热线药品服务许可证(京)-经营-2010-0048'),
+(22, 64, 'leijiaxin', '666', '雷佳欣', '', '', '', '', '0000-00-00 000000', 0, '驻市场行政助理'),
+(23, 64, 'zhouyunpeng', '666', '周澐芃', '', '', '', '', '0000-00-00 000000', 0, '前台');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_user2group`
+--
+
+CREATE TABLE IF NOT EXISTS `p_user2group` (
+  `u2g_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户映射组id',
+  `u2g_puid` int(10) NOT NULL COMMENT '用户id',
+  `u2g_pgid` int(10) NOT NULL COMMENT '组id',
+  PRIMARY KEY (`u2g_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=112 ;
+
+--
+-- 转存表中的数据 `p_user2group`
+--
+
+INSERT INTO `p_user2group` (`u2g_id`, `u2g_puid`, `u2g_pgid`) VALUES
+(107, 20, 2),
+(108, 22, 2),
+(109, 23, 2),
+(110, 1, 3),
+(111, 4, 3);
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `p_user2role`
+--
+
+CREATE TABLE IF NOT EXISTS `p_user2role` (
+  `u2r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户映射角色id',
+  `u2r_puid` int(10) NOT NULL COMMENT '用户id',
+  `u2r_prid` int(10) NOT NULL COMMENT '角色id',
+  PRIMARY KEY (`u2r_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=ucs2 AUTO_INCREMENT=10 ;
+
+--
+-- 转存表中的数据 `p_user2role`
+--
+
+INSERT INTO `p_user2role` (`u2r_id`, `u2r_puid`, `u2r_prid`) VALUES
+(7, 12, 2),
+(8, 1, 3),
+(9, 1, 5);
