@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <HEAD>
+  <TITLE>人员管理</TITLE>
+	<link rel="stylesheet" href="/css/base.css">
+	<link rel="stylesheet" href="/plugin/ztree/zTreeStyle.css" type="text/css">
+ 
+	<style type="text/css">
+		.ztree li span.button.add {
+			margin-left:2px;
+			margin-right: -1px;
+			background-position:-144px 0;
+			vertical-align:top;
+			*vertical-align:middle
+		}
+		
+		.header {height:30px; line-height:30px; padding:0px 15px; font-weight:bold; border-bottom:1px solid #ccc; background:#f0f0f0;}
+		
+		.item{float:left; padding:2px; margin:5px; height:18px; line-height:18px;border:1px solid #aaa;background:#eee;cursor:pointer;}
+	</style>
+ </HEAD>
+<BODY>
+<div>
+	<div class="header">
+		工作组选择面板
+	</div>
+
+	<table class="tablesolid" style="width:100%">
+		<tr>
+			<td style="width:200px;vertical-align:top;"><ul id="grouptree" class="ztree"></ul></td>
+			<td style="vertical-align:top;">
+				<table id="tb_list" style="width:100%;">
+					<tbody name="head">
+						<tr>
+							<td style="width:30px;">序</td>
+							<td style="width:50px;">名称</td>
+							<td style="width:50px;">账号</td>
+							<td style="width:80px;">手机</td>
+							<td>地址</td>
+							<td>备注</td>
+						</tr>
+					</tbody>
+					<tbody name="body" style="display:none">
+						<tr value="{pu_id}">
+							<td name="order">{order}</td>
+							<td name="pu_name" >{pu_name}</td>
+							<td name="pu_code" >{pu_code}</td>
+							<td name="pu_phone" >{pu_phone}</td>
+							<td name="pu_address" >{pu_address}</td>
+							<td name="pu_remark" edit="1">{pu_remark}</td>
+						</tr>
+						<!--
+						<tr>
+							<td colspan="7" name="order">{order}</td>
+						</tr>
+						-->
+					</tbody>
+					<tbody name="foot">
+						<tr>
+							<td  colspan="6" name="sum_order">
+								共<span id="tb_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条，
+								共<span id="tb_list_pagecount2" style="color:#c26220">0</span>&nbsp;页，
+								当前在第<span id="tb_list_pageindex2" style="color:#c26220">0</span>&nbsp;页　
+								<span id="tb_list_pageinfo">&nbsp;</span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+	</table>
+	<table style="width:100%;border:1px solid #ccc; ">
+		<tr><td>选中的工作组 <span style="color:#f00">(双击取消)</span>:</td></tr>
+		<tr><td id="out_pad"></td></tr>
+	</table>
+	<div style="text-align:center;padding:5px;clear:both;">
+		<input type="button" style="width:80px; height:30px;" onclick="backitem();" value="确定" /> 
+		<input type="button" style="width:80px; height:30px;" onclick="clear();" value="清空" />
+	</div>
+</div>
+</BODY>
+</HTML>
+
+
+<script type="text/javascript" src="/js/jquery-1.8.3.js"></script>
+<script type="text/javascript" src="/plugin/ztree/jquery.ztree.core-3.5.min.js"></script>
+<script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
+
+<script type="text/javascript" src="js/select_group.js"></script>
+

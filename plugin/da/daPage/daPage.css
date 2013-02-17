@@ -1,0 +1,43 @@
+﻿/*
+	author: danny.xu
+	date:		2011-4-30 15:11:58
+	description:	分页条daPage样式
+
+*/
+.daPage { display:inline-block; vertical-align:middle; font-size: 12px; margin:2px 0px;}
+        
+.daPage a {
+	text-decoration: none;
+	border: solid 1px #ddd;
+	color: #333;
+	background: #fff;
+}
+
+.daPage a, 
+.daPage span {
+	display: block;
+	float: left;
+	padding: 2px 3px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	min-width:1em;
+	text-align:center;
+}
+
+.daPage .omit {
+	margin: 0px,
+	padding: 0px;
+}
+
+.daPage .current {
+	background: #26B;
+	color: #fff;
+	border: solid 1px #444;
+}
+
+.daPage .current.prev, 
+.daPage .current.next{
+	color:#ddd;
+	border-color:#ddd;
+	background:#fff;
+}
