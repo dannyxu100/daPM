@@ -1,41 +1,50 @@
 
-/**查看详细日志信息
+/**修改密码
 */
-function showlog( pid ){
+function updatepwd(){
 	daWin({
-		width: 800,
-		height: 600,
-		url: "logmanage.php?pid="+pid
+		width:350,
+		height:400,
+		url:"pwd.php"
 	});
-	
 }
 
-function clearDate(){
-	document.getElementById('date_from').value='';
-	document.getElementById('date_to').value='';
-	document.getElementById('keyword').value='';
+/**加载菜单
+*/
+function loadmenu(){
+	da.runDB("/sys_power/action/menu_get_list.php",{
+		dataType: "json",
+		pmlevel: 1
+	},function(data){
+		if("FALSE" != data ){
+			barObj = daToolbar({
+				parent: "#menubar"
+			});
+
+			for(var i=0; i<data.length; i++){
+				barObj.appendItem({
+					id: "bt_menu"+data[i].pm_id,
+					html: data[i].pm_name,
+					data: {
+						id: data[i].pm_id,
+						url: data[i].pm_url,
+						img: data[i].pm_img
+					},
+					click: function(){
+						// alert(this.data.url)
+						goto(this.data.url, false, "page"+this.data.id);	//需要缓存，缓存code为page+pm_id
+					}
+				});
+			}
+			
+			barObj.select("bt_menu"+data[0].pm_id);
+		}
+	});
 }
 
-$(function() {
-	$( "#date_from" ).datepicker({
-	  defaultDate: "+1w",
-	  changeMonth: true,
-	  numberOfMonths: 3,
-	  onClose: function( selectedDate ) {
-		$( "#date_to" ).datepicker( "option", "minDate", selectedDate );
-	  }
-	});
-	$( "#date_to" ).datepicker({
-	  defaultDate: "+1w",
-	  changeMonth: true,
-	  numberOfMonths: 3,
-	  onClose: function( selectedDate ) {
-		$( "#date_from" ).datepicker( "option", "maxDate", selectedDate );
-	  }
+
+daLoader("daIframe,daWin,daToolbar",function(){
+	da(function(){
+		loadmenu();
 	});
 });
-
-daLoader("daWin",function(){
-
-});
-
