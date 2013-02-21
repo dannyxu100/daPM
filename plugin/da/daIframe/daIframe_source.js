@@ -375,10 +375,10 @@ var daIframe = (function(){
 		
 		idx = url.lastIndexOf("/");
 		if (idx >= 0) pageName = url.substr(idx + 1);
-	  idx = pageName.indexOf("?") ;
-	  if (idx >= 0) pageName = pageName.substr(0, idx);
+		idx = pageName.indexOf("?") ;
+		if (idx >= 0) pageName = pageName.substr(0, idx);
 	  
-	  return pageName;
+		return pageName;
 	};
 	
 	/**移除缓存
