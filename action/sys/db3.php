@@ -1,7 +1,8 @@
-﻿<?php
+<?php
 //error_reporting(-1);
 
-	
+// include_once "log.php";
+
 class DB{
 	private $m_CONNSTR = Array(
 		0 => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"pm"),
@@ -51,10 +52,7 @@ class DB{
 	
 	// }
 	
-	function Destroy(){
-		// if($this->CheckResource()){
-		 // @mysql_close($this->link);
-		// }
+	function close(){
 		unset($this->m_CONNSTR);
 		unset($this->m_host);
 		unset($this->m_db);
@@ -62,8 +60,6 @@ class DB{
 		unset($this->m_pwd);
 		unset($this->m_pdo);
 		unset($this->m_error_msg);
-		// unset($this->fetch);
-		// unset($this->fetch_array);
 	}
 	
 	function CheckResource(){
@@ -105,13 +101,45 @@ class DB{
 		return $this->m_pdo->getAttribute(constant($attr));
 	}
 	
+	/**执行sql代码段(带参数)
+	*/
+	function runsqlbyparam($sql, $param){
+		$statement = $this->m_pdo->prepare($sql);
+		try {
+			return $statement->execute( $param );	//返回true 或 false
+		}
+		catch (pdoException $e) {
+			$this->seterror($e->getMessage());
+			return null;
+		}
+	}
+	
+	/**执行sql代码段(无参)
+	*/
+	function runsql($sql){
+		$num = func_num_args();
+		$args = func_get_args();
+		if(1 < $num){
+			return $this->runsqlbyparam($args[0], $args[1]);
+		}
+		
+		$statement = $this->m_pdo->prepare($sql);
+		try {
+			$statement->execute();		//返回true 或 false
+		}
+		catch (pdoException $e) {
+			$this->seterror($e->getMessage());
+			return null;
+		}
+	}
+	
 	/**查询数据集(带参数)
 	*/
-	function querylistbyparam($sql, $param){
-		$stm = $this->m_pdo->prepare($sql);
+	function getlistbyparam($sql, $param){
+		$statement = $this->m_pdo->prepare($sql);
 		try {
-			$stm->execute( $param );
-			return $stm->fetchAll();		//从结构集中取出一个包含了所有行的数组
+			$statement->execute( $param );
+			return $statement->fetchAll();		//从结构集中取出一个包含了所有行的数组
 		}
 		catch (pdoException $e) {
 			$this->seterror($e->getMessage());
@@ -119,19 +147,19 @@ class DB{
 		}
 	}
 
-	/**查询数据集
+	/**查询数据集(无参)
 	*/
-	function querylist($sql){
+	function getlist($sql){
 		$num = func_num_args();
 		$args = func_get_args();
 		if(1 < $num){
-			return $this->querylistbyparam($args[0], $args[1]);
+			return $this->getlistbyparam($args[0], $args[1]);
 		}
 		
-		$stm = $this->m_pdo->prepare($sql);
+		$statement = $this->m_pdo->prepare($sql);
 		try {
-			$stm->execute();
-			return $stm->fetchAll();		//从结构集中取出一个包含了所有行的数组
+			$statement->execute();
+			return $statement->fetchAll();		//从结构集中取出一个包含了所有行的数组
 			
 		}
 		catch (pdoException $e) {
@@ -144,11 +172,11 @@ class DB{
 	/**更新数据
 	*/
 	function update($sql, $param){
-		$stm = $this->m_pdo->prepare($sql);
+		$statement = $this->m_pdo->prepare($sql);
 			
 		try {
-			$stm->execute( $param );
-			return $stm->rowCount();		//返回影响行数
+			$statement->execute( $param );
+			return $statement->rowCount();		//返回影响行数
 		}
 		catch (pdoException $e) {
 			$this->seterror($e->getMessage());
@@ -156,5 +184,25 @@ class DB{
 		}
 	}
 	
+	/**删除数据
+	*/
+	function delete($sql, $param){
+		return $this->update($sql, $param);
+	}
+	
+	/**插入数据
+	*/
+	function insert($sql, $param){
+		$statement = $this->m_pdo->prepare($sql);
+			
+		try {
+			$statement->execute( $param );
+			return $this->m_pdo->lastInsertId(); //返回刚插入的一条记录的主键
+		}
+		catch (pdoException $e) {
+			$this->seterror($e->getMessage());
+			return null;
+		}
+	}
 }
 ?>
