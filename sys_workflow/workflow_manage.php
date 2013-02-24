@@ -15,16 +15,11 @@
 			*vertical-align:middle
 		}
 		
-		.header {height:30px; line-height:30px; padding:0px 15px; font-weight:bold; border-bottom:1px solid #ccc; background:#f0f0f0;}		
-		.righttitle {height:30px; line-height:30px; padding:0px 15px;border-bottom:0px solid #f0f0f0;}
-		
+		.header {height:30px; line-height:30px; padding:0px 15px; font-weight:bold; border-bottom:1px solid #ccc; background:#f0f0f0;}
 		.tableform>tbody>tr>td{padding:3px; vertical-align:top;}
 		
 		#tabbar{padding-top:5px;}
 		
-		a.wfitem {display:block; float:left; margin:5px; padding:3px 5px; border:1px solid #999; background:#f5f5f5;}
-		a.wfitem:hover { background:#fff; color:#000;}
-		a.curwfitem { background:#666;  border:1px solid #000; color:#fff;}
 	</style>
  </HEAD>
 <BODY>
@@ -37,10 +32,13 @@
 		</tr>
 		<tr>
 			<td style="vertical-align:top;">
-				<div class="righttitle">
-					<a id="wft_title" href="javascript:void(0)" onclick="updateworkflowtype()" value=""></a>
-					<a style="margin-left:320px;" href="javascript:void(0)" onclick="addworkflow()" >新建</a>
+				<div class="list_top_bar">
+					<div class="list_top_title"><a id="wft_title" href="javascript:void(0)" onclick="updateworkflowtype()" value=""></a></div>
+					<div class="list_top_tools">
+						<a class="item" href="javascript:void(0)" onclick="addworkflow();" ><img src="/sys_power/images/sys_icon/add.png" /> 新建</a>
+					</div>
 				</div>
+				
 			</td>
 		</tr>
 		<tr>
@@ -52,9 +50,13 @@
 					<div id="tabbar"></div>
 					
 					<div id="pad_workflow">
-						<div style="height:30px;line-height:30px; border-bottom:#999; text-align:right; padding:0px 20px;">
-							<a href="javascript:void(0)" onclick="updateworkflow();" >保存</a> |
+						<div class="list_top_bar">
+							<div class="list_top_title">基本信息</div>
+							<div class="list_top_tools">
+								<a class="item" href="javascript:void(0)" onclick="updateworkflow();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+							</div>
 						</div>
+						
 						<table class="tablesolid" style="width:100%">
 							<tr>
 								<td class="header" style="width:60px;">名称</td>
@@ -100,10 +102,14 @@
 					-->
 					
 					<div id="pad_placelist">
-						<div class="righttitle">库所列表 
-							<a style="margin-left:320px;" href="javascript:void(0)" onclick="addplace()" >添加</a> | 
-							<a href="javascript:void(0)" onclick="deleteu2r()" >删除</a> | 
+						<div class="list_top_bar">
+							<div class="list_top_title">库所列表</div>
+							<div class="list_top_tools">
+								<a class="item" href="javascript:void(0)" onclick="addplace();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加</a>
+								<a class="item" href="javascript:void(0)" onclick="deleteu2r();" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+							</div>
 						</div>
+						
 						<table id="tb_placelist" style="width:100%;">
 							<tbody name="head">
 								<tr>
@@ -145,10 +151,14 @@
 					
 
 					<div id="pad_tranlist">
-						<div class="righttitle">事务变迁列表 
-							<a style="margin-left:320px;" href="javascript:void(0)" onclick="addtran()" >添加</a> | 
-							<a href="javascript:void(0)" onclick="deleteg2r()" >删除</a> | 
+						<div class="list_top_bar">
+							<div class="list_top_title">事务变迁列表</div>
+							<div class="list_top_tools">
+								<a class="item" href="javascript:void(0)" onclick="addtran();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加</a>
+								<a class="item" href="javascript:void(0)" onclick="deleteg2r();" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+							</div>
 						</div>
+						
 						<table id="tb_tranlist" style="width:100%;">
 							<tbody name="head">
 								<tr>
@@ -159,12 +169,12 @@
 									<td style="width:80px;">类型</td>
 									<td style="width:60px;">时限</td>
 									<td style="width:80px;">完毕任务</td>
-									<td style="width:80px;">执行角色</td>
-									<td>备注</td>
+									<td>执行角色</td>
+									<td>表单</td>
 								</tr>
 							</tbody>
 							<tbody name="body" style="display:none">
-								<tr value="{t_id}">
+								<tr value="{t_id}" title="{t_remark}">
 									<td style="text-align:center;"><input type="checkbox" name="chkitem_tran" value="{t_id}" /></td>
 									<td name="order">{order}</td>
 									<td name="t_name" >{t_name}</td>
@@ -173,7 +183,7 @@
 									<td name="t_limit" >{t_limit}</td>
 									<td name="t_firetaskid" >{t_firetaskid}</td>
 									<td name="t_rolename" >{t_rolename}</td>
-									<td name="t_remark">{t_remark}</td>
+									<td name="t_formname" >{t_formname}</td>
 								</tr>
 							</tbody>
 							<tbody name="foot">
@@ -190,10 +200,14 @@
 					</div>
 					
 					<div id="pad_arclist">
-						<div class="righttitle">路由向弧列表 
-							<a style="margin-left:320px;" href="javascript:void(0)" onclick="addarc()" >添加</a> | 
-							<a href="javascript:void(0)" onclick="deleteg2r()" >删除</a> | 
+						<div class="list_top_bar">
+							<div class="list_top_title">路由向弧列表</div>
+							<div class="list_top_tools">
+								<a class="item" href="javascript:void(0)" onclick="addarc();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加</a>
+								<a class="item" href="javascript:void(0)" onclick="deleteg2r();" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+							</div>
 						</div>
+						
 						<table id="tb_arclist" style="width:100%;">
 							<tbody name="head">
 								<tr>
