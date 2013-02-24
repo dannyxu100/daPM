@@ -11,7 +11,7 @@
 </div>
 
 <style>
-#title_bar{border-bottom:solid 1px #666; height:35px; background:#f7f7f7;}
+#title_bar{border-bottom:solid 1px #666; height:35px; background:#ddd url(/image/bar_bg.jpg) repeat-x;}
 #info_bar{position:absolute;top:0px;right:15px;border:solid 0px #f0f0f0;}
 
 #user_list{color:#555; border-bottom:solid 0px #f0f0f0; padding:5px 15px; margin-bottom:10px;}
@@ -23,8 +23,8 @@
 
 <body>
 <div id="title_bar">
-	<!--<img src="image/logo.jpg"/>-->
-	<span style="font-size:20px; font-weight:bold;margin-left:10px;">项目进度管理</span> <span style="font-size:10px;">版本1.0</span>
+	<img src="image/logo.jpg"/>
+	<!--<span style="font-size:20px; font-weight:bold;margin-left:10px;">项目进度管理</span> <span style="font-size:10px;">版本1.0</span>-->
 	<div id="menubar"></div>
 </div>
 <div id="info_bar">
