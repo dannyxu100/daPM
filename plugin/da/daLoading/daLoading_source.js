@@ -118,7 +118,8 @@ daLoading.fnStruct = daLoading.prototype = {
 		
 		if( !this.dlParent.style.position ) this.dlParent.style.position = "relative";
 		this.dlBody.style.left = ( this.setting.left ) ? this.setting.left : (this.dlParent.offsetWidth - this.dlBody.offsetWidth)/2 + "px";
-		this.dlBody.style.top = ( this.setting.top ) ? this.setting.top : (this.dlParent.offsetHeight - this.dlBody.offsetHeight)/2+ "px";
+		// this.dlBody.style.top = ( this.setting.top ) ? this.setting.top : (this.dlParent.offsetHeight - this.dlBody.offsetHeight)/2+ "px";
+		this.dlBody.style.top = "0px";
 		
 		da(this.dlBody).bgiframe();
 	},
