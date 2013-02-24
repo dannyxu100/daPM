@@ -15,9 +15,7 @@
 			*vertical-align:middle
 		}
 		
-		.header {height:30px; line-height:30px; padding:0px 15px; font-weight:bold; border-bottom:1px solid #ccc; background:#f0f0f0;}		
-		.righttitle {height:30px; line-height:30px; padding:0px 15px;border-bottom:1px solid #f0f0f0;}
-		
+		.header {height:30px; line-height:30px; padding:0px 15px; font-weight:bold; border-bottom:1px solid #ccc; background:#f0f0f0;}
 		.tableform>tbody>tr>td{padding:3px; vertical-align:top;}
 		
 		#pg_remark{width:400px; height:120px;}
