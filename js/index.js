@@ -24,7 +24,7 @@ function loadmenu(){
 			for(var i=0; i<data.length; i++){
 				barObj.appendItem({
 					id: "bt_menu"+data[i].pm_id,
-					html: data[i].pm_name,
+					html: '<img src="'+ data[i].pm_img +'" /> '+data[i].pm_name,
 					data: {
 						id: data[i].pm_id,
 						url: data[i].pm_url,
