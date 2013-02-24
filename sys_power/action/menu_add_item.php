@@ -5,7 +5,7 @@
 	// include_once "../../action/sys/log.php";
 	// error_reporting(-1);
 
-	$db = new DB(1);
+	$db = new DB("da_powersys");
 	$res = $db->insert("insert into p_menu(pm_pid, pm_name) values(:pid, :name);",
 	array(
 		":pid"=>$_POST["pid"],

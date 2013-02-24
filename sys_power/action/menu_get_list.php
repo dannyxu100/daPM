@@ -22,7 +22,7 @@
 	}
 	$sql .= " order by pm_sort asc, pm_pid asc";
 	
-	$db = new DB(1);
+	$db = new DB("da_powersys");
 	$set = $db->getlist($sql, $param);
 	// echo $db->geterror();
 	$db->close();
