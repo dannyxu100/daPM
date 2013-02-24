@@ -158,7 +158,6 @@ function clicknode(treeId, treeNode){
 	loadworkflowlist();
 }
 
-
 /**加载路由向弧列表
 */
 function loadarc(){
@@ -193,6 +192,7 @@ function loadarc(){
 		}
 	}).load();
 }
+
 /**加载事务变迁列表
 */
 function loadtran(){
@@ -211,6 +211,12 @@ function loadtran(){
 		field: function( fld, val, row, ds ){
 			if("t_type"==fld ){
 				return "USER"==val?"人工操作":"AUTO"==val?"自动执行":"TIME"==val?"限时触发":"消息触发";
+			}
+			else if( "t_rolename" == fld ){
+				return '<a href="javascript:void(0)" onclick="selectrole('+ row.t_id +', this)">'+ (val?val:"空") +'</a>';
+			}
+			else if( "t_formname" == fld ){
+				return '<a href="javascript:void(0)" onclick="selectform('+ row.t_id +', this)">'+ (val?val:"空") +'</a>';
 			}
 			return val;
 		},
@@ -278,8 +284,8 @@ function loadworkflow(wfid, obj){
 	var daObj = da(obj);
 	g_wfid = wfid;
 	g_wfname = daObj.text();
-	da(".curwfitem").removeClass("curwfitem");
-	daObj.addClass("curwfitem");
+	da(".curmenu").removeClass("curmenu");
+	daObj.addClass("curmenu");
 	
 
 	loadinfo();
@@ -301,8 +307,63 @@ function loadworkflowlist(){
 		if("FALSE" != data){
 			for( var i=0; i<data.length; i++ ){
 				//delegate
-				da("#workflowlist").append('<a href="javascript:void(0)" class="wfitem" onclick="loadworkflow('+ data[i].wf_id +', this)">'+ (i+1)+"、"+data[i].wf_name +'</a>');
+				da("#workflowlist").append('<a href="javascript:void(0)" class="bt_menu" style="float:left;" onclick="loadworkflow('+ data[i].wf_id +', this)">'+ (i+1)+"、"+data[i].wf_name +'</a>');
 			}
+			
+			da(da(".bt_menu").dom[0]).click();
+		}
+	});
+}
+
+/**为事务变迁 选择执行角色
+*/
+function selectrole( tid, obj ){
+	daWin({
+		width: 400,
+		height:400,
+		url: "/sys_power/plugin/select_role.htm?ismulti=true",
+		back: function( data ){
+			var rids = "", rnames = "";
+			
+			for( var k in data ){
+				rids += k +",";
+				rnames += data[k].pr_name +",";
+			}
+			da.runDB("/sys_workflow/action/tran2role_update_list.php",{
+				rids: rids,
+				rnames: rnames,
+				tid: tid
+			},function(res){
+				if("FALSE"!=res){
+					da(obj).text(rnames);
+				}
+			});
+			
+		}
+	});
+}
+
+/**为事务变迁 选择执行相关表单
+*/
+function selectform( tid, obj ){
+	return;
+	
+	daWin({
+		width: 400,
+		height:400,
+		url: "/sys_power/plugin/select_role.htm",
+		back: function(id,name){
+			debugger;
+			da.runDB("/sys_workflow/action/tran_update_role.php",{
+				troleid: id,
+				trolename: name,
+				tid: tid
+			},function(res){debugger;
+				if("FALSE"!=res){
+					da(obj).text(name);
+				}
+			});
+			
 		}
 	});
 }
