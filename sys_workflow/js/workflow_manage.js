@@ -329,13 +329,14 @@ function selectrole( tid, obj ){
 				rids += k +",";
 				rnames += data[k].pr_name +",";
 			}
+			
 			da.runDB("/sys_workflow/action/tran2role_update_list.php",{
 				rids: rids,
 				rnames: rnames,
 				tid: tid
 			},function(res){
 				if("FALSE"!=res){
-					da(obj).text(rnames);
+					da(obj).text(rnames?rnames:"空");
 				}
 			});
 			
@@ -346,21 +347,25 @@ function selectrole( tid, obj ){
 /**为事务变迁 选择执行相关表单
 */
 function selectform( tid, obj ){
-	return;
-	
 	daWin({
-		width: 400,
+		width: 600,
 		height:400,
-		url: "/sys_power/plugin/select_role.htm",
-		back: function(id,name){
-			debugger;
-			da.runDB("/sys_workflow/action/tran_update_role.php",{
-				troleid: id,
-				trolename: name,
+		url: "/sys_businessform/plugin/select_businessform.htm?ismulti=true",
+		back: function( data ){
+			var bfids = "", bfnames = "";
+			
+			for( var k in data ){
+				bfids += k +",";
+				bfnames += data[k].bf_name +",";
+			}
+			
+			da.runDB("/sys_workflow/action/tran2form_update_list.php",{
+				bfids: bfids,
+				bfnames: bfnames,
 				tid: tid
-			},function(res){debugger;
+			},function(res){
 				if("FALSE"!=res){
-					da(obj).text(name);
+					da(obj).text(bfnames?bfnames:"空");
 				}
 			});
 			
