@@ -23,9 +23,6 @@
 		#bf_remark{width:400px; height:120px;}
 		#tabbar{padding-top:5px;}
 		
-		a.bfitem {display:block; float:left; margin:5px; padding:3px 5px; border:1px solid #999; background:#f5f5f5;}
-		a.bfitem:hover { background:#fff; color:#000;}
-		a.curbfitem { background:#666;  border:1px solid #000; color:#fff;}
 	</style>
  </HEAD>
 <BODY>

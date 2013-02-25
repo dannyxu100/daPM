@@ -31,7 +31,12 @@
 		<tr>
 			<td style="width:250px;vertical-align:top;"><ul id="treeDemo" class="ztree"></ul></td>
 			<td style="vertical-align:top;">
-				<div class="righttitle">基本信息 <a style="margin-left:320px;" href="javascript:void(0)" onclick="updatemenu()" >保存</a></div>
+				<div class="list_top_bar">
+					<div class="list_top_title">基本信息</div>
+					<div class="list_top_tools">
+						<a class="item" href="javascript:void(0)" onclick="updatemenu();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+					</div>
+				</div>
 				
 				<table id="orgform" class="tablesolid" style="width:100%">
 					<tr>
@@ -60,7 +65,7 @@
 					<tr>
 						<td class="header">预览</td>
 						<td colspan="3">
-							<img src="/image/menu/logo.jpg" style="width:32px;height:32px;margin:5px;"/>
+							<img id="pm_img_view" src="" style="margin:5px;"/>
 						</td>
 					</tr>
 					<tr>

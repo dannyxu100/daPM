@@ -14,12 +14,12 @@
 			*vertical-align:middle
 		}
 		
-		.header {height:30px; line-height:30px; padding:0px 15px; font-weight:bold; border-bottom:1px solid #ccc; background:#f0f0f0;}		
-		.righttitle {height:30px; line-height:30px; padding:0px 5px;border-bottom:1px solid #f0f0f0;}
+		.header {height:30px; line-height:30px; padding:0px 15px; font-weight:bold; border-bottom:1px solid #ccc; background:#f0f0f0;}
 		
 		.tableform>tbody>tr>td{padding:3px; vertical-align:top;}
 		
 		#po_remark{width:400px; height:120px;}
+		
 	</style>
  </HEAD>
 <BODY>
@@ -30,12 +30,14 @@
 		<tr>
 			<td style="width:200px;vertical-align:top;"><ul id="orgtree" class="ztree"></ul></td>
 			<td style="vertical-align:top;">
-				<div class="righttitle">成员信息列表
-				<a style="margin-left:320px;" href="javascript:void(0)" onclick="adduser();" >新建</a> | 
-				<a href="javascript:void(0)" >删除</a> | 
+				<div class="list_top_bar">
+					<div class="list_top_title">成员信息列表</div>
+					<div class="list_top_tools">
+						<a class="item" href="javascript:void(0)" onclick="adduser();" ><img src="/sys_power/images/sys_icon/add.png" /> 新建</a>
+						<a class="item" href="javascript:void(0)" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+					</div>
 				</div>
 				
-
 				<table id="tb_list" style="width:100%;">
 					<tbody name="head">
 						<tr>

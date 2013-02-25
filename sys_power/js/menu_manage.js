@@ -170,6 +170,8 @@ function clicknode(treeId, treeNode){
 			for(var fld in res[0]){
 				da("#"+fld).val(res[0][fld]);
 			}
+			
+			da("#pm_img_view").attr("src",res[0].pm_img);
 		}
 	});
 

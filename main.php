@@ -15,7 +15,7 @@
 
 <body>
 <form name="indexform" method="post" action="">
-<div id="user_list" style="width:800px;"> 
+<div id="user_list" style="width:800px;margin-top:5px;"> 
 <?php 
 	date_default_timezone_set('ETC/GMT-8');
 	function getTag( $tagname )

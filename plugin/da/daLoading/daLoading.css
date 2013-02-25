@@ -8,13 +8,13 @@
 	position:absolute; z-index:99999; top:0px; left:0px;
 	padding:6px; margin:5px;
 	border:1px solid #000;
-	background:#fff url(images/alpha_bg.png);
+	background:#000;
 	font-size:12px;
 	cursor:pointer;
 	text-align:center;
 }
-.dl_body .dl_text{ text-align:center; color:#222;}
-.dl_body .dl_text .loadingGif{width:32px;height:32px;background:#fff url("images/loading.gif") center no-repeat; }
+.dl_body .dl_text{ text-align:center; color:#f0f0f0;}
+.dl_body .dl_text .loadingGif{width:32px;height:32px;background:#000 url("images/loading.gif") center no-repeat; }
 
 .dl_body .dl_barbox{
 	position:relative;

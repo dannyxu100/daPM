@@ -13,7 +13,7 @@
 		$db->Query("START TRANSACTION");
 		
 		$rows = 0;
-		for($i=0; $i<count($arr)-1; $i++){
+		for($i=0; $i<count($arr)-1; $i++){		//","分隔引起最后多一个空数据,所以-1
 			if( 0 >= $db->GetNum("select * from p_user2group where u2g_puid=".$arr[$i]." and u2g_pgid=".$_POST["pgid"])){
 				$res = $db->Query("insert into p_user2group(u2g_puid, u2g_pgid) values(".$arr[$i].",".$_POST["pgid"].");");
 				$rows++;
@@ -35,6 +35,6 @@
 		echo 'FALSE';
 	}
 	
-	echo $db->error_message;
+	//echo $db->error_message;
 	$db->Destroy();
 ?>

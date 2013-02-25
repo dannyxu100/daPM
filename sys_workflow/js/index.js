@@ -3,13 +3,26 @@ var level2menu = "";
 /**显示隐藏左栏
 */
 function slideleft(){
-	var tdObj = da("#left_frame");
+	var tdObj = da("#left_frame"),
+		btObj = da("#bt_slide");
+		
 	if(tdObj.is(":hidden")){
 		tdObj.show();
+		btObj.dom[0].className = "bt_slideleft";
 	}
 	else{
 		tdObj.hide();
+		btObj.dom[0].className = "bt_slideright";
 	}
+}
+
+/**点击二级菜单
+*/
+function clickmenu( url, obj ){
+	da(".curmenu").removeClass("curmenu");
+	da(obj).addClass("curmenu");
+
+	goto( url );
 }
 
 /**加载菜单
@@ -23,9 +36,11 @@ function loadlevel2menu(){
 			var listObj = da("#menu_list");
 			
 			for(var i=0; i<data.length; i++){
-				listObj.append('<a class="bt_menu" href="javascript:void(0)" onclick="goto(\''+data[i].pm_url+'\')">'+ data[i].pm_name +'</a>');
+				listObj.append('<a class="bt_menu" href="javascript:void(0)" onclick="clickmenu(\''+data[i].pm_url+'\', this)"><img src="'+data[i].pm_img+'"/> '+ data[i].pm_name +'</a>');
 
 			}
+			
+			da(da(".bt_menu").dom[0]).click();
 		}
 	});
 }

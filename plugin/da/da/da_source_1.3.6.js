@@ -7756,6 +7756,24 @@ var daRe_until = /Until$/,
 			 return args;                                   		//返回整个参数列表对象
 		},
 		
+		/**检验url地址是否可有效访问
+		*/
+		urlCheck: function( url ){
+			var obj = da.ajaxSettings.xhr(),
+				res = false;
+			
+			obj.open("HEAD", url, false);
+			obj.send();
+			
+			if (obj.status == 200)
+				res = true;
+			
+			obj = null;
+			delete obj;
+			
+			return res;
+		},
+		
 		//获取最外层框架页面的窗体对象
 		getRootWin: function( sPage ){
 			var curWin = window;

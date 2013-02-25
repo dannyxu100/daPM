@@ -1,0 +1,70 @@
+-- phpMyAdmin SQL Dump
+-- version 3.2.0.1
+-- http://www.phpmyadmin.net
+--
+-- 主机: localhost
+-- 生成日期: 2013 年 02 月 24 日 15:31
+-- 服务器版本: 5.5.8
+-- PHP 版本: 5.3.3
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- 数据库: `da_bizform`
+--
+CREATE DATABASE `da_bizform` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `da_bizform`;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_businessform`
+--
+
+CREATE TABLE IF NOT EXISTS `b_businessform` (
+  `bf_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '业务单据id',
+  `bf_name` varchar(50) NOT NULL COMMENT '业务单名称',
+  `bf_bftid` int(10) NOT NULL COMMENT '业务单分类id',
+  `bf_sort` int(10) NOT NULL COMMENT '排序',
+  `bf_listhtml` text NOT NULL COMMENT '业务单list页面html代码',
+  `bf_formhtml` text NOT NULL COMMENT '业务单form页面html代码',
+  `bf_remark` text NOT NULL COMMENT '备注',
+  `bf_user` varchar(50) NOT NULL COMMENT '业务单创建者',
+  `bf_date` datetime NOT NULL COMMENT '业务单创建日期',
+  `bf_edituser` varchar(50) NOT NULL COMMENT '最近一次变更者',
+  `bf_editdate` datetime NOT NULL COMMENT '最近一次变更日期',
+  PRIMARY KEY (`bf_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- 转存表中的数据 `b_businessform`
+--
+
+INSERT INTO `b_businessform` (`bf_id`, `bf_name`, `bf_bftid`, `bf_sort`, `bf_listhtml`, `bf_formhtml`, `bf_remark`, `bf_user`, `bf_date`, `bf_edituser`, `bf_editdate`) VALUES
+(1, '请假单', 2, 0, '%3Ctable%20id=%22tb_list%22%20style=%22width:100%25;%22%3E%0A%09%3Ctbody%3E%0A%09%09%3Ctr%3E%0A%09%09%09%3Ctd%20style=%22text-align:center;%22%3E%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%E5%BA%8F%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%E5%BA%93%E6%89%80%E5%90%8D%E7%A7%B0%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%E6%96%B9%E5%90%91%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%E5%8F%98%E8%BF%81%E5%90%8D%E7%A7%B0%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%E6%8E%92%E5%BA%8F%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%E7%B1%BB%E5%9E%8B%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%E8%A1%A8%E8%BE%BE%E5%BC%8F%0A%09%09%09%3C/td%3E%0A%09%09%3C/tr%3E%0A%09%3C/tbody%3E%0A%09%3Ctbody%3E%0A%09%09%3Ctr%3E%0A%09%09%09%3Ctd%20style=%22text-align:center;%22%3E%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%7Border%7D%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%7Bp_name%7D%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%7Ba_direction%7D%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%7Bt_name%7D%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%7Ba_sort%7D%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%7Ba_type%7D%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%7Ba_precondition%7D%0A%09%09%09%3C/td%3E%0A%09%09%3C/tr%3E%0A%3C!--%0A%09%09%3Ctr%3E%0A%09%09%09%3Ctd%20colspan=%227%22%3E%0A%09%09%09%09%7Border%7D%0A%09%09%09%3C/td%3E%0A%09%09%3C/tr%3E%0A--%3E%0A%09%3C/tbody%3E%0A%09%3Ctbody%3E%0A%09%09%3Ctr%3E%0A%09%09%09%3Ctd%20colspan=%228%22%3E%0A%09%09%09%09%E5%85%B1%3Cspan%20id=%22tb_arclist_recordcount2%22%20style=%22color:#c26220;%22%3E0%3C/span%3E&nbsp;%E6%9D%A1%EF%BC%8C%0A%09%09%09%09%E5%85%B1%3Cspan%20id=%22tb_arclist_pagecount2%22%20style=%22color:#c26220;%22%3E0%3C/span%3E&nbsp;%E9%A1%B5%EF%BC%8C%0A%09%09%09%09%E5%BD%93%E5%89%8D%E5%9C%A8%E7%AC%AC%3Cspan%20id=%22tb_arclist_pageindex2%22%20style=%22color:#c26220;%22%3E0%3C/span%3E&nbsp;%E9%A1%B5%E3%80%80%20%3Cspan%20id=%22tb_arclist_pageinfo%22%3E&nbsp;%3C/span%3E%20%0A%09%09%09%3C/td%3E%0A%09%09%3C/tr%3E%0A%09%3C/tbody%3E%0A%3C/table%3E', '%3Cp%20style=%22text-align:center;%22%3E%0A%09%3Cspan%20style=%22font-size:24px;line-height:1.5;%22%3E%E8%AF%B7%E5%81%87%E5%8D%95%3C/span%3E%20%0A%3C/p%3E%0A%3Cp%3E%0A%09%3Cspan%20style=%22font-size:24px;line-height:1.5;%22%3E%20%0A%09%3Ctable%20style=%22width:100%25;%22%20cellpadding=%222%22%20cellspacing=%220%22%20border=%221%22%20bordercolor=%22#000000%22%3E%0A%09%09%3Ctbody%3E%0A%09%09%09%3Ctr%3E%0A%09%09%09%09%3Ctd%20colspan=%223%22%3E%0A%09%09%09%09%09%E8%AF%B7%E5%81%87%E4%BA%BA%EF%BC%9A%3Cbr%20/%3E%0A%09%09%09%09%3C/td%3E%0A%09%09%09%09%3Ctd%3E%0A%09%09%09%09%09%E6%97%A5%E6%9C%9F%EF%BC%9A%0A%09%09%09%09%3C/td%3E%0A%09%09%09%09%3Ctd%3E%0A%09%09%09%09%09%E7%BC%96%E5%8F%B7%EF%BC%9A%0A%09%09%09%09%3C/td%3E%0A%09%09%09%3C/tr%3E%0A%09%09%09%3Ctr%3E%0A%09%09%09%09%3Ctd%20rowspan=%223%22%3E%0A%09%09%09%09%09%3Cbr%20/%3E%0A%09%09%09%09%3C/td%3E%0A%09%09%09%09%3Ctd%20colspan=%224%22%3E%0A%09%09%09%09%09%3Cbr%20/%3E%0A%09%09%09%09%3C/td%3E%0A%09%09%09%3C/tr%3E%0A%09%09%09%3Ctr%3E%0A%09%09%09%09%3Ctd%20colspan=%224%22%3E%0A%09%09%09%09%09%3Cbr%20/%3E%0A%09%09%09%09%3C/td%3E%0A%09%09%09%3C/tr%3E%0A%09%09%09%3Ctr%3E%0A%09%09%09%09%3Ctd%20colspan=%222%22%3E%0A%09%09%09%09%09%3Cbr%20/%3E%0A%09%09%09%09%3C/td%3E%0A%09%09%09%09%3Ctd%20colspan=%222%22%3E%0A%09%09%09%09%09%3Cbr%20/%3E%0A%09%09%09%09%3C/td%3E%0A%09%09%09%3C/tr%3E%0A%09%09%09%3Ctr%3E%0A%09%09%09%09%3Ctd%3E%0A%09%09%09%09%09%E9%83%A8%E9%97%A8%E7%BB%8F%E7%90%86%EF%BC%9A%0A%09%09%09%09%3C/td%3E%0A%09%09%09%09%3Ctd%20colspan=%222%22%3E%0A%09%09%09%09%09%E9%83%A8%E9%97%A8%E6%80%BB%E7%9B%91%0A%09%09%09%09%3C/td%3E%0A%09%09%09%09%3Ctd%3E%0A%09%09%09%09%09%E5%AE%A1%E6%89%B9%E6%97%A5%E6%9C%9F%EF%BC%9A%0A%09%09%09%09%3C/td%3E%0A%09%09%09%09%3Ctd%3E%0A%09%09%09%09%09%3Cbr%20/%3E%0A%09%09%09%09%3C/td%3E%0A%09%09%09%3C/tr%3E%0A%09%09%3C/tbody%3E%0A%09%3C/table%3E%0A%3Cbr%20/%3E%0A%3Cimg%20src=%22http://api.map.baidu.com/staticimage?center=104.061852%252C30.592671&zoom=16&width=558&height=360&markers=104.061852%252C30.592671&markerStyles=l%252CA%22%20alt=%22%22%20/%3E%3Cbr%20/%3E%0A%3C/span%3E%20%0A%3C/p%3E', '', '徐飞', '2013-02-16 19:43:01', '徐飞', '2013-02-16 21:33:07'),
+(2, '企业网建业务单', 2, 2, '', '', '3232', '徐飞', '2013-02-16 19:48:36', '', '0000-00-00 00:00:00'),
+(3, 'SEO业务单', 2, 3, '', '', '', '徐飞', '2013-02-16 19:50:12', '徐飞', '2013-02-16 20:09:42');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_businessformtype`
+--
+
+CREATE TABLE IF NOT EXISTS `b_businessformtype` (
+  `bft_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '业务单分类id',
+  `bft_pid` int(10) NOT NULL COMMENT '业务单分类父id',
+  `bft_name` varchar(50) NOT NULL COMMENT '业务单分类名称',
+  `bft_sort` int(10) NOT NULL COMMENT '排序',
+  `bft_date` datetime NOT NULL COMMENT '创建日期',
+  `bft_remark` text NOT NULL COMMENT '备注',
+  PRIMARY KEY (`bft_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `b_businessformtype`
+--
+
+INSERT INTO `b_businessformtype` (`bft_id`, `bft_pid`, `bft_name`, `bft_sort`, `bft_date`, `bft_remark`) VALUES
+(1, -1, '成都网联天下（业务单分类）', 0, '2013-02-16 18:44:22', ''),
+(2, 1, '内部OA人事管理表单', 1, '2013-02-16 00:00:00', '');

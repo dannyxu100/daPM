@@ -6,9 +6,10 @@
 class DB{
 	private $m_CONNSTR = Array(
 		0 => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"pm"),
-		1 => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_powersys"),
-		2 => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_workflow"),
-		3 => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_bizform")
+		"pm" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"pm"),
+		"da_powersys" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_powersys"),
+		"da_workflow" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_workflow"),
+		"da_bizform" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_bizform")
 	);
 	
 	private $m_host;
@@ -80,12 +81,6 @@ class DB{
 	/**获取错误信息
 	*/
 	function geterror(){
-		$attributes = array(
-			"AUTOCOMMIT", "ERRMODE", "CASE", "CLIENT_VERSION", "CONNECTION_STATUS",
-			"ORACLE_NULLS", "PERSISTENT", "PREFETCH", "SERVER_INFO", "SERVER_VERSION",
-			"TIMEOUT"
-		);
-
 		return $this->m_error_msg;
 	}
 	
@@ -168,6 +163,22 @@ class DB{
 		}
 		
 	}
+
+	/**查询数据数量
+	*/
+	function getcount($sql){
+		$num = func_num_args();
+		$args = func_get_args();
+		
+		if(1 < $num){
+			$rows = $this->getlistbyparam($args[0], $args[1]);
+		}
+		else{
+			$rows = $this->getlist($sql);
+		}
+		
+		return count($rows);
+	}
 	
 	/**更新数据
 	*/
@@ -203,6 +214,24 @@ class DB{
 			$this->seterror($e->getMessage());
 			return null;
 		}
+	}
+	
+	/**启动事务处理
+	*/
+	function tran(){
+		$this->m_pdo->beginTransaction();
+	}
+	
+	/**提交事务处理
+	*/
+	function commit(){
+		$this->m_pdo->commit();
+	}
+	
+	/**回滚事务处理
+	*/
+	function back(){
+		$this->m_pdo->rollBack();
 	}
 }
 ?>

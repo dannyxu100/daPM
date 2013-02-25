@@ -8,14 +8,18 @@
 	display:inline-block; vertical-align:middle;
 	margin:2px; padding:0px;
 	border:solid #eee; border-width:0px 1px 1px 0px;
-	font-size:12px;
 }
 .daToolbar .item { 
 	float:left;
 	margin:0px; margin-left:-1px; padding:5px 10px;
-	border:1px solid #aaa; background:#f0f0f0;
+	border:1px solid #aaa; background:#f0f0f0 url(images/bar_bg.jpg);
 	list-style:none; 
+	font-size:12px; font-weight:bold; color:#555;
 	cursor:pointer;
+}
+.daToolbar .item img{
+	width:16px; height:16px;
+	vertical-align:middle;
 }
 .daToolbar .hover {
 	background:#fff;

@@ -40,7 +40,7 @@
 	$sql .= " where pm_id=:pmid";
 	$param = array_merge($param, array(":pmid"=>$_POST["pmid"]));
 	
-	$db = new DB(1);
+	$db = new DB("da_powersys");
 	$res = $db->update($sql, $param);
 	// print_r($param);
 	// print_r($sql);

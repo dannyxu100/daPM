@@ -195,8 +195,8 @@ function loadform(bfid, obj){
 	var daObj = da(obj);
 	g_bfid = bfid;
 	g_bfname = daObj.text();
-	da(".curbfitem").removeClass("curbfitem");
-	daObj.addClass("curbfitem");
+	da(".curmenu").removeClass("curmenu");
+	daObj.addClass("curmenu");
 	
 	loadinfo();
 }
@@ -213,8 +213,10 @@ function loadformlist(){
 		if("FALSE" != data){
 			for( var i=0; i<data.length; i++ ){
 				//delegate
-				da("#formlist").append('<a href="javascript:void(0)" class="bfitem" onclick="loadform('+ data[i].bf_id +', this)">'+ (i+1)+"、"+data[i].bf_name +'</a>');
+				da("#formlist").append('<a href="javascript:void(0)" class="bt_menu" style="float:left;" onclick="loadform('+ data[i].bf_id +', this)">'+ (i+1)+"、"+data[i].bf_name +'</a>');
 			}
+			
+			da(da(".bt_menu").dom[0]).click();
 		}
 	});
 }
