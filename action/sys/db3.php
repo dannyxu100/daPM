@@ -41,7 +41,8 @@ class DB{
 			$this->m_pwd,
 			array(
 				PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'",		//设置数据库信息编码
-				PDO::ATTR_ERRMODE =>PDO::ERRMODE_EXCEPTION				//启动异常信息
+				PDO::ATTR_ERRMODE =>PDO::ERRMODE_EXCEPTION,				//启动异常信息
+				PDO::ATTR_EMULATE_PREPARES => false						//禁用prepared statements的仿真效果, 禁止了所有可能的恶意SQL注入攻击
 			)
 		);
 		
