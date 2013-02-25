@@ -154,6 +154,11 @@
 				<div id="pad_powertree">
 					<ul id="treePower" class="ztree"></ul>
 				</div>
+				
+				<div id="pad_menutree">
+					<ul id="treeMenu" class="ztree"></ul>
+				</div>
+				
 			</td>
 		</tr>
 	</table>

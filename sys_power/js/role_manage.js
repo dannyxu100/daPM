@@ -64,13 +64,13 @@ function beforeRemove(treeId, treeNode) {
 				function(res){
 					if("FALSE"==res){
 						alert("操作失败");
-						loadtree();
+						loadroletree();
 					}
 				});
 			}
 			else{
 				alert("对不起，【" + treeNode.name + "】拥有下属部门，请先删除下属部门。");
-				loadtree();
+				loadroletree();
 			}
 		});
 	
@@ -103,7 +103,7 @@ function beforeRename(treeId, treeNode, newName) {
 			success: function(res){
 				if(res=="FALSE"){
 					alert("操作失败");
-					loadtree();
+					loadroletree();
 				}
 				
 			}
@@ -177,8 +177,9 @@ function clicknode(treeId, treeNode){
 
 }
 
-/*加载左边部门数据*/
-function loadtree(){
+
+/*加载左边角色树*/
+function loadroletree(){
 	 da.runDB("action/role_get_list.php",{
 	   dataType: "json"
 	   },
@@ -202,10 +203,62 @@ function loadtree(){
 }
 
 
+/**选中或取消权限
+*/
+function selectmenu(obj){
+	var arr = obj.id.split("_");
+		pm_id = arr[1];
+		
+	if(obj.checked){
+		da.runDB("/sys_power/action/menu2role_add_item.php",{
+			prid: g_prid,
+			pmid: pm_id
+			
+		},function(res){
+			if("FALSE" == res){
+				alert("设置失败");
+			}else{
+				alert("设置成功");
+			}
+		});
+	}
+	else{
+		da.runDB("/sys_power/action/menu2role_delete_item.php",{
+			prid: g_prid,
+			pmid: pm_id
+			
+		},function(res){
+			if("FALSE" == res){
+				alert("设置失败");
+			}else{
+				alert("设置成功");
+			}
+		});
+	}
+}
 
-var setting2 = {
+
+/**加载角色权限
+*/
+function loadmenu2role(){
+	da.runDB("/sys_power/action/menu2role_get_list.php",{
+		dataType: "json",
+		prid: g_prid
+		
+	},function(data){
+		var chkObj;
+		for(var i=0; i<data.length; i++){
+			chkObj = da("#chkmenu_"+ data[i].m2r_pmid);
+				
+			chkObj.dom[0].checked = true;
+			chkObj.attr("checked","true");
+		}
+	});
+}
+
+var setting3 = {
 	view: {
-		addDiyDom: addDiyDom
+		addDiyDom: addDiyDom3
 	},
 	data: {
 		simpleData: {
@@ -214,14 +267,37 @@ var setting2 = {
 	}
 };
 
-function addDiyDom(treeId, treeNode) {
+function addDiyDom3(treeId, treeNode) {
 	var aObj = $("#" + treeNode.tId + "_a");
 	
-	var editStr = g_html.replace(/{nodeid}/g, treeNode.id);
-	aObj.after(editStr);
+	aObj.after('<label class="chk_powertype"><input type="checkbox" id="chkmenu_'+ treeNode.id +'" onclick="selectmenu(this)"/>允许</label>');
 		
 }
 
+/*加载左边部门数据*/
+function loadmenutree(){
+	da.runDB("action/menu_get_list.php",{
+		dataType: "json"
+	},
+	function(data){
+		var zNodes = [];
+		for(var i=0; i<data.length; i++){
+			zNodes.push({
+				id: data[i].pm_id,
+				pId: data[i].pm_pid,
+				name: data[i].pm_name,
+				open: true
+			});
+		}
+
+		$.fn.zTree.init($("#treeMenu"), setting3, zNodes);
+		loadmenu2role();
+	},
+	function(msg){
+		//da.out(msg.responseText);
+	});
+	   
+}
 /**选中或取消权限
 */
 function selectpowertype(obj){
@@ -277,6 +353,25 @@ function loadpower2role(){
 	});
 }
 
+var setting2 = {
+	view: {
+		addDiyDom: addDiyDom
+	},
+	data: {
+		simpleData: {
+			enable: true
+		}
+	}
+};
+
+function addDiyDom(treeId, treeNode) {
+	var aObj = $("#" + treeNode.tId + "_a");
+	
+	var editStr = g_html.replace(/{nodeid}/g, treeNode.id);
+	aObj.after(editStr);
+		
+}
+
 /**加载权限树
 */
 function loadpowertree(){
@@ -322,6 +417,7 @@ function loadpowertype(){
 			g_html = g_html.join("");
 			
 			loadpowertree();
+			loadmenutree();
 		}
 	});
 	
@@ -406,7 +502,7 @@ function updaterole(){
 			else{
 				alert("修改成功。");
 			}
-			loadtree();
+			loadroletree();
 		}
 	});
 }
@@ -549,6 +645,7 @@ function loadtab(){
 			da("#pad_list").hide();
 			da("#pad_grouplist").hide();
 			da("#pad_powertree").hide();
+			da("#pad_menutree").hide();
 			da("#pad_info").show();
 		}
 	});
@@ -558,6 +655,7 @@ function loadtab(){
 			da("#pad_info").hide();
 			da("#pad_grouplist").hide();
 			da("#pad_powertree").hide();
+			da("#pad_menutree").hide();
 			da("#pad_list").show();
 		}
 	});
@@ -567,6 +665,7 @@ function loadtab(){
 			da("#pad_info").hide();
 			da("#pad_list").hide();
 			da("#pad_powertree").hide();
+			da("#pad_menutree").hide();
 			da("#pad_grouplist").show();
 		}
 	});
@@ -575,7 +674,17 @@ function loadtab(){
 			da("#pad_info").hide();
 			da("#pad_list").hide();
 			da("#pad_grouplist").hide();
+			da("#pad_menutree").hide();
 			da("#pad_powertree").show();
+		}
+	});
+	daTab0.appendItem("item05","角色导航菜单","",{
+		click:function(){
+			da("#pad_info").hide();
+			da("#pad_list").hide();
+			da("#pad_grouplist").hide();
+			da("#pad_powertree").hide();
+			da("#pad_menutree").show();
 		}
 	});
 	daTab0.click("item04");
@@ -586,7 +695,7 @@ daLoader("daUI,daDate,daMsg,daTab,daTable,daWin", function(){
 	/*页面加载完毕*/
 	$(document).ready(function(){
 		loadtab();
-		loadtree();
+		loadroletree();
 	});
 	
 	$( "#pr_date" ).datepicker({
