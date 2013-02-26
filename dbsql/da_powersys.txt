@@ -1,16 +1,16 @@
-ï»¿-- phpMyAdmin SQL Dump
--- version 2.11.2.1
+-- phpMyAdmin SQL Dump
+-- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
--- ä¸»æœº: localhost
--- ç”Ÿæˆæ—¥æœŸ: 2013 å¹´ 02 æœˆ 26 æ—¥ 08:22
--- æœåŠ¡å™¨ç‰ˆæœ¬: 5.0.45
--- PHP ç‰ˆæœ¬: 5.2.5
+-- Ö÷»ú: localhost
+-- Éú³ÉÈÕÆÚ: 2013 Äê 02 ÔÂ 24 ÈÕ 15:32
+-- ·şÎñÆ÷°æ±¾: 5.5.8
+-- PHP °æ±¾: 5.3.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 --
--- æ•°æ®åº“: `da_powersys`
+-- Êı¾İ¿â: `da_powersys`
 --
 CREATE DATABASE `da_powersys` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `da_powersys`;
@@ -18,48 +18,48 @@ USE `da_powersys`;
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_group`
+-- ±íµÄ½á¹¹ `p_group`
 --
 
-CREATE TABLE `p_group` (
-  `pg_id` int(10) NOT NULL auto_increment COMMENT 'ç»„id',
-  `pg_pid` int(10) NOT NULL COMMENT 'æ‰€å±çˆ¶ç»„id',
-  `pg_sort` int(10) NOT NULL COMMENT 'æ’åº',
-  `pg_name` varchar(50) NOT NULL COMMENT 'ç»„åç§°',
-  `pg_date` datetime NOT NULL COMMENT 'ç»„åˆ›å»ºæ—¶é—´',
-  `pg_remark` text NOT NULL COMMENT 'å¤‡æ³¨',
-  PRIMARY KEY  (`pg_id`)
+CREATE TABLE IF NOT EXISTS `p_group` (
+  `pg_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '×éid',
+  `pg_pid` int(10) NOT NULL COMMENT 'ËùÊô¸¸×éid',
+  `pg_sort` int(10) NOT NULL COMMENT 'ÅÅĞò',
+  `pg_name` varchar(50) NOT NULL COMMENT '×éÃû³Æ',
+  `pg_date` datetime NOT NULL COMMENT '×é´´½¨Ê±¼ä',
+  `pg_remark` text NOT NULL COMMENT '±¸×¢',
+  PRIMARY KEY (`pg_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_group`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_group`
 --
 
 INSERT INTO `p_group` (`pg_id`, `pg_pid`, `pg_sort`, `pg_name`, `pg_date`, `pg_remark`) VALUES
-(1, -1, 0, 'æˆéƒ½ç½‘è”å¤©ä¸‹ï¼ˆå·¥ä½œç»„ï¼‰', '0000-00-00 00:00:00', ''),
-(2, 1, 10, 'è¡Œæ”¿1ç»„', '0000-00-00 00:00:00', ''),
-(3, 1, 0, 'æ€»ç›‘1ç»„', '0000-00-00 00:00:00', ''),
-(4, 1, 5, 'ç»ç†1ç»„', '0000-00-00 00:00:00', ''),
-(5, 1, 30, 'æ™®é€šå‘˜å·¥', '0000-00-00 00:00:00', ''),
-(6, 1, 1, 'æ€»ç›‘2ç»„', '0000-00-00 00:00:00', ''),
-(7, 1, 11, 'è¡Œæ”¿2ç»„', '0000-00-00 00:00:00', ''),
-(8, 1, 6, 'ç»ç†2ç»„', '0000-00-00 00:00:00', '');
+(1, -1, 0, '³É¶¼ÍøÁªÌìÏÂ£¨¹¤×÷×é£©', '0000-00-00 00:00:00', ''),
+(2, 1, 10, 'ĞĞÕş1×é', '0000-00-00 00:00:00', ''),
+(3, 1, 0, '×Ü¼à1×é', '0000-00-00 00:00:00', ''),
+(4, 1, 5, '¾­Àí1×é', '0000-00-00 00:00:00', ''),
+(5, 1, 30, 'ÆÕÍ¨Ô±¹¤', '0000-00-00 00:00:00', ''),
+(6, 1, 1, '×Ü¼à2×é', '0000-00-00 00:00:00', ''),
+(7, 1, 11, 'ĞĞÕş2×é', '0000-00-00 00:00:00', ''),
+(8, 1, 6, '¾­Àí2×é', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_group2role`
+-- ±íµÄ½á¹¹ `p_group2role`
 --
 
-CREATE TABLE `p_group2role` (
-  `g2r_id` int(10) NOT NULL auto_increment COMMENT 'ç»„æ˜ å°„è§’è‰²id',
-  `g2r_pgid` int(10) NOT NULL COMMENT 'ç»„id',
-  `g2r_prid` int(10) NOT NULL COMMENT 'è§’è‰²id',
-  PRIMARY KEY  (`g2r_id`)
+CREATE TABLE IF NOT EXISTS `p_group2role` (
+  `g2r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '×éÓ³Éä½ÇÉ«id',
+  `g2r_pgid` int(10) NOT NULL COMMENT '×éid',
+  `g2r_prid` int(10) NOT NULL COMMENT '½ÇÉ«id',
+  PRIMARY KEY (`g2r_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_group2role`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_group2role`
 --
 
 INSERT INTO `p_group2role` (`g2r_id`, `g2r_pgid`, `g2r_prid`) VALUES
@@ -69,202 +69,199 @@ INSERT INTO `p_group2role` (`g2r_id`, `g2r_pgid`, `g2r_prid`) VALUES
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_log`
+-- ±íµÄ½á¹¹ `p_log`
 --
 
-CREATE TABLE `p_log` (
-  `pl_id` int(10) NOT NULL auto_increment COMMENT 'æ—¥å¿—id',
-  `pl_type` varchar(20) NOT NULL COMMENT 'æ“ä½œç±»å‹',
-  `pl_conent` varchar(2000) NOT NULL COMMENT 'æ“ä½œå†…å®¹',
-  `pl_puid` int(10) NOT NULL COMMENT 'æ“ä½œäºº',
-  `pl_date` datetime NOT NULL COMMENT 'æ“ä½œæ—¶é—´',
-  PRIMARY KEY  (`pl_id`)
+CREATE TABLE IF NOT EXISTS `p_log` (
+  `pl_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ÈÕÖ¾id',
+  `pl_type` varchar(20) NOT NULL COMMENT '²Ù×÷ÀàĞÍ',
+  `pl_conent` varchar(2000) NOT NULL COMMENT '²Ù×÷ÄÚÈİ',
+  `pl_puid` int(10) NOT NULL COMMENT '²Ù×÷ÈË',
+  `pl_date` datetime NOT NULL COMMENT '²Ù×÷Ê±¼ä',
+  PRIMARY KEY (`pl_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_log`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_log`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_menu`
+-- ±íµÄ½á¹¹ `p_menu`
 --
 
-CREATE TABLE `p_menu` (
-  `pm_id` int(10) NOT NULL auto_increment COMMENT 'èœå•id',
-  `pm_pid` int(10) NOT NULL COMMENT 'èœå•çˆ¶id',
-  `pm_name` varchar(50) character set utf8 NOT NULL COMMENT 'èœå•å',
-  `pm_level` int(10) NOT NULL COMMENT 'èœå•çº§åˆ«',
-  `pm_sort` int(10) NOT NULL COMMENT 'æ’åº',
-  `pm_url` varchar(1000) character set utf8 NOT NULL COMMENT 'é¡µé¢é“¾æ¥åœ°å€',
-  `pm_img` varchar(1000) character set utf8 NOT NULL COMMENT 'å›¾æ ‡æ–‡ä»¶åœ°å€',
-  `pm_remark` text character set utf8 NOT NULL COMMENT 'å¤‡æ³¨',
-  PRIMARY KEY  (`pm_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='ç³»ç»Ÿèœå•è¡¨' AUTO_INCREMENT=30 ;
+CREATE TABLE IF NOT EXISTS `p_menu` (
+  `pm_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '²Ëµ¥id',
+  `pm_pid` int(10) NOT NULL COMMENT '²Ëµ¥¸¸id',
+  `pm_name` varchar(50) CHARACTER SET utf8 NOT NULL COMMENT '²Ëµ¥Ãû',
+  `pm_level` int(10) NOT NULL COMMENT '²Ëµ¥¼¶±ğ',
+  `pm_sort` int(10) NOT NULL COMMENT 'ÅÅĞò',
+  `pm_url` varchar(1000) CHARACTER SET utf8 NOT NULL COMMENT 'Ò³ÃæÁ´½ÓµØÖ·',
+  `pm_img` varchar(1000) CHARACTER SET utf8 NOT NULL COMMENT 'Í¼±êÎÄ¼şµØÖ·',
+  `pm_remark` text CHARACTER SET utf8 NOT NULL COMMENT '±¸×¢',
+  PRIMARY KEY (`pm_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='ÏµÍ³²Ëµ¥±í' AUTO_INCREMENT=30 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_menu`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_menu`
 --
 
 INSERT INTO `p_menu` (`pm_id`, `pm_pid`, `pm_name`, `pm_level`, `pm_sort`, `pm_url`, `pm_img`, `pm_remark`) VALUES
-(1, -1, 'æˆéƒ½ç½‘è”å¤©ä¸‹ï¼ˆèœå•ç®¡ç†ï¼‰', 0, 1, '#', '/image/menu/logo.jpg', ''),
-(2, 1, 'æˆ‘çš„æ¡Œé¢', 1, 0, '/main.php?menu=2', '/sys_power/images/menu_icon/desk.png', ''),
-(3, 1, 'æƒé™ç®¡ç†', 1, 10, '/sys_power/index.php?menu=3', '/sys_power/images/menu_icon/power.png', ''),
-(5, 3, 'éƒ¨é—¨ç®¡ç†', 2, 1, '/sys_power/org_manage.php', '/sys_power/images/menu_icon/depart.png', ''),
-(6, 3, 'äººå‘˜ç®¡ç†', 2, 10, '/sys_power/user_manage.php', '/sys_power/images/menu_icon/user.png', ''),
-(7, 3, 'å·¥ä½œç»„ç®¡ç†', 2, 20, '/sys_power/group_manage.php', '/sys_power/images/menu_icon/group.png', ''),
-(8, 3, 'è§’è‰²ç®¡ç†', 2, 30, '/sys_power/role_manage.php', '/sys_power/images/menu_icon/role.png', ''),
-(9, 3, 'åŠŸèƒ½æ¨¡å—ç®¡ç†', 2, 40, '/sys_power/power_manage.php', '/sys_power/images/menu_icon/module.png', ''),
-(10, 3, 'æƒé™ç±»å‹ç®¡ç†', 2, 50, '/sys_power/powertype_manage.php', '/sys_power/images/menu_icon/keytype.png', ''),
-(11, 1, 'æµç¨‹ç®¡ç†', 1, 20, '/sys_workflow/index.php?menu=11', '/sys_power/images/menu_icon/workflow.png', ''),
-(12, 11, 'å·¥ä½œæµç®¡ç†', 2, 0, '/sys_workflow/workflow_manage.php', '/sys_power/images/menu_icon/flow.png', ''),
-(13, 11, 'è¡¨å•ç®¡ç†', 2, 0, '/sys_businessform/businessform_manage.php', '/sys_power/images/menu_icon/form.png', ''),
-(14, 3, 'å¯¼èˆªèœå•ç®¡ç†', 2, 60, '/sys_power/menu_manage.php', '/sys_power/images/menu_icon/menu.png', ''),
-(21, 1, 'ç³»ç»Ÿç®¡ç†', 1, 100, '/sys_power/config_manage.php?menu=21', '/sys_power/images/menu_icon/setting.png', ''),
-(22, 1, 'ä¸šåŠ¡é¢æ¿', 1, 0, '/web/biz/biz_list.php', '/sys_power/images/menu_icon/business.png', ''),
-(23, 21, 'å¯é€‰é¡¹é…ç½®', 2, 0, '', '', ''),
-(24, 21, 'åŸºæœ¬ä¿¡æ¯é…ç½®', 2, 0, '', '', ''),
-(25, 1, 'OAåŠå…¬', 1, 0, '', '/sys_power/images/menu_icon/book.png', ''),
-(26, 25, 'æ—¥è®°ä¾¿ç­¾', 2, 0, '', '', ''),
-(28, 25, 'é€šçŸ¥å…¬å‘Š', 2, 0, '', '', ''),
-(29, 3, 'ä¸Šä¸‹çº§ç®¡ç†', 2, 5, '', '/sys_power/images/menu_icon/relation.png', '');
+(1, -1, '³É¶¼ÍøÁªÌìÏÂ£¨²Ëµ¥¹ÜÀí£©', 0, 1, '#', '/image/menu/logo.jpg', ''),
+(2, 1, 'ÎÒµÄ×ÀÃæ', 1, 0, '/main.php?menu=2', '/sys_power/images/menu_icon/desk.png', ''),
+(3, 1, 'È¨ÏŞ¹ÜÀí', 1, 10, '/sys_power/index.php?menu=3', '/sys_power/images/menu_icon/power.png', ''),
+(5, 3, '²¿ÃÅ¹ÜÀí', 2, 1, '/sys_power/org_manage.php', '/sys_power/images/menu_icon/depart.png', ''),
+(6, 3, 'ÈËÔ±¹ÜÀí', 2, 10, '/sys_power/user_manage.php', '/sys_power/images/menu_icon/user.png', ''),
+(7, 3, '¹¤×÷×é¹ÜÀí', 2, 20, '/sys_power/group_manage.php', '/sys_power/images/menu_icon/group.png', ''),
+(8, 3, '½ÇÉ«¹ÜÀí', 2, 30, '/sys_power/role_manage.php', '/sys_power/images/menu_icon/role.png', ''),
+(9, 3, '¹¦ÄÜÄ£¿é¹ÜÀí', 2, 40, '/sys_power/power_manage.php', '/sys_power/images/menu_icon/module.png', ''),
+(10, 3, 'È¨ÏŞÀàĞÍ¹ÜÀí', 2, 50, '/sys_power/powertype_manage.php', '/sys_power/images/menu_icon/keytype.png', ''),
+(11, 1, 'Á÷³Ì¹ÜÀí', 1, 20, '/sys_workflow/index.php?menu=11', '/sys_power/images/menu_icon/workflow.png', ''),
+(12, 11, '¹¤×÷Á÷¹ÜÀí', 2, 0, '/sys_workflow/workflow_manage.php', '/sys_power/images/menu_icon/flow.png', ''),
+(13, 11, '±íµ¥¹ÜÀí', 2, 0, '/sys_businessform/businessform_manage.php', '/sys_power/images/menu_icon/form.png', ''),
+(14, 3, 'µ¼º½²Ëµ¥¹ÜÀí', 2, 60, '/sys_power/menu_manage.php', '/sys_power/images/menu_icon/menu.png', ''),
+(21, 1, 'ÏµÍ³¹ÜÀí', 1, 100, '/sys_power/config_manage.php?menu=21', '/sys_power/images/menu_icon/setting.png', ''),
+(22, 1, 'ÒµÎñÃæ°å', 1, 0, '/web/biz/biz_list.php', '/sys_power/images/menu_icon/business.png', ''),
+(23, 21, '¿ÉÑ¡ÏîÅäÖÃ', 2, 0, '', '', ''),
+(24, 21, '»ù±¾ĞÅÏ¢ÅäÖÃ', 2, 0, '', '', ''),
+(25, 1, 'OA°ì¹«', 1, 0, '', '/sys_power/images/menu_icon/book.png', ''),
+(26, 25, 'ÈÕ¼Ç±ãÇ©', 2, 0, '', '', ''),
+(28, 25, 'Í¨Öª¹«¸æ', 2, 0, '', '', ''),
+(29, 3, 'ÉÏÏÂ¼¶¹ÜÀí', 2, 5, '', '/sys_power/images/menu_icon/relation.png', '');
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_menu2role`
+-- ±íµÄ½á¹¹ `p_menu2role`
 --
 
-CREATE TABLE `p_menu2role` (
-  `m2r_id` int(10) NOT NULL auto_increment COMMENT 'èœå•è§’è‰²æ˜ å°„id',
-  `m2r_pmid` int(10) NOT NULL COMMENT 'èœå•id',
-  `m2r_prid` int(10) NOT NULL COMMENT 'è§’è‰²id',
-  PRIMARY KEY  (`m2r_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='èœå•è§’è‰²æ˜ å°„è¡¨' AUTO_INCREMENT=3 ;
+CREATE TABLE IF NOT EXISTS `p_menu2role` (
+  `m2r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '²Ëµ¥½ÇÉ«Ó³Éäid',
+  `m2r_pmid` int(10) NOT NULL COMMENT '²Ëµ¥id',
+  `m2r_prid` int(10) NOT NULL COMMENT '½ÇÉ«id',
+  PRIMARY KEY (`m2r_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='²Ëµ¥½ÇÉ«Ó³Éä±í' AUTO_INCREMENT=1 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_menu2role`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_menu2role`
 --
 
-INSERT INTO `p_menu2role` (`m2r_id`, `m2r_pmid`, `m2r_prid`) VALUES
-(1, 1, 3),
-(2, 2, 3);
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_org`
+-- ±íµÄ½á¹¹ `p_org`
 --
 
-CREATE TABLE `p_org` (
-  `po_id` int(10) NOT NULL auto_increment COMMENT 'éƒ¨é—¨id',
-  `po_pid` int(10) NOT NULL COMMENT 'çˆ¶çº§éƒ¨é—¨id',
-  `po_sort` int(10) NOT NULL COMMENT 'æ’åº',
-  `po_name` varchar(50) NOT NULL COMMENT 'éƒ¨é—¨åç§°',
-  `po_date` datetime NOT NULL COMMENT 'åˆ›å»ºæ—¶é—´',
-  `po_remark` text NOT NULL COMMENT 'å¤‡æ³¨',
-  PRIMARY KEY  (`po_id`)
+CREATE TABLE IF NOT EXISTS `p_org` (
+  `po_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '²¿ÃÅid',
+  `po_pid` int(10) NOT NULL COMMENT '¸¸¼¶²¿ÃÅid',
+  `po_sort` int(10) NOT NULL COMMENT 'ÅÅĞò',
+  `po_name` varchar(50) NOT NULL COMMENT '²¿ÃÅÃû³Æ',
+  `po_date` datetime NOT NULL COMMENT '´´½¨Ê±¼ä',
+  `po_remark` text NOT NULL COMMENT '±¸×¢',
+  PRIMARY KEY (`po_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=70 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_org`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_org`
 --
 
 INSERT INTO `p_org` (`po_id`, `po_pid`, `po_sort`, `po_name`, `po_date`, `po_remark`) VALUES
-(0, -1, 0, 'æˆéƒ½ç½‘è”å¤©ä¸‹ï¼ˆéƒ¨é—¨ï¼‰', '0000-00-00 00:00:00', ''),
-(1, 0, 1, 'æŠ€æœ¯éƒ¨', '2013-01-30 16:09:42', 'ç½‘è”å¤©ä¸‹æŠ€æœ¯éƒ¨ï¼Œç½‘é¡µè®¾è®¡ã€SHOPEXã€äººäººå¸®ã€‚'),
-(2, 0, 10, 'å®¢æœéƒ¨', '2013-01-23 16:10:50', 'SEOç½‘ç»œä¼˜åŒ–æ¨å¹¿ã€‚'),
-(3, 1, 0, 'ç¨‹åºç»„', '2013-01-29 16:11:47', 'PHP,ASP,åˆ‡ç‰‡ã€‚'),
-(38, 1, 0, 'è®¾è®¡ç»„', '0000-00-00 00:00:00', ''),
-(57, 2, 0, 'å•†å‹å®¢æœç»„', '0000-00-00 00:00:00', ''),
-(58, 0, 0, 'æ€»ç»åŠ', '0000-00-00 00:00:00', ''),
-(59, 0, 0, 'è´¢åŠ¡éƒ¨', '0000-00-00 00:00:00', ''),
-(60, 66, 0, 'å•†å‹å¸‚åœºéƒ¨', '0000-00-00 00:00:00', ''),
-(61, 66, 0, 'å•†æ´¾å¸‚åœºéƒ¨', '0000-00-00 00:00:00', ''),
-(62, 2, 0, 'SEOå®¢æœç»„', '0000-00-00 00:00:00', ''),
-(64, 0, 0, 'äººäº‹è¡Œæ”¿éƒ¨', '0000-00-00 00:00:00', ''),
-(65, 2, 0, 'ShopExå®¢æœç»„', '0000-00-00 00:00:00', ''),
-(66, 0, 5, 'å¸‚åœºéƒ¨', '0000-00-00 00:00:00', ''),
-(68, 1, 0, 'æ–°å»ºéƒ¨é—¨', '0000-00-00 00:00:00', ''),
-(69, 66, 0, 'æ–°å»ºéƒ¨é—¨', '0000-00-00 00:00:00', '');
+(0, -1, 0, '³É¶¼ÍøÁªÌìÏÂ£¨²¿ÃÅ£©', '0000-00-00 00:00:00', ''),
+(1, 0, 1, '¼¼Êõ²¿', '2013-01-30 16:09:42', 'ÍøÁªÌìÏÂ¼¼Êõ²¿£¬ÍøÒ³Éè¼Æ¡¢SHOPEX¡¢ÈËÈË°ï¡£'),
+(2, 0, 10, '¿Í·ş²¿', '2013-01-23 16:10:50', 'SEOÍøÂçÓÅ»¯ÍÆ¹ã¡£'),
+(3, 1, 0, '³ÌĞò×é', '2013-01-29 16:11:47', 'PHP,ASP,ÇĞÆ¬¡£'),
+(38, 1, 0, 'Éè¼Æ×é', '0000-00-00 00:00:00', ''),
+(57, 2, 0, 'ÉÌÓÑ¿Í·ş×é', '0000-00-00 00:00:00', ''),
+(58, 0, 0, '×Ü¾­°ì', '0000-00-00 00:00:00', ''),
+(59, 0, 0, '²ÆÎñ²¿', '0000-00-00 00:00:00', ''),
+(60, 66, 0, 'ÉÌÓÑÊĞ³¡²¿', '0000-00-00 00:00:00', ''),
+(61, 66, 0, 'ÉÌÅÉÊĞ³¡²¿', '0000-00-00 00:00:00', ''),
+(62, 2, 0, 'SEO¿Í·ş×é', '0000-00-00 00:00:00', ''),
+(64, 0, 0, 'ÈËÊÂĞĞÕş²¿', '0000-00-00 00:00:00', ''),
+(65, 2, 0, 'ShopEx¿Í·ş×é', '0000-00-00 00:00:00', ''),
+(66, 0, 5, 'ÊĞ³¡²¿', '0000-00-00 00:00:00', ''),
+(68, 1, 0, 'ĞÂ½¨²¿ÃÅ', '0000-00-00 00:00:00', ''),
+(69, 66, 0, 'ĞÂ½¨²¿ÃÅ', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_power`
+-- ±íµÄ½á¹¹ `p_power`
 --
 
-CREATE TABLE `p_power` (
-  `pp_id` int(10) NOT NULL auto_increment COMMENT 'æƒé™id',
-  `pp_pid` int(10) NOT NULL COMMENT 'çˆ¶æƒé™id',
-  `pp_name` varchar(50) NOT NULL COMMENT 'æƒé™åç§°',
-  `pp_code` varchar(50) NOT NULL COMMENT 'æƒé™ç¼–ç ',
-  `pp_sort` int(10) NOT NULL COMMENT 'æ’åº',
-  `pp_date` datetime NOT NULL COMMENT 'åˆ›å»ºæ—¥æœŸ',
-  `pp_remark` text NOT NULL COMMENT 'å¤‡æ³¨',
-  PRIMARY KEY  (`pp_id`)
+CREATE TABLE IF NOT EXISTS `p_power` (
+  `pp_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'È¨ÏŞid',
+  `pp_pid` int(10) NOT NULL COMMENT '¸¸È¨ÏŞid',
+  `pp_name` varchar(50) NOT NULL COMMENT 'È¨ÏŞÃû³Æ',
+  `pp_code` varchar(50) NOT NULL COMMENT 'È¨ÏŞ±àÂë',
+  `pp_sort` int(10) NOT NULL COMMENT 'ÅÅĞò',
+  `pp_date` datetime NOT NULL COMMENT '´´½¨ÈÕÆÚ',
+  `pp_remark` text NOT NULL COMMENT '±¸×¢',
+  PRIMARY KEY (`pp_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=19 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_power`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_power`
 --
 
 INSERT INTO `p_power` (`pp_id`, `pp_pid`, `pp_name`, `pp_code`, `pp_sort`, `pp_date`, `pp_remark`) VALUES
-(1, -1, 'æˆéƒ½ç½‘è”å¤©ä¸‹ï¼ˆæƒé™æ¨¡å—ï¼‰', 'rootpower', 0, '0000-00-00 00:00:00', ''),
-(3, 1, 'ç³»ç»ŸåŠŸèƒ½', 'sys', 0, '2013-02-12 00:00:00', ''),
-(4, 3, 'æ¡Œé¢', 'sys_desk', 0, '2013-02-12 00:00:00', 'å·¥ä½œæ¡Œé¢'),
-(5, 3, 'éƒ¨é—¨ç®¡ç†', 'sys_depart', 0, '2013-02-12 00:00:00', ''),
-(6, 3, 'äººå‘˜ç®¡ç†', 'sys_user', 0, '2013-02-12 00:00:00', ''),
-(7, 3, 'å·¥ä½œç»„ç®¡ç†', 'sys_group', 0, '2013-02-12 00:00:00', ''),
-(8, 3, 'è§’è‰²ç®¡ç†', 'sys_role', 0, '2013-02-12 00:00:00', ''),
-(9, 3, 'æƒé™ç®¡ç†', 'sys_power', 0, '2013-02-12 00:00:00', ''),
-(10, 1, 'ä¸šåŠ¡åŠŸèƒ½', 'biz', 10, '2013-02-12 00:00:00', ''),
-(11, 10, 'åˆ›å»ºé¡¹ç›®', 'biz_project', 0, '2013-02-12 00:00:00', ''),
-(12, 10, 'åˆ›å»ºæ—¥å¿—', 'biz_log', 0, '2013-02-12 00:00:00', ''),
-(13, 3, 'æƒé™ç±»å‹ç®¡ç†', 'sys_powertype', 0, '2013-02-12 00:00:00', ''),
-(14, 10, 'ä¿®æ”¹å¯†ç ', 'biz_updatepwd', 0, '2013-02-13 00:00:00', ''),
-(15, 1, 'ä¸šåŠ¡æµç¨‹', '', 20, '2013-02-13 00:00:00', ''),
-(16, 15, 'äººäº‹è¯·å‡', '', 0, '2013-02-13 00:00:00', ''),
-(17, 15, 'ä¼ä¸šç½‘å»º', '', 10, '0000-00-00 00:00:00', ''),
-(18, 15, 'å•†æ´¾é¡¹ç›®', '', 30, '0000-00-00 00:00:00', '');
+(1, -1, '³É¶¼ÍøÁªÌìÏÂ£¨È¨ÏŞÄ£¿é£©', 'rootpower', 0, '0000-00-00 00:00:00', ''),
+(3, 1, 'ÏµÍ³¹¦ÄÜ', 'sys', 0, '2013-02-12 00:00:00', ''),
+(4, 3, '×ÀÃæ', 'sys_desk', 0, '2013-02-12 00:00:00', '¹¤×÷×ÀÃæ'),
+(5, 3, '²¿ÃÅ¹ÜÀí', 'sys_depart', 0, '2013-02-12 00:00:00', ''),
+(6, 3, 'ÈËÔ±¹ÜÀí', 'sys_user', 0, '2013-02-12 00:00:00', ''),
+(7, 3, '¹¤×÷×é¹ÜÀí', 'sys_group', 0, '2013-02-12 00:00:00', ''),
+(8, 3, '½ÇÉ«¹ÜÀí', 'sys_role', 0, '2013-02-12 00:00:00', ''),
+(9, 3, 'È¨ÏŞ¹ÜÀí', 'sys_power', 0, '2013-02-12 00:00:00', ''),
+(10, 1, 'ÒµÎñ¹¦ÄÜ', 'biz', 10, '2013-02-12 00:00:00', ''),
+(11, 10, '´´½¨ÏîÄ¿', 'biz_project', 0, '2013-02-12 00:00:00', ''),
+(12, 10, '´´½¨ÈÕÖ¾', 'biz_log', 0, '2013-02-12 00:00:00', ''),
+(13, 3, 'È¨ÏŞÀàĞÍ¹ÜÀí', 'sys_powertype', 0, '2013-02-12 00:00:00', ''),
+(14, 10, 'ĞŞ¸ÄÃÜÂë', 'biz_updatepwd', 0, '2013-02-13 00:00:00', ''),
+(15, 1, 'ÒµÎñÁ÷³Ì', '', 20, '2013-02-13 00:00:00', ''),
+(16, 15, 'ÈËÊÂÇë¼Ù', '', 0, '2013-02-13 00:00:00', ''),
+(17, 15, 'ÆóÒµÍø½¨', '', 10, '0000-00-00 00:00:00', ''),
+(18, 15, 'ÉÌÅÉÏîÄ¿', '', 30, '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_power2group`
+-- ±íµÄ½á¹¹ `p_power2group`
 --
 
-CREATE TABLE `p_power2group` (
-  `p2g_id` int(10) NOT NULL auto_increment COMMENT 'ç»„æ˜ å°„æƒé™id',
-  `p2g_pgid` int(10) NOT NULL COMMENT 'ç»„id',
-  `p2g_ppid` int(10) NOT NULL COMMENT 'æƒé™id',
-  `p2g_ptid` int(10) NOT NULL COMMENT 'æƒé™ç±»å‹id',
-  PRIMARY KEY  (`p2g_id`)
+CREATE TABLE IF NOT EXISTS `p_power2group` (
+  `p2g_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '×éÓ³ÉäÈ¨ÏŞid',
+  `p2g_pgid` int(10) NOT NULL COMMENT '×éid',
+  `p2g_ppid` int(10) NOT NULL COMMENT 'È¨ÏŞid',
+  `p2g_ptid` int(10) NOT NULL COMMENT 'È¨ÏŞÀàĞÍid',
+  PRIMARY KEY (`p2g_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_power2group`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_power2group`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_power2role`
+-- ±íµÄ½á¹¹ `p_power2role`
 --
 
-CREATE TABLE `p_power2role` (
-  `p2r_id` int(10) NOT NULL auto_increment COMMENT 'è§’è‰²æ˜ å°„æƒé™id',
-  `p2r_prid` int(10) NOT NULL COMMENT 'è§’è‰²id',
-  `p2r_ppid` int(10) NOT NULL COMMENT 'æƒé™id',
-  `p2r_ptid` int(10) NOT NULL COMMENT 'æƒé™ç±»å‹id',
-  PRIMARY KEY  (`p2r_id`)
+CREATE TABLE IF NOT EXISTS `p_power2role` (
+  `p2r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '½ÇÉ«Ó³ÉäÈ¨ÏŞid',
+  `p2r_prid` int(10) NOT NULL COMMENT '½ÇÉ«id',
+  `p2r_ppid` int(10) NOT NULL COMMENT 'È¨ÏŞid',
+  `p2r_ptid` int(10) NOT NULL COMMENT 'È¨ÏŞÀàĞÍid',
+  PRIMARY KEY (`p2r_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=38 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_power2role`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_power2role`
 --
 
 INSERT INTO `p_power2role` (`p2r_id`, `p2r_prid`, `p2r_ppid`, `p2r_ptid`) VALUES
@@ -297,143 +294,141 @@ INSERT INTO `p_power2role` (`p2r_id`, `p2r_prid`, `p2r_ppid`, `p2r_ptid`) VALUES
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_power2user`
+-- ±íµÄ½á¹¹ `p_power2user`
 --
 
-CREATE TABLE `p_power2user` (
-  `p2u_id` int(10) NOT NULL auto_increment COMMENT 'ç”¨æˆ·æ˜ å°„æƒé™id',
-  `p2u_puid` int(10) NOT NULL COMMENT 'ç”¨æˆ·id',
-  `p2u_ppid` int(10) NOT NULL COMMENT 'æƒé™id',
-  `p2u_ptid` int(10) NOT NULL COMMENT 'æƒé™ç±»å‹id',
-  PRIMARY KEY  (`p2u_id`)
+CREATE TABLE IF NOT EXISTS `p_power2user` (
+  `p2u_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ÓÃ»§Ó³ÉäÈ¨ÏŞid',
+  `p2u_puid` int(10) NOT NULL COMMENT 'ÓÃ»§id',
+  `p2u_ppid` int(10) NOT NULL COMMENT 'È¨ÏŞid',
+  `p2u_ptid` int(10) NOT NULL COMMENT 'È¨ÏŞÀàĞÍid',
+  PRIMARY KEY (`p2u_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_power2user`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_power2user`
 --
 
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_powertype`
+-- ±íµÄ½á¹¹ `p_powertype`
 --
 
-CREATE TABLE `p_powertype` (
-  `pt_id` int(10) NOT NULL auto_increment COMMENT 'æƒé™ç±»å‹id',
-  `pt_code` varchar(20) NOT NULL COMMENT 'æƒé™ç±»å‹ç¼–ç ',
-  `pt_name` varchar(100) NOT NULL COMMENT 'æƒé™ç±»å‹åç§°',
-  `pt_sort` int(10) NOT NULL COMMENT 'æ’åº',
-  `pt_remark` text NOT NULL COMMENT 'å¤‡æ³¨',
-  PRIMARY KEY  (`pt_id`)
+CREATE TABLE IF NOT EXISTS `p_powertype` (
+  `pt_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'È¨ÏŞÀàĞÍid',
+  `pt_code` varchar(20) NOT NULL COMMENT 'È¨ÏŞÀàĞÍ±àÂë',
+  `pt_name` varchar(100) NOT NULL COMMENT 'È¨ÏŞÀàĞÍÃû³Æ',
+  `pt_sort` int(10) NOT NULL COMMENT 'ÅÅĞò',
+  `pt_remark` text NOT NULL COMMENT '±¸×¢',
+  PRIMARY KEY (`pt_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_powertype`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_powertype`
 --
 
 INSERT INTO `p_powertype` (`pt_id`, `pt_code`, `pt_name`, `pt_sort`, `pt_remark`) VALUES
-(1, 'read', 'å¯è®¿é—®', 0, ''),
-(2, 'manage', 'å¯ç®¡ç†', 30, ''),
-(3, 'delete', 'å¯åˆ é™¤', 20, ''),
-(4, 'create', 'å¯æ–°å»º', 10, '');
+(1, 'read', '¿É·ÃÎÊ', 0, ''),
+(2, 'manage', '¿É¹ÜÀí', 30, ''),
+(3, 'delete', '¿ÉÉ¾³ı', 20, ''),
+(4, 'create', '¿ÉĞÂ½¨', 10, '');
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_role`
+-- ±íµÄ½á¹¹ `p_role`
 --
 
-CREATE TABLE `p_role` (
-  `pr_id` int(10) NOT NULL auto_increment COMMENT 'è§’è‰²id',
-  `pr_pid` int(10) NOT NULL COMMENT 'çˆ¶çº§è§’è‰²id',
-  `pr_name` varchar(50) NOT NULL COMMENT 'è§’è‰²åç§°',
-  `pr_sort` int(10) NOT NULL COMMENT 'æ’åº',
-  `pr_date` datetime NOT NULL COMMENT 'è§’è‰²åˆ›å»ºæ—¶é—´',
-  `pr_remark` text NOT NULL COMMENT 'å¤‡æ³¨',
-  PRIMARY KEY  (`pr_id`)
+CREATE TABLE IF NOT EXISTS `p_role` (
+  `pr_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '½ÇÉ«id',
+  `pr_pid` int(10) NOT NULL COMMENT '¸¸¼¶½ÇÉ«id',
+  `pr_name` varchar(50) NOT NULL COMMENT '½ÇÉ«Ãû³Æ',
+  `pr_sort` int(10) NOT NULL COMMENT 'ÅÅĞò',
+  `pr_date` datetime NOT NULL COMMENT '½ÇÉ«´´½¨Ê±¼ä',
+  `pr_remark` text NOT NULL COMMENT '±¸×¢',
+  PRIMARY KEY (`pr_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_role`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_role`
 --
 
 INSERT INTO `p_role` (`pr_id`, `pr_pid`, `pr_name`, `pr_sort`, `pr_date`, `pr_remark`) VALUES
-(1, -1, 'æˆéƒ½ç½‘è”å¤©ä¸‹ï¼ˆè§’è‰²ï¼‰', 0, '0000-00-00 00:00:00', ''),
-(2, 1, 'æ€»ç»ç†', 10, '2013-02-13 00:00:00', ''),
-(3, 1, 'é¡¹ç›®ç»ç†', 20, '2013-02-13 00:00:00', ''),
-(4, 1, 'æ–°å»ºè§’è‰²', 30, '2013-02-13 00:00:00', ''),
-(5, 1, 'è¶…çº§ç®¡ç†å‘˜', 0, '2013-02-13 00:00:00', ''),
-(6, 2, 'æ–°å»ºè§’è‰²', 0, '0000-00-00 00:00:00', ''),
-(7, 3, 'æ–°å»ºè§’è‰²', 0, '0000-00-00 00:00:00', '');
+(1, -1, '³É¶¼ÍøÁªÌìÏÂ£¨½ÇÉ«£©', 0, '0000-00-00 00:00:00', ''),
+(2, 1, '×Ü¾­Àí', 10, '2013-02-13 00:00:00', ''),
+(3, 1, 'ÏîÄ¿¾­Àí', 20, '2013-02-13 00:00:00', ''),
+(4, 1, 'ĞÂ½¨½ÇÉ«', 30, '2013-02-13 00:00:00', ''),
+(5, 1, '³¬¼¶¹ÜÀíÔ±', 0, '2013-02-13 00:00:00', ''),
+(6, 2, 'ĞÂ½¨½ÇÉ«', 0, '0000-00-00 00:00:00', ''),
+(7, 3, 'ĞÂ½¨½ÇÉ«', 0, '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_user`
+-- ±íµÄ½á¹¹ `p_user`
 --
 
-CREATE TABLE `p_user` (
-  `pu_id` int(10) NOT NULL auto_increment COMMENT 'ç”¨æˆ·idå·',
-  `pu_oid` int(10) NOT NULL COMMENT 'æ‰€å±ç»„ç»‡idå·',
-  `pu_code` varchar(50) NOT NULL COMMENT 'è´¦å·',
-  `pu_pwd` varchar(50) NOT NULL COMMENT 'å¯†ç ',
-  `pu_name` varchar(20) NOT NULL COMMENT 'å§“å',
-  `pu_gender` varchar(4) NOT NULL COMMENT 'æ€§åˆ«',
-  `pu_phone` varchar(50) NOT NULL COMMENT 'æ‰‹æœº',
-  `pu_telephone` varchar(50) NOT NULL COMMENT 'ç”µè¯',
-  `pu_address` varchar(500) NOT NULL COMMENT 'åœ°å€',
-  `pu_lastlogin` datetime NOT NULL COMMENT 'æœ€åä¸€æ¬¡ç™»é™†ç³»ç»Ÿ',
-  `pu_logincount` int(11) NOT NULL COMMENT 'ç™»é™†ç³»ç»Ÿæ¬¡æ•°',
-  `pu_remark` text NOT NULL COMMENT 'å¤‡æ³¨',
-  PRIMARY KEY  (`pu_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
+CREATE TABLE IF NOT EXISTS `p_user` (
+  `pu_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ÓÃ»§idºÅ',
+  `pu_oid` int(10) NOT NULL COMMENT 'ËùÊô×éÖ¯idºÅ',
+  `pu_code` varchar(50) NOT NULL COMMENT 'ÕËºÅ',
+  `pu_pwd` varchar(50) NOT NULL COMMENT 'ÃÜÂë',
+  `pu_name` varchar(20) NOT NULL COMMENT 'ĞÕÃû',
+  `pu_gender` varchar(4) NOT NULL COMMENT 'ĞÔ±ğ',
+  `pu_phone` varchar(50) NOT NULL COMMENT 'ÊÖ»ú',
+  `pu_telephone` varchar(50) NOT NULL COMMENT 'µç»°',
+  `pu_address` varchar(500) NOT NULL COMMENT 'µØÖ·',
+  `pu_lastlogin` datetime NOT NULL COMMENT '×îºóÒ»´ÎµÇÂ½ÏµÍ³',
+  `pu_logincount` int(11) NOT NULL COMMENT 'µÇÂ½ÏµÍ³´ÎÊı',
+  `pu_remark` text NOT NULL COMMENT '±¸×¢',
+  PRIMARY KEY (`pu_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=24 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_user`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_user`
 --
 
 INSERT INTO `p_user` (`pu_id`, `pu_oid`, `pu_code`, `pu_pwd`, `pu_name`, `pu_gender`, `pu_phone`, `pu_telephone`, `pu_address`, `pu_lastlogin`, `pu_logincount`, `pu_remark`) VALUES
-(1, 1, 'xufei', '1', 'å¾é£', 'ç”·', '13688387776', '', 'æˆéƒ½å¸‚é’ç¾ŠåŒºå…«å®è¡—', '0000-00-00 00:00:00', 0, 'å¾é£'),
-(2, 3, 'yangjun', '', 'æ¨ä¿Š', 'ç”·', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(3, 3, 'zhangkai', '', 'å¼ å‡¯', 'ç”·', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(4, 38, 'xiaodan', '', 'è‚–ä¸¹', 'å¥³', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(5, 1, 'gaoyan', '', 'é«˜ç‡•', 'å¥³', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(6, 38, 'jiujun', '', 'åˆ˜å³»', 'ç”·', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(7, 1, 'wangzheng', '', 'ç‹æ­£', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(8, 1, 'wangyuting', '', 'ç‹é’°å©·', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(9, 38, 'wangxiujuan', '', 'ç‹ç§€å¨Ÿ', 'å¥³', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(10, 1, 'dongting', '', 'è‘£å©·', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(11, 1, 'chencong', '', 'é™ˆèª', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(12, 58, 'gaosiwei', '', 'é«˜æ€ä¼Ÿ', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(13, 1, 'zhuyunsheng', '', 'æœ±èŠ¸ç”Ÿ', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(14, 1, 'yantao', '', 'é—«æ¶›', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(15, 1, 'zhouwei', '', 'å‘¨ç»´', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(16, 1, 'dengshuai', '', 'é‚“å¸…', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(17, 1, 'lidan', '', 'æä¸¹', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(18, 58, '666', '3213sfdsf', 'æµ‹è¯•æ•°æ®', '', '12312321321', '321321321', 'fdsfdsfdså‘çš„èº«ä»½çš„', '0000-00-00 00:00:00', 0, ''),
-(19, 58, '666', '3213sfdsf', 'æµ‹è¯•æ•°æ®', '', '12312321321', '321321321', 'fdsfdsfdså‘çš„èº«ä»½çš„', '0000-00-00 00:00:00', 0, ''),
-(20, 64, 'zhangxiang', '666', 'å¼ ç¥¥', '', '13688387777', '13688387777', 'åŒ—äº¬12318æ–‡åŒ–å¸‚åœºä¸¾æŠ¥çƒ­çº¿è¯å“æœåŠ¡è®¸å¯è¯(äº¬)-ç»è¥-2010-0048', '0000-00-00 00:00:00', 0, ''),
-(22, 64, 'leijiaxin', '666', 'é›·ä½³æ¬£', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(23, 64, 'zhouyunpeng', '666', 'å‘¨æ¾èŠƒ', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(24, 38, 'lina', '666', 'æå¨œ', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(25, 3, 'fenxin', '666', 'å†¯æ¬£', '', '', '', '', '0000-00-00 00:00:00', 0, '');
+(1, 1, 'xufei', '1', 'Ğì·É', 'ÄĞ', '13688387776', '', '³É¶¼ÊĞÇàÑòÇø°Ë±¦½Ö', '0000-00-00 00:00:00', 0, 'Ğì·É'),
+(2, 3, 'yangjun', '', 'Ñî¿¡', 'ÄĞ', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(3, 3, 'zhangkai', '', 'ÕÅ¿­', 'ÄĞ', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(4, 38, 'xiaodan', '', 'Ğ¤µ¤', 'Å®', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(5, 1, 'gaoyan', '', '¸ßÑà', 'Å®', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(6, 38, 'jiujun', '', 'Áõ¾ş', 'ÄĞ', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(7, 1, 'wangzheng', '', 'ÍõÕı', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(8, 1, 'wangyuting', '', 'ÍõîÚæÃ', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(9, 38, 'wangxiujuan', '', 'ÍõĞã¾ê', 'Å®', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(10, 1, 'dongting', '', '¶­æÃ', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(11, 1, 'chencong', '', '³Â´Ï', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(12, 58, 'gaosiwei', '', '¸ßË¼Î°', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(13, 1, 'zhuyunsheng', '', 'ÖìÜ¿Éú', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(14, 1, 'yantao', '', 'ãÆÌÎ', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(15, 1, 'zhouwei', '', 'ÖÜÎ¬', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(16, 1, 'dengshuai', '', 'µËË§', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(17, 1, 'lidan', '', 'Àîµ¤', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(18, 58, '666', '3213sfdsf', '²âÊÔÊı¾İ', '', '12312321321', '321321321', 'fdsfdsfds·¢µÄÉí·İµÄ', '0000-00-00 00:00:00', 0, ''),
+(19, 58, '666', '3213sfdsf', '²âÊÔÊı¾İ', '', '12312321321', '321321321', 'fdsfdsfds·¢µÄÉí·İµÄ', '0000-00-00 00:00:00', 0, ''),
+(20, 64, 'zhangxiang', '666', 'ÕÅÏé', '', '13688387777', '13688387777', '±±¾©12318ÎÄ»¯ÊĞ³¡¾Ù±¨ÈÈÏßÒ©Æ··şÎñĞí¿ÉÖ¤(¾©)-¾­Óª-2010-0048', '0000-00-00 00:00:00', 0, ''),
+(22, 64, 'leijiaxin', '666', 'À×¼ÑĞÀ', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
+(23, 64, 'zhouyunpeng', '666', 'ÖÜ·ÆM', '', '', '', '', '0000-00-00 00:00:00', 0, '');
 
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_user2group`
+-- ±íµÄ½á¹¹ `p_user2group`
 --
 
-CREATE TABLE `p_user2group` (
-  `u2g_id` int(10) NOT NULL auto_increment COMMENT 'ç”¨æˆ·æ˜ å°„ç»„id',
-  `u2g_puid` int(10) NOT NULL COMMENT 'ç”¨æˆ·id',
-  `u2g_pgid` int(10) NOT NULL COMMENT 'ç»„id',
-  PRIMARY KEY  (`u2g_id`)
+CREATE TABLE IF NOT EXISTS `p_user2group` (
+  `u2g_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ÓÃ»§Ó³Éä×éid',
+  `u2g_puid` int(10) NOT NULL COMMENT 'ÓÃ»§id',
+  `u2g_pgid` int(10) NOT NULL COMMENT '×éid',
+  PRIMARY KEY (`u2g_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=112 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_user2group`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_user2group`
 --
 
 INSERT INTO `p_user2group` (`u2g_id`, `u2g_puid`, `u2g_pgid`) VALUES
@@ -446,18 +441,18 @@ INSERT INTO `p_user2group` (`u2g_id`, `u2g_puid`, `u2g_pgid`) VALUES
 -- --------------------------------------------------------
 
 --
--- è¡¨çš„ç»“æ„ `p_user2role`
+-- ±íµÄ½á¹¹ `p_user2role`
 --
 
-CREATE TABLE `p_user2role` (
-  `u2r_id` int(10) NOT NULL auto_increment COMMENT 'ç”¨æˆ·æ˜ å°„è§’è‰²id',
-  `u2r_puid` int(10) NOT NULL COMMENT 'ç”¨æˆ·id',
-  `u2r_prid` int(10) NOT NULL COMMENT 'è§’è‰²id',
-  PRIMARY KEY  (`u2r_id`)
+CREATE TABLE IF NOT EXISTS `p_user2role` (
+  `u2r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT 'ÓÃ»§Ó³Éä½ÇÉ«id',
+  `u2r_puid` int(10) NOT NULL COMMENT 'ÓÃ»§id',
+  `u2r_prid` int(10) NOT NULL COMMENT '½ÇÉ«id',
+  PRIMARY KEY (`u2r_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=ucs2 AUTO_INCREMENT=10 ;
 
 --
--- å¯¼å‡ºè¡¨ä¸­çš„æ•°æ® `p_user2role`
+-- ×ª´æ±íÖĞµÄÊı¾İ `p_user2role`
 --
 
 INSERT INTO `p_user2role` (`u2r_id`, `u2r_puid`, `u2r_prid`) VALUES
