@@ -45,6 +45,7 @@ function loadmenu(){
 
 daLoader("daIframe,daWin,daToolbar",function(){
 	da(function(){
-		loadmenu();
+		//decodeURIComponent(da.cookie("COOKIE_FROM_DASYS"));
+		loadmenu(); 
 	});
 });

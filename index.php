@@ -7,12 +7,15 @@
 <title>项目进度管理-桌面</title>
 <div style="display:none;">
 <?include_once("action/sessioncheck.php");?>
+<?include_once("action/fn.php");?>
 <?include_once("action/sys/db.php");?>
 </div>
 
 <style>
 #title_bar{border-bottom:solid 1px #666; height:35px; background:#ddd url(/image/bar_bg.jpg) repeat-x;}
-#info_bar{position:absolute;top:0px;right:15px;border:solid 0px #f0f0f0;}
+#info_bar{position:absolute;top:0px;right:15px; height:35px; line-height:35px; border:solid 0px #f0f0f0;}
+#info_bar span{color:#999;}
+#info_bar a{font-weight:bold;}
 
 #user_list{color:#555; border-bottom:solid 0px #f0f0f0; padding:5px 15px; margin-bottom:10px;}
 
@@ -28,9 +31,14 @@
 	<div id="menubar"></div>
 </div>
 <div id="info_bar">
-	<span><?php echo $_SESSION["u_name"] ?> | <?php echo $_SESSION["u_depart"] ?></span> - 
+	<span>
+		<?php echo fn_getcookie("puname") ?> / 
+		<?php echo fn_getcookie("poname") ?> / 
+		<?php echo fn_getcookie("rolename") ?> / 
+		<?php echo fn_getcookie("groupname") ?> / 
+	</span> 
 	<a href="javascript:void(0)" onclick="updatepwd()">修改密码</a> | 
-	<a href="/action/loginout.php" style="color:#f00">退出</a>
+	<a href="/action/loginout.php">退出</a>
 </div>
 
 <iframe id="mainframe" src="" frameborder="0" style="width:100%;height:500px;" defaultHeight="600"></iframe>

@@ -165,6 +165,26 @@ class DB{
 		
 	}
 
+	/**查询一条记录
+	*/
+	function getone($sql){
+		$num = func_num_args();
+		$args = func_get_args();
+		if(1 < $num){
+			$rows = $this->getlistbyparam($args[0], $args[1]);
+		}
+		else{
+			$rows = $this->getlist($sql);
+		}
+		
+		if(is_array($rows) && 0<count($rows)){
+			return $rows[0];
+		}
+		else{
+			return null;
+		}
+	}
+	
 	/**查询数据数量
 	*/
 	function getcount($sql){

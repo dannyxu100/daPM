@@ -2,7 +2,7 @@
 	// error_reporting(-1);
 	include_once "../../action/sessioncheck.php";
 	include_once "../../action/sys/db3.php";
-	include_once "../../action/sys/log.php";
+	// include_once "../../action/sys/log.php";
 
 	$sql1 = "select * from b_businessform ";
 	$sql2 = "select count(bf_id) as Column1 from b_businessform ";
@@ -24,17 +24,17 @@
 		$end = $start + $_POST["pagesize"];
 		$sql1 .= " limit :start, :end";
 		
-		$param1 = array_merge($param1, array(":start"=>0, ":end"=>20));
+		$param1 = array_merge($param1, array(":start"=>$start, ":end"=>$end));
 	}
-	$log = new Log();
-	$log->write($sql1);
-	$log->write($sql2);
+	// $log = new Log();
+	// $log->write($sql1);
+	// $log->write($sql2);
 	
 	$db = new DB("da_bizform");
 	$set = $db->getlist($sql1, $param1);
 	$count = $db->getlist($sql2, $param2);
 	//echo $db->error_message;
-	$log->write($db->geterror());
+	// $log->write($db->geterror());
 	$db->close();
 	//print_r($set);
 	

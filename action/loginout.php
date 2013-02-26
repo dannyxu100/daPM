@@ -1,10 +1,7 @@
 ﻿<?php
 //注销登录
 	session_start();
-	$_SESSION['u_id']="";
-	$_SESSION['u_code']="";
-	$_SESSION['u_name']="";
-	$_SESSION['u_depart']="";
+	setcookie('COOKIE_FROM_DASYS', "", time()-86400, "/");		//设置cookie 失效
 	
 	echo "<script language='javascript'>location='/login.php';</script>";
 ?>

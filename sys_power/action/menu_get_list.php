@@ -6,7 +6,11 @@
 	//error_reporting(-1);
 	
 	$sql = "select * from p_menu ";
+	// $sql = "select * from p_menu, p_menu2role ";
 	$param = array();
+	
+	// $sql .= " where pm_id=m2r_pmid and m2r_prid=:prid ";			//prid为非空参数(加入角色权限过滤)
+	// $param = array_merge($param, array(":prid"=>$_POST["prid"]));
 	
 	if(isset($_POST["pmid"])){
 		$sql .= " where pm_id=:pmid ";
