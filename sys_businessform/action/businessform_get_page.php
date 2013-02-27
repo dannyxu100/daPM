@@ -2,7 +2,7 @@
 	// error_reporting(-1);
 	include_once "../../action/sessioncheck.php";
 	include_once "../../action/sys/db3.php";
-	// include_once "../../action/sys/log.php";
+	include_once "../../action/sys/log.php";
 
 	$sql1 = "select * from b_businessform ";
 	$sql2 = "select count(bf_id) as Column1 from b_businessform ";
@@ -26,9 +26,10 @@
 		
 		$param1 = array_merge($param1, array(":start"=>$start, ":end"=>$end));
 	}
-	// $log = new Log();
+	$log = new Log();
 	// $log->write($sql1);
 	// $log->write($sql2);
+	$log->write(var_export($param1, TRUE));
 	
 	$db = new DB("da_bizform");
 	$set = $db->getlist($sql1, $param1);

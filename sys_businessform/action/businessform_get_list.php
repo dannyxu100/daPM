@@ -15,10 +15,10 @@
 	}
 	$sql .= " order by bf_sort asc, bf_id asc";
 	
-	$db = new DB(3);
-	$set = $db->GetAll($sql);
+	$db = new DB("da_bizform");
+	$set = $db->getlist($sql);
 	//echo $db->error_message;
-	$db->Destroy();
+	$db->close();
 	
 	// $log = new Log();
 	// $log->write($sql.time());

@@ -4,29 +4,32 @@
 	include_once "../../action/sys/db.php";
 	// include_once "../../action/sys/log.php";
 
+	$db = new DB("da_workflow");
 	$sql = "select * from w_place ";
 	$sql2 = "select count(p_id) as Column1 from w_place ";
 	
 	if( isset($_POST["wfid"]) ){
-		$sql .= " where p_wfid=".$_POST["wfid"]." ";
-		$sql2 .= " where p_wfid=".$_POST["wfid"]." ";
+		$sql .= " where p_wfid=:wfid ";
+		$sql2 .= " where p_wfid=:wfid ";
+		$db->param(":wfid", $_POST["wfid"]);
 	}
 	$sql .= " order by p_sort asc, p_id asc ";
 	
 	if( isset($_POST["pageindex"]) ){				//分页
 		$start = ($_POST["pageindex"]-1)*$_POST["pagesize"];
 		$end = $start + $_POST["pagesize"];
-		$sql .= " limit ".$start.", ".$end;
+		$sql .= " limit :start, :end";
+		$db->param(":start", $start);
+		$db->param(":end", $end);
 	}
 	// $log = new Log();
 	// $log->write($sql);
 	// $log->write($sql2);
 	
-	$db = new DB(2);
-	$set = $db->GetAll($sql);
-	$count = $db->GetAll($sql2);
+	$set = $db->getlist($sql);
+	$count = $db->getlist($sql2);
 	//echo $db->error_message;
-	$db->Destroy();
+	$db->close();
 	//print_r($set);
 	
 	if(is_array($set)){

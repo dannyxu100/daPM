@@ -4,14 +4,15 @@
 	include_once "../../action/sys/db.php";
 	// include_once "../../action/sys/log.php";
 
-	$sql = "select * from w_workflow where wf_id=".$_POST["wf_id"];
+	
+	$db = new DB("da_workflow");
+	$sql = "select * from w_workflow where wf_id=:wf_id";
+	$db->param(":wf_id", $_POST["wf_id"]);
 	// $log = new Log();
 	// $log->write($sql);
-	
-	$db = new DB(2);
-	$set = $db->GetAll($sql);
+	$set = $db->getlist($sql);
 	//echo $db->error_message;
-	$db->Destroy();
+	$db->close();
 	//print_r($set);
 	
 	if(is_array($set)){

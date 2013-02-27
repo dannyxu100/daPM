@@ -37,9 +37,7 @@ function loadlevel2menu(){
 			
 			for(var i=0; i<data.length; i++){
 				listObj.append('<a class="bt_menu" href="javascript:void(0)" onclick="clickmenu(\''+data[i].pm_url+'\', this)"><img src="'+data[i].pm_img+'"/> '+ data[i].pm_name +'</a>');
-
 			}
-			
 			da(da(".bt_menu").dom[0]).click();
 		}
 	});

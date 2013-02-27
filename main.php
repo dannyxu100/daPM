@@ -37,9 +37,10 @@
 		else{return "#900";}	//红色
 	}
 	
-	$db = new DB();
-	$set = $db->GetAll("select pu_id, pu_name from da_powersys.p_user order by pu_oid asc, pu_name asc");
+	$db = new DB("da_powersys");
+	$set = $db->getlist("select pu_id, pu_name from da_powersys.p_user order by pu_oid asc, pu_name asc");
 	//error_reporting(-1);
+	$db->close();
 	
 	$chked = "";
 	//echo $_POST['chkuser'][0];
@@ -119,8 +120,9 @@
 		$sql .= " and p2u_pid=p_id and p2u_uid='".$_POST['chkuser'][0]."' order by p_date_start desc,p_id desc";
 	}
 	
-	$ds = $db->GetAll($sql);
-	$db->Destroy();
+	$db = new DB("pm");
+	$ds = $db->getlist($sql);
+	$db->close();
 	//echo $db->error_message;
 	//echo "select * from pm_project_info, pm_p2user where p2u_pid=p_id and p2u_uid='".$_POST['chkuser'][0]."'";
 	//echo count($ds);

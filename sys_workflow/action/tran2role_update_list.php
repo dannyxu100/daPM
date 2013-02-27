@@ -1,6 +1,6 @@
 ﻿<?php 
 	include_once "../../action/sessioncheck.php";
-	include_once "../../action/sys/db3.php";
+	include_once "../../action/sys/db.php";
 	include_once "../../action/sys/log.php";
 	// error_reporting(-1);
 
@@ -11,7 +11,8 @@
 	if(0<count($arr_id) && isset($_POST["tid"])){
 		$db->tran();
 		
-		$db->delete("delete from w_tran2role where t2r_tid=:tid",array(":tid"=>$_POST["tid"]));
+		$db->param(":tid", $_POST["tid"]);
+		$db->delete("delete from w_tran2role where t2r_tid=:tid");
 		
 		$rows = 0;
 		for($i=0; $i<count($arr_id)-1; $i++){		//","分隔引起最后多一个空数据,所以-1
@@ -28,7 +29,7 @@
 		
 		if($db->geterror()){
 			$db->back();
-			echo 'FALSE'.$db->geterror();
+			echo 'FALSE';
 		}
 		else{
 			$db->commit();

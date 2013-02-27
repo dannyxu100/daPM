@@ -7,7 +7,6 @@
 	html{background:#f9f9f9;}
 </style>
 </head>
-
 <body>
 <form id="loginform" name="loginform" method="post" action="/action/logincheck.php">
 	<div style="margin:0px auto; margin-top:100px; width:400px; height:300px;border:solid 1px #999;background:#f0f0f0;">

@@ -12,10 +12,10 @@
 	}
 	$sql .= " order by wf_sort asc, wf_id asc";
 	
-	$db = new DB(2);
-	$set = $db->GetAll($sql);
+	$db = new DB("da_workflow");
+	$set = $db->getlist($sql);
 	//echo $db->error_message;
-	$db->Destroy();
+	$db->close();
 	
 	// $log = new Log();
 	// $log->write($sql.time());

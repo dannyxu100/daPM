@@ -1,4 +1,4 @@
-﻿var g_curbfid = "",
+﻿var g_curbftid = "",
 	g_ismulti = false;
 
 var setting = {
@@ -19,7 +19,7 @@ var setting = {
 };
 
 function onMouseUp(event, treeId, treeNode) {
-	g_curbfid = treeNode.id;
+	g_curbftid = treeNode.id;
 	loadformlist();
 }
 
@@ -52,8 +52,8 @@ function loadformlist(){
 			opt: "qry"
 		};
 		
-	if( g_curbfid ){
-		data1.bfid = g_curbfid;
+	if( g_curbftid ){
+		data1.bftid = g_curbftid;
 	}
 	
 	//考虑到多页选择，就不清楚缓存了。

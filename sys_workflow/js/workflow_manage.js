@@ -347,6 +347,7 @@ function selectrole( tid, obj ){
 /**为事务变迁 选择执行相关表单
 */
 function selectform( tid, obj ){
+	alert(tid);
 	daWin({
 		width: 600,
 		height:400,
@@ -489,28 +490,23 @@ function updateworkflowtype(){
 
 /*加载左边部门数据*/
 function loadtree(){
-	 $.ajax({
-	   url: "action/workflowtype_get_list.php",
-	   type: "POST",
-	   dataType: "json",
-	   error: function(msg){
-		//da.out(msg.responseText);
-	   },
-	   success: function(data){
-			var zNodes = [];
-			for(var i=0; i<data.length; i++){
-				zNodes.push({
-					id: data[i].wft_id,
-					pId: data[i].wft_pid,
-					name: data[i].wft_name,
-					open: true
-				});
-			}
+	da.runDB("action/workflowtype_get_list.php",{
+	   dataType: "json"
+	},
+	function(data){
+		var zNodes = [];
+		for(var i=0; i<data.length; i++){
+			zNodes.push({
+				id: data[i].wft_id,
+				pId: data[i].wft_pid,
+				name: data[i].wft_name,
+				open: true
+			});
+		}
+		
+		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
 			
-			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
-			
-	   }
-	 });
+   });
 }
 
 function loadtab(){

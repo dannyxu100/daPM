@@ -5,20 +5,22 @@
 	// include_once "../../action/sys/log.php";
 	//error_reporting(-1);
 	
-	$sql = "";
+	$db = new DB("da_workflow");
+	
 	$sql = "select * from w_workflowtype ";
 	if(isset($_POST["wftid"])){
-		$sql .= " where wft_id = '".$_POST["wftid"]."' ";
+		$sql .= " where wft_id=:wftid ";
+		$db->param(":wftid", $_POST["wftid"]);
 	}
 	else if(isset($_POST["wftpid"])){
-		$sql .= " where wft_pid = '".$_POST["wftpid"]."' ";
+		$sql .= " where wft_pid=:wftpid ";
+		$db->param(":wftpid", $_POST["wftpid"]);
 	}
 	$sql .= " order by wft_sort asc, wft_pid asc";
 	
-	$db = new DB(2);
-	$set = $db->GetAll($sql);
+	$set = $db->getlist($sql);
 	//echo $db->error_message;
-	$db->Destroy();
+	$db->close();
 	
 	// $log = new Log();
 	// $log->write($sql.time());
@@ -28,7 +30,6 @@
 			foreach ( $set[$i] as $key => $value ) {
 				$set[$i][$key] = urlencode( $value );   
 			}
-
 		}
 		echo urldecode(json_encode($set));
 	}
