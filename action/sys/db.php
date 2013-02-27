@@ -1,7 +1,7 @@
 <?php
 //error_reporting(-1);
 
-// include_once "log.php";
+include_once "log.php";
 
 class DB{
 	private $m_CONNSTR = Array(
@@ -106,8 +106,9 @@ class DB{
 	*/
 	function runsql($sql){
 		$statement = $this->m_pdo->prepare($sql);
-		$this->setparamlist( $statement );
+		
 		try {
+			$this->bindparamlist( $statement );
 			$statement->execute();		//返回true 或 false
 		}
 		catch (pdoException $e) {
@@ -116,10 +117,25 @@ class DB{
 		}
 	}
 	
+	/**添加sql参数列表
+	*/
+	function paramlist( $arrparam ){
+		$this->m_paramlist = array();
+	
+		for( $i=0; $i<count($arrparam); $i++){
+			$param = $arrparam[$i];
+			array_push($this->m_paramlist, array("name"=>$param[0], "value"=>$param[1], "type"=>$this->getdbtype($param[1])));
+		}
+	}
+	
+	/**添加1个sql参数
+	*/
 	function param( $name, $value ){
 		array_push($this->m_paramlist, array("name"=>$name, "value"=>$value, "type"=>$this->getdbtype($value)));
 	}
 	
+	/**根据添加的数据，返回对应的数据库类型
+	*/
 	function getdbtype($value) {
 		if (is_int($value)) {
 			return PDO::PARAM_INT;
@@ -135,7 +151,9 @@ class DB{
 		}
 	}
 	
-	function setparamlist( $statement ){
+	/**给PDOstatement对象绑定参数
+	*/
+	private function bindparamlist( $statement ){
 		for( $i=0; $i<count($this->m_paramlist); $i++){
 			$param = $this->m_paramlist[$i];
 			$statement->bindValue( $param["name"], $param["value"], $param["type"] );
@@ -146,9 +164,9 @@ class DB{
 	*/
 	function getlist($sql){
 		$statement = $this->m_pdo->prepare($sql);
-		$this->setparamlist( $statement );
 		
 		try {
+			$this->bindparamlist( $statement );
 			$statement->execute();
 			return $statement->fetchAll();		//从结构集中取出一个包含了所有行的数组
 			
@@ -184,9 +202,9 @@ class DB{
 	*/
 	function update($sql){
 		$statement = $this->m_pdo->prepare($sql);
-		$this->setparamlist( $statement );
 			
 		try {
+			$this->bindparamlist( $statement );
 			$statement->execute();
 			return $statement->rowCount();		//返回影响行数
 		}
@@ -206,9 +224,9 @@ class DB{
 	*/
 	function insert($sql){
 		$statement = $this->m_pdo->prepare($sql);
-		$this->setparamlist( $statement );
 			
 		try {
+			$this->bindparamlist( $statement );
 			$statement->execute();
 			return $this->m_pdo->lastInsertId(); //返回刚插入的一条记录的主键
 		}

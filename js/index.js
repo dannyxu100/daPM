@@ -32,7 +32,7 @@ function loadmenu(){
 					},
 					click: function(){
 						// alert(this.data.url)
-						goto(this.data.url, false, "page"+this.data.id);	//需要缓存，缓存code为page+pm_id
+						goto(this.data.url, g_isctrl, "page"+this.data.id);	//需要缓存，缓存code为page+pm_id
 					}
 				});
 			}
@@ -42,10 +42,25 @@ function loadmenu(){
 	});
 }
 
+var g_isctrl = false;
+/**监听按键
+*/
+function listenKey(){
+	daKey({
+		keydown: function(keyName, ctrlKey, altKey, shiftKey){
+			g_isctrl = ctrlKey;
+		},
+		keyup: function(keyName, ctrlKey, altKey, shiftKey){
+			g_isctrl = ctrlKey;
+		}
+	});
+}
 
-daLoader("daIframe,daWin,daToolbar",function(){
+daLoader("daIframe,daWin,daToolbar,daKey",function(){
 	da(function(){
 		//decodeURIComponent(da.cookie("COOKIE_FROM_DASYS"));
-		loadmenu(); 
+		loadmenu();
+		
+		listenKey();
 	});
 });

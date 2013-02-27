@@ -22,7 +22,7 @@ function clickmenu( url, obj ){
 	da(".curmenu").removeClass("curmenu");
 	da(obj).addClass("curmenu");
 
-	goto( url );
+	goto( url, g_isctrl );
 }
 
 /**加载菜单
@@ -44,11 +44,26 @@ function loadlevel2menu(){
 }
 
 
-daLoader("daIframe,daWin,daToolbar",function(){
+var g_isctrl = false;
+/**监听按键
+*/
+function listenKey(){
+	daKey({
+		keydown: function(keyName, ctrlKey, altKey, shiftKey){
+			g_isctrl = ctrlKey;
+		},
+		keyup: function(keyName, ctrlKey, altKey, shiftKey){
+			g_isctrl = ctrlKey;
+		}
+	});
+}
+
+daLoader("daIframe,daWin,daToolbar,daKey",function(){
 	da(function(){
 		var arrParam = da.urlParams();
 		level2menu = arrParam["menu"];
 		
 		loadlevel2menu();
+		listenKey();
 	});
 });

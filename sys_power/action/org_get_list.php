@@ -5,20 +5,22 @@
 	//include_once "../../action/sys/log.php";
 	//error_reporting(-1);
 	
-	$sql = "";
+	$db = new DB("da_powersys");
+	
 	$sql = "select * from p_org ";
 	if(isset($_POST["poid"])){
-		$sql .= " where po_id = '".$_POST["poid"]."' ";
+		$sql .= " where po_id=:poid ";
+		$db->param(":poid", $_POST["poid"]);
 	}
 	else if(isset($_POST["popid"])){
-		$sql .= " where po_pid = '".$_POST["popid"]."' ";
+		$sql .= " where po_pid=:popid ";
+		$db->param(":popid", $_POST["popid"]);
 	}
 	$sql .= " order by po_sort asc, po_pid asc";
 	
-	$db = new DB(1);
-	$set = $db->GetAll($sql);
-	//echo $db->error_message;
-	$db->Destroy();
+	$set = $db->getlist($sql);
+	
+	$db->close();
 	
 	// $log = new Log();
 	// $log->write($sql.time());

@@ -214,8 +214,8 @@ var daTable = (function(){
 				function( data, dataType, contentType, xml2json ) {
 					fn( data );
 				}, 
-				function( data, msg, exception ) {
-					alert2( msg );
+				function( msg, code, content ) {
+					alert( code+"<br/>"+content );
 				});
 			}
 			else if(dataType && "xml" == dataType){
@@ -225,8 +225,8 @@ var daTable = (function(){
 						fn( data );
 					}
 				}, 
-				function( data, msg, exception ) {
-					alert2( msg );
+				function( msg, code, content  ) {
+					alert( code+"<br/>"+content );
 				});
 				
 			}
@@ -268,7 +268,7 @@ var daTable = (function(){
 				context.recordCount = 0;						//清空上一次加载记录数缓存
 				
 				if( ds11 ){										//ds1为统计总记录数，ds11为当前页数据集
-					if(ds1[0].Column1){							//缓存记录总数
+					if("undefined" != ds1[0].Column1){			//缓存记录总数
 						context.recordCount = ds1[0].Column1;
 					}
 					else{
@@ -373,7 +373,7 @@ var daTable = (function(){
 				da(dataBody).empty();
 			}
 			
-			if(ds[0].Column1){			//ds1并非有效数据集
+			if(!ds || 0 >= ds.length){	//ds1并非有效数据集
 				return;
 			}
 			

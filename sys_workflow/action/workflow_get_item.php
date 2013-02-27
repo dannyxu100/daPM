@@ -11,7 +11,7 @@
 	// $log = new Log();
 	// $log->write($sql);
 	$set = $db->getlist($sql);
-	//echo $db->error_message;
+
 	$db->close();
 	//print_r($set);
 	

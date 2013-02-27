@@ -15,8 +15,7 @@
 	$pid = $_GET['pid'];
 	$db = new DB();
 	$pro = $db->GetOne("select * from pm_project_info where p_id='".$pid."'");
-	$db->Destroy();
-	//echo $db->error_message;
+	$db->close();
 ?>
 </head>
 

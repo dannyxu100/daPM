@@ -347,7 +347,6 @@ function selectrole( tid, obj ){
 /**为事务变迁 选择执行相关表单
 */
 function selectform( tid, obj ){
-	alert(tid);
 	daWin({
 		width: 600,
 		height:400,
@@ -364,7 +363,7 @@ function selectform( tid, obj ){
 				bfids: bfids,
 				bfnames: bfnames,
 				tid: tid
-			},function(res){
+			},function(res){debugger;
 				if("FALSE"!=res){
 					da(obj).text(bfnames?bfnames:"空");
 				}

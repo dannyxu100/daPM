@@ -4,20 +4,22 @@
 	//include_once "../../action/sys/log.php";
 	//error_reporting(-1);
 	
-	$sql = "";
+	$db = new DB("da_powersys");
+	
 	$sql = "select * from p_role ";
 	if(isset($_POST["prid"])){
-		$sql .= " where pr_id = '".$_POST["prid"]."' ";
+		$sql .= " where pr_id=:prid ";
+		$db->param(":prid", $_POST["prid"] );
 	}
 	else if(isset($_POST["prpid"])){
-		$sql .= " where pr_pid = '".$_POST["prpid"]."' ";
+		$sql .= " where pr_pid =:prpid ";
+		$db->param(":prpid", $_POST["prpid"] );
 	}
 	$sql .= " order by pr_sort asc, pr_pid asc";
 	
-	$db = new DB(1);
-	$set = $db->GetAll($sql);
-	//echo $db->error_message;
-	$db->Destroy();
+	$set = $db->getlist($sql);
+	
+	$db->close();
 	
 	// $log = new Log();
 	// $log->write($sql.time());
