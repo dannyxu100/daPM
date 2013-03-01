@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <HEAD>
+  <TITLE>创建数据表</TITLE>
+	<link rel="stylesheet" href="/css/base.css"/>
+ 	<style type="text/css">
+		.header {height:30px; line-height:30px; padding:0px 15px; font-weight:bold; border-bottom:1px solid #ccc; background:#f0f0f0;}		
+
+	</style>
+ </HEAD>
+<BODY>
+<div>
+	<div class="list_top_bar">
+		<div class="list_top_title"></div>
+		<div class="list_top_tools">
+			<a class="item" href="javascript:void(0)" onclick="savetable();" ><img src="/sys_power/images/sys_icon/add.png" /> 保存</a>
+		</div>
+	</div>
+	<table class="tablesolid" style="width:100%">
+		<tr>
+			<td class="header" style="width:30px;">表名</td>
+			<td style="width:230px;"><input id="tbname" style="width:220px;"/></td>
+			<td class="header" style="width:30px;">备注</td>
+			<td><input id="tbremark" style="width:400px;"/></td>
+		</tr>
+	</table>
+	
+	<table class="tablesolid" style="width:100%;margin-top:10px;">
+		<thead>
+			<tr>
+				<td style="width:100px;">字段</td>
+				<td style="width:100px;">类型</td>
+				<td style="width:60px;">长度</td>
+				<td style="width:90px;">默认值</td>
+				<td style="width:50px;">可空</td>
+				<td style="width:50px;">主键</td>
+				<td style="width:50px;">自增</td>
+				<td>备注</td>
+			</tr>
+		</thead>
+		<tbody id="itemtemplet">
+			<tr style="display:none;">
+				<td><input class="fldname" style="width:100px;"/></td>
+				<td>
+					<select class="fldtype">
+						<option value="varchar">Varchar</option>
+						<option value="int">Int</option>
+						<option value="datetime">DateTime</option>
+						<option value="">Char</option>
+						<option value="">TinyText</option>
+						<option value="">Text</option>
+						<option value="">Bit</option>
+						<option value="">Bool</option>
+						<option value="">TinyInt</option>
+						<option value="">SmallInt</option>
+						<option value="">BigInt</option>
+						<option value="">Float</option>
+						<option value="">Double</option>
+						<option value="">Time</option>
+						<option value="">TimeStamp</option>
+						<option value="">Date</option>
+						<option value="">Year</option>
+					</select>
+				</td>
+				<td><input class="fldlength" style="width:50px;"/></td>
+				<td><input class="flddefault" style="width:80px;"/></td>
+				<td><input class="fldisvoid" type="checkbox" value="1"/></td>
+				<td><input class="fldiskey" type="checkbox" value="1"/></td>
+				<td><input class="fldisauto" type="checkbox" value="1"/></td>
+				<td><input class="fldremark" style="width:90%;"/></td>
+			</tr>
+		</tbody>
+		<tbody id="itemlist"></tbody>
+	</table>
+	
+	<a href="javascript:void(0)" onclick="additem()">添加字段</a>
+</div>
+</BODY>
+</HTML>
+
+
+<script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
+<script type="text/javascript" src="js/table_add_item.js"></script>

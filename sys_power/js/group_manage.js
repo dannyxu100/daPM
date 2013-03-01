@@ -187,7 +187,7 @@ function loaduserlist(){
 	//加载工作组人员列表
 	daTable({
 		id: "tb_list",
-		url: "action/user2group_get_list.php",
+		url: "action/user2group_get_page.php",
 		data: {
 			dataType: "json",
 			pgid: g_pgid,

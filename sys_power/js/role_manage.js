@@ -338,7 +338,7 @@ function selectpowertype(obj){
 /**加载角色权限
 */
 function loadpower2role(){
-	da.runDB("/sys_power/action/power2role_get_list.php",{
+	da.runDB("/sys_power/action/power2role_get_page.php",{
 		dataType: "json",
 		prid: g_prid
 		

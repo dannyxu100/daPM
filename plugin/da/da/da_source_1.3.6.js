@@ -5166,9 +5166,9 @@ var daRe_until = /Until$/,
 		clone: function( dataAndEvents, deepDataAndEvents ) {
 			dataAndEvents = dataAndEvents == null ? false : dataAndEvents;
 			deepDataAndEvents = deepDataAndEvents == null ? dataAndEvents : deepDataAndEvents;
-	
+
 			return this.map( function() {
-				return da.clone( this.dom, dataAndEvents, deepDataAndEvents );
+				return da.clone( this.dom[0], dataAndEvents, deepDataAndEvents );
 			});
 		},
 	

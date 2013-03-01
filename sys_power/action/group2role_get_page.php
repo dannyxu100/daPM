@@ -5,14 +5,14 @@
 	//error_reporting(-1);
 
 	$db = new DB("da_powersys");
-	$sql = "select * from p_group2role, p_group, p_role where g2r_pgid=pg_id and g2r_prid=pr_id ";
+	$sql1 = "select * from p_group2role, p_group, p_role where g2r_pgid=pg_id and g2r_prid=pr_id ";
 	$param1 = array();
 	
 	$sql2 = "select count(g2r_id) as Column1 from p_group2role";
 	$param2 = array();
 	
 	if(isset($_POST["prid"])){						//工作组筛选
-		$sql .= " and g2r_prid=:prid order by pg_sort asc ";
+		$sql1 .= " and g2r_prid=:prid order by pg_sort asc ";
 		$sql2 .= " where g2r_prid=:prid ";
 		
 		array_push($param1, array(":prid", $_POST["prid"]));

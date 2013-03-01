@@ -31,7 +31,12 @@
 		<tr>
 			<td style="width:250px;vertical-align:top;"><ul id="treeDemo" class="ztree"></ul></td>
 			<td style="vertical-align:top;">
-				<div class="righttitle">基本信息 <a style="margin-left:320px;" href="javascript:void(0)" onclick="updatepower()" >保存</a></div>
+				<div class="list_top_bar">
+					<div class="list_top_title">基本信息</div>
+					<div class="list_top_tools">
+						<a class="item" href="javascript:void(0)" onclick="updatepower();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+					</div>
+				</div>
 				
 				<table id="orgform" class="tableform" style="width:100%">
 					<tr>

@@ -23,12 +23,13 @@
 	</style>
  </HEAD>
 <BODY>
-<div>
-	<div class="righttitle">权限类型信息列表
-	<a style="margin-left:320px;" href="javascript:void(0)" onclick="addpowertype();" >新建</a> | 
-	<a href="javascript:void(0)" >删除</a> | 
+	<div class="list_top_bar">
+		<div class="list_top_title">权限类型信息列表</div>
+		<div class="list_top_tools">
+			<a class="item" href="javascript:void(0)" onclick="updaterole();" ><img src="/sys_power/images/sys_icon/add.png" /> 新建</a>
+			<a class="item" href="javascript:void(0)" onclick="" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+		</div>
 	</div>
-	
 
 	<table id="tb_list" style="width:500px;">
 		<tbody name="head">
