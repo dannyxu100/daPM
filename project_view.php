@@ -13,9 +13,8 @@
 	date_default_timezone_set('ETC/GMT-8');
 	//error_reporting(-1);
 	$pid = $_GET['pid'];
-	$db = new DB();
-	$pro = $db->GetOne("select * from pm_project_info where p_id='".$pid."'");
-	$db->close();
+	$db = new DB("pm");
+	$pro = $db->getone("select * from pm_project_info where p_id='".$pid."'");
 ?>
 </head>
 
@@ -25,8 +24,8 @@
 		<div style="float:left;width:400px;margin-bottom:10px;">负责人: 
 		<?php
 			$db = new DB();
-			$ds = $db->GetAll("select * from pm_user, pm_p2user where u_id = p2u_uid and p2u_pid='".$pid."'");
-			$db->Destroy();
+			$ds = $db->getlist("select * from pm_user, pm_p2user where u_id = p2u_uid and p2u_pid='".$pid."'");
+			$db->close();
 			
 			for($i=0;$i<count($ds);$i++)
 			{

@@ -9,6 +9,7 @@
 </style>
 <div style="display:none;">
 <?include_once("./action/sessioncheck.php");?>
+<?include_once("./action/fn.php");?>
 <?include_once("./action/sys/db.php");?>
 </div>
 <?
@@ -28,8 +29,8 @@
 	$pid = $_GET["pid"];
 	error_reporting(-1);
 	
-	$db = new DB();
-	$project = $db->GetAll("select p_name,p_persent,u_name from pm_project_info,pm_p2user,pm_user where p_id=p2u_pid and p2u_uid=u_id and p_id='".$pid."'");
+	$db = new DB("pm");
+	$project = $db->getlist("select p_name,p_persent,u_name from pm_project_info,pm_p2user,pm_user where p_id=p2u_pid and p2u_uid=u_id and p_id='".$pid."'");
 	$pname = $project[0]["p_name"];
 	$puser = "";
 	for($i=0;$i<count($project);$i++){
@@ -37,9 +38,9 @@
 	}
 	
 	//echo $db->error_message;
-	$log = $db->GetAll("select * from pm_project_log, pm_tag where l_pid='".$pid."' and l_tagid=t_id order by l_date desc, l_id desc");
-	$tag = $db->GetAll("select * from pm_tag where t_tid='1'");
-	$db->Destroy();
+	$log = $db->getlist("select * from pm_project_log, pm_tag where l_pid='".$pid."' and l_tagid=t_id order by l_date desc, l_id desc");
+	$tag = $db->getlist("select * from pm_tag where t_tid='1'");
+	$db->close();
 ?>
 </head>
 <script>
@@ -120,7 +121,7 @@
 							?>
 						</select> ％
 					</td>
-					<td>记录人员: <span style="color:#ccc"><?php echo $_SESSION['u_name'] ?></span></td>
+					<td>记录人员: <span style="color:#ccc"><?php echo fn_getcookie('puname') ?></span></td>
 					<td>日期: <span style="color:#ccc"><?php echo $showtime=date("Y-m-d H:i:s") ?></span></td>
 				</tr>
 				<tr >
