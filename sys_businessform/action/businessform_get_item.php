@@ -4,15 +4,15 @@
 	include_once "../../action/sys/db.php";
 	// include_once "../../action/sys/log.php";
 
-	$sql = "select * from b_businessform where bf_id=".$_POST["bf_id"];
+	$db = new DB("da_bizform");
+	$sql = "select * from b_businessform where bf_id=:bf_id ";
 	// $log = new Log();
 	// $log->write($sql);
 	
-	$db = new DB(3);
-	$set = $db->GetAll($sql);
-	//echo $db->error_message;
-	$db->Destroy();
-	//print_r($set);
+	$db->param(":bf_id", $_POST["bf_id"]);
+	$set = $db->getlist($sql);
+	
+	$db->close();
 	
 	if(is_array($set)){
 		for($i=0; $i<count($set); $i++){
@@ -20,8 +20,10 @@
 				$set[$i][$key] = urlencode( $value );   
 			}
 		}
+		echo urldecode(json_encode($set));
+	}
+	else{
+		echo "FALSE";
 	}
 	
-	// $log->write($res);
-	echo urldecode(json_encode($set));
 ?>

@@ -181,7 +181,7 @@ function clicknode(treeId, treeNode){
 /*加载左边角色树*/
 function loadroletree(){
 	 da.runDB("action/role_get_list.php",{
-	   dataType: "json"
+		dataType: "json"
 	   },
 	   function(data){
 			var zNodes = [];
@@ -249,7 +249,7 @@ function loadmenu2role(){
 		var chkObj;
 		for(var i=0; i<data.length; i++){
 			chkObj = da("#chkmenu_"+ data[i].m2r_pmid);
-				
+
 			chkObj.dom[0].checked = true;
 			chkObj.attr("checked","true");
 		}
@@ -346,7 +346,7 @@ function loadpower2role(){
 		var chkObj;
 		for(var i=0; i<data.length; i++){
 			chkObj = da("#power_"+data[i].p2r_ppid+"_"+data[i].p2r_ptid);
-				
+			
 			chkObj.dom[0].checked = true;
 			chkObj.attr("checked","true");
 		}
@@ -459,7 +459,7 @@ function loadgrouplist(){
 	//加载工作组人员列表
 	daTable({
 		id: "tb_grouplist",
-		url: "action/group2role_get_list.php",
+		url: "action/group2role_get_page.php",
 		data: {
 			dataType: "json",
 			prid: g_prid,

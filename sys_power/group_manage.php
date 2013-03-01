@@ -32,7 +32,13 @@
 			<td style="vertical-align:top;">
 				<div id="tabbar"></div>
 				<div id="pad_info">
-					<div class="righttitle">工作组基本信息 <a style="margin-left:320px;" href="javascript:void(0)" onclick="updategroup()" >保存</a></div>
+					<div class="list_top_bar">
+						<div class="list_top_title">工作组基本信息</div>
+						<div class="list_top_tools">
+							<a class="item" href="javascript:void(0)" onclick="updategroup();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+						</div>
+					</div>
+					
 					<table id="orgform" class="tableform" style="width:100%">
 						<tr>
 							<td colspan="3">名称 <input id="pg_name" type="text" style="width:400px;" value="" /></td>
@@ -49,10 +55,14 @@
 				</div>
 				
 				<div id="pad_list">
-					<div class="righttitle">工作组下包含的人员列表 
-						<a style="margin-left:320px;" href="javascript:void(0)" onclick="addu2g()" >添加</a> | 
-						<a href="javascript:void(0)" onclick="deleteu2g()" >删除</a> | 
+					<div class="list_top_bar">
+						<div class="list_top_title">工作组下包含的人员列表</div>
+						<div class="list_top_tools">
+							<a class="item" href="javascript:void(0)" onclick="addu2g();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加</a>
+							<a class="item" href="javascript:void(0)" onclick="deleteu2g();" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+						</div>
 					</div>
+					
 					<table id="tb_list" style="width:100%;">
 						<tbody name="head">
 							<tr>

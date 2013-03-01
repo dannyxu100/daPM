@@ -35,9 +35,11 @@
 		</tr>
 		<tr>
 			<td style="vertical-align:top;">
-				<div class="righttitle">
-					<a id="bft_title" href="javascript:void(0)" onclick="updateformtype()" value=""></a>
-					<a style="margin-left:320px;" href="javascript:void(0)" onclick="addform()" >新建</a>
+				<div class="list_top_bar">
+					<div class="list_top_title"><a id="wft_title" href="javascript:void(0)" onclick="updateformtype()" value=""></a></div>
+					<div class="list_top_tools">
+						<a class="item" href="javascript:void(0)" onclick="addform();" ><img src="/sys_power/images/sys_icon/add.png" /> 新建</a>
+					</div>
 				</div>
 			</td>
 		</tr>
@@ -50,9 +52,13 @@
 					<div id="tabbar"></div>
 					
 					<div id="pad_info">
-						<div style="height:30px;line-height:30px; border-bottom:#999; text-align:right; padding:0px 20px;">
-							<a href="javascript:void(0)" onclick="updateform();" >保存</a> |
+						<div class="list_top_bar">
+							<div class="list_top_title"></div>
+							<div class="list_top_tools">
+								<a class="item" href="javascript:void(0)" onclick="updateform();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+							</div>
 						</div>
+						
 						<table class="tablesolid" style="width:100%">
 							<tr>
 								<td class="header" style="width:80px;">名称</td>
@@ -84,16 +90,22 @@
 					</div>
 					
 					<div id="pad_list">
-						<div style="height:30px;line-height:30px; border-bottom:#999; text-align:right; padding:0px 20px;">
-							<a href="javascript:void(0)" onclick="viewlisthtml();" >预览</a> |
-							<a href="javascript:void(0)" onclick="updatelisthtml();" >保存</a> |
+						<div class="list_top_bar">
+							<div class="list_top_title"></div>
+							<div class="list_top_tools">
+								<a class="item" href="javascript:void(0)" onclick="viewlisthtml();" ><img src="/sys_power/images/sys_icon/seach.png" /> 预览</a>
+								<a class="item" href="javascript:void(0)" onclick="updatelisthtml();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+							</div>
 						</div>
 						<textarea id="bf_listhtml" name="bf_listhtml" style="width:99%;height:300px;"></textarea>
 					</div>
 					
 					<div id="pad_form">
-						<div style="height:30px;line-height:30px; border-bottom:#999; text-align:right; padding:0px 20px;">
-							<a href="javascript:void(0)" onclick="updateformhtml();" >保存</a> |
+						<div class="list_top_bar">
+							<div class="list_top_title"></div>
+							<div class="list_top_tools">
+								<a class="item" href="javascript:void(0)" onclick="updateformhtml();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+							</div>
 						</div>
 						<textarea id="bf_formhtml" name="bf_formhtml" style="width:99%;height:800px;"></textarea>
 					</div>

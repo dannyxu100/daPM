@@ -1,17 +1,27 @@
 <?php 
-	// error_reporting(-1);
 	include_once "../../action/sessioncheck.php";
 	include_once "../../action/sys/db.php";
 	// include_once "../../action/sys/log.php";
-
+	//error_reporting(-1);
+	
 	$db = new DB("da_powersys");
-	$sql1 = "select * from p_powertype order by pt_sort asc ";
+	$sql1 = "select * from p_user2group, p_user, p_group where u2g_puid=pu_id and u2g_pgid=pg_id ";
 	$param1 = array();
 	
-	$sql2 = "select count(pt_id) as Column1 from p_powertype ";
+	$sql2 = "select count(u2g_id) as Column1 from p_user2group";
 	$param2 = array();
 	
-	if( isset($_POST["pageindex"]) ){				//åˆ†é¡µ
+	if( isset($_POST["pgid"]) ){					//²¿ÃÅÉ¸Ñ¡
+		$sql1 .= " and u2g_pgid=:pgid";
+		$sql2 .= " where u2g_pgid=:pgid";
+		
+		array_push($param1, array(":pgid", $_POST["pgid"]));
+		array_push($param2, array(":pgid", $_POST["pgid"]));
+	}
+	
+	$sql1 .= " order by u2g_id desc ";
+	
+	if( isset($_POST["pageindex"]) ){				//·ÖÒ³
 		$start = ($_POST["pageindex"]-1)*$_POST["pagesize"];
 		$end = $start + $_POST["pagesize"];
 		$sql1 .= " limit :start, :end";
@@ -43,7 +53,7 @@
 	
 	$res = array(
 		"ds1"=>$count,
-		"ds11"=>$set									//è®°å½•é›†
+		"ds11"=>$set									//¼ÇÂ¼¼¯
 	);
 	
 	// $log->write($res);

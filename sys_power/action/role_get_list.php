@@ -29,7 +29,6 @@
 			foreach ( $set[$i] as $key => $value ) {
 				$set[$i][$key] = urlencode( $value );   
 			}
-
 		}
 		echo urldecode(json_encode($set));
 	}
