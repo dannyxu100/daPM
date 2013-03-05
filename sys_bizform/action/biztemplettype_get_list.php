@@ -7,13 +7,13 @@
 	
 	$sql = "";
 	$sql = "select * from b_biztemplettype ";
-	if(isset($_POST["bftid"])){
-		$sql .= " where bft_id = '".$_POST["bftid"]."' ";
+	if(isset($_POST["bttid"])){
+		$sql .= " where btt_id = '".$_POST["bttid"]."' ";
 	}
-	else if(isset($_POST["bftpid"])){
-		$sql .= " where bft_pid = '".$_POST["bftpid"]."' ";
+	else if(isset($_POST["bttpid"])){
+		$sql .= " where btt_pid = '".$_POST["bttpid"]."' ";
 	}
-	$sql .= " order by bft_sort asc, bft_pid asc";
+	$sql .= " order by btt_sort asc, btt_pid asc";
 	
 	$db = new DB("da_bizform");
 	$set = $db->getlist($sql);

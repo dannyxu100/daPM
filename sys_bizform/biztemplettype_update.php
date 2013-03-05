@@ -52,5 +52,5 @@
 <script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="/js/jquery.ui.datepicker-zh-CN.js"></script>
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
-<script type="text/javascript" src="js/businessformtype_update.js"></script>
+<script type="text/javascript" src="js/biztemplettype_update.js"></script>
 

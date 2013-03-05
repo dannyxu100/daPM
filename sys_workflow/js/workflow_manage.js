@@ -350,13 +350,13 @@ function selectform( tid, obj ){
 	daWin({
 		width: 600,
 		height:400,
-		url: "/sys_bizform/plugin/select_bizform.htm?ismulti=true",
+		url: "/sys_bizform/plugin/select_biztemplet.htm?ismulti=true",
 		back: function( data ){
 			var bfids = "", bfnames = "";
 			
 			for( var k in data ){
 				bfids += k +",";
-				bfnames += data[k].bf_name +",";
+				bfnames += data[k].bt_name +",";
 			}
 			
 			da.runDB("/sys_workflow/action/tran2form_update_list.php",{

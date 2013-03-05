@@ -2103,7 +2103,7 @@
 					var values = da.pushArray( value );
 	
 					da(elem).find("option").each(function() {
-						this.selected = da.isInArray( da(thsis).val(), values ) >= 0;
+						this.selected = da.isInArray( da(this).val(), values ) >= 0;
 					});
 	
 					if ( !values.length ) {

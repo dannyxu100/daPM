@@ -4,7 +4,7 @@
 	include_once "../../action/sys/db.php";
 	// include_once "../../action/sys/log.php";
 
-	$sql = "select * from b_biztemplettype where bft_id=".$_POST["bft_id"];
+	$sql = "select * from b_biztemplettype where btt_id=".$_POST["btt_id"];
 	// $log = new Log();
 	// $log->write($sql);
 	

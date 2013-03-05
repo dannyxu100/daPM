@@ -1,4 +1,4 @@
-﻿var g_curbftid = "",
+﻿var g_curbttid = "",
 	g_ismulti = false;
 
 var setting = {
@@ -19,22 +19,22 @@ var setting = {
 };
 
 function onMouseUp(event, treeId, treeNode) {
-	g_curbftid = treeNode.id;
+	g_curbttid = treeNode.id;
 	loadformlist();
 }
 
 /*加载左边部门数据*/
 function loadtree(){
-	da.runDB("/sys_bizform/action/bizformtype_get_list.php",{
+	da.runDB("/sys_bizform/action/biztemplettype_get_list.php",{
 	   dataType: "json"
 	   
 	},function(data){
 		var zNodes = [];
 		for(var i=0; i<data.length; i++){
 			zNodes.push({
-				id: data[i].bft_id,
-				pId: data[i].bft_pid,
-				name: data[i].bft_name,
+				id: data[i].btt_id,
+				pId: data[i].btt_pid,
+				name: data[i].btt_name,
 				open: true
 			});
 		}
@@ -52,15 +52,15 @@ function loadformlist(){
 			opt: "qry"
 		};
 		
-	if( g_curbftid ){
-		data1.bftid = g_curbftid;
+	if( g_curbttid ){
+		data1.bttid = g_curbttid;
 	}
 	
 	//考虑到多页选择，就不清楚缓存了。
 	// g_ds = {};	//清除缓存数据
 	daTable({
 		id: "tb_list",
-		url: "/sys_bizform/action/bizform_get_page.php",
+		url: "/sys_bizform/action/biztemplet_get_page.php",
 		data: data1,
 		//loading: false,
 		//page: false,
@@ -68,17 +68,17 @@ function loadformlist(){
 		
 		field: function( fld, val, row, ds ){
 			if("checkbox" == fld){				//
-				if(g_chkItems[row.bf_id]){		//判断是否被选过
-					return '<input id="chkbox_'+ row.bf_id +'" type="checkbox" checked name="chklist" value="'+ row.bf_id +'"/>';
+				if(g_chkItems[row.bt_id]){		//判断是否被选过
+					return '<input id="chkbox_'+ row.bt_id +'" type="checkbox" checked name="chklist" value="'+ row.bt_id +'"/>';
 				}
 				else{
-					return '<input id="chkbox_'+ row.bf_id +'" type="checkbox" name="chklist" value="'+ row.bf_id +'"/>';
+					return '<input id="chkbox_'+ row.bt_id +'" type="checkbox" name="chklist" value="'+ row.bt_id +'"/>';
 				}
 			}
 			// da.out($v[_pu_remark]);
 			// if( "pu_count" == fld )
 				// return 0==val?"完整SQL":"不完整SQL";
-			if("bf_id"==fld){
+			if("bt_id"==fld){
 				g_ds[val] = row;
 			}
 			// if("pu_name"==fld){
@@ -98,16 +98,16 @@ var g_chkItems = {};
 /**选择人员
 */
 function selectitem( trObj ){
-	var bfid = da(trObj).attr("value"),
+	var btid = da(trObj).attr("value"),
 		chkObj = da("input[name=chklist]",trObj);
 
 	if(chkObj.dom[0].checked){
-		delete g_chkItems[bfid];
+		delete g_chkItems[btid];
 		chkObj.dom[0].checked = false;
 		chkObj.removeAttr("checked");
 	}
 	else{
-		g_chkItems[bfid] = g_ds[bfid];
+		g_chkItems[btid] = g_ds[btid];
 		chkObj.dom[0].checked = true;
 		chkObj.attr("checked","true");
 	}
@@ -121,10 +121,10 @@ function selectitem( trObj ){
 
 /**取消选中的人员
 */
-function cancelitem( bfid ){
-	delete g_chkItems[bfid];
+function cancelitem( btid ){
+	delete g_chkItems[btid];
 
-	var chkObj = da("#chkbox_"+bfid);
+	var chkObj = da("#chkbox_"+btid);
 	if(0<chkObj.dom.length){
 		chkObj.dom[0].checked = false;
 		chkObj.removeAttr("checked");
@@ -140,7 +140,7 @@ function showitem(){
 		strHTML = '';
 		
 	for( var k in g_chkItems ){
-		strHTML += '<div class="item" ondblclick="cancelitem('+ g_chkItems[k].bf_id +')">'+ g_chkItems[k].bf_name +'</div>';
+		strHTML += '<div class="item" ondblclick="cancelitem('+ g_chkItems[k].bt_id +')">'+ g_chkItems[k].bt_name +'</div>';
 	}
 	
 	outObj.html(strHTML);

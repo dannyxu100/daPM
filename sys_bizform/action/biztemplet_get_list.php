@@ -6,13 +6,13 @@
 	//error_reporting(-1);
 	
 	$sql = "select * from b_biztemplet ";
-	if(isset($_POST["bfid"])){
-		$sql .= " where bf_id = '".$_POST["bfid"]."' ";
+	if(isset($_POST["btid"])){
+		$sql .= " where bt_id = '".$_POST["btid"]."' ";
 	}
-	else if(isset($_POST["bftid"])){
-		$sql .= " where bf_bftid = '".$_POST["bftid"]."' ";
+	else if(isset($_POST["bttid"])){
+		$sql .= " where bt_bttid = '".$_POST["bttid"]."' ";
 	}
-	$sql .= " order by bf_sort asc, bf_id asc";
+	$sql .= " order by bt_sort asc, bt_id asc";
 	
 	$db = new DB("da_bizform");
 	$set = $db->getlist($sql);

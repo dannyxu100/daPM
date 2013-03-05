@@ -8,18 +8,18 @@
 	$sql1 = "select * from b_biztemplet ";
 	$param1 = array();
 	
-	$sql2 = "select count(bf_id) as Column1 from b_biztemplet ";
+	$sql2 = "select count(bt_id) as Column1 from b_biztemplet ";
 	$param2 = array();
 	
-	if( isset($_POST["bftid"]) ){					//部门筛选
-		$sql1 .= " where bf_bftid=:bftid ";
-		$sql2 .= " where bf_bftid=:bftid ";
+	if( isset($_POST["bttid"]) ){					//部门筛选
+		$sql1 .= " where bt_bttid=:bttid ";
+		$sql2 .= " where bt_bttid=:bttid ";
 		
-		array_push($param1, array(":bftid", $_POST["bftid"]));
-		array_push($param2, array(":bftid", $_POST["bftid"]));
+		array_push($param1, array(":bttid", $_POST["bttid"]));
+		array_push($param2, array(":bttid", $_POST["bttid"]));
 	}
 	
-	$sql1 .= " order by bf_sort asc, bf_id asc ";
+	$sql1 .= " order by bt_sort asc, bt_id asc ";
 	
 	if( isset($_POST["pageindex"]) ){				//分页
 		$start = ($_POST["pageindex"]-1)*$_POST["pagesize"];

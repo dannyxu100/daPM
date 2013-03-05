@@ -5,11 +5,11 @@
 	// include_once "../../action/sys/log.php";
 
 	$db = new DB("da_bizform");
-	$sql = "select * from b_biztemplet where bf_id=:bf_id ";
+	$sql = "select * from b_biztemplet where bt_id=:bt_id ";
 	// $log = new Log();
 	// $log->write($sql);
 	
-	$db->param(":bf_id", $_POST["bf_id"]);
+	$db->param(":bt_id", $_POST["bt_id"]);
 	$set = $db->getlist($sql);
 	
 	$db->close();

@@ -103,7 +103,8 @@ function loadtablelist(){
 						id: db,
 						pId: 0,
 						name: db,
-						open: "da_userform"==db?true:false
+						open: "da_userform"==db?true:false,
+						icon: "da_userform"==db?"":"/plugin/ztree/img/diy/no.png"
 					});
 				}
 			

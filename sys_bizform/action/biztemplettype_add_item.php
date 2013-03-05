@@ -5,7 +5,7 @@
 	// error_reporting(-1);
 
 	$db = new DB(3);
-	$res = $db->Query("insert into b_biztemplettype(bft_pid, bft_name) values(".$_POST["pid"].",'".$_POST["name"]."')");
+	$res = $db->Query("insert into b_biztemplettype(btt_pid, btt_name) values(".$_POST["pid"].",'".$_POST["name"]."')");
 	if($res){
 		echo mysql_insert_id();
 	}

@@ -1,7 +1,7 @@
 ﻿
-var g_bftid = "",
-	g_bfid = "",
-	g_bfname = "";
+var g_bttid = "",
+	g_btid = "",
+	g_btname = "";
 
 <!--
 var setting = {
@@ -139,7 +139,7 @@ function addHoverDom(treeId, treeNode) {
 	if (btn) btn.bind("click", function(){
 		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 
-		da.runDB("action/bizformtype_add_item.php",{
+		da.runDB("action/biztemplettype_add_item.php",{
 			pid: treeNode.id,
 			name: "新建表单分类"
 		},
@@ -161,10 +161,10 @@ function removeHoverDom(treeId, treeNode) {
 /**点击树节点事件
 */
 function clicknode(treeId, treeNode){
-	g_bftid = treeNode.id;
+	g_bttid = treeNode.id;
 	
 	da("#pad_config").hide();
-	da("#bft_title").html(treeNode.name);
+	da("#btt_title").html(treeNode.name);
 
 	loadformlist();
 }
@@ -172,29 +172,29 @@ function clicknode(treeId, treeNode){
 /**加载表单基本信息
 */
 function loadinfo(){
-	da.runDB("action/bizform_get_item.php",{
+	da.runDB("action/biztemplet_get_item.php",{
 		dataType: "json",
-		bf_id: g_bfid
+		bt_id: g_btid
 	},function(res){
 		if("FALSE"!= res && res[0]){
 			for(var fld in res[0]){
 				da("#"+fld).val(res[0][fld]);
 			}
 			
-			g_editorList.html(decodeURI(res[0].bf_listhtml));
-			g_editorForm.html(decodeURI(res[0].bf_formhtml));
+			g_editorList.html(decodeURI(res[0].bt_listhtml));
+			g_editorForm.html(decodeURI(res[0].bt_formhtml));
 		}
 	});
 }
 
 /**加载表单信息
 */
-function loadform(bfid, obj){
+function loadform(btid, obj){
 	da("#pad_config").show();
 	
 	var daObj = da(obj);
-	g_bfid = bfid;
-	g_bfname = daObj.text();
+	g_btid = btid;
+	g_btname = daObj.text();
 	da(".curmenu").removeClass("curmenu");
 	daObj.addClass("curmenu");
 	
@@ -206,18 +206,20 @@ function loadform(bfid, obj){
 function loadformlist(){
 	da("#formlist").empty();
 
-	da.runDB("/sys_bizform/action/bizform_get_list.php",{
+	da.runDB("/sys_bizform/action/biztemplet_get_list.php",{
 		dataType: "json",
-		bftid: g_bftid
+		bttid: g_bttid
 	},function(data){
 		if("FALSE" != data){
 			for( var i=0; i<data.length; i++ ){
 				//delegate
-				da("#formlist").append('<a href="javascript:void(0)" class="bt_menu" style="float:left;" onclick="loadform('+ data[i].bf_id +', this)">'+ (i+1)+"、"+data[i].bf_name +'</a>');
+				da("#formlist").append('<a href="javascript:void(0)" class="bt_menu" style="float:left;" onclick="loadform('+ data[i].bt_id +', this)">'+ (i+1)+"、"+data[i].bt_name +'</a>');
 			}
 			
 			da(da(".bt_menu").dom[0]).click();
 		}
+	},function(a,b,c){
+		debugger;
 	});
 }
 
@@ -227,18 +229,18 @@ function viewlisthtml(){
 	daWin({
 		width: 800,
 		height:600,
-		url: "/sys_bizform/view_bizformlist.php?bfid="+g_bfid
+		url: "/sys_bizform/view_bizformlist.php?btid="+g_btid
 	});
 }
 
 /** 修改表单列表页代码
 */
 function updatelisthtml(){
-	da("#bf_listhtml").val(g_editorList.html());
+	da("#bt_listhtml").val(g_editorList.html());
 
-	da.runDB("/sys_bizform/action/bizform_update_listhtml.php",{
-		bf_id: g_bfid,
-		bf_listhtml: encodeURI(da("#bf_listhtml").val())			//编码，避免读取的时候ajax转化为json出错
+	da.runDB("/sys_bizform/action/biztemplet_update_listhtml.php",{
+		bt_id: g_btid,
+		bt_listhtml: encodeURI(da("#bt_listhtml").val())			//编码，避免读取的时候ajax转化为json出错
 		
 	},function(data){
 		if("FALSE" != data){
@@ -253,11 +255,11 @@ function updatelisthtml(){
 /** 修改表单详细页代码
 */
 function updateformhtml(){
-	da("#bf_formhtml").val(g_editorForm.html());
+	da("#bt_formhtml").val(g_editorForm.html());
 	
-	da.runDB("/sys_bizform/action/bizform_update_formhtml.php",{
-		bf_id: g_bfid,
-		bf_formhtml: encodeURI(da("#bf_formhtml").val())			//编码，避免读取的时候ajax转化为json出错
+	da.runDB("/sys_bizform/action/biztemplet_update_formhtml.php",{
+		bt_id: g_btid,
+		bt_formhtml: encodeURI(da("#bt_formhtml").val())			//编码，避免读取的时候ajax转化为json出错
 		
 	},function(data){
 		if("FALSE" != data){
@@ -272,11 +274,11 @@ function updateformhtml(){
 /** 修改表单信息
 */
 function updateform(){
-	da.runDB("/sys_bizform/action/bizform_update_item.php",{
-		bf_id: g_bfid,
-		bf_name: da("#bf_name").val(),
-		bf_sort: da("#bf_sort").val(),
-		bf_remark: da("#bf_remark").val()
+	da.runDB("/sys_bizform/action/biztemplet_update_item.php",{
+		bt_id: g_btid,
+		bt_name: da("#bt_name").val(),
+		bt_sort: da("#bt_sort").val(),
+		bt_remark: da("#bt_remark").val()
 		
 	},function(data){
 		if("FALSE" != data){
@@ -294,7 +296,7 @@ function updateformtype(){
 	daWin({
 		width: 550,
 		height: 400,
-		url: "/sys_bizform/bizformtype_update.php?bftid="+ g_bftid,
+		url: "/sys_bizform/biztemplettype_update.php?bttid="+ g_bttid,
 		after: function(){
 			loadtree();
 		}
@@ -304,7 +306,7 @@ function updateformtype(){
 /**添加新表单
 */
 function addform(){
-	if( "" == g_bftid ){
+	if( "" == g_bttid ){
 		alert("请先点击选择，表单类型。");
 		return;
 	}
@@ -312,8 +314,8 @@ function addform(){
 	daWin({
 		width: 550,
 		height: 450,
-		title: da("#bft_title").text() +"> 新建表单",
-		url: "/sys_bizform/bizform_add.php?bftid="+ g_bftid,
+		title: da("#btt_title").text() +"> 新建表单",
+		url: "/sys_bizform/biztemplet_add.php?bttid="+ g_bttid,
 		after: function(){
 			loadformlist();
 		}
@@ -396,16 +398,16 @@ function loadtab(){
 /**加载左边部门数据
 */
 function loadtree(){
-	da.runDB("action/bizformtype_get_list.php",{
+	da.runDB("action/biztemplettype_get_list.php",{
 	   dataType: "json"
 	   
 	},function(data){
 		var zNodes = [];
 		for(var i=0; i<data.length; i++){
 			zNodes.push({
-				id: data[i].bft_id,
-				pId: data[i].bft_pid,
-				name: data[i].bft_name,
+				id: data[i].btt_id,
+				pId: data[i].btt_pid,
+				name: data[i].btt_name,
 				open: true
 			});
 		}
@@ -419,7 +421,7 @@ var g_editorList, g_editorForm;
 */
 function loadeditor(){
 	KindEditor.ready(function(K) {
-		g_editorList = K.create('#bf_listhtml', {
+		g_editorList = K.create('#bt_listhtml', {
 			resizeType : 1,
 			allowPreviewEmoticons : false,
 			fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
@@ -436,7 +438,7 @@ function loadeditor(){
 				'da_list_fld'
 			]
 		});
-		g_editorForm = K.create('#bf_formhtml', {
+		g_editorForm = K.create('#bt_formhtml', {
 			resizeType : 1,
 			allowPreviewEmoticons : false,
 			fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
