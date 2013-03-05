@@ -1,6 +1,6 @@
 ﻿<?php
 	
-	/**获取
+	/**获取cookie值
 	*/
 	function fn_getcookie( $name ){
 		$arrcookie = explode('|', urldecode($_COOKIE["COOKIE_FROM_DASYS"]));

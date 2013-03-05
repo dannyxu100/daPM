@@ -8,7 +8,9 @@
 <BODY>
 	<table class="tablesolid" style="width:100%">
 		<tr>
-			<td id="left_frame" style="vertical-align:top; width:200px; padding:0px;"><div id="workflow_list"></div></td>
+			<td id="left_frame" style="vertical-align:top; width:200px; padding:0px;">
+				<div id="workflow_list"></div>
+			</td>
 			<td style="vertical-align:middle; width:10px; padding:0px;cursor:pointer; background:#f7f7f7;" onclick="slideleft()">
 				<div id="bt_slide" class="bt_slideleft"></div>
 			</td>
@@ -31,5 +33,6 @@
 </HTML>
 
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
+<script type="text/javascript" src="/js/fn.js"></script>
 <script type="text/javascript" src="js/biz_list.js"></script>
 

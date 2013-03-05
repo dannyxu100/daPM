@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 02 月 24 日 15:32
+-- 生成日期: 2013 年 03 月 05 日 17:09
 -- 服务器版本: 5.5.8
 -- PHP 版本: 5.3.3
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `w_arc` (
   `a_type` varchar(20) NOT NULL COMMENT '向弧类型；（分支或汇聚类型）SEQ：一般顺序流类型；Explicit Or Split：显示条件分支；Implicit Or Split：隐式条件分支； Or Join：条件汇聚（显示和隐式）；And Split：并行分支； And Join：并行汇聚',
   `a_precondition` text NOT NULL COMMENT '只有当a_type为Explicit Or Split时有效，这个包含了我们知道的值只有true或false的guard表达式。',
   PRIMARY KEY (`a_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流向弧表' AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `w_arc`
@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `w_place` (
   `p_type` varchar(20) NOT NULL COMMENT '库所类型；1：开始库所；50：中间库所；999：结束库所（当创建了一个新的工作流程时，会自动创建一个开始库所和结束库所）',
   `p_remark` text NOT NULL COMMENT '备注',
   PRIMARY KEY (`p_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流库节点表' AUTO_INCREMENT=23 ;
 
 --
 -- 转存表中的数据 `w_place`
@@ -118,12 +118,14 @@ CREATE TABLE IF NOT EXISTS `w_tran2form` (
   `t2f_tid` int(10) NOT NULL COMMENT '事物变迁id',
   `t2f_bfid` int(10) NOT NULL COMMENT '业务表单id',
   PRIMARY KEY (`t2f_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='事物变迁映射业务表单表' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='事物变迁映射业务表单表' AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `w_tran2form`
 --
 
+INSERT INTO `w_tran2form` (`t2f_id`, `t2f_tid`, `t2f_bfid`) VALUES
+(3, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -136,16 +138,20 @@ CREATE TABLE IF NOT EXISTS `w_tran2role` (
   `t2r_tid` int(10) NOT NULL COMMENT '事务变迁id',
   `t2r_prid` int(10) NOT NULL COMMENT '角色id',
   PRIMARY KEY (`t2r_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='事务变迁映射角色表' AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='事务变迁映射角色表' AUTO_INCREMENT=31 ;
 
 --
 -- 转存表中的数据 `w_tran2role`
 --
 
 INSERT INTO `w_tran2role` (`t2r_id`, `t2r_tid`, `t2r_prid`) VALUES
-(19, 3, 6),
 (20, 1, 3),
-(21, 2, 2);
+(21, 2, 2),
+(25, 3, 2),
+(26, 3, 3),
+(27, 3, 4),
+(28, 3, 5),
+(30, 4, 5);
 
 -- --------------------------------------------------------
 
@@ -194,7 +200,7 @@ CREATE TABLE IF NOT EXISTS `w_transition` (
   `t_rolename` text NOT NULL COMMENT '事务变迁映射角色',
   `t_formname` text NOT NULL COMMENT '事务变迁映射表单',
   PRIMARY KEY (`t_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流事务变迁节点表' AUTO_INCREMENT=5 ;
 
 --
 -- 转存表中的数据 `w_transition`
@@ -203,7 +209,8 @@ CREATE TABLE IF NOT EXISTS `w_transition` (
 INSERT INTO `w_transition` (`t_id`, `t_wfid`, `t_name`, `t_sort`, `t_remark`, `t_type`, `t_limit`, `t_firetaskid`, `t_rolename`, `t_formname`) VALUES
 (1, 7, '部门经理审核', 5, '', 'USER', 0, 0, '项目经理,', ''),
 (2, 7, '部门总监确定', 10, '', 'USER', 0, 0, '总经理,', ''),
-(3, 7, '创建假事单', 0, '', 'USER', 0, 0, '新建角色,', '');
+(3, 7, '创建假事单', 0, '', 'USER', 0, 0, '总经理,项目经理,新建角色,超级管理员,', '请假单,'),
+(4, 11, '创建KPI表', 1, '', 'USER', 0, 0, '超级管理员,', '');
 
 -- --------------------------------------------------------
 
@@ -224,7 +231,7 @@ CREATE TABLE IF NOT EXISTS `w_workflow` (
   `wf_editdate` datetime NOT NULL COMMENT '最近一次变更日期',
   `wf_edituser` varchar(50) CHARACTER SET utf8 NOT NULL COMMENT '最近一次变更者',
   PRIMARY KEY (`wf_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='工作流表' AUTO_INCREMENT=14 ;
 
 --
 -- 转存表中的数据 `w_workflow`
@@ -250,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `w_workflowcase` (
   `wfc_enddate` datetime NOT NULL COMMENT '工作流实例关闭日期（令牌放入结束库时）',
   `wfc_context` text NOT NULL COMMENT 'sql where语句形式的，或者是数据库基建。这个由对应工作流的启动任务id（w_starttaskid）产生的',
   PRIMARY KEY (`wfc_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工作流实例' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工作流实例表' AUTO_INCREMENT=1 ;
 
 --
 -- 转存表中的数据 `w_workflowcase`
@@ -271,7 +278,7 @@ CREATE TABLE IF NOT EXISTS `w_workflowtype` (
   `wft_date` datetime NOT NULL COMMENT '创建日期',
   `wft_remark` text NOT NULL COMMENT '备注',
   PRIMARY KEY (`wft_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流分类表' AUTO_INCREMENT=9 ;
 
 --
 -- 转存表中的数据 `w_workflowtype`

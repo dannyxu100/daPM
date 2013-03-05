@@ -42,9 +42,10 @@ function clickworkflow( wfid, obj ){
 
 /**加载菜单
 */
-function loadworkflowtype(){
-	da.runDB("/sys_workflow/action/workflow_get_list.php",{
-		dataType: "json"
+function loadworkflow(){
+	da.runDB("/web/biz/action/workflowbypower_get_list.php",{
+		dataType: "json",
+		roleids: fn_getcookie("roleid")
 		
 	},function(data){
 		if("FALSE" != data ){
@@ -63,6 +64,6 @@ function loadworkflowtype(){
 
 daLoader("daIframe,daWin,daToolbar",function(){
 	da(function(){
-		loadworkflowtype();
+		loadworkflow();
 	});
 });

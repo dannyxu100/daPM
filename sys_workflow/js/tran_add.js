@@ -9,7 +9,6 @@ function savetran(){
 		t_type: da("#t_type").val(),
 		t_limit: da("#t_limit").val(),
 		t_firetaskid: da("#t_firetaskid").val(),
-		t_roleid: da("#t_roleid").val(),
 		t_remark: da("#t_remark").val()
 	},function(res){
 		if("FALSE"!=res){

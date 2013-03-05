@@ -183,6 +183,15 @@ function loadinfo(){
 			
 			g_editorList.html(decodeURI(res[0].bt_listhtml));
 			g_editorForm.html(decodeURI(res[0].bt_formhtml));
+			
+			loaddbsource(function(dbObj){		//加载数据源下拉
+				dbObj.val(res[0].bt_dbsource);
+				
+				loaddbfld(function(fldObj){		//加载关联字段下拉
+					fldObj.val(res[0].bt_dbfld);
+				});	
+			});
+			
 		}
 	});
 }
@@ -373,10 +382,10 @@ function deleteu2g(){
 
 /**联动加载数据源表对应的可选字段
 */
-function loaddbfld(){
-	var dbObj = da("#bt_dbfld");
-	dbObj.empty();
-	dbObj.append('<option value="">空</option>');
+function loaddbfld(callback){
+	var fldObj = da("#bt_dbfld");
+	fldObj.empty();
+	fldObj.append('<option value="">空</option>');
 	
 	da.runDB("/sys_userform/action/tbcolumns_get_list.php",{
 		dataType: 'json',
@@ -387,34 +396,40 @@ function loaddbfld(){
 			
 			for(var i=0; i<data.length; i++){
 				if("PRI"==data[i].COLUMN_KEY){		//主键高亮
-					dbObj.append('<option style="color:#f00;" value="'+ data[i].COLUMN_NAME +'">'+ data[i].COLUMN_NAME +'</option>');
+					fldObj.append('<option style="color:#f00;" value="'+ data[i].COLUMN_NAME +'">'+ data[i].COLUMN_NAME +'</option>');
 					key = data[i].COLUMN_NAME;
 				}
 				else{
-					dbObj.append('<option value="'+ data[i].COLUMN_NAME +'">'+ data[i].COLUMN_NAME +'</option>');
+					fldObj.append('<option value="'+ data[i].COLUMN_NAME +'">'+ data[i].COLUMN_NAME +'</option>');
 				}
 			}
 			
 			if( "" != key ){		//有主键，默认选中主键
-				dbObj.val(key);
+				fldObj.val(key);
 			}
+			
+			callback(fldObj);
 		}
 	});
 }
 
 /**加载可选数据源表
 */
-function loaddbsource(){
+function loaddbsource(callback){
+	var dbObj = da("#bt_dbsource");
+	dbObj.empty();
+	dbObj.append('<option value="">空</option>');
+	
 	da.runDB("/sys_userform/action/table_get_list.php",{
 		dataType: 'json',
 		dbnames: "( 'da_userform' )"
 	},function(data){
 		if("FALSE" != data){
-			var dbObj = da("#bt_dbsource");
-			
 			for(var i=0; i<data.length; i++){
 				dbObj.append('<option value="'+ data[i].tbname +'">'+ data[i].tbname +'</option>');
 			}
+			
+			callback(dbObj);
 		}
 	});
 }
@@ -536,7 +551,6 @@ daLoader("daUI,daDate,daMsg,daTab,daTable,daWin", function(){
 	
 		loadtree();
 		loadtab();
-		loaddbsource();		//加载数据源下拉
 		
 		da("#pad_config").hide();
 	});
