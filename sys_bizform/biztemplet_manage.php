@@ -94,13 +94,13 @@
 						</div>
 						<div style="padding:20px;">
 							数据源: 
-							<select id="bt_dbsource" style="margin-right:20px;">
-								<option value="0">空</option>
+							<select id="bt_dbsource" style="width:150px; margin-right:20px;" onchange="loaddbfld()">
+								<option value="">空</option>
 							</select>
-							关联字段<span style="color:#f00;">(一般选择主键)</span>:  
-							<select id="bt_dbfld">
-								<option value="0">空</option>
-							</select>
+							关联字段:  
+							<select id="bt_dbfld" style="width:150px;">
+								<option value="">空</option>
+							</select> <span style="color:#f00;">(一般选择主键)</span>
 						</div>
 					</div>
 					

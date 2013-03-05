@@ -1,7 +1,7 @@
 <?php
 	include_once "../../action/sessioncheck.php";
 	include_once "../../action/sys/db.php";
-	include_once "../../action/sys/log.php";
+	// include_once "../../action/sys/log.php";
 	//error_reporting(-1);
 	
 	$db = new DB("da_userform");
@@ -28,9 +28,9 @@
 		array_push($param1, array(":start", $start));
 		array_push($param1, array(":end", $end));
 	}
-	$log = new Log();
-	$log->write($sql1);
-	$log->write($sql2);
+	// $log = new Log();
+	// $log->write($sql1);
+	// $log->write($sql2);
 	
 	$db->paramlist($param1);
 	$set = $db->getlist($sql1);

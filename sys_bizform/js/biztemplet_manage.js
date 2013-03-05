@@ -271,6 +271,24 @@ function updateformhtml(){
 	});
 }
 
+/** 修改数据源信息
+*/
+function updatesource(){
+	da.runDB("/sys_bizform/action/biztemplet_update_dbsource.php",{
+		bt_id: g_btid,
+		dbsource: da("#bt_dbsource").val(),
+		dbfld: da("#bt_dbfld").val()
+		
+	},function(data){
+		if("FALSE" != data){
+			alert("修改成功。");
+		}
+		else{
+			alert("操作失败！");
+		}
+	});
+}
+
 /** 修改表单信息
 */
 function updateform(){
@@ -351,6 +369,54 @@ function deleteu2g(){
 			});
 		});
 	}
+}
+
+/**联动加载数据源表对应的可选字段
+*/
+function loaddbfld(){
+	var dbObj = da("#bt_dbfld");
+	dbObj.empty();
+	dbObj.append('<option value="">空</option>');
+	
+	da.runDB("/sys_userform/action/tbcolumns_get_list.php",{
+		dataType: 'json',
+		tbname: da("#bt_dbsource").val()
+	},function(data){
+		if("FALSE" != data){
+			var key = "";
+			
+			for(var i=0; i<data.length; i++){
+				if("PRI"==data[i].COLUMN_KEY){		//主键高亮
+					dbObj.append('<option style="color:#f00;" value="'+ data[i].COLUMN_NAME +'">'+ data[i].COLUMN_NAME +'</option>');
+					key = data[i].COLUMN_NAME;
+				}
+				else{
+					dbObj.append('<option value="'+ data[i].COLUMN_NAME +'">'+ data[i].COLUMN_NAME +'</option>');
+				}
+			}
+			
+			if( "" != key ){		//有主键，默认选中主键
+				dbObj.val(key);
+			}
+		}
+	});
+}
+
+/**加载可选数据源表
+*/
+function loaddbsource(){
+	da.runDB("/sys_userform/action/table_get_list.php",{
+		dataType: 'json',
+		dbnames: "( 'da_userform' )"
+	},function(data){
+		if("FALSE" != data){
+			var dbObj = da("#bt_dbsource");
+			
+			for(var i=0; i<data.length; i++){
+				dbObj.append('<option value="'+ data[i].tbname +'">'+ data[i].tbname +'</option>');
+			}
+		}
+	});
 }
 
 /**加载分页按钮
@@ -470,6 +536,7 @@ daLoader("daUI,daDate,daMsg,daTab,daTable,daWin", function(){
 	
 		loadtree();
 		loadtab();
+		loaddbsource();		//加载数据源下拉
 		
 		da("#pad_config").hide();
 	});
