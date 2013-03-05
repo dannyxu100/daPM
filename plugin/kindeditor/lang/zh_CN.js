@@ -8,6 +8,16 @@
 *******************************************************************************/
 
 KindEditor.lang({
+	/************** da 系统自定义插件 ***************/
+	
+	da_list_fld : "插入字段",
+	'da_list_fld.url' : 'URL',
+	'da_list_fld.linkType' : '打开类型',
+	'da_list_fld.newWindow' : '新窗口',
+	'da_list_fld.selfWindow' : '当前窗口',
+	
+	/************** da 系统自定义插件 ***************/
+	
 	source : 'HTML代码',
 	preview : '预览',
 	undo : '后退(Ctrl+Z)',

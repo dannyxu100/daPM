@@ -71,14 +71,17 @@ class Log {
      *输出:无
      */
     public function write($log) {
+		$url = $_SERVER['PHP_SELF']; 
+		$filename = end(explode('/',$url)); 
+	
         //传入的数组记录
-        $str = "";
+        $str = "【FROM '".$filename."' log】: ";
         if (is_array ( $log )) {
             foreach ( $log as $k => $v ) {
                 $str .= $k . " : " . $v . "\n";
             }
         } else {
-            $str = $log . "\n";
+            $str .= $log . "\n";
         }
         
         //写日志

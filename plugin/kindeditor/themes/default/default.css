@@ -1,3 +1,4 @@
+
 /* common */
 .ke-inline-block {
 	display: -moz-inline-stack;
@@ -1146,3 +1147,14 @@
 	text-align: center;
 }
 
+
+/************** da 系统自定义插件 ***************/
+
+.ke-icon-da_list_fld{
+	background-image: url(/plugin/kindeditor/themes/da/da_list_fld.png);
+	background-position: 0px 0px;
+	width: 16px;
+	height: 16px;
+}
+
+/************** da 系统自定义插件 ***************/

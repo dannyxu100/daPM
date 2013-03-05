@@ -1,7 +1,7 @@
 <?php
 //error_reporting(-1);
 
-include_once "log.php";
+// include_once "log.php";
 
 class DB{
 	private $m_CONNSTR = Array(
@@ -9,7 +9,8 @@ class DB{
 		"pm" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"pm"),
 		"da_powersys" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_powersys"),
 		"da_workflow" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_workflow"),
-		"da_bizform" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_bizform")
+		"da_bizform" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_bizform"),
+		"da_userform" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_userform")
 	);
 	
 	private $m_host;
@@ -109,7 +110,7 @@ class DB{
 		
 		try {
 			$this->bindparamlist( $statement );
-			$statement->execute();		//返回true 或 false
+			return $statement->execute();		//返回true 或 false
 		}
 		catch (pdoException $e) {
 			$this->seterror($e->getMessage());

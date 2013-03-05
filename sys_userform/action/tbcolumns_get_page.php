@@ -1,32 +1,24 @@
-<?php 
-	
+<?php
 	include_once "../../action/sessioncheck.php";
 	include_once "../../action/sys/db.php";
-	//include_once "../../action/sys/log.php";
+	include_once "../../action/sys/log.php";
 	//error_reporting(-1);
 	
-	$db = new DB("da_powersys");
-	$sql1 = "select * from p_group ";
+	$db = new DB("da_userform");
+	$sql1 = "select * from information_schema.COLUMNS ";
 	$param1 = array();
 	
-	$sql2 = "select count(pg_id) as Column1 from p_group ";
+	$sql2 = "select count(TABLE_NAME) as Column1 from information_schema.COLUMNS ";
 	$param2 = array();
 	
-	if(isset($_POST["pgid"])){
-		$sql1 .= " where pg_id=:pgid ";
-		$sql2 .= " where pg_id=:pgid ";
+	if(isset($_POST["tbname"])){
+		$sql1 .= " where TABLE_NAME=:tbname ";
+		$sql2 .= " where TABLE_NAME=:tbname ";
 		
-		array_push($param1, array(":pgid", $_POST["pgid"]));
-		array_push($param2, array(":pgid", $_POST["pgid"]));
+		array_push($param1, array(":tbname", $_POST["tbname"]));
+		array_push($param2, array(":tbname", $_POST["tbname"]));
 	}
-	else if(isset($_POST["pgpid"])){
-		$sql1 .= " where pg_pid=:pgpid ";
-		$sql2 .= " where pg_pid=:pgpid ";
-		
-		array_push($param1, array(":pgpid", $_POST["pgpid"]));
-		array_push($param2, array(":pgpid", $_POST["pgpid"]));
-	}
-	$sql1 .= " order by pg_sort asc, pg_pid asc";
+	$sql1 .= " order by ORDINAL_POSITION asc, COLUMN_NAME asc";
 	
 	if( isset($_POST["pageindex"]) ){				//·ÖÒ³
 		$start = ($_POST["pageindex"]-1)*$_POST["pagesize"];
@@ -36,9 +28,9 @@
 		array_push($param1, array(":start", $start));
 		array_push($param1, array(":end", $end));
 	}
-	// $log = new Log();
-	// $log->write($sql1);
-	// $log->write($sql2);
+	$log = new Log();
+	$log->write($sql1);
+	$log->write($sql2);
 	
 	$db->paramlist($param1);
 	$set = $db->getlist($sql1);
