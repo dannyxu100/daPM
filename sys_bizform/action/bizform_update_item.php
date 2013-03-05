@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 	// json_encode($arr);
 	include_once "../../action/sessioncheck.php";
 	include_once "../../action/sys/db.php";
@@ -6,14 +6,14 @@
 	// error_reporting(-1);
 
 	date_default_timezone_set("Asia/Hong_Kong");
-
-	$sql = "insert into b_businessform(bf_name, bf_bftid, bf_sort, bf_user, bf_date, bf_remark) values(";
-	$sql .= "'".$_POST["bf_name"]."',";
-	$sql .= "'".$_POST["bf_bftid"]."',";
-	$sql .= "'".$_POST["bf_sort"]."',";
-	$sql .= "'".$_SESSION["u_name"]."',";
-	$sql .= "'".date("Y-m-d H:i:s")."',";
-	$sql .= "'".$_POST["bf_remark"]."')";
+	
+	$sql = "update b_biztemplet set ";
+	$sql .= " bf_name='".$_POST["bf_name"]."',";
+	$sql .= " bf_sort='".$_POST["bf_sort"]."',";
+	$sql .= " bf_remark='".$_POST["bf_remark"]."',";
+	$sql .= " bf_edituser='".$_SESSION["u_name"]."',";
+	$sql .= " bf_editdate='".date("Y-m-d H:i:s")."'";
+	$sql .= " where bf_id='".$_POST["bf_id"]."' ";
 	
 	// $log = new Log();
 	// $log->write($sql.time());

@@ -350,7 +350,7 @@ function selectform( tid, obj ){
 	daWin({
 		width: 600,
 		height:400,
-		url: "/sys_businessform/plugin/select_businessform.htm?ismulti=true",
+		url: "/sys_bizform/plugin/select_bizform.htm?ismulti=true",
 		back: function( data ){
 			var bfids = "", bfnames = "";
 			

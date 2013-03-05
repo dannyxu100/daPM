@@ -85,11 +85,11 @@
 						</table>
 					</div>
 					
-					<div id="pad_db">
+					<div id="pad_db" style="display:none;">
 						
 					</div>
 					
-					<div id="pad_list">
+					<div id="pad_list" style="display:none;">
 						<div class="list_top_bar">
 							<div class="list_top_title"></div>
 							<div class="list_top_tools">
@@ -100,7 +100,7 @@
 						<textarea id="bf_listhtml" name="bf_listhtml" style="width:99%;height:300px;"></textarea>
 					</div>
 					
-					<div id="pad_form">
+					<div id="pad_form" style="display:none;">
 						<div class="list_top_bar">
 							<div class="list_top_title"></div>
 							<div class="list_top_tools">
@@ -127,7 +127,7 @@
 <script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="/js/jquery.ui.datepicker-zh-CN.js"></script>
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
-<script type="text/javascript" src="js/businessform_manage.js"></script>
+<script type="text/javascript" src="js/bizform_manage.js"></script>
 
 
 <script charset="utf-8" src="/plugin/kindeditor/kindeditor-min.js"></script>

@@ -5,7 +5,7 @@
 	// include_once "../../action/sys/log.php";
 	//error_reporting(-1);
 	
-	$sql = "select * from b_businessform ";
+	$sql = "select * from b_biztemplet ";
 	if(isset($_POST["bfid"])){
 		$sql .= " where bf_id = '".$_POST["bfid"]."' ";
 	}

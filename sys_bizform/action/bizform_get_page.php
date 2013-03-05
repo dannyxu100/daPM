@@ -5,10 +5,10 @@
 	// include_once "../../action/sys/log.php";
 
 	$db = new DB("da_bizform");
-	$sql1 = "select * from b_businessform ";
+	$sql1 = "select * from b_biztemplet ";
 	$param1 = array();
 	
-	$sql2 = "select count(bf_id) as Column1 from b_businessform ";
+	$sql2 = "select count(bf_id) as Column1 from b_biztemplet ";
 	$param2 = array();
 	
 	if( isset($_POST["bftid"]) ){					//≤ø√≈…∏—°

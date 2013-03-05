@@ -6,7 +6,7 @@
 	//error_reporting(-1);
 	
 	$sql = "";
-	$sql = "select * from b_businessformtype ";
+	$sql = "select * from b_biztemplettype ";
 	if(isset($_POST["bftid"])){
 		$sql .= " where bft_id = '".$_POST["bftid"]."' ";
 	}

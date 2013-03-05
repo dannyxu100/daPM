@@ -139,7 +139,7 @@ function addHoverDom(treeId, treeNode) {
 	if (btn) btn.bind("click", function(){
 		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 
-		da.runDB("action/businessformtype_add_item.php",{
+		da.runDB("action/bizformtype_add_item.php",{
 			pid: treeNode.id,
 			name: "新建表单分类"
 		},
@@ -172,7 +172,7 @@ function clicknode(treeId, treeNode){
 /**加载表单基本信息
 */
 function loadinfo(){
-	da.runDB("action/businessform_get_item.php",{
+	da.runDB("action/bizform_get_item.php",{
 		dataType: "json",
 		bf_id: g_bfid
 	},function(res){
@@ -206,7 +206,7 @@ function loadform(bfid, obj){
 function loadformlist(){
 	da("#formlist").empty();
 
-	da.runDB("/sys_businessform/action/businessform_get_list.php",{
+	da.runDB("/sys_bizform/action/bizform_get_list.php",{
 		dataType: "json",
 		bftid: g_bftid
 	},function(data){
@@ -227,7 +227,7 @@ function viewlisthtml(){
 	daWin({
 		width: 800,
 		height:600,
-		url: "/sys_businessform/view_businessformlist.php?bfid="+g_bfid
+		url: "/sys_bizform/view_bizformlist.php?bfid="+g_bfid
 	});
 }
 
@@ -236,7 +236,7 @@ function viewlisthtml(){
 function updatelisthtml(){
 	da("#bf_listhtml").val(g_editorList.html());
 
-	da.runDB("/sys_businessform/action/businessform_update_listhtml.php",{
+	da.runDB("/sys_bizform/action/bizform_update_listhtml.php",{
 		bf_id: g_bfid,
 		bf_listhtml: encodeURI(da("#bf_listhtml").val())			//编码，避免读取的时候ajax转化为json出错
 		
@@ -255,7 +255,7 @@ function updatelisthtml(){
 function updateformhtml(){
 	da("#bf_formhtml").val(g_editorForm.html());
 	
-	da.runDB("/sys_businessform/action/businessform_update_formhtml.php",{
+	da.runDB("/sys_bizform/action/bizform_update_formhtml.php",{
 		bf_id: g_bfid,
 		bf_formhtml: encodeURI(da("#bf_formhtml").val())			//编码，避免读取的时候ajax转化为json出错
 		
@@ -272,7 +272,7 @@ function updateformhtml(){
 /** 修改表单信息
 */
 function updateform(){
-	da.runDB("/sys_businessform/action/businessform_update_item.php",{
+	da.runDB("/sys_bizform/action/bizform_update_item.php",{
 		bf_id: g_bfid,
 		bf_name: da("#bf_name").val(),
 		bf_sort: da("#bf_sort").val(),
@@ -294,7 +294,7 @@ function updateformtype(){
 	daWin({
 		width: 550,
 		height: 400,
-		url: "/sys_businessform/businessformtype_update.php?bftid="+ g_bftid,
+		url: "/sys_bizform/bizformtype_update.php?bftid="+ g_bftid,
 		after: function(){
 			loadtree();
 		}
@@ -313,7 +313,7 @@ function addform(){
 		width: 550,
 		height: 450,
 		title: da("#bft_title").text() +"> 新建表单",
-		url: "/sys_businessform/businessform_add.php?bftid="+ g_bftid,
+		url: "/sys_bizform/bizform_add.php?bftid="+ g_bftid,
 		after: function(){
 			loadformlist();
 		}
@@ -396,7 +396,7 @@ function loadtab(){
 /**加载左边部门数据
 */
 function loadtree(){
-	da.runDB("action/businessformtype_get_list.php",{
+	da.runDB("action/bizformtype_get_list.php",{
 	   dataType: "json"
 	   
 	},function(data){

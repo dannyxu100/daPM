@@ -5,7 +5,7 @@
 	// include_once "../../action/sys/log.php";
 
 	$db = new DB("da_bizform");
-	$sql = "select * from b_businessform where bf_id=:bf_id ";
+	$sql = "select * from b_biztemplet where bf_id=:bf_id ";
 	// $log = new Log();
 	// $log->write($sql);
 	

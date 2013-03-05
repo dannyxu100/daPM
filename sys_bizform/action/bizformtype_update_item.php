@@ -5,11 +5,12 @@
 	// include_once "../../action/sys/log.php";
 	// error_reporting(-1);
 
-	date_default_timezone_set("Asia/Hong_Kong");
-	
-	$sql = "update b_businessform set ";
-	$sql .= " bf_listhtml='".$_POST["bf_listhtml"]."'";
-	$sql .= " where bf_id='".$_POST["bf_id"]."' ";
+	$sql = "update b_biztemplettype set ";
+	$sql .= " bft_name='".$_POST["bft_name"]."',";
+	$sql .= " bft_sort='".$_POST["bft_sort"]."',";
+	$sql .= " bft_remark='".$_POST["bft_remark"]."',";
+	$sql .= " bft_date='".$_POST["bft_date"]."' ";
+	$sql .= " where bft_id='".$_POST["bft_id"]."' ";
 	
 	// $log = new Log();
 	// $log->write($sql.time());

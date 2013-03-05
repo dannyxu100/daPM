@@ -7,8 +7,8 @@
 
 	date_default_timezone_set("Asia/Hong_Kong");
 	
-	$sql = "update b_businessform set ";
-	$sql .= " bf_formhtml='".$_POST["bf_formhtml"]."'";
+	$sql = "update b_biztemplet set ";
+	$sql .= " bf_listhtml='".$_POST["bf_listhtml"]."'";
 	$sql .= " where bf_id='".$_POST["bf_id"]."' ";
 	
 	// $log = new Log();

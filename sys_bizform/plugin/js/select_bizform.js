@@ -25,7 +25,7 @@ function onMouseUp(event, treeId, treeNode) {
 
 /*加载左边部门数据*/
 function loadtree(){
-	da.runDB("/sys_businessform/action/businessformtype_get_list.php",{
+	da.runDB("/sys_bizform/action/bizformtype_get_list.php",{
 	   dataType: "json"
 	   
 	},function(data){
@@ -60,7 +60,7 @@ function loadformlist(){
 	// g_ds = {};	//清除缓存数据
 	daTable({
 		id: "tb_list",
-		url: "/sys_businessform/action/businessform_get_page.php",
+		url: "/sys_bizform/action/bizform_get_page.php",
 		data: data1,
 		//loading: false,
 		//page: false,
