@@ -12,10 +12,15 @@
 	from information_schema.tables ";
 	
 	if(isset($_POST["dbnames"])){
-		$sql .= " where table_schema in ".$_POST["dbnames"];
+		$dbnames = $_POST["dbnames"];
+		$dbnames = strtr($dbnames, array("," => "', '"));
+		$dbnames = "('".$dbnames."')";
+		
+		$sql .= " where table_schema in ".$dbnames;
 	}
 	$set = $db->getlist($sql);
 	// $log = new Log();
+	// $log->write($sql);
 	// $log->write($db->geterror());
 	
 	$db->close();

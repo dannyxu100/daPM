@@ -422,7 +422,7 @@ function loaddbsource(callback){
 	
 	da.runDB("/sys_userform/action/table_get_list.php",{
 		dataType: 'json',
-		dbnames: "( 'da_userform' )"
+		dbnames: "da_userform"
 	},function(data){
 		if("FALSE" != data){
 			for(var i=0; i<data.length; i++){

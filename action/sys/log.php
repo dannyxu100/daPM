@@ -1,20 +1,20 @@
-<?php
+ï»¿<?php
 /**********************************************************
  * File name: LogClass.class.php
- * Class name: ÈÕÖ¾¼ÇÂ¼Àà
+ * Class name: æ—¥å¿—è®°å½•ç±»
  * Create date: 2008/05/14
  * Update date: 2008/09/28
  * Author: blue
- * Description: ÈÕÖ¾¼ÇÂ¼Àà
- * Example: //Éè¶¨Â·¾¶ºÍÎÄ¼þÃû
+ * Description: æ—¥å¿—è®°å½•ç±»
+ * Example: //è®¾å®šè·¯å¾„å’Œæ–‡ä»¶å
  * $dir="a/b/".date("Y/m",time());
  * $filename=date("d",time()).".log";
  * $Log=new Log($dir,$filename);
  * $Log->write("test".time());
- * //Ê¹ÓÃÄ¬ÈÏ
+ * //ä½¿ç”¨é»˜è®¤
  * $Log=new Log();
  * $Log->write("test".time());
- * //¼ÇÂ¼ÐÅÏ¢Êý×é
+ * //è®°å½•ä¿¡æ¯æ•°ç»„
  * $Log=new Log();
  * $arr=array(
  * 'type'=>'info',
@@ -25,57 +25,57 @@
  **********************************************************/
 
 class Log {
-    private $_filepath; //ÎÄ¼þÂ·¾¶
-    private $_filename; //ÈÕÖ¾ÎÄ¼þÃû
-    private $_filehandle; //ÎÄ¼þ¾ä±ú
+    private $_filepath; //æ–‡ä»¶è·¯å¾„
+    private $_filename; //æ—¥å¿—æ–‡ä»¶å
+    private $_filehandle; //æ–‡ä»¶å¥æŸ„
     
 
     /**
-     *×÷ÓÃ:³õÊ¼»¯¼ÇÂ¼Àà
-     *ÊäÈë:ÎÄ¼þµÄÂ·¾¶,ÒªÐ´ÈëµÄÎÄ¼þÃû
-     *Êä³ö:ÎÞ
+     *ä½œç”¨:åˆå§‹åŒ–è®°å½•ç±»
+     *è¾“å…¥:æ–‡ä»¶çš„è·¯å¾„,è¦å†™å…¥çš„æ–‡ä»¶å
+     *è¾“å‡º:æ— 
      */
     public function Log($dir="", $filename="") {
-        //Ä¬ÈÏÂ·¾¶Îªµ±Ç°Â·¾¶
+        //é»˜è®¤è·¯å¾„ä¸ºå½“å‰è·¯å¾„
         $this->_filepath = empty ( $dir ) ? $_SERVER["DOCUMENT_ROOT"]."/log" : $dir;
         
-        //Ä¬ÈÏÎªÒÔÊ±¼ä£«.logµÄÎÄ¼þÎÄ¼þ
+        //é»˜è®¤ä¸ºä»¥æ—¶é—´ï¼‹.logçš„æ–‡ä»¶æ–‡ä»¶
         $this->_filename = empty ( $filename ) ? date ( 'Y-m-d', time () ) . '.log' : $filename;
         
-        //Éú³ÉÂ·¾¶×Ö´®
+        //ç”Ÿæˆè·¯å¾„å­—ä¸²
         $path = $this->_createPath ( $this->_filepath, $this->_filename );
-        //ÅÐ¶ÏÊÇ·ñ´æÔÚ¸ÃÎÄ¼þ
-        if (! $this->_isExist ( $path )) { //²»´æÔÚ
-            //Ã»ÓÐÂ·¾¶µÄ»°£¬Ä¬ÈÏÎªµ±Ç°Ä¿Â¼
+        //åˆ¤æ–­æ˜¯å¦å­˜åœ¨è¯¥æ–‡ä»¶
+        if (! $this->_isExist ( $path )) { //ä¸å­˜åœ¨
+            //æ²¡æœ‰è·¯å¾„çš„è¯ï¼Œé»˜è®¤ä¸ºå½“å‰ç›®å½•
             if (! empty ( $this->_filepath )) {
-                //´´½¨Ä¿Â¼
-                if (! $this->_createDir ( $this->_filepath )) { //´´½¨Ä¿Â¼²»³É¹¦µÄ´¦Àí
-                    die ( "´´½¨Ä¿Â¼Ê§°Ü!" );
+                //åˆ›å»ºç›®å½•
+                if (! $this->_createDir ( $this->_filepath )) { //åˆ›å»ºç›®å½•ä¸æˆåŠŸçš„å¤„ç†
+                    die ( "åˆ›å»ºç›®å½•å¤±è´¥!" );
                 }
             }
-            //´´½¨ÎÄ¼þ
-            if (! $this->_createLogFile ( $path )) { //´´½¨ÎÄ¼þ²»³É¹¦µÄ´¦Àí
-                die ( "´´½¨ÎÄ¼þÊ§°Ü!" );
+            //åˆ›å»ºæ–‡ä»¶
+            if (! $this->_createLogFile ( $path )) { //åˆ›å»ºæ–‡ä»¶ä¸æˆåŠŸçš„å¤„ç†
+                die ( "åˆ›å»ºæ–‡ä»¶å¤±è´¥!" );
             }
         }
         
-        //Éú³ÉÂ·¾¶×Ö´®
+        //ç”Ÿæˆè·¯å¾„å­—ä¸²
         $path = $this->_createPath ( $this->_filepath, $this->_filename );
-        //´ò¿ªÎÄ¼þ
+        //æ‰“å¼€æ–‡ä»¶
         $this->_filehandle = fopen ( $path, "a+" );
     }
     
     /**
-     *×÷ÓÃ:Ð´Èë¼ÇÂ¼
-     *ÊäÈë:ÒªÐ´ÈëµÄ¼ÇÂ¼
-     *Êä³ö:ÎÞ
+     *ä½œç”¨:å†™å…¥è®°å½•
+     *è¾“å…¥:è¦å†™å…¥çš„è®°å½•
+     *è¾“å‡º:æ— 
      */
     public function write($log) {
 		$url = $_SERVER['PHP_SELF']; 
 		$filename = end(explode('/',$url)); 
 	
-        //´«ÈëµÄÊý×é¼ÇÂ¼
-        $str = "¡¾FROM '".$filename."' log¡¿: ";
+        //ä¼ å…¥çš„æ•°ç»„è®°å½•
+        $str = "ã€FROM '".$filename."' logã€‘: ";
         if (is_array ( $log )) {
             foreach ( $log as $k => $v ) {
                 $str .= $k . " : " . $v . "\n";
@@ -84,45 +84,45 @@ class Log {
             $str .= $log . "\n";
         }
         
-        //Ð´ÈÕÖ¾
-        if (! fwrite ( $this->_filehandle, $str )) { //Ð´ÈÕÖ¾Ê§°Ü
-            die ( "Ð´ÈëÈÕÖ¾Ê§°Ü" );
+        //å†™æ—¥å¿—
+        if (! fwrite ( $this->_filehandle, $str )) { //å†™æ—¥å¿—å¤±è´¥
+            die ( "å†™å…¥æ—¥å¿—å¤±è´¥" );
         }
     }
     
     /**
-     *×÷ÓÃ:ÅÐ¶ÏÎÄ¼þÊÇ·ñ´æÔÚ
-     *ÊäÈë:ÎÄ¼þµÄÂ·¾¶,ÒªÐ´ÈëµÄÎÄ¼þÃû
-     *Êä³ö:true | false
+     *ä½œç”¨:åˆ¤æ–­æ–‡ä»¶æ˜¯å¦å­˜åœ¨
+     *è¾“å…¥:æ–‡ä»¶çš„è·¯å¾„,è¦å†™å…¥çš„æ–‡ä»¶å
+     *è¾“å‡º:true | false
      */
     private function _isExist($path) {
         return file_exists ( $path );
     }
     
     /**
-     *×÷ÓÃ:´´½¨Ä¿Â¼(ÒýÓÃ±ðÈË³¬Ç¿µÄ´úÂë-_-;;)
-     *ÊäÈë:Òª´´½¨µÄÄ¿Â¼
-     *Êä³ö:true | false
+     *ä½œç”¨:åˆ›å»ºç›®å½•(å¼•ç”¨åˆ«äººè¶…å¼ºçš„ä»£ç -_-;;)
+     *è¾“å…¥:è¦åˆ›å»ºçš„ç›®å½•
+     *è¾“å‡º:true | false
      */
     private function _createDir($dir) {
         return is_dir ( $dir ) or ($this->_createDir ( dirname ( $dir ) ) and mkdir ( $dir, 0777 ));
     }
     
     /**
-     *×÷ÓÃ:´´½¨ÈÕÖ¾ÎÄ¼þ
-     *ÊäÈë:Òª´´½¨µÄÄ¿Â¼
-     *Êä³ö:true | false
+     *ä½œç”¨:åˆ›å»ºæ—¥å¿—æ–‡ä»¶
+     *è¾“å…¥:è¦åˆ›å»ºçš„ç›®å½•
+     *è¾“å‡º:true | false
      */
     private function _createLogFile($path) {
-        $handle = fopen ( $path, "w" ); //´´½¨ÎÄ¼þ
+        $handle = fopen ( $path, "w" ); //åˆ›å»ºæ–‡ä»¶
         fclose ( $handle );
         return $this->_isExist ( $path );
     }
     
     /**
-     *×÷ÓÃ:¹¹½¨Â·¾¶
-     *ÊäÈë:ÎÄ¼þµÄÂ·¾¶,ÒªÐ´ÈëµÄÎÄ¼þÃû
-     *Êä³ö:¹¹½¨ºÃµÄÂ·¾¶×Ö´®
+     *ä½œç”¨:æž„å»ºè·¯å¾„
+     *è¾“å…¥:æ–‡ä»¶çš„è·¯å¾„,è¦å†™å…¥çš„æ–‡ä»¶å
+     *è¾“å‡º:æž„å»ºå¥½çš„è·¯å¾„å­—ä¸²
      */
     private function _createPath($dir, $filename) {
         if (empty ( $dir )) {
@@ -133,12 +133,12 @@ class Log {
     }
     
     /**
-     *¹¦ÄÜ: Îö¹¹º¯Êý£¬ÊÍ·ÅÎÄ¼þ¾ä±ú
-     *ÊäÈë: ÎÞ
-     *Êä³ö: ÎÞ
+     *åŠŸèƒ½: æžæž„å‡½æ•°ï¼Œé‡Šæ”¾æ–‡ä»¶å¥æŸ„
+     *è¾“å…¥: æ— 
+     *è¾“å‡º: æ— 
      */
     function __destruct() {
-        //¹Ø±ÕÎÄ¼þ
+        //å…³é—­æ–‡ä»¶
         fclose ( $this->_filehandle );
     }
 }

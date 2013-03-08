@@ -68,7 +68,7 @@ function loadinfo(){
 		if("FALSE"!= res){
 			for(var fld in res){
 				if("tbsize"==fld){			//占用空间单位转为MB;
-					da("#"+fld).val((res[fld]/1024/1024).toFixed(2));
+					da("#"+fld).val((res[fld]/1024/1024).toFixed(2)+" MB");
 				}
 				else{
 					da("#"+fld).val(res[fld]);
@@ -89,8 +89,8 @@ function clicknode( treeId, treeNode ){
 
 function loadtablelist(){
 	da.runDB("/sys_userform/action/table_get_list.php",{
-		dataType: 'json',
-		dbnames: "('da_powersys', 'da_workflow', 'da_bizform', 'da_userform', 'PM')"
+		dataType: "json",
+		dbnames: "da_powersys,da_workflow,da_bizform,da_userform,PM"
 	},function(data){
 		if("FALSE" != data){
 			var zNodes = [], db = "";

@@ -51,7 +51,7 @@
 						</tr>
 						<tr>
 							<td class="header">占用空间</td>
-							<td><input id="tbsize" disabled="true" /> MB</td>
+							<td><input id="tbsize" disabled="true" /></td>
 							<td class="header">记录数</td>
 							<td><input id="tbrows" disabled="true" /></td>
 						</tr>
