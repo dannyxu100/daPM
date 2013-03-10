@@ -158,7 +158,7 @@ a.curmenu { background:#1a4bfe url(/images/bar_bg.jpg) 0px -35px;  border:1px so
 
 
 /******** 顶部工具条 *********/
-.list_top_bar{height:24px; padding:5px; border-bottom:1px solid #f0f0f0;}
+.list_top_bar{height:24px; padding:5px 10px; border-bottom:1px solid #f0f0f0;}
 .list_top_title { float:left; height:22px; line-height:22px; margin-right:50px;}
 .list_top_tools{ float:right; vertical-align:middle; height:22px; }
 .list_top_tools a.item{ display:block; float:left; vertical-align:middle; padding:2px 5px; margin:0px 2px; border:1px solid #aaa; background:url(/images/bar_bg.jpg) }

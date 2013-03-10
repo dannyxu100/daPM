@@ -14,7 +14,7 @@
 		</div>
 	</div>
 	
-	<div id="tabbar"></div>
+	<div id="tabbar" ></div>
 	<div id="templet_list" style="padding:3px;"></div>
 </BODY>
 </HTML>
