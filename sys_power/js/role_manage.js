@@ -640,7 +640,7 @@ function deleteg2r(){
 */
 function loadtab(){
 	var daTab0 = daTab(da("#tabbar").dom[0],"daTab0","myname","",true);
-	daTab0.appendItem("item01","基本信息","",{
+	daTab0.appendItem("item01","基本信息","/sys_power/images/menu_icon/form.png",{
 		click:function(){
 			da("#pad_list").hide();
 			da("#pad_grouplist").hide();
@@ -650,7 +650,7 @@ function loadtab(){
 		}
 	});
 
-	daTab0.appendItem("item02","包含人员","",{
+	daTab0.appendItem("item02","包含人员","/sys_power/images/menu_icon/user.png",{
 		click:function(){
 			da("#pad_info").hide();
 			da("#pad_grouplist").hide();
@@ -660,7 +660,7 @@ function loadtab(){
 		}
 	});
 	
-	daTab0.appendItem("item03","包含工作组","",{
+	daTab0.appendItem("item03","包含工作组","/sys_power/images/menu_icon/group.png",{
 		click:function(){
 			da("#pad_info").hide();
 			da("#pad_list").hide();
@@ -669,7 +669,7 @@ function loadtab(){
 			da("#pad_grouplist").show();
 		}
 	});
-	daTab0.appendItem("item04","角色权限","",{
+	daTab0.appendItem("item04","角色权限","/sys_power/images/menu_icon/power.png",{
 		click:function(){
 			da("#pad_info").hide();
 			da("#pad_list").hide();

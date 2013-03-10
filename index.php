@@ -12,7 +12,7 @@
 </div>
 
 <style>
-#title_bar{border-bottom:solid 1px #666; height:35px; background:#ddd url(/image/bar_bg.jpg) repeat-x;}
+#title_bar{border-bottom:solid 1px #666; height:35px; background:#ddd url(/images/bar_bg.jpg) repeat-x;}
 #info_bar{position:absolute;top:0px;right:15px; height:35px; line-height:35px; border:solid 0px #f0f0f0;}
 #info_bar span{color:#999;}
 #info_bar a{font-weight:bold;}
@@ -26,7 +26,7 @@
 
 <body>
 <div id="title_bar">
-	<img src="image/logo.jpg"/>
+	<img src="images/logo.jpg"/>
 	<!--<span style="font-size:20px; font-weight:bold;margin-left:10px;">项目进度管理</span> <span style="font-size:10px;">版本1.0</span>-->
 	<div id="menubar"></div>
 </div>

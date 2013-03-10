@@ -25,7 +25,6 @@
 <BODY>
 <div>
 	<div class="header">工作流管理</div>
-
 	<table class="tablesolid" style="width:100%">
 		<tr>
 			<td rowspan="4" style="width:250px;vertical-align:top;"><ul id="treeDemo" class="ztree"></ul></td>
@@ -46,7 +45,7 @@
 		</tr>
 		<tr>
 			<td style="vertical-align:top;">
-				<div id="pad_config" style="display:none;">
+				<div id="pad_config">
 					<div id="tabbar"></div>
 					
 					<div id="pad_workflow">
@@ -60,7 +59,13 @@
 						<table class="tablesolid" style="width:100%">
 							<tr>
 								<td class="header" style="width:60px;">名称</td>
-								<td colspan="3"><input id="wf_name" style="width:200px;" /><span class="must">*</span></td>
+								<td><input id="wf_name" style="width:200px;" /><span class="must">*</span></td>
+								<td class="header" style="width:80px;">主表单</td>
+								<td>
+									<input id="wf_btname" disabled="true"/>
+									<input id="wf_btid" type="hidden" disabled="true"/>
+									<a href="javascript:void(0)" onclick="selectmainform()">选择</a>
+								</td>
 							</tr>
 							<tr>
 								<td class="header">排序</td>
@@ -89,7 +94,9 @@
 							</tr>
 							<tr>
 								<td class="header">备注</td>
-								<td colspan="3"><textarea style="width:90%; height:500px;" id="wf_remark" ></textarea></td>
+								<td colspan="3">
+									<textarea id="wf_remark" name="wf_remark" style="width:90%; height:500px;" ></textarea>
+								</td>
 							</tr>
 						</table>
 					</div>
@@ -269,21 +276,5 @@
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
 <script type="text/javascript" src="js/workflow_manage.js"></script>
 
-
 <script charset="utf-8" src="/plugin/kindeditor/kindeditor-min.js"></script>
 <script charset="utf-8" src="/plugin/kindeditor/lang/zh_CN.js"></script>
-<script>
-	var editor;
-	KindEditor.ready(function(K) {
-		editor = K.create('#wf_remark', {
-			resizeType : 1,
-			allowPreviewEmoticons : false,
-			fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
-			allowFileManager : true,
-			items : [
-				'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-				'insertunorderedlist', '|', 'emoticons', 'image', 'link']
-		});
-	});
-</script>

@@ -152,10 +152,10 @@
 		/*
 			sId:	tab按钮DOM对象id（如果想添加右边mini功能按钮,sid参数需要加"right:"前缀 但是注意：设置为right小按钮的样式时，就不能用selectItem高亮咯~！）
 			title:	tab按钮标题
-			icoName:	tab按钮小图标css类名
+			icoPath:	tab按钮小图标路径
 			fnEvents:	tab按钮自定义事件可以以键值对的方式绑定多个{ click:function(){}, mouseover:function(){} }
 		*/
-		appendItem: function( sId, title, icoName, fnEvents, noClose ){
+		appendItem: function( sId, title, icoPath, fnEvents, noClose ){
 			var objItem = doc.getElementById( sId ),
 					noClose = ( "undefined" === typeof noClose ) ? this.noClose : noClose;
 			
@@ -179,10 +179,10 @@
 			var arrHTML = [];
 			arrHTML.push('<div class="cnt" >');
 			
-			if( icoName ){																//小图标
-				arrHTML.push('<div id="'+ sId +'_ico" class="ico ');
-				arrHTML.push(icoName);
-				arrHTML.push(' "></div>');
+			if( icoPath ){																//小图标
+				arrHTML.push('<div id="'+ sId +'_ico" class="ico" style="background:url(');
+				arrHTML.push(icoPath);
+				arrHTML.push(') no-repeat;"></div>');
 			}
 			arrHTML.push('<div id="'+ sId +'_txt" class="txt">');
 			arrHTML.push(title);													//选项名

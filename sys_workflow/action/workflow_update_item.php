@@ -1,10 +1,8 @@
 <?php 
-	// json_encode($arr);
-	include_once "../../action/sessioncheck.php";
-	include_once "../../action/sys/db.php";
-	include_once "../../action/fn.php";
-	// include_once "../../action/sys/log.php";
-	// error_reporting(-1);
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sessioncheck.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/fn.php";
+	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 
 	date_default_timezone_set("Asia/Hong_Kong");
 	
@@ -17,8 +15,8 @@
 	wf_date=:wf_date, 
 	wf_edituser=:wf_edituser, 
 	wf_editdate=:wf_editdate, 
-	wf_remark=:wf_remark, 
-	wf_id=:wf_id";
+	wf_remark=:wf_remark 
+	where wf_id=:wf_id";
 	
 	$db->param(":wf_name", $_POST["wf_name"]);
 	$db->param(":wf_sort", $_POST["wf_sort"]);
@@ -31,11 +29,11 @@
 	$db->param(":wf_remark", $_POST["wf_remark"]);
 	$db->param(":wf_id", $_POST["wf_id"]);
 	
-	// $log = new Log();
-	// $log->write($sql.time());
 	
 	$res = $db->update($sql);
-	//echo $db->error_message;
+	// $log = new Log();
+	// $log->write($db->geterror());
+	
 	$db->close();
 	//print_r($set);
 	echo $res?$res:"FALSE";

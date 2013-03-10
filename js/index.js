@@ -15,7 +15,7 @@ function loadmenu(){
 	da.runDB("/sys_power/action/menu_get_list.php",{
 		dataType: "json",
 		pmlevel: 1
-	},function(data){debugger;
+	},function(data){
 		if("FALSE" != data ){
 			barObj = daToolbar({
 				parent: "#menubar"
@@ -39,8 +39,8 @@ function loadmenu(){
 			
 			barObj.select("bt_menu"+data[0].pm_id);
 		}
-	},function(a,b,c){
-		debugger;
+	},function(res, msg, ex){
+		alert(ex);
 	});
 }
 

@@ -145,18 +145,22 @@ body .fn-hide {
 td.header { padding:0px 10px; background:#f5f5f5; text-align:right; vertical-align:top}
 
 
-/******** 内页CSS *********/
-a.bt_menu{display:block;margin:3px;padding:5px; font-weight:bold; color:#555; border:1px solid #999;background:#ddd url(/image/bar_bg.jpg);}
+/******** 按钮 *********/
+a.bt_menu{display:block;margin:3px;padding:5px; font-weight:bold; color:#555; border:1px solid #999;background:#ddd url(/images/bar_bg.jpg);}
 a.bt_menu:hover {border:1px solid #000;}
 a.bt_menu img{width:16px; height:16px; vertical-align:middle;}
-a.curmenu { background:#1a4bfe url(/image/bar_bg.jpg) 0px -35px;  border:1px solid #000; color:#f0f0f0; font-weight:bold;}
+a.curmenu { background:#1a4bfe url(/images/bar_bg.jpg) 0px -35px;  border:1px solid #000; color:#f0f0f0; font-weight:bold;}
 
-.bt_slideleft{ width:10px;height:50px;cursor:pointer; border:1px solid #ddd; background:#ddd url(/image/bt_slide.jpg) }
-.bt_slideright{ width:10px;height:50px;cursor:pointer; border:1px solid #ddd; background:#ddd url(/image/bt_slide.jpg) -10px 0px; }
+/******** 框架左栏滑动按钮 *********/
+.frame_slide{vertical-align:middle; width:10px; padding:0px;cursor:pointer; background:#f5f5f5;}
+.frame_slide .bt_slideleft{ width:10px;height:50px;cursor:pointer; border:1px solid #ddd; background:#ddd url(/images/bt_slide.jpg) }
+.frame_slide .bt_slideright{ width:10px;height:50px;cursor:pointer; border:1px solid #ddd; background:#ddd url(/images/bt_slide.jpg) -10px 0px; }
 
+
+/******** 顶部工具条 *********/
 .list_top_bar{height:24px; padding:5px; border-bottom:1px solid #f0f0f0;}
 .list_top_title { float:left; height:22px; line-height:22px; margin-right:50px;}
 .list_top_tools{ float:right; vertical-align:middle; height:22px; }
-.list_top_tools a.item{ display:block; float:left; vertical-align:middle; padding:2px 5px; margin:0px 2px; border:1px solid #aaa; background:url(/image/bar_bg.jpg) }
+.list_top_tools a.item{ display:block; float:left; vertical-align:middle; padding:2px 5px; margin:0px 2px; border:1px solid #aaa; background:url(/images/bar_bg.jpg) }
 .list_top_tools a.item:hover{ border:1px solid #666; background-image:none; background-color:#fff; }
 .list_top_tools a.item img{vertical-align:middle;}

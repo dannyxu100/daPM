@@ -269,7 +269,7 @@ var daValid = (function(){
 							this.infoObj.show();
 				}
 				else{
-						var warnTxt = '<span style="color:#c00;font-family:arial;font-size:14px;font-weight:bold;">(!)</span>&nbsp;&nbsp;' 
+						var warnTxt = '<span style="color:#c00;font-family:arial;font-size:14px;font-weight:bold;">（!）</span>&nbsp;&nbsp;' 
 						+ ( this.setting.validinfo || "数据格式不正确" );
 						
 						if( "undefined" != typeof daTip && !this.setting.simple ){
@@ -324,11 +324,9 @@ var daValid = (function(){
 */
 daValid.valid = function( obj ){
 	var daObj = da(obj),
-		res = null;
+		res = true;
 
 	if( 0 < daObj.dom.length ){
-		res = true;
-	
 		daObj.each(function(){
 			var validObj = da.data( this, "daValid" );
 			

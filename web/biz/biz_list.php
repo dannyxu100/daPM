@@ -6,29 +6,16 @@
 	
  </HEAD>
 <BODY>
-	<table class="tablesolid" style="width:100%">
-		<tr>
-			<td id="left_frame" style="vertical-align:top; width:200px; padding:0px;">
-				<div id="workflow_list"></div>
-			</td>
-			<td style="vertical-align:middle; width:10px; padding:0px;cursor:pointer; background:#f7f7f7;" onclick="slideleft()">
-				<div id="bt_slide" class="bt_slideleft"></div>
-			</td>
-			<td style="vertical-align:top;">
-				<div class="list_top_bar">
-					<div class="list_top_title">业务名称</div>
-					<div class="list_top_tools">
-						<a class="item" href="javascript:void(0)" onclick="add();" ><img src="/sys_power/images/sys_icon/add.png" /> 新建</a>
-						<a class="item" href="javascript:void(0)" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
-					</div>
-				</div>
-				
-				<div id="templet_list"></div>
-				
-			</td>
-		</tr>
-	</table>
+	<div class="list_top_bar">
+		<div class="list_top_title"><span id="biz_title">业务名称</span></div>
+		<div class="list_top_tools">
+			<a class="item" href="javascript:void(0)" onclick="addbiz();" ><img src="/sys_power/images/sys_icon/add.png" /> 新建</a>
+			<a class="item" href="javascript:void(0)" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+		</div>
+	</div>
 	
+	<div id="tabbar"></div>
+	<div id="templet_list" style="padding:3px;"></div>
 </BODY>
 </HTML>
 

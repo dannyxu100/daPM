@@ -1,8 +1,8 @@
 <?php 
 	// error_reporting(-1);
-	include_once "../../action/sessioncheck.php";
-	include_once "../../action/sys/db.php";
-	// include_once "../../action/sys/log.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sessioncheck.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
+	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 
 	$db = new DB("da_bizform");
 	$sql1 = "select * from b_biztemplet ";
@@ -42,20 +42,11 @@
 	// $log->write($db->geterror());
 	$db->close();
 	
-	if(is_array($set)){
-		for($i=0; $i<count($set); $i++){
-			foreach ( $set[$i] as $key => $value ) {
-				$set[$i][$key] = urlencode( $value );   
-			}
-
-		}
-	}
-	
 	$res = array(
 		"ds1"=>$count,
 		"ds11"=>$set									//¼ÇÂ¼¼¯
 	);
 	
 	// $log->write($res);
-	echo urldecode(json_encode($res));
+	echo json_encode($res);
 ?>

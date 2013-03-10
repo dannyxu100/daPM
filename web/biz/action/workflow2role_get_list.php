@@ -18,12 +18,7 @@
 	$db->close();
 	
 	if(is_array($set)){
-		for($i=0; $i<count($set); $i++){
-			foreach ( $set[$i] as $key => $value ) {
-				$set[$i][$key] = urlencode( $value );   
-			}
-		}
-		echo urldecode(json_encode($set));
+		echo json_encode($set);
 	}
 	else{
 		echo "FALSE";

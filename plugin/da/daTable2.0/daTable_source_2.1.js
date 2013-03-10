@@ -157,6 +157,11 @@ var daTable = (function(){
 			if( 0 < fmtBody.dom.length ){
 				this.fmtBody = fmtBody.dom[0];
 				this.fmtHTML = this.fmtBody.innerHTML.replace(/[\r\t\n]/g, "");
+				
+				if(!da(this.fmtBody).is(":hidden")){
+					da(this.fmtBody).hide();
+				}
+				
 				this.fmtMap = {};
 				
 				if( 0 < footBody.dom.length )

@@ -230,13 +230,18 @@ da.extend({
 			
 			//daTip事件绑定函数
 			bindEvent: function(){
-				if( this.tipSetting.events )
-					da.eventBind( this.tipObj, this.tipSetting.events);
+				// if( this.tipSetting.events )
+					// da.eventBind( this.tipObj, this.tipSetting.events);
+				
+				// var context = this;
+				// da.eventBind( this.tipCloseBt, {click: function(){
+					// context.hide();
+				// }} );
 				
 				var context = this;
-				da.eventBind( this.tipCloseBt, {click: function(){
+				da(this.tipCloseBt).bind("click",function(){
 					context.hide();
-				}} );
+				});
 				
 			},
 			
@@ -359,21 +364,21 @@ da.extend({
 			
 			//显示提示框
 			show: function(){
-					this.tipObj.style.display = "block";
-					this.tipState = "show";												//改变daTip的显示状态
-					
-					var da_targetObj = da(this.tipTarget),
-							posTarget = da_targetObj.pos(),
-							sizeTarget = {width: da_targetObj.width(), height: da_targetObj.height()},
-							posTip = this.getPos( posTarget, sizeTarget );
-					
-			  	this.pos( posTip );
-			  	
-					if( !this.tipSetting.close )
-						this.tipCloseBt.style.display = "none";
-					
-					if( this.tipSetting.warn.open )								//如果需要播放警告动画
-						this.warn();
+				this.tipObj.style.display = "block";
+				this.tipState = "show";												//改变daTip的显示状态
+				
+				var da_targetObj = da(this.tipTarget),
+						posTarget = da_targetObj.pos(),
+						sizeTarget = {width: da_targetObj.width(), height: da_targetObj.height()},
+						posTip = this.getPos( posTarget, sizeTarget );
+			
+				this.pos( posTip );
+			
+				if( !this.tipSetting.close )
+					this.tipCloseBt.style.display = "none";
+				
+				if( this.tipSetting.warn.open )								//如果需要播放警告动画
+					this.warn();
 					
 			},
 			
@@ -389,7 +394,8 @@ da.extend({
 			//设置tip的位置
 			pos: function( pos ){
 					var da_tipObj = da( this.tipObj );
-					da_tipObj.offset( {left:pos.left, top:pos.top} );
+					// da_tipObj.offset({ left:pos.left, top:pos.top });
+					da_tipObj.css({ left:pos.left+"px", top:pos.top+"px" });
 			},
 			
 			/**daTip跟随鼠标，设置显示位置

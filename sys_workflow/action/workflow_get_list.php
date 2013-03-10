@@ -1,8 +1,8 @@
 <?php 
 	
-	include_once "../../action/sessioncheck.php";
-	include_once "../../action/sys/db.php";
-	// include_once "../../action/sys/log.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sessioncheck.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
+	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 	//error_reporting(-1);
 	
 	$sql = "";
@@ -18,16 +18,10 @@
 	$db->close();
 	
 	// $log = new Log();
-	// $log->write($sql.time());
+	// $log->write(json_encode($set));
 	
 	if(is_array($set)){
-		for($i=0; $i<count($set); $i++){
-			foreach ( $set[$i] as $key => $value ) {
-				$set[$i][$key] = urlencode( $value );   
-			}
-
-		}
-		echo urldecode(json_encode($set));
+		echo json_encode($set);
 	}
 	else{
 		echo "FALSE";

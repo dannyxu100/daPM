@@ -504,6 +504,7 @@ function loadeditor(){
 	KindEditor.ready(function(K) {
 		g_editorList = K.create('#bt_listhtml', {
 			resizeType : 1,
+			filterMode : false,		//不过滤危险标签
 			allowPreviewEmoticons : false,
 			fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
 			allowFileManager : true,
@@ -521,6 +522,7 @@ function loadeditor(){
 		});
 		g_editorForm = K.create('#bt_formhtml', {
 			resizeType : 1,
+			filterMode : false,		//不过滤危险标签
 			allowPreviewEmoticons : false,
 			fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
 			allowFileManager : true,
@@ -540,14 +542,14 @@ function loadeditor(){
 
 daLoader("daUI,daDate,daMsg,daTab,daTable,daWin", function(){
 	//daUI();
+		loadeditor();
 	
 	/*页面加载完毕*/
-	$(function(){
+	da(function(){
 		$("#pr_date" ).datepicker({
 		  defaultDate: "+1w",
 		  changeMonth: true
 		});
-		loadeditor();
 	
 		loadtree();
 		loadtab();

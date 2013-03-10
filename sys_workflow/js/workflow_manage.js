@@ -55,20 +55,25 @@ function beforeRemove(treeId, treeNode) {
 	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 	zTree.selectNode(treeNode);
 	
-	if(confirm("确认删除部门【" + treeNode.name + "】吗？")){
-		da.runDB("action/org_get_list.php",{			//检查是否拥有下级部门
-			popid: treeNode.id
+	confirm("确认删除部门【" + treeNode.name + "】吗？",
+	function(){
+		da.runDB("action/workflowtype_get_list.php",{			//检查是否拥有下级部门
+			wftpid: treeNode.id
 		},
-		function(res){
+		function(res){debugger;
 			if('FALSE'==res){
-				da.runDB("action/org_delete_item.php",{
-				 oid: treeNode.id
+				da.runDB("action/workflowtype_delete_item.php",{
+					wftid: treeNode.id
 				},
 				function(res){
+					debugger;
 					if("FALSE"==res){
 						alert("操作失败");
 						loadtree();
 					}
+				},
+				function(a,b,c){
+					debugger;
 				});
 			}
 			else{
@@ -78,10 +83,10 @@ function beforeRemove(treeId, treeNode) {
 		});
 	
 		return true;
-	}
-	else{
+	},
+	function(){
 		return false;
-	}
+	});
 }
 function onRemove(e, treeId, treeNode) {
 
@@ -266,12 +271,13 @@ function loadinfo(){
 		dataType: "json",
 		wf_id: g_wfid
 	},function(res){
-		if("FALSE"!= res && res[0]){
-			for(var fld in res[0]){
-				da("#"+fld).val(res[0][fld]);
+		if("FALSE"!= res){
+			for(var fld in res){
+				da("#"+fld).val(res[fld]);
 			}
 			
-			da("[name=wf_isrun][value="+ res[0].wf_isrun +"]").attr("checked",true).dom[0].checked=true;
+			da("[name=wf_isrun][value="+ res.wf_isrun +"]").attr("checked",true).dom[0].checked=true;
+			g_editor.html(res.wf_remark);
 		}
 	});
 }
@@ -352,21 +358,49 @@ function selectform( tid, obj ){
 		height:400,
 		url: "/sys_bizform/plugin/select_biztemplet.htm?ismulti=true",
 		back: function( data ){
-			var bfids = "", bfnames = "";
+			var btids = "", btnames = "";
 			
 			for( var k in data ){
-				bfids += k +",";
-				bfnames += data[k].bt_name +",";
+				btids += k +",";
+				btnames += data[k].bt_name +",";
 			}
 			
 			da.runDB("/sys_workflow/action/tran2form_update_list.php",{
-				bfids: bfids,
-				bfnames: bfnames,
+				btids: btids,
+				btnames: btnames,
 				tid: tid
 			},function(res){debugger;
 				if("FALSE"!=res){
-					da(obj).text(bfnames?bfnames:"空");
+					da(obj).text(btnames?btnames:"空");
 				}
+			});
+			
+		}
+	});
+}
+
+/**为工作流 选择主表单
+*/
+function selectmainform(){
+	daWin({
+		width: 600,
+		height:400,
+		url: "/sys_bizform/plugin/select_biztemplet.htm",
+		back: function( data ){
+			var btid = "", btname = "";
+			
+			for( var k in data ){
+				btid = k;
+				btname = data[k].bt_name;
+			}
+			
+			da.runDB("/sys_workflow/action/workflow_update_btid.php",{
+				btid: btid,
+				btname: btname,
+				wfid: g_wfid
+			},function(res){
+				da("#wf_btid").val(btid?btid:"");
+				da("#wf_btname").val(btname?btname:"");
 			});
 			
 		}
@@ -451,6 +485,8 @@ function addworkflow(){
 /** 修改工作流信息
 */
 function updateworkflow(){
+	da("#wf_remark").val(g_editor.html());
+	
 	da.runDB("/sys_workflow/action/workflow_update_item.php",{
 		wf_id: g_wfid,
 		wf_name: da("#wf_name").val(),
@@ -561,13 +597,34 @@ function loadtab(){
 	daTab0.click("item01");
 }
 
-daLoader("daUI,daDate,daMsg,daTab,daTable,daWin,daButton", function(){
+var g_editor;
+/**加载在线编辑器
+*/
+function loadeditor(){
+	KindEditor.ready(function(K) {
+		g_editor = K.create('#wf_remark', {
+			resizeType : 1,
+			allowPreviewEmoticons : false,
+			fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
+			allowFileManager : true,
+			items : [
+				'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+				'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+		});
+	});
+}
+
+daLoader("daDate,daMsg,daTab,daTable,daWin,daButton", function(){
 	//daUI();
+	loadeditor();
 	
 	/*页面加载完毕*/
 	da(function(){
 		loadtree();
 		loadtab();
+		
+		da("#pad_config").hide();
 	});
 });
 

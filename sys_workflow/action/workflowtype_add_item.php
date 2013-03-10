@@ -1,7 +1,7 @@
 <?php 
 	// json_encode($arr);
-	include_once "../../action/sessioncheck.php";
-	include_once "../../action/sys/db.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sessioncheck.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
 	// error_reporting(-1);
 
 	$db = new DB("da_workflow");

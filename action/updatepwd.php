@@ -1,6 +1,6 @@
 ﻿<?php
 //验证登陆信息
-include_once 'sys/db.php';
+include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
 session_start();
 
 $uid = $_SESSION['u_id'];

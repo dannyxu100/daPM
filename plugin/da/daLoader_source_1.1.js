@@ -277,7 +277,7 @@ need:"da,daButton,daInput,daOption,daSelect,daDate,daTip,daKey" });			//daUI接�
 
 //-------------------------------------
 daLoader.def('daQuery', {path: _p+'/daQuery/daQuery.js', need:"da" });										//组合查询 控件类
-daLoader.def('daValid', {path: _p+'/daValid/daValid_source.js', need:"da,daTip" });							//数据验证类
+daLoader.def('daValid', {path: _p+'/daValid/daValid_source.js', need:"da" });							//数据验证类
 //-------------------------------------
 daLoader.def('daMap_CSS', {path: _p+'/daMap/daMap.css' });
 daLoader.def('daMap', {path: _p+'/daMap/daMap.js', need:"da,daFx,daDrag,daWheel,daKey,daLoading,daMap_CSS" });	//GIS地图 控件类

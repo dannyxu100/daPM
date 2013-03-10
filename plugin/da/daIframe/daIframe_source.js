@@ -321,7 +321,8 @@ var daIframe = (function(){
 
 				// if( inWinSize.width ){			//宽度暂时使用计算值了
 					// curIframe.style.width = inWinSize.width + "px";
-				// }							 
+				// }
+				
 				if( inWinSize.height ){
 					curIframe.style.height = ( inWinSize.height + context.extendHeight ) + "px";	//danny.xu 2012-2-10 15:44:15 多+30为了迎合豪庭系系统的漂浮菜单；
 				}
@@ -384,7 +385,6 @@ var daIframe = (function(){
 		// da(newObj.iframe).fadeIn();						//显示新加的iframe
 		
 		newObj.iframe.style.left = -newObj.iframe.offsetWidth + "px";
-		
 		da( newObj.iframe ).stop().act({
 			left: 0
 		},{

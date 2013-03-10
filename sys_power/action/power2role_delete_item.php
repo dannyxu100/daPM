@@ -1,8 +1,8 @@
 <?php 
 	// json_encode($arr);
-	include_once "../../action/sessioncheck.php";
-	include_once "../../action/sys/db.php";
-	// include_once "../../action/sys/log.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sessioncheck.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
+	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 	// error_reporting(-1);
 	
 	// $log = new Log();

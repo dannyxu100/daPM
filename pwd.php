@@ -9,7 +9,7 @@
 <form id="pwdform" name="pwdform" method="post" action="/action/updatepwd.php" onsubmit="return chkdata()">
 	<div style="padding:20px 80px;">
 		<div>旧密码 <input id="old_pwd" name="old_pwd" type="text" style="width:150px;"/></div>
-		<br/><br/>
+		<br/>
 		<div>新密码 <input id="new_pwd" name="new_pwd" type="password" style="width:150px;"/></div>
 		<br/>
 		<div>再确认 <input id="new_pwd2" name="new_pwd2" type="password" style="width:150px;"/></div>

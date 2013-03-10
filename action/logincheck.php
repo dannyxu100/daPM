@@ -1,7 +1,7 @@
 ﻿<?php
 	//验证登陆信息
-	include_once 'sys/db.php';
-	// include_once "sys/log.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
+	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 	// error_reporting(-1);
 
 	date_default_timezone_set('ETC/GMT-8');
@@ -73,7 +73,7 @@
 	
 	//缓存所属工作组信息
 	if(is_array($set_group)){
-		//格式//group:0,999,3-销售一组,机动小组,飞虎组
+		//格式//groupid:0,999,3|groupname:销售一组,机动小组,飞虎组
 		$arrpgid = array();
 		$arrpgname = array();
 		for($i=0; $i<count($set_group); $i++){
@@ -87,7 +87,7 @@
 	
 	//缓存所属角色信息
 	if(is_array($set_role)){
-		//格式//role:0,999,3-超级管理员,总经理,普通员工
+		//格式//roleid:0,999,3|rolename:超级管理员,总经理,普通员工
 		$arrprid = array();
 		$arrprname = array();
 		for($i=0; $i<count($set_role); $i++){
@@ -98,7 +98,7 @@
 		array_push($arrcookie, 'rolename:'.implode(',', $arrprname));
 	}
 	
-	//格式//puid:999|pucode:dannyxu100|puname:徐飞|group:0,999,3-销售一组,机动小组,飞虎组|role:0,999,3-超级管理员,总经理,普通员工|role:0,999,3-超级管理员,总经理,普通员工|
+	//格式//puid:999|pucode:dannyxu100|puname:徐飞|groupid:0,999,3|groupname:销售一组,机动小组,飞虎组|roleid:0,999,3|rolename:超级管理员,总经理,普通员工|role:0,999,3-超级管理员,总经理,普通员工|
 	setcookie('COOKIE_FROM_DASYS', urlencode(implode('|', $arrcookie)), time()+86400, "/");		//有效期24小时, 整个领域有效
 	
 	//登录成功

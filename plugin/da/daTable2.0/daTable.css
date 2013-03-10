@@ -5,8 +5,8 @@
 */
 
 .daTable {
-	border-left: 1px solid #d0dfdf;
-	border-top: 1px solid #ddd;
+	border-left: 1px solid #f0f0f0;
+	border-top: 1px solid #f0f0f0;
 	border-right: 1px solid #eee;
 	border-bottom: 1px solid #eee;
 }
@@ -14,16 +14,17 @@
 .daTable>thead>tr>td,
 .daTable>tbody>tr>td,
 .daTable>tfoot>tr>td {
-	border: 1px solid #d0d7d7;
+	padding:3px;
+	border: solid #ddd;
 	border-width: 0px 1px 1px 0px;
+	color: #444;
 }
 
 .daTable>thead>tr>td,
 .daTable>tbody[name=head]>tr>td {
-	background: #eee;
-	color: #666;
-	font-size: 14px;
-	font-family: "黑体";
+	background: #f7f7f7 url(images/head_bg.jpg) repeat-x;
+	color: #000;
+	font-size: 12px;
 }
 
 .daTable>tbody>tr.itemHover {

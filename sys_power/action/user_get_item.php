@@ -1,8 +1,8 @@
 <?php 
 	// error_reporting(-1);
-	include_once "../../action/sessioncheck.php";
-	include_once "../../action/sys/db.php";
-	// include_once "../../action/sys/log.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sessioncheck.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
+	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 
 	$sql = "select * from p_user,p_org where pu_oid=po_id and pu_id=".$_POST["pu_id"];
 	// $log = new Log();

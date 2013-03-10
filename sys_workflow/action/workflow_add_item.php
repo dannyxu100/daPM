@@ -1,27 +1,15 @@
 ﻿<?php 
 	// json_encode($arr);
-	include_once "../../action/sessioncheck.php";
-	include_once "../../action/fn.php";
-	include_once "../../action/sys/db.php";
-	// include_once "../../action/sys/log.php";
-	// error_reporting(-1);
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sessioncheck.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/fn.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
+	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 
 	date_default_timezone_set("Asia/Hong_Kong");
-	$rows = 0;
 	
 	$db = new DB("da_workflow");
 	$sql = "insert into w_workflow(wf_name, wf_wftid, wf_sort, wf_isrun, wf_starttaskid, wf_user, wf_date, wf_edituser, wf_editdate, wf_remark) 
 	values(:wf_name, :wf_wftid, :wf_sort, :wf_isrun, :wf_starttaskid, :wf_user, :wf_date, :wf_edituser, :wf_editdate, :wf_remark) ";
-	$sql .= "'".$_POST["wf_name"]."',";
-	$sql .= "'".$_POST["wf_wftid"]."',";
-	$sql .= "'".$_POST["wf_sort"]."',";
-	$sql .= "'".$_POST["wf_isrun"]."',";
-	$sql .= "'".$_POST["wf_starttaskid"]."',";
-	$sql .= "'".$_SESSION["u_name"]."',";
-	$sql .= "'".date("Y-m-d H:i:s")."',";
-	$sql .= "'".$_POST["wf_edituser"]."',";
-	$sql .= "'".$_POST["wf_editdate"]."',";
-	$sql .= "'".$_POST["wf_remark"]."')";
 	
 	// $log = new Log();
 	// $log->write($sql.time());
@@ -39,7 +27,6 @@
 	
 	$res = $db->insert($sql);
 	$workflow = $db->getone("select @@IDENTITY as wf_id");
-	$rows++;
 	
 	$sql2 = "insert into w_place(p_name, p_wfid, p_type, p_sort) values(";
 	$sql2 .= "'开始',";
@@ -59,19 +46,16 @@
 	
 	$res = $db->insert($sql2);
 	$res = $db->insert($sql3);
-	$rows += 2;
 	
 	if($db->geterror()){
 		$db->back();
+		$db->close();
 		echo 'FALSE';
 	}
 	else{
-		// $rows = $db->GetAffectRows();
 		$db->commit();
-		echo $rows;
+		$db->close();
+		echo $res;
 	}
-	//echo $db->error_message;
-	$db->close();
-	//print_r($set);
-	echo $res?$res:"FALSE";
+	
 ?>

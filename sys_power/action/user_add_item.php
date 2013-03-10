@@ -1,8 +1,8 @@
 ﻿<?php 
 	// json_encode($arr);
-	include_once "../../action/sessioncheck.php";
-	include_once "../../action/sys/db.php";
-	// include_once "../../action/sys/log.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sessioncheck.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
+	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 	// error_reporting(-1);
 	
 	$sql = "insert into p_user(pu_name, pu_code, pu_pwd, pu_oid, pu_phone, pu_telephone, pu_address, pu_remark) values(";

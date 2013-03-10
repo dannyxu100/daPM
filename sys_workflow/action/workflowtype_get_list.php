@@ -1,9 +1,8 @@
 <?php 
 	
-	include_once "../../action/sessioncheck.php";
-	include_once "../../action/sys/db.php";
-	// include_once "../../action/sys/log.php";
-	//error_reporting(-1);
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sessioncheck.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
+	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 	
 	$db = new DB("da_workflow");
 	
@@ -19,19 +18,14 @@
 	$sql .= " order by wft_sort asc, wft_pid asc";
 	
 	$set = $db->getlist($sql);
-	//echo $db->error_message;
+	
 	$db->close();
 	
 	// $log = new Log();
 	// $log->write($sql.time());
 	
-	if(is_array($set)){
-		for($i=0; $i<count($set); $i++){
-			foreach ( $set[$i] as $key => $value ) {
-				$set[$i][$key] = urlencode( $value );   
-			}
-		}
-		echo urldecode(json_encode($set));
+	if(is_array($set) && 0<count($set)){
+		echo json_encode($set);
 	}
 	else{
 		echo "FALSE";

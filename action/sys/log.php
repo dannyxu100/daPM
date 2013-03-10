@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**********************************************************
  * File name: LogClass.class.php
  * Class name: 日志记录类
