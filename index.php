@@ -1,26 +1,27 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<link rel="icon" href="/image/pm_ico.jpg" type="image/x-icon" />
-<link rel="stylesheet" href="/css/base.css"/>
+	<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
+	<?include_once("action/fn.php");?>
+	<?include_once("action/sys/db.php");?>
 
-<title>项目进度管理-桌面</title>
-<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
-<?include_once("action/fn.php");?>
-<?include_once("action/sys/db.php");?>
+	<link rel="icon" href="/image/pm_ico.jpg" type="image/x-icon" />
+	<link rel="stylesheet" href="/css/base.css"/>
 
-<style>
-#title_bar{border-bottom:solid 1px #666; height:35px; background:#ddd url(/images/bar_bg.jpg) repeat-x;}
-#info_bar{position:absolute;top:0px;right:15px; height:35px; line-height:35px; border:solid 0px #f0f0f0;}
-#info_bar span{color:#999;}
-#info_bar a{font-weight:bold;}
+	<title>项目进度管理-桌面</title>
 
-#user_list{color:#555; border-bottom:solid 0px #f0f0f0; padding:5px 15px; margin-bottom:10px;}
+	<style>
+	#title_bar{border-bottom:solid 1px #666; height:35px; background:#ddd url(/images/bar_bg.jpg) repeat-x;}
+	#info_bar{position:absolute;top:0px;right:15px; height:35px; line-height:35px; border:solid 0px #f0f0f0;}
+	#info_bar span{color:#999;}
+	#info_bar a{font-weight:bold;}
 
-#menubar{height:30px; position:absolute;left:250px;top:0px;}
-</style>
+	#user_list{color:#555; border-bottom:solid 0px #f0f0f0; padding:5px 15px; margin-bottom:10px;}
 
-</head>
+	#menubar{height:30px; position:absolute;left:250px;top:0px;}
+	</style>
+
+	</head>
 
 <body>
 <div id="title_bar">

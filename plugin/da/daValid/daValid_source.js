@@ -188,7 +188,7 @@ var daValid = (function(){
 			regexp: null,							//用户自定义验证正则表达式
 			valid: null,							//用户自定义验证处理函数
 			simple: false,							//提示样式是否使用简单的span文字风格
-			css: 'border:1px solid #f00;height:16px;line-height:16px;font-size:12px;color:#f00;background:#fffcee;padding:3px;margin:3px;'
+			css: 'border:1px solid #f00;height:16px;line-height:16px;font-size:12px;color:#f00;background:#fffcee;padding:2px 4px;margin:2px;'
 		},
 		
 		
@@ -269,8 +269,8 @@ var daValid = (function(){
 							this.infoObj.show();
 				}
 				else{
-						var warnTxt = '<span style="color:#c00;font-family:arial;font-size:14px;font-weight:bold;">（!）</span>&nbsp;&nbsp;' 
-						+ ( this.setting.validinfo || "数据格式不正确" );
+						var warnTxt = '<span style="color:#c00;font-size:12px;font-weight:bold;">( ! )&nbsp;' 
+						+ ( this.setting.validinfo || "" ) +"</span>";
 						
 						if( "undefined" != typeof daTip && !this.setting.simple ){
 							this.infoObj = daTip({
