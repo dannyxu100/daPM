@@ -5,11 +5,9 @@
 <link rel="stylesheet" href="/css/base.css"/>
 
 <title>项目进度管理-桌面</title>
-<div style="display:none;">
-<?include_once("action/sessioncheck.php");?>
+<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
 <?include_once("action/fn.php");?>
 <?include_once("action/sys/db.php");?>
-</div>
 
 <style>
 #title_bar{border-bottom:solid 1px #666; height:35px; background:#ddd url(/images/bar_bg.jpg) repeat-x;}

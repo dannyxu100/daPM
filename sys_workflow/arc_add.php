@@ -1,7 +1,9 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <HEAD>
-  <TITLE>添加工作流路由向弧</TITLE>
+	<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
+	
+	<TITLE>添加工作流路由向弧</TITLE>
 	<link rel="stylesheet" href="/css/base.css">
 	<style>
 		td{padding:3px;}
@@ -14,8 +16,12 @@
 	</div>
 	<table class="tablesolid" style="width:100%">
 		<tr>
+			<td class="header">名称</td>
+			<td><input type="text" id="a_name" valid="abcnumber,false" /> (提交流程可选项)</td>
+		</tr>
+		<tr>
 			<td class="header">排序</td>
-			<td><input type="text" id="a_sort" value="0" />(编号最好别紧贴,可以预留步骤位置)</td>
+			<td><input type="text" id="a_sort" value="0" /> (编号最好别紧贴,可以预留步骤位置)</td>
 		</tr>
 		<tr>
 			<td class="header">向弧类型</td>

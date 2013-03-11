@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <HEAD>
   <TITLE>部门管理</TITLE>
+	<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
+	
 	<link rel="stylesheet" href="/css/base.css"/>
 	<link rel="stylesheet" href="/plugin/ztree/zTreeStyle.css" type="text/css"/>
 <link rel="stylesheet" href="/css/jquery-ui-1.9.2.custom.min.css"/>

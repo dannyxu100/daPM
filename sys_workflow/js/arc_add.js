@@ -32,6 +32,7 @@ function loadplace(){
 function savearc(){
 	da.runDB("action/arc_add_item.php",{
 		a_wfid: g_wfid,
+		a_name: da("#a_name").val(),
 		a_sort: da("#a_sort").val(),
 		a_direction: da("[name=a_direction]:checked").val(),
 		a_pid: da("#a_pid").val(),

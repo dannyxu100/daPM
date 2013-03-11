@@ -28,12 +28,37 @@ function slideleft(){
 	}
 }
 
+/**查看业务表单详细信息
+* dbfldid: 数据源主键 id
+* bcid: 业务单实例 id
+* wfcid: 工作流实例 id
+*/
+function viewbiz( dbfldid, bcid, wfcid ){
+	if( g_isctrl ){
+		daWin({
+			width: 800,
+			height: 500,
+			url: "/web/biz/biz_update_detail.php?wfid="+ g_wfid +"&wfcid="+ wfcid +"&btid="+ g_btid +"&bcid="+ bcid 
+			+"&dbsource="+ g_dbsource+"&dbfld="+ g_dbfld +"&dbfldid="+ dbfldid,
+			back: function(){
+				
+			}
+		});
+	}
+	else{
+		goto("/web/biz/biz_update_detail.php?wfid="+ g_wfid +"&wfcid="+ wfcid +"&btid="+ g_btid +"&bcid="+ bcid 
+		+"&dbsource="+ g_dbsource +"&dbfld="+ g_dbfld +"&dbfldid="+ dbfldid);
+	}
+}
+
+
 /**加载工具按钮
 */
 function appendtools( fld, val, row, ds ){
 	var arrhtml = [
 		'<a href="javascript:void(0)" title="点击查看" style="display:block; float:left; width:16px; height:16px; background:url(/sys_power/images/sys_icon/search.png)"></a>',
-		'<a href="javascript:void(0)" title="删除" style="display:block; float:left; width:16px; height:16px; background:url(/sys_power/images/sys_icon/delete.png)"></a>'
+		'<a href="javascript:void(0)" title="删除" style="display:block; float:left; width:16px; height:16px; background:url(/sys_power/images/sys_icon/delete.png)"></a>',
+		'<a href="javascript:void(0)" title="处理业务" style="display:block; float:left; height:16px;"  onclick="viewbiz(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">处理</a>'
 		];
 	return arrhtml.join("");
 }
@@ -69,7 +94,7 @@ function loaddata(){
 			}
 			else if( firstfld ){
 				firstfld = false;
-				return '<a href="javascript:void(0)" title="点击查看" onclick="viewbiz(\''+ row[g_dbfld] +'\')">'+ val +'</a>';
+				return '<a href="javascript:void(0)" title="点击查看" onclick="viewbiz(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">'+ val +'</a>';
 			}
 			else if("tools"==fld){
 				return appendtools(fld, val, row, ds);
@@ -94,7 +119,7 @@ function loadtemplet(){
 		return;
 	}
 	
-	da.runDB("/web/biz/action/biztempletbyworkflow_get_item.php",{
+	da.runDB("/web/biz/action/biztemplet2workflow_get_item.php",{
 		dataType: "json",
 		wfid: g_wfid
 		
@@ -104,7 +129,7 @@ function loadtemplet(){
 			g_dbsource = data[0].bt_dbsource;
 			g_dbfld = data[0].bt_dbfld;
 			
-			listObj.append( decodeURI(data[0].bt_listhtml) );
+			listObj.append( data[0].bt_listhtml );
 			da("#biz_title").text(data[0].bt_name);
 			
 			loaddata();				//加载列表模板完毕，再加载数据
@@ -140,12 +165,31 @@ function loadtab(){
 }
 
 
-daLoader("daMsg,daTab,daTable,daIframe,daWin",function(){
+var g_isctrl = false;
+/**监听按键
+*/
+function listenKey(){
+	daKey({
+		keydown: function(keyName, ctrlKey, altKey, shiftKey){
+			if( !g_isctrl ){
+				g_isctrl = ctrlKey;
+			}
+		},
+		keyup: function(keyName, ctrlKey, altKey, shiftKey){
+			if( g_isctrl ){
+				g_isctrl = ctrlKey;
+			}
+		}
+	});
+}
+
+daLoader("daMsg,daKey,daTab,daTable,daIframe,daWin",function(){
 	da(function(){
 		var arrparam = da.urlParams();
 		g_wfid = arrparam["wfid"];
 		
 		loadtab();
 		loadtemplet();
+		listenKey();
 	});
 });

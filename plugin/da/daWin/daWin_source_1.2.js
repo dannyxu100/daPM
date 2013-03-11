@@ -77,7 +77,7 @@ var daWin = (function(){
 			modal: false,									//是否以模式对话框的方式显示，可选[true|false]
 			
 			place: null, 									//窗体打开的位置
-			act: true,										//是否融入动画特效
+			act: false,										//是否融入动画特效
 			time: 200,										//动画特效默认时长
 			easing: "easeOutQuad",							//动画特效类型
 			

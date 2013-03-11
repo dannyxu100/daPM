@@ -1,7 +1,9 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <HEAD>
-  <TITLE>工作流类型</TITLE>
+	<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
+	
+	<TITLE>工作流类型</TITLE>
 	<link rel="stylesheet" href="/css/base.css"/>
 	<link rel="stylesheet" href="/plugin/ztree/zTreeStyle.css" type="text/css"/>
 	<link rel="stylesheet" href="/css/jquery-ui-1.9.2.custom.min.css"/>

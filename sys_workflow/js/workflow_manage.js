@@ -180,7 +180,7 @@ function loadarc(){
 		
 		field: function( fld, val, row, ds ){
 			if("a_direction"==fld ){
-				return "IN"==val?"--->":"<---";
+				return "IN"==val?'<span style="color:#9f9">-->></span>':'<span style="font-weight:bold;color:#f00"><<-</span>';
 			}
 			else if("a_type"==fld ){
 				return "SEQ"==val?"一般顺序流类型":

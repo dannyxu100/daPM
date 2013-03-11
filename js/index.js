@@ -44,19 +44,25 @@ function loadmenu(){
 	});
 }
 
+
 var g_isctrl = false;
 /**监听按键
 */
 function listenKey(){
 	daKey({
 		keydown: function(keyName, ctrlKey, altKey, shiftKey){
-			g_isctrl = ctrlKey;
+			if( !g_isctrl ){
+				g_isctrl = ctrlKey;
+			}
 		},
 		keyup: function(keyName, ctrlKey, altKey, shiftKey){
-			g_isctrl = ctrlKey;
+			if( g_isctrl ){
+				g_isctrl = ctrlKey;
+			}
 		}
 	});
 }
+
 
 daLoader("daIframe,daWin,daToolbar,daKey",function(){
 	da(function(){

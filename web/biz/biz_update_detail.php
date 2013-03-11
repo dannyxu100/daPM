@@ -1,6 +1,8 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <HEAD>
+	<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
+	
 	<TITLE>业务处理-新建页</TITLE>
 	<link rel="stylesheet" href="/css/base.css">
 	
@@ -13,7 +15,7 @@
 		</div>
 		<div class="list_top_tools">
 			<a class="item" href="javascript:void(0)" onclick="savebiz();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
-			<a class="item" href="javascript:void(0)" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+			<a class="item" href="javascript:void(0)" onclick="submitworkflow();" ><img src="/sys_power/images/sys_icon/email_go.png" /> 提交流程</a>
 		</div>
 	</div>
 	

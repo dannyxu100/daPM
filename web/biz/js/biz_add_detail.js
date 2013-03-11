@@ -60,7 +60,7 @@ function loadtemplet(){
 	},function(data){
 		if("FALSE" != data ){
 			var formObj = da("#templet_form");
-			formObj.append( decodeURI(data[0].bt_formhtml) );
+			formObj.append( data[0].bt_formhtml );
 			g_dbsource = data[0].bt_dbsource;
 			
 			inittools();

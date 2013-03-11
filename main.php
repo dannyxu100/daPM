@@ -7,10 +7,8 @@
 
 
 <title>项目进度管理-主页面</title>
-<div style="display:none;">
-<?include_once("action/sessioncheck.php");?>
+<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
 <?include_once("action/sys/db.php");?>
-</div>
 </head>
 
 <body>

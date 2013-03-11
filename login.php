@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="css/base.css">
 </head>
 <body>
-<form id="loginform" name="loginform" method="post" action="/action/logincheck.php">
+<form id="loginform" name="loginform" method="post" action="/action/login.php">
 	<div style="width:900px; margin:50px auto; position:relative;">
 		<div style="width:400px; position:absolute; top:160px; left:450px;">
 			<table cellspacing="0" cellpadding="0" style="margin:10px auto; width:60%; height:50px;">

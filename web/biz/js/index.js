@@ -23,7 +23,7 @@ function clickworkflow( wfid, btid, obj ){
 	da(".curmenu").removeClass("curmenu");
 	da(obj).addClass("curmenu");
 	
-	goto("/web/biz/biz_list.php?wfid="+ wfid, true);
+	goto("/web/biz/biz_list.php?wfid="+ wfid, g_isctrl, "page_"+ wfid +"_list" );
 }
 
 /**加载菜单
@@ -48,8 +48,28 @@ function loadworkflow(){
 }
 
 
-daLoader("daMsg,daTable,daIframe,daWin",function(){
+var g_isctrl = false;
+/**监听按键
+*/
+function listenKey(){
+	daKey({
+		keydown: function(keyName, ctrlKey, altKey, shiftKey){
+			if( !g_isctrl ){
+				g_isctrl = ctrlKey;
+			}
+		},
+		keyup: function(keyName, ctrlKey, altKey, shiftKey){
+			if( g_isctrl ){
+				g_isctrl = ctrlKey;
+			}
+		}
+	});
+}
+
+daLoader("daMsg,daKey,daTable,daIframe,daWin",function(){
 	da(function(){
 		loadworkflow();
+		
+		listenKey();
 	});
 });

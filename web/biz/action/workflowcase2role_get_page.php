@@ -1,9 +1,10 @@
 ﻿<?php 
-	include_once $_SERVER['DOCUMENT_ROOT']."action/sessioncheck.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
 	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
 	include_once $_SERVER['DOCUMENT_ROOT']."action/fn.php";
 	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 	
+	$wfid = $_POST["wfid"];
 	$dbsource = $_POST["dbsource"];
 	$dbfld = $_POST["dbfld"];
 	$status = isset($_POST["status"])?$_POST["status"]:"EN";	//默认状态筛选为EN启动状态
@@ -16,7 +17,7 @@
 	and t_id=t2r_tid 
 	and t2r_prid in (".fn_getcookie("roleid").")";
 	$param1 = array();
-	array_push($param1, array(":wfid", $_POST["wfid"]));
+	array_push($param1, array(":wfid", $wfid));
 	
 	$db->paramlist($param1);
 	$set_tran = $db->getlist($sql1);
@@ -33,7 +34,7 @@
 	and w_trancase.tc_status=:status 
 	and w_trancase.tc_tid in (".implode(',', $tids).")";
 	$param2 = array();
-	array_push($param2, array(":wfid", $_POST["wfid"]));
+	array_push($param2, array(":wfid", $wfid));
 	array_push($param2, array(":status", $status));
 	
 	$db->paramlist($param2);
@@ -45,10 +46,10 @@
 	}
 	
 	/**************************** 查询数据源记录集 *********************************/
-	$sql31 = "select ".$dbsource.".* from ".$dbsource.", ";
+	$sql31 = "select ".$dbsource.".*, b_bizcase.bc_id, w_workflowcase.wfc_id from ".$dbsource.", ";
 	$param31 = array();
 	
-	$sql32 = "select count(*) as Column1 from ".$dbsource.", ";
+	$sql32 = "select count(bc_id) as Column1 from ".$dbsource.", ";
 	$param32 = array();
 
 	$sql4 = "da_bizform.b_bizcase, da_workflow.w_workflowcase 
@@ -57,11 +58,11 @@
 	and w_workflowcase.wfc_id in (".implode(',', $wfcids).")";
 
 	$sql31 .= $sql4;
-	array_push($param31, array(":wfid", $_POST["wfid"]));
+	array_push($param31, array(":wfid", $wfid));
 	// $sql1 .= " order by bt_sort asc, bt_id asc ";
 	
 	$sql32 .= $sql4;
-	array_push($param32, array(":wfid", $_POST["wfid"]));
+	array_push($param32, array(":wfid", $wfid));
 	
 	if( isset($_POST["pageindex"]) ){				//分页
 		$start = ($_POST["pageindex"]-1)*$_POST["pagesize"];

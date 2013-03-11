@@ -181,8 +181,8 @@ function loadinfo(){
 				da("#"+fld).val(res[0][fld]);
 			}
 			
-			g_editorList.html(decodeURI(res[0].bt_listhtml));
-			g_editorForm.html(decodeURI(res[0].bt_formhtml));
+			g_editorList.html(res[0].bt_listhtml);
+			g_editorForm.html(res[0].bt_formhtml);
 			
 			loaddbsource(function(dbObj){		//加载数据源下拉
 				dbObj.val(res[0].bt_dbsource);
@@ -249,7 +249,7 @@ function updatelisthtml(){
 
 	da.runDB("/sys_bizform/action/biztemplet_update_listhtml.php",{
 		bt_id: g_btid,
-		bt_listhtml: encodeURI(da("#bt_listhtml").val())			//编码，避免读取的时候ajax转化为json出错
+		bt_listhtml: da("#bt_listhtml").val()			//编码，避免读取的时候ajax转化为json出错
 		
 	},function(data){
 		if("FALSE" != data){
@@ -268,7 +268,7 @@ function updateformhtml(){
 	
 	da.runDB("/sys_bizform/action/biztemplet_update_formhtml.php",{
 		bt_id: g_btid,
-		bt_formhtml: encodeURI(da("#bt_formhtml").val())			//编码，避免读取的时候ajax转化为json出错
+		bt_formhtml: da("#bt_formhtml").val()			//编码，避免读取的时候ajax转化为json出错
 		
 	},function(data){
 		if("FALSE" != data){

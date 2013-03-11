@@ -5,10 +5,9 @@
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="/css/jquery-ui-1.9.2.custom.min.css">
 
-<div style="display:none;">
-<?include_once("./action/sessioncheck.php");?>
+<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
 <?include_once("./action/sys/db.php");?>
-</div>
+
 <?
 	date_default_timezone_set('ETC/GMT-8');
 	
