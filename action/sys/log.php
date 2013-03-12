@@ -24,6 +24,8 @@
  * $Log->write($arr);
  **********************************************************/
 
+date_default_timezone_set('ETC/GMT-8');
+
 class Log {
     private $_filepath; //文件路径
     private $_filename; //日志文件名
@@ -40,7 +42,7 @@ class Log {
         $this->_filepath = empty ( $dir ) ? $_SERVER["DOCUMENT_ROOT"]."/log" : $dir;
         
         //默认为以时间＋.log的文件文件
-        $this->_filename = empty ( $filename ) ? date ( 'Y-m-d', time () ) . '.log' : $filename;
+        $this->_filename = empty ( $filename ) ? date("Y-m-d") . '.log' : $filename;
         
         //生成路径字串
         $path = $this->_createPath ( $this->_filepath, $this->_filename );

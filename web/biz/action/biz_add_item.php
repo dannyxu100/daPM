@@ -29,7 +29,7 @@
 	
 	$wfcase = $db->getone("select @@IDENTITY as wfc_id");		//获取刚添加的工作流实例id
 	$place = $db->getone("select p_id from da_workflow.w_place 
-	where p_type=1 and p_wfid=".$wfid."");				//获取工作流开始库所id；库所类型；1：开始库所；50：中间库所；999：结束库所
+	where p_type=1 and p_wfid=".$wfid."");			//获取工作流开始库所id；库所类型；1：开始库所；50：中间库所；999：结束库所
 	
 	
 	/************************** 在工作流"开始库所"放置一个令牌 ***************************************/
@@ -116,7 +116,6 @@
 		echo 'FALSE';
 	}
 	else{
-		// $rows = $db->GetAffectRows();
 		$db->commit();
 		$db->close();
 		echo $res;

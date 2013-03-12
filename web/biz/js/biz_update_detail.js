@@ -13,7 +13,7 @@ function submitworkflow(){
 	daWin({
 		width: 500,
 		height: 300,
-		url: "/sys_workflow/plugin/submit_workflow.php?wfid="+ g_wfid +"&wfcid="+ g_wfcid,
+		url: "/web/biz/plugin/submit_workflow.php?wfid="+ g_wfid +"&wfcid="+ g_wfcid,
 		back: function(){
 			
 		}

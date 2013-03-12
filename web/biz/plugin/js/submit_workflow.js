@@ -5,14 +5,29 @@ var g_wfid = "",
 /**提交业务流程
 */
 function updatetran(){
-	
+	da.runDB( "/web/biz/action/trancase_submit_item.php", {
+		dataType: "json",
+		wfid: g_wfid,
+		wfcid: g_wfcid,
+		aid: da("#arclist").val()
+	},
+	function(data){debugger;
+		if( "FALSE" != data ){
+			alert("提交成功。");
+		}
+		else{
+			alert("操作失败。");
+		}
+	},function(a,b,c){
+		debugger;
+	});
 }
 
 
 /**加载工作流向弧（路由）可选项
 */
 function loadarclist(){
-	da.runDB( "/sys_workflow/action/arc2direction_get_list.php", {
+	da.runDB( "/web/biz/action/arc2direction_get_list.php", {
 		dataType: "json",
 		wfid: g_wfid,
 		wfcid: g_wfcid

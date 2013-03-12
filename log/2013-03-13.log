@@ -1,0 +1,38 @@
+【FROM 'workflowcase2role_get_page.php' log】: 11111
+【FROM 'workflowcase2role_get_page.php' log】: 7    EN     select tc_wfcid from da_workflow.w_trancase 
+	where w_trancase.tc_wfid=:wfid 
+	and w_trancase.tc_status=:status 
+	and w_trancase.tc_tid in (0,1,3,3)
+【FROM 'workflowcase2role_get_page.php' log】: 7    EN     select tc_wfcid from da_workflow.w_trancase 
+	where w_trancase.tc_wfid=:wfid 
+	and w_trancase.tc_status=:status 
+	and w_trancase.tc_tid in (0,1,3,3)
+【FROM 'workflowcase2role_get_page.php' log】: 7    EN     select tc_wfcid from da_workflow.w_trancase 
+	where w_trancase.tc_wfid=:wfid 
+	and w_trancase.tc_status=:status 
+	and w_trancase.tc_tid in (0,3,1)
+【FROM 'workflowcase2role_get_page.php' log】: 7    EN     select tc_wfcid from da_workflow.w_trancase 
+	where w_trancase.tc_wfid=:wfid 
+	and w_trancase.tc_status=:status 
+	and w_trancase.tc_tid in (0,2,1)
+【FROM 'workflowcase2role_get_page.php' log】: 15    EN     select tc_wfcid from da_workflow.w_trancase 
+	where w_trancase.tc_wfid=:wfid 
+	and w_trancase.tc_status=:status 
+	and w_trancase.tc_tid in (0,7)
+【FROM 'workflowcase2role_get_page.php' log】: 7    EN     select tc_wfcid from da_workflow.w_trancase 
+	where w_trancase.tc_wfid=:wfid 
+	and w_trancase.tc_status=:status 
+	and w_trancase.tc_tid in (0,3,1)
+【FROM 'workflowcase2role_get_page.php' log】: 15    EN     select tc_wfcid from da_workflow.w_trancase 
+	where w_trancase.tc_wfid=:wfid 
+	and w_trancase.tc_status=:status 
+	and w_trancase.tc_tid in (0,5)
+【FROM 'workflowcase2role_get_page.php' log】: 7    EN     select tc_wfcid from da_workflow.w_trancase 
+	where w_trancase.tc_wfid=:wfid 
+	and w_trancase.tc_status=:status 
+	and w_trancase.tc_tid in (0,3,1)
+【FROM 'workflowcase2role_get_page.php' log】: 7    EN     select tc_wfcid from da_workflow.w_trancase 
+	where w_trancase.tc_wfid=:wfid 
+	and w_trancase.tc_status=:status 
+	and w_trancase.tc_tid in (0,2,1)
+【FROM 'trancase_submit_item.php' log】: 

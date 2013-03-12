@@ -19,7 +19,7 @@
 	$db->paramlist($param1);
 	$set_tran = $db->getlist($sql1);
 	
-	$tids = array();					//事务变迁id记录集
+	$tids = array();					//事务变迁id记录集。
 	for( $i=0; $i<count($set_tran); $i++){
 		array_push( $tids, $set_tran[$i]["t_id"] );
 	}
@@ -30,7 +30,8 @@
 	and a_direction='OUT' 
 	and tc_wfcid=:wfcid 
 	and (tc_status='EN' or tc_status='IP') 
-	and tc_tid in (".implode(',', $tids).")";	//向弧走向；IN：库所走向事务变迁；OUT：事务变迁走向库所	
+	and tc_tid in (".implode(',', $tids).")";	//通过工作流实例wfcid缩小范围。
+												//向弧走向；IN：库所走向事务变迁；OUT：事务变迁走向库所。
 												//事务变迁（工作项）状态；EN：启用；IP：处理中；CA：取消； FI：完成
 												
 	$sql2 .= " order by a_sort asc, a_id asc";
@@ -42,6 +43,7 @@
 	$set = $db->getlist($sql2);
 	
 	// $log = new Log();
+	// $log->write($sql1);
 	// $log->write($sql2);
 	// $log->write($db->geterror());
 	

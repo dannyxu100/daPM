@@ -73,6 +73,7 @@
 		array_push($param31, array(":end", $end));
 	}
 	// $log = new Log();
+	// $log->write($wfid."    ".$status."     ".$sql2);
 	// $log->write($sql31);
 	// $log->write($sql32);
 	
