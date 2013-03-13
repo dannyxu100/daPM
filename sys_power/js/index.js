@@ -59,7 +59,6 @@ function listenKey(){
 			if( g_isctrl ){
 				g_isctrl = ctrlKey;
 			}
-			da.out(g_isctrl);
 		}
 	});
 }

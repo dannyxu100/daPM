@@ -38,7 +38,7 @@ function viewbizlog( dbfldid, bcid, wfcid ){
 		daWin({
 			width: 800,
 			height: 500,
-			url: "/sys_common/bizlog/logmanage.php?wfid="+ g_wfid +"&wfcid="+ wfcid +"&btid="+ g_btid +"&bcid="+ bcid 
+			url: "/sys_common/bizlog/log_manage.php?wfid="+ g_wfid +"&wfcid="+ wfcid +"&btid="+ g_btid +"&bcid="+ bcid 
 			+"&dbsource="+ g_dbsource+"&dbfld="+ g_dbfld +"&dbfldid="+ dbfldid,
 			back: function(){
 				
@@ -46,7 +46,7 @@ function viewbizlog( dbfldid, bcid, wfcid ){
 		});
 	}
 	else{
-		goto("/sys_common/bizlog/logmanage.php?wfid="+ g_wfid +"&wfcid="+ wfcid +"&btid="+ g_btid +"&bcid="+ bcid 
+		goto("/sys_common/bizlog/log_manage.php?wfid="+ g_wfid +"&wfcid="+ wfcid +"&btid="+ g_btid +"&bcid="+ bcid 
 		+"&dbsource="+ g_dbsource +"&dbfld="+ g_dbfld +"&dbfldid="+ dbfldid);
 	}
 	
