@@ -5,6 +5,14 @@
 	
 	<TITLE>业务处理-列表页</TITLE>
 	<link rel="stylesheet" href="/css/base.css">
+	<style>
+		.itemHover td a.txt_tool{display:inline; margin-right:5px;}
+		a.txt_tool{display:none;}
+		
+		.itemHover td a.ico_tool{display:inline-block; vertical-align:middle; width:16px; height:16px; }
+		a.ico_tool{display:none;}
+	</style>
+	
 	
  </HEAD>
 <BODY>

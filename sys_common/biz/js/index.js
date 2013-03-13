@@ -23,13 +23,13 @@ function clickworkflow( wfid, btid, obj ){
 	da(".curmenu").removeClass("curmenu");
 	da(obj).addClass("curmenu");
 	
-	goto("/web/biz/biz_list.php?wfid="+ wfid, g_isctrl, "page_"+ wfid +"_list" );
+	goto("/sys_common/biz/biz_list.php?wfid="+ wfid, g_isctrl, "page_"+ wfid +"_list" );
 }
 
 /**加载菜单
 */
 function loadworkflow(){
-	da.runDB("/web/biz/action/workflow2role_get_list.php",{
+	da.runDB("/sys_common/biz/action/workflow2role_get_list.php",{
 		dataType: "json",
 		roleids: fn_getcookie("roleid")
 		

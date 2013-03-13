@@ -540,7 +540,6 @@ function loadtree(){
 		}
 		
 		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
-			
    });
 }
 

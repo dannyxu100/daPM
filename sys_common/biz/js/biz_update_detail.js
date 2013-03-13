@@ -13,7 +13,7 @@ function submitworkflow(){
 	daWin({
 		width: 500,
 		height: 300,
-		url: "/web/biz/plugin/submit_workflow.php?wfid="+ g_wfid +"&wfcid="+ g_wfcid,
+		url: "/sys_common/biz/plugin/submit_workflow.php?wfid="+ g_wfid +"&wfcid="+ g_wfcid,
 		back: function(){
 			
 		}
@@ -35,7 +35,7 @@ function loaddata(){
 		return;
 	}
 	
-	da.runDB("/web/biz/action/dbsource_get_item.php", {
+	da.runDB("/sys_common/biz/action/dbsource_get_item.php", {
 		dataType: "json",
 		dbsource: g_dbsource,
 		dbfld: g_dbfld,

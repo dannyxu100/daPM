@@ -8,7 +8,7 @@ var g_wfid = "",
 /**创建业务
 */
 function addbiz(){
-	goto("/web/biz/biz_add_detail.php?btid="+ g_btid +"&wfid="+ g_wfid);
+	goto("/sys_common/biz/biz_add_detail.php?btid="+ g_btid +"&wfid="+ g_wfid);
 }
 
 
@@ -33,12 +33,12 @@ function slideleft(){
 * bcid: 业务单实例 id
 * wfcid: 工作流实例 id
 */
-function viewbiz( dbfldid, bcid, wfcid ){
+function viewbizlog( dbfldid, bcid, wfcid ){
 	if( g_isctrl ){
 		daWin({
 			width: 800,
 			height: 500,
-			url: "/web/biz/biz_update_detail.php?wfid="+ g_wfid +"&wfcid="+ wfcid +"&btid="+ g_btid +"&bcid="+ bcid 
+			url: "/sys_common/bizlog/logmanage.php?wfid="+ g_wfid +"&wfcid="+ wfcid +"&btid="+ g_btid +"&bcid="+ bcid 
 			+"&dbsource="+ g_dbsource+"&dbfld="+ g_dbfld +"&dbfldid="+ dbfldid,
 			back: function(){
 				
@@ -46,7 +46,31 @@ function viewbiz( dbfldid, bcid, wfcid ){
 		});
 	}
 	else{
-		goto("/web/biz/biz_update_detail.php?wfid="+ g_wfid +"&wfcid="+ wfcid +"&btid="+ g_btid +"&bcid="+ bcid 
+		goto("/sys_common/bizlog/logmanage.php?wfid="+ g_wfid +"&wfcid="+ wfcid +"&btid="+ g_btid +"&bcid="+ bcid 
+		+"&dbsource="+ g_dbsource +"&dbfld="+ g_dbfld +"&dbfldid="+ dbfldid);
+	}
+	
+}
+
+/**查看业务表单详细信息
+* dbfldid: 数据源主键 id
+* bcid: 业务单实例 id
+* wfcid: 工作流实例 id
+*/
+function viewbiz( dbfldid, bcid, wfcid ){
+	if( g_isctrl ){
+		daWin({
+			width: 800,
+			height: 500,
+			url: "/sys_common/biz/biz_update_detail.php?wfid="+ g_wfid +"&wfcid="+ wfcid +"&btid="+ g_btid +"&bcid="+ bcid 
+			+"&dbsource="+ g_dbsource+"&dbfld="+ g_dbfld +"&dbfldid="+ dbfldid,
+			back: function(){
+				
+			}
+		});
+	}
+	else{
+		goto("/sys_common/biz/biz_update_detail.php?wfid="+ g_wfid +"&wfcid="+ wfcid +"&btid="+ g_btid +"&bcid="+ bcid 
 		+"&dbsource="+ g_dbsource +"&dbfld="+ g_dbfld +"&dbfldid="+ dbfldid);
 	}
 }
@@ -56,9 +80,9 @@ function viewbiz( dbfldid, bcid, wfcid ){
 */
 function appendtools( fld, val, row, ds ){
 	var arrhtml = [
-		'<a href="javascript:void(0)" title="点击查看" style="display:block; float:left; width:16px; height:16px; background:url(/sys_power/images/sys_icon/search.png)"></a>',
-		'<a href="javascript:void(0)" title="删除" style="display:block; float:left; width:16px; height:16px; background:url(/sys_power/images/sys_icon/delete.png)"></a>',
-		'<a href="javascript:void(0)" title="处理业务" style="display:block; float:left; height:16px;"  onclick="viewbiz(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">处理</a>'
+		'<a href="javascript:void(0)" class="txt_tool" onclick="viewbiz(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">接单</a>',
+		'<a href="javascript:void(0)" class="txt_tool" onclick="viewbizlog(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">日志</a>',
+		'<a href="javascript:void(0)" class="ico_tool" title="删除" style="background:url(/sys_power/images/sys_icon/delete.png)"></a>'
 		];
 	return arrhtml.join("");
 }
@@ -71,11 +95,11 @@ function loaddata(){
 		return;
 	}
 	
-	var firstfld = false;
+	var idxfld = 0;
 	
 	daTable({
 		id: "tb_list",
-		url: "/web/biz/action/workflowcase2role_get_page.php",
+		url: "/sys_common/biz/action/workflowcase2role_get_page.php",
 		data: {
 			// opt: "qry",
 			dataType: "json",
@@ -90,15 +114,16 @@ function loaddata(){
 		
 		field: function( fld, val, row, ds ){
 			if( "order" == fld ){
-				firstfld = true;
+				idxfld = 0;
 			}
-			else if( firstfld ){
-				firstfld = false;
-				return '<a href="javascript:void(0)" title="点击查看" onclick="viewbiz(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">'+ val +'</a>';
+			else if( 1 == idxfld ){
+				val = '<a href="javascript:void(0)" title="点击查看详细信息" onclick="viewbiz(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">'+ val +'</a>';
 			}
 			else if("tools"==fld){
-				return appendtools(fld, val, row, ds);
+				val = appendtools(fld, val, row, ds);
 			}
+			
+			idxfld++;
 			return val;
 		},
 		loaded: function( idx, xml, json, ds ){
@@ -119,7 +144,7 @@ function loadtemplet(){
 		return;
 	}
 	
-	da.runDB("/web/biz/action/biztemplet2workflow_get_item.php",{
+	da.runDB("/sys_common/biz/action/biztemplet2workflow_get_item.php",{
 		dataType: "json",
 		wfid: g_wfid
 		

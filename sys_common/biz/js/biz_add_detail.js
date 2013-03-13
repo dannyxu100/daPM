@@ -26,7 +26,7 @@ function savebiz(){
 		data[obj.id] = da(obj).val();
 	});
 	
-	da.runDB("/web/biz/action/biz_add_item.php", data, function(res){
+	da.runDB("/sys_common/biz/action/biz_add_item.php", data, function(res){
 		if("FALSE" != res ){
 			alert("保存成功。");
 			// iframeBack();
