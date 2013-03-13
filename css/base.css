@@ -144,6 +144,16 @@ body .fn-hide {
 
 td.header { padding:0px 10px; background:#f5f5f5; text-align:right; vertical-align:top}
 
+/******** 用户信息条 ********/
+.info_bar{position:absolute;top:0px;right:15px; height:35px; line-height:35px; border:solid 0px #f0f0f0;}
+.info_bar span{color:#999;}
+.info_bar a{font-weight:bold;}
+
+.userico{position:absolute; top:1px; left:-40px; vertical-align:middle; margin-right:10px;width:30px;height:30px;border:1px solid #999; cursor:pointer;}
+
+.userinfo_list{ display:none; position:absolute; top:1px; left:-220px; z-index:2; width:200px; padding:5px; border:1px solid #000; background:#fff; cursor:pointer;}
+.userinfo_list ul{height:22px;}
+.userinfo_list ul span{font-weight:bold;}
 
 /******** 按钮 *********/
 a.bt_menu{display:block;margin:3px;padding:5px; font-weight:bold; color:#555; border:1px solid #999;background:#ddd url(/images/bar_bg.jpg);}

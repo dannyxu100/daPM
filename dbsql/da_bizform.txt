@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 03 月 05 日 17:07
+-- 生成日期: 2013 年 03 月 13 日 16:48
 -- 服务器版本: 5.5.8
 -- PHP 版本: 5.3.3
 
@@ -24,12 +24,47 @@ USE `da_bizform`;
 CREATE TABLE IF NOT EXISTS `b_bizcase` (
   `bc_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '业务表单实例id',
   `bc_btid` int(10) NOT NULL COMMENT '表单模板id',
+  `bc_tcid` int(10) NOT NULL COMMENT '工作流事务变迁实例id(过程表单)',
+  `bc_wfcid` int(10) NOT NULL COMMENT '工作流实例id(主表单)',
   `bc_dbsourceid` varchar(50) NOT NULL COMMENT '数据源联系字段值（一般为主键值）',
   PRIMARY KEY (`bc_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='业务表单实例表' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='业务表单实例表' AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `b_bizcase`
+--
+
+INSERT INTO `b_bizcase` (`bc_id`, `bc_btid`, `bc_tcid`, `bc_wfcid`, `bc_dbsourceid`) VALUES
+(2, 2, 0, 6, '17'),
+(3, 1, 0, 7, '3'),
+(4, 1, 0, 8, '4'),
+(5, 1, 0, 9, '5'),
+(6, 1, 0, 10, '6'),
+(7, 1, 0, 11, '7'),
+(8, 1, 0, 12, '8'),
+(9, 1, 0, 13, '9'),
+(10, 1, 0, 14, '10');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_bizlog`
+--
+
+CREATE TABLE IF NOT EXISTS `b_bizlog` (
+  `l_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '业务单日志id',
+  `l_bcid` int(10) NOT NULL COMMENT '业务单实例id',
+  `l_conent` text NOT NULL COMMENT '业务单日志内容',
+  `l_date` datetime NOT NULL COMMENT '业务单日志日期',
+  `l_puid` int(10) NOT NULL COMMENT '写日志用户id',
+  `l_puname` varchar(50) NOT NULL COMMENT '写日志用户名',
+  `l_tagid` int(10) NOT NULL COMMENT '业务单日志标签id',
+  `l_tagname` varchar(50) NOT NULL COMMENT '业务单日志标签名称',
+  PRIMARY KEY (`l_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='业务单处理日志' AUTO_INCREMENT=1 ;
+
+--
+-- 转存表中的数据 `b_bizlog`
 --
 
 
@@ -61,9 +96,9 @@ CREATE TABLE IF NOT EXISTS `b_biztemplet` (
 --
 
 INSERT INTO `b_biztemplet` (`bt_id`, `bt_name`, `bt_bttid`, `bt_sort`, `bt_dbsource`, `bt_dbfld`, `bt_listhtml`, `bt_formhtml`, `bt_remark`, `bt_user`, `bt_date`, `bt_edituser`, `bt_editdate`) VALUES
-(1, '请假单', 2, 0, 'tb_test', 'a_name', '%3Ctable%20id=%22tb_list%22%20style=%22width:100%25;%22%3E%0A%09%3Ctbody%3E%0A%09%09%3Ctr%3E%0A%09%09%09%3Ctd%20style=%22text-align:center;%22%3E%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%E5%BA%8F%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%E5%BA%93%E6%89%80%E5%90%8D%E7%A7%B0%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%E6%96%B9%E5%90%91%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%E5%8F%98%E8%BF%81%E5%90%8D%E7%A7%B0%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%E6%8E%92%E5%BA%8F%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%E7%B1%BB%E5%9E%8B%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%E8%A1%A8%E8%BE%BE%E5%BC%8F%0A%09%09%09%3C/td%3E%0A%09%09%3C/tr%3E%0A%09%3C/tbody%3E%0A%09%3Ctbody%3E%0A%09%09%3Ctr%3E%0A%09%09%09%3Ctd%20style=%22text-align:center;%22%3E%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%7Border%7D%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%7Bp_name%7D%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%7Ba_direction%7D%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%7Bt_name%7D%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%7Ba_sort%7D%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%7Ba_type%7D%0A%09%09%09%3C/td%3E%0A%09%09%09%3Ctd%3E%0A%09%09%09%09%7Ba_precondition%7D%0A%09%09%09%3C/td%3E%0A%09%09%3C/tr%3E%0A%3C!--%0A%09%09%3Ctr%3E%0A%09%09%09%3Ctd%20colspan=%227%22%3E%0A%09%09%09%09%7Border%7D%0A%09%09%09%3C/td%3E%0A%09%09%3C/tr%3E%0A--%3E%0A%09%3C/tbody%3E%0A%09%3Ctbody%3E%0A%09%09%3Ctr%3E%0A%09%09%09%3Ctd%20colspan=%228%22%3E%0A%09%09%09%09%E5%85%B1%3Cspan%20id=%22tb_arclist_recordcount2%22%20style=%22color:#c26220;%22%3E0%3C/span%3E&nbsp;%E6%9D%A1%EF%BC%8C%0A%09%09%09%09%E5%85%B1%3Cspan%20id=%22tb_arclist_pagecount2%22%20style=%22color:#c26220;%22%3E0%3C/span%3E&nbsp;%E9%A1%B5%EF%BC%8C%0A%09%09%09%09%E5%BD%93%E5%89%8D%E5%9C%A8%E7%AC%AC%3Cspan%20id=%22tb_arclist_pageindex2%22%20style=%22color:#c26220;%22%3E0%3C/span%3E&nbsp;%E9%A1%B5%E3%80%80%20%3Cspan%20id=%22tb_arclist_pageinfo%22%3E&nbsp;%3C/span%3E%20%0A%09%09%09%3C/td%3E%0A%09%09%3C/tr%3E%0A%09%3C/tbody%3E%0A%3C/table%3E', '%3Cp%20style=%22text-align:center;%22%3E%0A%09%3Cspan%20style=%22font-size:24px;line-height:1.5;%22%3E%E8%AF%B7%E5%81%87%E5%8D%95%3C/span%3E%20%0A%3C/p%3E%0A%3Cp%3E%0A%09%3Cspan%20style=%22font-size:24px;line-height:1.5;%22%3E%20%0A%09%3Ctable%20style=%22width:100%25;%22%20cellpadding=%222%22%20cellspacing=%220%22%20border=%221%22%20bordercolor=%22#000000%22%3E%0A%09%09%3Ctbody%3E%0A%09%09%09%3Ctr%3E%0A%09%09%09%09%3Ctd%20colspan=%223%22%3E%0A%09%09%09%09%09%E8%AF%B7%E5%81%87%E4%BA%BA%EF%BC%9A%3Cbr%20/%3E%0A%09%09%09%09%3C/td%3E%0A%09%09%09%09%3Ctd%3E%0A%09%09%09%09%09%E6%97%A5%E6%9C%9F%EF%BC%9A%0A%09%09%09%09%3C/td%3E%0A%09%09%09%09%3Ctd%3E%0A%09%09%09%09%09%E7%BC%96%E5%8F%B7%EF%BC%9A%0A%09%09%09%09%3C/td%3E%0A%09%09%09%3C/tr%3E%0A%09%09%09%3Ctr%3E%0A%09%09%09%09%3Ctd%20rowspan=%223%22%3E%0A%09%09%09%09%09%3Cbr%20/%3E%0A%09%09%09%09%3C/td%3E%0A%09%09%09%09%3Ctd%20colspan=%224%22%3E%0A%09%09%09%09%09%3Cbr%20/%3E%0A%09%09%09%09%3C/td%3E%0A%09%09%09%3C/tr%3E%0A%09%09%09%3Ctr%3E%0A%09%09%09%09%3Ctd%20colspan=%224%22%3E%0A%09%09%09%09%09%3Cbr%20/%3E%0A%09%09%09%09%3C/td%3E%0A%09%09%09%3C/tr%3E%0A%09%09%09%3Ctr%3E%0A%09%09%09%09%3Ctd%20colspan=%222%22%3E%0A%09%09%09%09%09%3Cbr%20/%3E%0A%09%09%09%09%3C/td%3E%0A%09%09%09%09%3Ctd%20colspan=%222%22%3E%0A%09%09%09%09%09%3Cbr%20/%3E%0A%09%09%09%09%3C/td%3E%0A%09%09%09%3C/tr%3E%0A%09%09%09%3Ctr%3E%0A%09%09%09%09%3Ctd%3E%0A%09%09%09%09%09%E9%83%A8%E9%97%A8%E7%BB%8F%E7%90%86%EF%BC%9A%0A%09%09%09%09%3C/td%3E%0A%09%09%09%09%3Ctd%20colspan=%222%22%3E%0A%09%09%09%09%09%E9%83%A8%E9%97%A8%E6%80%BB%E7%9B%91%0A%09%09%09%09%3C/td%3E%0A%09%09%09%09%3Ctd%3E%0A%09%09%09%09%09%E5%AE%A1%E6%89%B9%E6%97%A5%E6%9C%9F%EF%BC%9A%0A%09%09%09%09%3C/td%3E%0A%09%09%09%09%3Ctd%3E%0A%09%09%09%09%09%3Cbr%20/%3E%0A%09%09%09%09%3C/td%3E%0A%09%09%09%3C/tr%3E%0A%09%09%3C/tbody%3E%0A%09%3C/table%3E%0A%3Cbr%20/%3E%0A%3Cimg%20src=%22http://api.map.baidu.com/staticimage?center=104.061852%252C30.592671&zoom=16&width=558&height=360&markers=104.061852%252C30.592671&markerStyles=l%252CA%22%20alt=%22%22%20/%3E%3Cbr%20/%3E%0A%3C/span%3E%20%0A%3C/p%3E', '', '徐飞', '2013-02-16 19:43:01', '徐飞', '2013-02-16 21:33:07'),
-(2, '企业网建业务单', 2, 2, '', '', '', '', '3232', '徐飞', '2013-02-16 19:48:36', '', '0000-00-00 00:00:00'),
-(3, 'SEO业务单', 2, 3, '', '', '', '', '', '徐飞', '2013-02-16 19:50:12', '徐飞', '2013-02-16 20:09:42');
+(1, '请假单', 2, 0, 'hsd_leave', 'l_id', '<table id="tb_list" style="width:100%;">\n	<tbody name="head">\n		<tr>\n			<td style="width:30px;">\n				序\n			</td>\n			<td style="width:80px;">\n				请假人\n			</td>\n			<td style="width:100px;">\n				请假日期\n			</td>\n			<td>\n				请假事由\n			</td>\n			<td style="width:80px;">\n				部门经理\n			</td>\n			<td style="width:80px;">\n				部门总监\n			</td>\n			<td style="width:100px;">\n				审核日期\n			</td>\n			<td style="width:100px;">\n				&nbsp;\n			</td>\n		</tr>\n	</tbody>\n	<tbody name="body">\n		<tr>\n			<td name="order">\n				{order}\n			</td>\n			<td name="l_puname">\n				{l_puname}\n			</td>\n			<td name="l_date" fmt="yyyy-mm-dd">\n				{l_date}\n			</td>\n			<td name="l_content">\n				{l_content}\n			</td>\n			<td>\n				{l_manager}\n			</td>\n			<td>\n				{l_general}\n			</td>\n			<td name="l_date2" fmt="yyyy-mm-dd">\n				{l_date2}\n			</td>\n			<td>\n				{tools}\n			</td>\n		</tr>\n	</tbody>\n	<tbody>\n		<tr>\n			<td colspan="9">\n				<span style="white-space:nowrap;">共<span id="tb_list_recordcount2">0</span>&nbsp;条，\n				共<span id="tb_list_pagecount2">0</span>&nbsp;页，\n				当前在第<span id="tb_list_pageindex2">0</span>&nbsp;页　 <span id="tb_list_pageinfo">&nbsp;</span> </span> \n			</td>\n		</tr>\n	</tbody>\n</table>', '<p style="text-align:center;">\n	<span style="font-size:24px;line-height:1.5;font-family:KaiTi_GB2312;">请假单</span> \n</p>\n<table style="width:100%;" cellpadding="5" cellspacing="0" border="1" bordercolor="#CCCCCC">\n	<tbody>\n		<tr>\n			<td style="width:80px;text-align:right;">\n				请假人：\n			</td>\n			<td>\n				<input id="l_puname" valid="abcnumber,false" /> \n			</td>\n			<td style="width:80px;text-align:right;">\n				日期：\n			</td>\n			<td>\n				<input id="l_date" /> \n			</td>\n			<td style="width:80px;text-align:right;">\n				编号：\n			</td>\n			<td>\n				<input id="l_id" disabled="disabled" /> \n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;">\n				假期始于：\n			</td>\n			<td>\n				<input id="l_fromdate" /> \n			</td>\n			<td style="text-align:right;">\n				止于：\n			</td>\n			<td>\n				<input id="l_todate" /> \n			</td>\n			<td>\n				<br />\n			</td>\n			<td>\n				<br />\n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;vertical-align:top;">\n				事 &nbsp; 由：\n			</td>\n			<td colspan="5">\n				<textarea id="l_content" style="width:100%;height:100px;"></textarea> \n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;">\n				部门经理：\n			</td>\n			<td>\n				<input id="l_manager" disabled="disabled" /> \n			</td>\n			<td style="text-align:right;">\n				部门总监：\n			</td>\n			<td>\n				<input id="l_general" disabled="disabled" /> \n			</td>\n			<td style="text-align:right;">\n				审批日期：\n			</td>\n			<td>\n				<input id="l_date2" disabled="disabled" /> \n			</td>\n		</tr>\n	</tbody>\n</table>', '', '徐飞', '2013-02-16 19:43:01', '徐飞', '2013-02-16 21:33:07'),
+(2, '企业网建业务单', 2, 2, 'td_website', 'ws_id', '<table id="tb_list" style="width:100%;">\n	<tbody name="head">\n		<tr>\n			<td style="width:30px;">\n				序\n			</td>\n			<td>\n				客户名称\n			</td>\n			<td style="width:120px;">\n				合同号\n			</td>\n			<td style="width:80px;">\n				销售人员\n			</td>\n			<td style="width:80px;">\n				联系人\n			</td>\n			<td style="width:80px;">\n				联系电话\n			</td>\n			<td style="width:100px;">\n				提交日期\n			</td>\n		</tr>\n	</tbody>\n	<tbody name="body">\n		<tr>\n			<td name="order">\n				{order}\n			</td>\n			<td>\n				{ws_cstname}\n			</td>\n			<td>\n				{ws_code}\n			</td>\n			<td>\n				{ws_solename}\n			</td>\n			<td>\n				{ws_connname}\n			</td>\n			<td>\n				{ws_connphone}\n			</td>\n			<td name="ws_date" fmt="yyyy-mm-dd/p">\n				{ws_date}\n			</td>\n		</tr>\n	</tbody>\n	<tbody>\n		<tr>\n			<td colspan="8">\n				共<span id="tb_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条， \n                            共<span id="tb_list_pagecount2" style="color:#c26220;">0</span>&nbsp;页， \n                            当前在第<span id="tb_list_pageindex2" style="color:#c26220;">0</span>&nbsp;页　&nbsp; <span id="tb_list_pageinfo" style="color:#c26220;">&nbsp;</span> \n			</td>\n		</tr>\n	</tbody>\n</table>', '<div style="text-align:center;">\n	<span style="font-family:KaiTi_GB2312;line-height:1.5;font-size:24px;">企业建站单</span> \n</div>\n<p>\n	<span style="font-family:KaiTi_GB2312;"> \n	<table style="width:100%;" cellpadding="2" cellspacing="0" border="1" bordercolor="#CCCCCC">\n		<tbody>\n			<tr>\n				<td style="text-align:right;width:80px;">\n					客户名称：\n				</td>\n				<td>\n					<input id="ws_cstname" style="width:200px;" valid="account,false" validinfo="不能为空" /> \n				</td>\n				<td style="text-align:right;width:80px;">\n					销售人员：\n				</td>\n				<td>\n					<input id="ws_solename" /> \n				</td>\n				<td style="text-align:right;width:80px;">\n					合同号：\n				</td>\n				<td>\n					<input id="ws_code" valid="abcnumber,false" validinfo="不能为空,格式为：HT201303150020" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;">\n					联系人：\n				</td>\n				<td>\n					<input id="ws_connname" /> \n				</td>\n				<td style="text-align:right;">\n					联系电话：\n				</td>\n				<td>\n					<input id="ws_connphone" valid="phone,false" /> \n				</td>\n				<td style="text-align:right;">\n					提单日期：\n				</td>\n				<td>\n					<input id="ws_date" disabled="disabled" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;">\n					地 &nbsp; 址：\n				</td>\n				<td colspan="5">\n					<input id="ws_connaddr" style="width:300px;" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;vertical-align:top;">\n					备 &nbsp; 注：\n				</td>\n				<td colspan="5">\n					<textarea id="ws_remark" style="width:100%;height:200px;"></textarea> \n				</td>\n			</tr>\n		</tbody>\n	</table>\n<br />\n<br />\n</span> \n</p>\n<p>\n	<br />\n</p>', '3232', '徐飞', '2013-02-16 19:48:36', '', '0000-00-00 00:00:00'),
+(3, 'SEO业务单', 2, 3, '', '', '', '<p>\n	fdsfdsfdsafdsfdsf\n</p>\n<p>\n	ds\n</p>\n<p>\n	f\n</p>\n<p>\n	ds\n</p>\n<p>\n	af\n</p>\n<p>\n	d\n</p>\n<p>\n	safdddddddddddddddddddd\n</p>', '', '徐飞', '2013-02-16 19:50:12', '徐飞', '2013-02-16 20:09:42');
 
 -- --------------------------------------------------------
 

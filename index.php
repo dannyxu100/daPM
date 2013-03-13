@@ -12,12 +12,7 @@
 
 	<style>
 	#title_bar{border-bottom:solid 1px #666; height:35px; background:#ddd url(/images/bar_bg.jpg) repeat-x;}
-	#info_bar{position:absolute;top:0px;right:15px; height:35px; line-height:35px; border:solid 0px #f0f0f0;}
-	#info_bar span{color:#999;}
-	#info_bar a{font-weight:bold;}
-
-	#user_list{color:#555; border-bottom:solid 0px #f0f0f0; padding:5px 15px; margin-bottom:10px;}
-
+	
 	#menubar{height:30px; position:absolute;left:250px;top:0px;}
 	</style>
 
@@ -29,13 +24,14 @@
 	<!--<span style="font-size:20px; font-weight:bold;margin-left:10px;">项目进度管理</span> <span style="font-size:10px;">版本1.0</span>-->
 	<div id="menubar"></div>
 </div>
-<div id="info_bar">
-	<span>
-		<?php echo fn_getcookie("puname") ?> / 
-		<?php echo fn_getcookie("poname") ?> / 
-		<?php echo fn_getcookie("rolename") ?> / 
-		<?php echo fn_getcookie("groupname") ?> / 
-	</span> 
+<div class="info_bar">
+	<img class="userico" src="/images/userico/1.jpg" onmouseover="showuserinfo()"/>
+	<div class="userinfo_list" onmouseout="hideuserinfo()">
+		<ul><span>姓 名:&nbsp;&nbsp;</span><?php echo fn_getcookie("puname") ?> </ul>
+		<ul><span>所属部门:&nbsp;&nbsp;</span><?php echo fn_getcookie("poname") ?> </ul>
+		<ul><span>角 色:&nbsp;&nbsp;</span><?php echo fn_getcookie("rolename") ?> </ul>
+		<ul><span>工作组:&nbsp;&nbsp;</span><?php echo fn_getcookie("groupname") ?> </ul>
+	</div> 
 	<a href="javascript:void(0)" onclick="updatepwd()">修改密码</a> | 
 	<a href="/action/loginout.php">退出</a>
 </div>

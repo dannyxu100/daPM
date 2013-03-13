@@ -1,4 +1,11 @@
 
+function showuserinfo(){
+	da(".userinfo_list").show();
+}
+function hideuserinfo(){
+	da(".userinfo_list").hide();
+}
+
 /**修改密码
 */
 function updatepwd(){
