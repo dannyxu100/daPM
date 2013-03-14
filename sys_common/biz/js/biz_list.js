@@ -38,16 +38,14 @@ function viewbizlog( dbfldid, bcid, wfcid ){
 		daWin({
 			width: 800,
 			height: 500,
-			url: "/sys_common/bizlog/log_manage.php?wfid="+ g_wfid +"&wfcid="+ wfcid +"&btid="+ g_btid +"&bcid="+ bcid 
-			+"&dbsource="+ g_dbsource+"&dbfld="+ g_dbfld +"&dbfldid="+ dbfldid,
+			url: "/sys_common/bizlog/log_manage.php?bcid="+ bcid,
 			back: function(){
 				
 			}
 		});
 	}
 	else{
-		goto("/sys_common/bizlog/log_manage.php?wfid="+ g_wfid +"&wfcid="+ wfcid +"&btid="+ g_btid +"&bcid="+ bcid 
-		+"&dbsource="+ g_dbsource +"&dbfld="+ g_dbfld +"&dbfldid="+ dbfldid);
+		goto("/sys_common/bizlog/log_manage.php?wfid="+ bcid );
 	}
 	
 }

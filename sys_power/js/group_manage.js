@@ -277,16 +277,16 @@ function deleteu2g(){
 		return;
 	}
 	
-	var suids = "";
+	var suids = [];
 	da("[name=chkitem]:checked").each(function(){
-		suids += this.value +",";
+		suids.push(this.value);
 	});
 	
 	if( suids ){
 		confirm("确认删除选中的人员吗？",function(){
 			da.runDB("/sys_power/action/user2group_delete_list.php",{
 				pgid: g_pgid,
-				uids: suids
+				uids: suids.join(",")
 			},function(res){
 				if("FALSE" == res){
 					alert("对不起，操作失败。");

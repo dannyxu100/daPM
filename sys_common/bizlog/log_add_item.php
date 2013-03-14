@@ -4,35 +4,51 @@
 	<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
 	<title>添加业务单日志</title>
 	<link rel="stylesheet" href="/css/base.css" />
+	<style>
+		td{padding:3px;}
+		.must{color:#f00; font-weight:bold; padding-left:5px;}
+	</style>
 
 </head>
 <body>
-	<span id="log_title">日志管理</span>
-	<div style="padding:5px;color:#ccc;">项目负责人:&nbsp;&nbsp;</div>
-	<table style="width:100%; height:50px;">
+	<div class="list_top_bar">
+		<div class="list_top_title"><span id="title"></span></div>
+		<div class="list_top_tools">
+			<a class="item" href="javascript:void(0)" onclick="savelog();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+		</div>
+	</div>
+	<table class="tablesolid" style="width:100%; height:50px;">
 		<tr >
-			<td colspan="3" style="padding:3px">
-				标签:&nbsp;&nbsp;
-			</td>
-		</tr>
-		<tr >
-			<td>完成进度:&nbsp;&nbsp;
+			<td class="header" style="width:50px;">进&nbsp;&nbsp;&nbsp;&nbsp;度:</td>
+			<td colspan="3">
 				<select id="p_persent" name="p_persent" style="width:80px;">
 					<option selected></option>
 					<option></option>
 				</select> ％
 			</td>
-			<td>记录人员: <span style="color:#ccc"></span></td>
-			<td>日期: <span style="color:#ccc"></span></td>
 		</tr>
 		<tr >
+			<td class="header" >标&nbsp;&nbsp;&nbsp;&nbsp;签:</td>
 			<td colspan="3">
+				<span id="tags"></span>
+			</td>
+		</tr>
+		<tr >
+			<td colspan="4">
 				<textarea id="l_note" name="l_note" style="width:100%;height:350px;"></textarea>
 				<input id="p_id" name="p_id" type="hidden" value="<?php echo $pid ?>"/>
 			</td>
 		</tr>
 		<tr >
-			<td colspan="3" style="text-align:center;padding-top:10px;">
+			<td class="header" >发布人:</td>
+			<td><span id="loguser" style="color:#666"></span></td>
+			<td class="header" >日&nbsp;&nbsp;&nbsp;&nbsp;期:</td>
+			<td >
+				<span id="logdate" style="color:#666"></span>
+			</td>
+		</tr>
+		<tr >
+			<td colspan="4" style="text-align:center;padding-top:10px;">
 				<input id="submit" name="submit" type="submit" style="width:80px; height:25px;" value="提交" onclick=""/>
 				<input type="button" style="width:80px; height:25px;color:#999;" value="清空" onclick="document.loginform.reset();" />
 			</td>
