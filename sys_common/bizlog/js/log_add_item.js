@@ -3,6 +3,23 @@
 /**添加日志
 */
 function savelog(){
+	var persent = da("#p_persent").val();
+	
+	da.runDB("/sys_common/bizlog/action/log_add_item.php",{
+		dataType: "json",
+		bcid: g_bcid,
+		tagname: da("[name=chktag]:checked").val(),
+		content: g_editor.html()
+		
+	},function(res){
+		if("FALSE"!=res){
+			alert("添加成功。");
+			back();
+		}	
+	},function(msg, code, ex){
+		alert(code);
+	});
+	
 }
 
 /**初始化控件

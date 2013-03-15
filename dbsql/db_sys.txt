@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 03 月 14 日 10:07
+-- 生成日期: 2013 年 03 月 15 日 10:10
 -- 服务器版本: 5.0.45
 -- PHP 版本: 5.2.5
 
@@ -27,6 +27,7 @@ CREATE TABLE `b_bizcase` (
   `bc_tcid` int(10) NOT NULL COMMENT '工作流事务变迁实例id(过程表单)',
   `bc_wfcid` int(10) NOT NULL COMMENT '工作流实例id(主表单)',
   `bc_dbsourceid` varchar(50) NOT NULL COMMENT '数据源联系字段值（一般为主键值）',
+  `bc_lastlog` text NOT NULL COMMENT '业务单最新日志内容',
   PRIMARY KEY  (`bc_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='业务表单实例表' AUTO_INCREMENT=11 ;
 
@@ -34,16 +35,16 @@ CREATE TABLE `b_bizcase` (
 -- 导出表中的数据 `b_bizcase`
 --
 
-INSERT INTO `b_bizcase` (`bc_id`, `bc_btid`, `bc_tcid`, `bc_wfcid`, `bc_dbsourceid`) VALUES
-(2, 2, 0, 6, '17'),
-(3, 1, 0, 7, '3'),
-(4, 1, 0, 8, '4'),
-(5, 1, 0, 9, '5'),
-(6, 1, 0, 10, '6'),
-(7, 1, 0, 11, '7'),
-(8, 1, 0, 12, '8'),
-(9, 1, 0, 13, '9'),
-(10, 1, 0, 14, '10');
+INSERT INTO `b_bizcase` (`bc_id`, `bc_btid`, `bc_tcid`, `bc_wfcid`, `bc_dbsourceid`, `bc_lastlog`) VALUES
+(2, 2, 0, 6, '17', '0'),
+(3, 1, 0, 7, '3', '<p>\n	111111\n</p>\n<p>\n	12222\n</p>\n<p>\n	22222\n</p>'),
+(4, 1, 0, 8, '4', '0'),
+(5, 1, 0, 9, '5', '0'),
+(6, 1, 0, 10, '6', '0'),
+(7, 1, 0, 11, '7', '0'),
+(8, 1, 0, 12, '8', '0'),
+(9, 1, 0, 13, '9', '0'),
+(10, 1, 0, 14, '10', '0');
 
 -- --------------------------------------------------------
 
@@ -54,17 +55,41 @@ INSERT INTO `b_bizcase` (`bc_id`, `bc_btid`, `bc_tcid`, `bc_wfcid`, `bc_dbsource
 CREATE TABLE `b_bizlog` (
   `l_id` int(10) NOT NULL auto_increment COMMENT '业务单日志id',
   `l_bcid` int(10) NOT NULL COMMENT '业务单实例id',
-  `l_conent` text NOT NULL COMMENT '业务单日志内容',
+  `l_content` text NOT NULL COMMENT '业务单日志内容',
   `l_date` datetime NOT NULL COMMENT '业务单日志日期',
   `l_puid` int(10) NOT NULL COMMENT '写日志用户id',
   `l_puname` varchar(50) NOT NULL COMMENT '写日志用户名',
-  `l_tagid` int(10) NOT NULL COMMENT '业务单日志标签id',
   `l_tagname` varchar(50) NOT NULL COMMENT '业务单日志标签名称',
   PRIMARY KEY  (`l_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='业务单处理日志' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='业务单处理日志' AUTO_INCREMENT=3 ;
 
 --
 -- 导出表中的数据 `b_bizlog`
+--
+
+INSERT INTO `b_bizlog` (`l_id`, `l_bcid`, `l_content`, `l_date`, `l_puid`, `l_puname`, `l_tagname`) VALUES
+(1, 2, '<p>\n	fdsfdsfdsa\n</p>\n<p>\n	fds\n</p>\n<p>\n	f\n</p>\n<p>\n	ds\n</p>\n<p>\n	af\n</p>\n<p>\n	d\n</p>\n<p>\n	safdsafdsfdsfa\n</p>', '2013-03-15 15:59:25', 1, '徐飞', '1'),
+(2, 3, '<p>\n	111111\n</p>\n<p>\n	12222\n</p>\n<p>\n	22222\n</p>', '2013-03-15 16:14:49', 1, '徐飞', '1');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `b_bizreply`
+--
+
+CREATE TABLE `b_bizreply` (
+  `r_id` int(10) NOT NULL auto_increment COMMENT '日志回复id',
+  `r_lid` int(10) NOT NULL COMMENT '日志id',
+  `r_bcid` int(10) NOT NULL COMMENT '业务单实例id',
+  `r_content` text NOT NULL COMMENT '回复内容',
+  `r_date` datetime NOT NULL COMMENT '回复日期',
+  `r_puid` int(10) NOT NULL COMMENT '回复人id',
+  `r_puname` varchar(50) NOT NULL COMMENT '回复人姓名',
+  PRIMARY KEY  (`r_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='表单实例日志回复表' AUTO_INCREMENT=1 ;
+
+--
+-- 导出表中的数据 `b_bizreply`
 --
 
 
@@ -515,7 +540,7 @@ CREATE TABLE `p_user` (
 --
 
 INSERT INTO `p_user` (`pu_id`, `pu_oid`, `pu_code`, `pu_pwd`, `pu_name`, `pu_gender`, `pu_phone`, `pu_telephone`, `pu_address`, `pu_lastlogin`, `pu_logincount`, `pu_remark`) VALUES
-(1, 1, 'xufei', '1', '徐飞', '男', '13688387776', '', '成都市青羊区八宝街', '2013-03-14 15:11:50', 0, '徐飞'),
+(1, 1, 'xufei', '1', '徐飞', '男', '13688387776', '', '成都市青羊区八宝街', '2013-03-15 08:41:30', 0, '徐飞'),
 (2, 3, 'yangjun', '', '杨俊', '男', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (3, 3, 'zhangkai', '', '张凯', '男', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (4, 38, 'xiaodan', '', '肖丹', '女', '', '', '', '0000-00-00 00:00:00', 0, ''),

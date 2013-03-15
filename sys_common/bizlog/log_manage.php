@@ -59,21 +59,68 @@
 		</form>
 	</div>
 	
-	
-	<div id="listPad">
-		<div style="padding:5px;"><span style="font-family:'黑体';font-size:22px;"></span>
-		<div style="padding:5px;color:#ccc;">项目负责人:&nbsp;&nbsp;</div>
-		<table style="margin:10px auto; width:100%; height:50px;border-top:1px solid #999">
-			<tr style="color:#444; background:#f9f9f9;">
-				<td class="no_multiple" style="width:20px; height:30px;border-bottom:1px solid #ccc;">序</td>
-				<td class="no_multiple" style="width:80px; height:30px;border-bottom:1px solid #ccc;">日期</td>
-				<td class="no_multiple" style="width:60px; height:30px;border-bottom:1px solid #ccc;">人员</td>
-				<td class="no_multiple" style="width:60px; height:30px;border-bottom:1px solid #ccc;">标签</td>
-				<td style="border-bottom:1px solid #ccc;">日志内容</td>
-			</tr>
-		</table>
+	<div id="listPad" style="padding:5px;">
+		<ul id="log_" class="logitem" >
+			<div class="ico" >
+				<img src=""/>
+				<div class="txt">王秀娟</div>
+			</div>
+			<div class="pl" >
+				<div class="pl_img"></div>
+			</div>
+			<div class="content" >
+				111111<br/>
+				11<br/>
+				11111111<br/>
+				<br/>
+				1111111<br/>
+				111111<br/>
+			</div>
+			<div style="clear:both;"></div>
+		</ul>
+		<div id="reply_" class="logreply" >
+			<ul class="item" >
+				<div class="ico" >
+					<img src=""/>
+					<div class="txt">王秀娟</div>
+				</div>
+				<div class="pr">
+					<div class="pr_img"></div>
+				</div>
+				<div class="content" >
+					111111<br/>
+				</div>
+				<div style="clear:both;"></div>
+			</ul>
+			<ul class="item" >
+				<div class="ico" >
+					<img src=""/>
+					<div class="txt">王秀娟</div>
+				</div>
+				<div class="pr">
+					<div class="primg"></div>
+				</div>
+				<div class="content" >
+					111111<br/>
+				</div>
+				<div style="clear:both;"></div>
+			</ul>
+			<ul class="item" >
+				<div class="ico" >
+					<img src=""/>
+					<div class="txt">王秀娟</div>
+				</div>
+				<div class="pr">
+					<div class="primg"></div>
+				</div>
+				<div class="content" >
+					111111<br/>
+				</div>
+				<div style="clear:both;"></div>
+			</ul>
 		</div>
 	</div>
+	
 	
 </body>
 

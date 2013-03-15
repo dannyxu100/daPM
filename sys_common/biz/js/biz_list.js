@@ -45,7 +45,7 @@ function viewbizlog( dbfldid, bcid, wfcid ){
 		});
 	}
 	else{
-		goto("/sys_common/bizlog/log_manage.php?wfid="+ bcid );
+		goto("/sys_common/bizlog/log_manage.php?bcid="+ bcid );
 	}
 	
 }

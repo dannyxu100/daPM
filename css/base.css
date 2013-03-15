@@ -174,3 +174,21 @@ a.curmenu { background:#1a4bfe url(/images/bar_bg.jpg) 0px -35px;  border:1px so
 .list_top_tools a.item{ display:block; float:left; vertical-align:middle; padding:2px 5px; margin:0px 2px; border:1px solid #aaa; background:url(/images/bar_bg.jpg) }
 .list_top_tools a.item:hover{ border:1px solid #666; background-image:none; background-color:#fff; }
 .list_top_tools a.item img{vertical-align:middle;}
+
+/******** 业务单日志列表 *********/
+.logitem{width:900px;}
+.logitem .ico{float:left;width:50px; height:80px;}
+.logitem .ico img {width:50px; height:50px;}
+.logitem .ico .txt {width:50px; height:22px; line-height:22px; text-align:center; overflow:hidden;}
+.logitem .pl{float:left; position:relative; width:15px; height:50px;}
+.logitem .pl .pl_img{position:absolute; top:10px; left:1px; width:15px;height:12px;background:url(/images/log_pointer.jpg) 0px 0px no-repeat;}
+.logitem .content{float:left; width:770px; border:1px solid #666; padding:5px;}
+
+.logreply{width:705px; margin:5px 0px 15px 0px;}
+.logreply .item{width:705px; margin:10px 5px;}
+.logreply .ico{float:right;width:50px; height:80px;}
+.logreply .ico img {width:50px; height:50px;}
+.logreply .ico .txt {width:50px; height:22px; line-height:22px; text-align:center; overflow:hidden;}
+.logreply .pr{float:right; position:relative; width:15px; height:50px;}
+.logreply .pr .pr_img{position:absolute; top:10px; left:-1px; width:15px;height:12px;background:url(/images/log_pointer.jpg) -15px 0px no-repeat;}
+.logreply .content{float:right; width:570px; border:1px solid #ccc; padding:5px;}
