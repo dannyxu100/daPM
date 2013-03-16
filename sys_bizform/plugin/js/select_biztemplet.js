@@ -165,7 +165,7 @@ daLoader("daTable,daWin,daMsg", function(){
 	//da.out("加载成功");
 	da(function(){
 		arrParams = da.urlParams();
-		g_ismulti = Boolean(arrParams["ismulti"]);
+		g_ismulti = !!arrParams["ismulti"];
 		
 		loadtree();
 	});

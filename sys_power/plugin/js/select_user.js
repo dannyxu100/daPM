@@ -1,4 +1,5 @@
-﻿var g_curoid = "";
+﻿var g_curoid = "",
+	g_ismulti = false;
 
 var setting = {
 	view: {
@@ -129,6 +130,10 @@ function selectitem( trObj ){
 		chkObj.dom[0].checked = true;
 		chkObj.attr("checked","true");
 	}
+
+	if(!g_ismulti){
+		backitem();
+	}
 	
 	showitem();
 }
@@ -176,6 +181,8 @@ function clear(){
 daLoader("daTable,daWin", function(){
 	//da.out("加载成功");
 	da(function(){
+		arrParams = da.urlParams();
+		g_ismulti = !!arrParams["ismulti"];
 		//alert(1);
 		loadtree();
 	});

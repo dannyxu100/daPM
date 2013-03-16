@@ -1,0 +1,4 @@
+【FROM 'relation_get_userlist.php' log】: 1
+【FROM 'relation_get_userlist.php' log】: 1
+【FROM 'relation_get_userlist.php' log】: select * from p_relation, p_user where pu_id=pr_puid and pr_poid=:poid and pr_leaderid=:leaderid order by pr_puid asc
+【FROM 'relation_get_userlist.php' log】: 

@@ -691,7 +691,7 @@ function loadtab(){
 	daTab0.click("item04");
 }
 
-daLoader("daUI,daDate,daMsg,daTab,daTable,daWin", function(){
+daLoader("daDate,daMsg,daTab,daTable,daWin", function(){
 	//daUI();
 	/*页面加载完毕*/
 	$(document).ready(function(){

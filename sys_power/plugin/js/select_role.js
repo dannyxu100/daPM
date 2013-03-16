@@ -93,7 +93,7 @@ function clearitem(){
 daLoader(function(){
 	arrParams = da.urlParams();
 	g_prid = arrParams["prid"];
-	g_ismulti = Boolean(arrParams["ismulti"]);
+	g_ismulti = !!arrParams["ismulti"];
 	//alert(g_prid);
 	
 	da(function(){
