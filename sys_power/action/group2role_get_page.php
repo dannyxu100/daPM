@@ -1,4 +1,4 @@
-<?php 
+ï»¿<?php 
 	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
 	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
 	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
@@ -11,14 +11,14 @@
 	$sql2 = "select count(g2r_id) as Column1 from p_group2role";
 	$param2 = array();
 	
-	if(isset($_POST["prid"])){						//¹¤×÷×éÉ¸Ñ¡
+	if(isset($_POST["prid"])){						//å·¥ä½œç»„ç­›é€‰
 		$sql1 .= " and g2r_prid=:prid order by pg_sort asc ";
 		$sql2 .= " where g2r_prid=:prid ";
 		
 		array_push($param1, array(":prid", $_POST["prid"]));
 		array_push($param2, array(":prid", $_POST["prid"]));
 	}
-	if( isset($_POST["pageindex"]) ){				//·ÖÒ³
+	if( isset($_POST["pageindex"]) ){				//åˆ†é¡µ
 		$start = ($_POST["pageindex"]-1)*$_POST["pagesize"];
 		$end = $start + $_POST["pagesize"];
 		$sql1 .= " limit :start, :end";
@@ -39,19 +39,10 @@
 	// $log->write($sql);
 	// $log->write($sql2);
 	
-	if(is_array($set)){
-		for($i=0; $i<count($set); $i++){
-			foreach ( $set[$i] as $key => $value ) {
-				$set[$i][$key] = urlencode( $value );   
-			}
-		}
-	}
-	
 	$res = array(
 		"ds1"=>$count,
-		"ds11"=>$set									//¼ÇÂ¼¼¯
+		"ds11"=>$set									//è®°å½•é›†
 	);
 	
-	// $log->write(var_export($res,true));
-	echo urldecode(json_encode($res));
+	echo json_encode($res);
 ?>

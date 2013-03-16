@@ -50,15 +50,16 @@ function beforeRemove(treeId, treeNode) {
 	className = (className === "dark" ? "":"dark");
 	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 	zTree.selectNode(treeNode);
-	
-	if(confirm("确认删除部门【" + treeNode.name + "】吗？")){
+
+	confirm("确认删除部门【" + treeNode.name + "】吗？",
+	function(){
 		da.runDB("action/org_get_list.php",{			//检查是否拥有下级部门
 			popid: treeNode.id
 		},
 		function(res){
 			if('FALSE'==res){
 				da.runDB("action/org_delete_item.php",{
-				 oid: treeNode.id
+					poid: treeNode.id
 				},
 				function(res){
 					if("FALSE"==res){
@@ -74,10 +75,10 @@ function beforeRemove(treeId, treeNode) {
 		});
 	
 		return true;
-	}
-	else{
+	},
+	function(){
 		return false;
-	}
+	});
 }
 function onRemove(e, treeId, treeNode) {
 
@@ -232,8 +233,8 @@ $(document).ready(function(){
 });
 
 
-daLoader("daUI,daDate,daMsg", function(){
-	daUI();
+daLoader("daMsg,daWin", function(){
+	// daUI();
 	$( "#po_date" ).datepicker({
 	  defaultDate: "+1w",
 	  changeMonth: true,

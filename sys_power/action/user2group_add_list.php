@@ -7,26 +7,26 @@
 	$arr = preg_split("/,/", $_POST["uids"]);
 	
 	// $log = new Log();
-	$db = new DB(1);
+	$db = new DB("da_powersys");
 	if(0<count($arr) && isset($_POST["pgid"])){
-		$db->Query("START TRANSACTION");
+		$db->tran();
 		
 		$rows = 0;
-		for($i=0; $i<count($arr)-1; $i++){		//","分隔引起最后多一个空数据,所以-1
-			if( 0 >= $db->GetNum("select * from p_user2group where u2g_puid=".$arr[$i]." and u2g_pgid=".$_POST["pgid"])){
-				$res = $db->Query("insert into p_user2group(u2g_puid, u2g_pgid) values(".$arr[$i].",".$_POST["pgid"].");");
+		for($i=0; $i<count($arr); $i++){		//","分隔引起最后多一个空数据,所以-1
+			if( 0 >= $db->getcount("select * from p_user2group where u2g_puid=".$arr[$i]." and u2g_pgid=".$_POST["pgid"])){
+				$res = $db->insert("insert into p_user2group(u2g_puid, u2g_pgid) values(".$arr[$i].",".$_POST["pgid"].");");
 				$rows++;
-				// $log->write("insert into p_user2group(u2g_puid, u2g_pgid) values(".$arr[$i].",".$_POST["pgid"].");");
 			}
 		}
 		
-		if($db->GetError()){
-			$db->Query('ROLLBACK');
+		if($db->geterror()){
+			$db->back();
+			$db->close();
 			echo 'FALSE';
 		}
 		else{
-			// $rows = $db->GetAffectRows();
-			$db->Query('COMMIT');
+			$db->commit();
+			$db->close();
 			echo $rows;
 		}
 	}
@@ -34,6 +34,4 @@
 		echo 'FALSE';
 	}
 	
-	//echo $db->error_message;
-	$db->Destroy();
 ?>

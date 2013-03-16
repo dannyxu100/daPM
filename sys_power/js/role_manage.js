@@ -52,14 +52,15 @@ function beforeRemove(treeId, treeNode) {
 	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 	zTree.selectNode(treeNode);
 	
-	if(confirm("确认删除部门【" + treeNode.name + "】吗？")){
-		da.runDB("action/org_get_list.php",{			//检查是否拥有下级部门
-			popid: treeNode.id
+	confirm("确认删除角色【" + treeNode.name + "】吗？",
+	function(){
+		da.runDB("action/role_get_list.php",{			//检查是否拥有下级部门
+			prpid: treeNode.id
 		},
-		function(res){
+		function(res){debugger;
 			if('FALSE'==res){
-				da.runDB("action/org_delete_item.php",{
-				 oid: treeNode.id
+				da.runDB("action/role_delete_item.php",{
+				 prid: treeNode.id
 				},
 				function(res){
 					if("FALSE"==res){
@@ -69,16 +70,16 @@ function beforeRemove(treeId, treeNode) {
 				});
 			}
 			else{
-				alert("对不起，【" + treeNode.name + "】拥有下属部门，请先删除下属部门。");
+				alert("对不起，【" + treeNode.name + "】拥有子项，请先删除子项。");
 				loadroletree();
 			}
 		});
 	
 		return true;
-	}
-	else{
+	},
+	function(){
 		return false;
-	}
+	});
 }
 function onRemove(e, treeId, treeNode) {
 
@@ -137,7 +138,7 @@ function addHoverDom(treeId, treeNode) {
 		var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 
 		da.runDB("action/role_add_item.php",{
-			pid: treeNode.id,
+			prpid: treeNode.id,
 			name: "新建角色"
 		},
 		function(res){
@@ -338,7 +339,7 @@ function selectpowertype(obj){
 /**加载角色权限
 */
 function loadpower2role(){
-	da.runDB("/sys_power/action/power2role_get_page.php",{
+	da.runDB("/sys_power/action/power2role_get_list.php",{
 		dataType: "json",
 		prid: g_prid
 		
@@ -520,14 +521,14 @@ function addu2r(){
 		height: 500,
 		url: "/sys_power/plugin/select_user.htm",
 		back: function( res ){
-			var suids = "";
+			var suids = [];
 			for(var k in res){
-				suids += k +",";
+				suids.push(res[k].pu_id);
 			}
 			
 			da.runDB("/sys_power/action/user2role_add_list.php",{
 				prid: g_prid,
-				uids: suids
+				uids: suids.join(",")
 			},function(res){
 				if("FALSE" == res){
 					alert("对不起，操作失败。");
@@ -554,14 +555,14 @@ function addg2r(){
 		height: 500,
 		url: "/sys_power/plugin/select_group.htm",
 		back: function( res ){
-			var sgids = "";
+			var sgids = [];
 			for(var k in res){
-				sgids += k +",";
+				sgids.push(res[k].pg_id);
 			}
 			
 			da.runDB("/sys_power/action/group2role_add_list.php",{
 				prid: g_prid,
-				gids: sgids
+				gids: sgids.join(",")
 			},function(res){
 				if("FALSE" == res){
 					alert("对不起，操作失败。");
@@ -582,16 +583,16 @@ function deleteu2r(){
 		return;
 	}
 	
-	var suids = "";
+	var suids = [];
 	da("[name=chkitem]:checked").each(function(){
-		suids += this.value +",";
+		suids.push(this.value);
 	});
 	
-	if( suids ){
+	if( 0<suids.length ){
 		confirm("确认删除选中的人员吗？",function(){
 			da.runDB("/sys_power/action/user2role_delete_list.php",{
 				prid: g_prid,
-				uids: suids
+				uids: suids.join(",")
 			},function(res){
 				if("FALSE" == res){
 					alert("对不起，操作失败。");
@@ -613,16 +614,16 @@ function deleteg2r(){
 		return;
 	}
 	
-	var sgids = "";
+	var sgids = [];
 	da("[name=chkitem]:checked").each(function(){
-		sgids += this.value +",";
+		sgids.push(this.value);
 	});
 	
-	if( sgids ){
+	if( 0<sgids.length ){
 		confirm("确认删除选中的人员吗？",function(){
 			da.runDB("/sys_power/action/group2role_delete_list.php",{
 				prid: g_prid,
-				gids: sgids
+				gids: sgids.join(",")
 			},function(res){
 				if("FALSE" == res){
 					alert("对不起，操作失败。");

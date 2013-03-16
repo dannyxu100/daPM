@@ -143,7 +143,6 @@ daLoader("daTable,daWin", function(){
 
 	da(function(){
 		//alert(1);
-		loaduserlist();
 	});
 });
 //-->

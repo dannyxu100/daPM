@@ -17,10 +17,10 @@ function loaduser(){
 	da.runDB("action/user_get_item.php",{
 		dataType: "json",
 		pu_id: puid
-	},function(res){debugger;
-		if("FALSE"!= res && res[0]){
-			for(var fld in res[0]){
-				da("#"+fld).val(res[0][fld]);
+	},function(res){
+		if("FALSE"!= res){
+			for(var fld in res){
+				da("#"+fld).val(res[fld]);
 			}
 		}
 	});

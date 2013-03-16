@@ -1,10 +1,11 @@
 <?php 
 	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
 	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
-	// error_reporting(-1);
 
+	$sql = "delete from p_role where pr_id=".$_POST["prid"];
+	
 	$db = new DB("da_powersys");
-	$res = $db->insert("insert into p_group(pg_pid, pg_name) values(".$_POST["pid"].",'".$_POST["name"]."')");
+	$res = $db->delete($sql);
 	
 	$db->close();
 	

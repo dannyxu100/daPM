@@ -62,6 +62,7 @@
 	array_push($arrcookie, "puid:".$row['pu_id']);
 	array_push($arrcookie, "pucode:".$row['pu_code']);
 	array_push($arrcookie, "puname:".$row['pu_name']);
+	array_push($arrcookie, "puicon:".$row['pu_icon']);
 	
 	//缓存所属部门信息
 	array_push($arrcookie, "poid:".$set_org['po_id']);

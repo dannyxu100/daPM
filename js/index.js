@@ -5,6 +5,9 @@ function showuserinfo(){
 function hideuserinfo(){
 	da(".userinfo_list").hide();
 }
+function updatepwd(){
+	
+}
 
 /**修改密码
 */

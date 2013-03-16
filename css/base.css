@@ -151,7 +151,7 @@ td.header { padding:0px 10px; background:#f5f5f5; text-align:right; vertical-ali
 
 .userico{position:absolute; top:1px; left:-40px; vertical-align:middle; margin-right:10px;width:30px;height:30px;border:1px solid #999; cursor:pointer;}
 
-.userinfo_list{ display:none; position:absolute; top:1px; left:-220px; z-index:2; width:200px; padding:5px; border:1px solid #000; background:#fff; cursor:pointer;}
+.userinfo_list{ display:none; position:absolute; top:1px; left:-253px; z-index:2; width:200px; padding:5px; border:1px solid #000; background:#fff; cursor:pointer;}
 .userinfo_list ul{height:22px;}
 .userinfo_list ul span{font-weight:bold;}
 
@@ -176,19 +176,22 @@ a.curmenu { background:#1a4bfe url(/images/bar_bg.jpg) 0px -35px;  border:1px so
 .list_top_tools a.item img{vertical-align:middle;}
 
 /******** 业务单日志列表 *********/
-.logitem{width:900px;}
+.logitem{width:800px;}
 .logitem .ico{float:left;width:50px; height:80px;}
-.logitem .ico img {width:50px; height:50px;}
-.logitem .ico .txt {width:50px; height:22px; line-height:22px; text-align:center; overflow:hidden;}
-.logitem .pl{float:left; position:relative; width:15px; height:50px;}
-.logitem .pl .pl_img{position:absolute; top:10px; left:1px; width:15px;height:12px;background:url(/images/log_pointer.jpg) 0px 0px no-repeat;}
-.logitem .content{float:left; width:770px; border:1px solid #666; padding:5px;}
+.logitem .ico img {width:50px; height:50px;border:1px solid #666;}
+.logitem .ico .txt {width:50px; height:22px; line-height:22px; font-weight:bold; text-align:center; overflow:hidden;}
+.logitem .pl{float:left; position:relative; width:16px; height:50px;}
+.logitem .pl .pl_img{position:absolute; top:10px; left:2px; width:15px;height:12px;background:url(/images/log_pointer.jpg) 0px 0px no-repeat;}
+.logitem .content{float:left; width:550px; border:1px solid #666; padding:5px; overflow:hidden;}
+.logitem .content .ldate{color:#ccc; border-bottom:1px #eee dashed; margin-bottom:10px;}
+.logitem .logtoolbar{ width:625px; text-align:right; margin-bottom:15px;}
 
-.logreply{width:705px; margin:5px 0px 15px 0px;}
+.logreply{width:705px;}
 .logreply .item{width:705px; margin:10px 5px;}
 .logreply .ico{float:right;width:50px; height:80px;}
 .logreply .ico img {width:50px; height:50px;}
-.logreply .ico .txt {width:50px; height:22px; line-height:22px; text-align:center; overflow:hidden;}
-.logreply .pr{float:right; position:relative; width:15px; height:50px;}
-.logreply .pr .pr_img{position:absolute; top:10px; left:-1px; width:15px;height:12px;background:url(/images/log_pointer.jpg) -15px 0px no-repeat;}
-.logreply .content{float:right; width:570px; border:1px solid #ccc; padding:5px;}
+.logreply .ico .txt {width:50px; height:22px; line-height:22px; font-weight:bold; text-align:center; overflow:hidden;}
+.logreply .pr{float:right; position:relative; width:16px; height:50px;}
+.logreply .pr .pr_img{position:absolute; top:10px; left:-2px; width:15px;height:12px;background:url(/images/log_pointer.jpg) -15px 0px no-repeat;}
+.logreply .content{float:right; width:570px; border:1px solid #ccc; padding:5px; overflow:hidden;}
+.logreply .content .rdate{color:#ccc; border-bottom:1px #eee dashed; margin-bottom:10px;}

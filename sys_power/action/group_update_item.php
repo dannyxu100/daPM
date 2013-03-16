@@ -1,7 +1,6 @@
 <?php 
 	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
 	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
-	//error_reporting(-1);
 
 	$sql = "update p_group set ";
 	if( isset($_POST["pgname"]) )
@@ -22,10 +21,10 @@
 	}
 	$sql .= " where pg_id=".$_POST["pgid"];
 	
-	$db = new DB(1);
-	$res = $db->Query($sql);
-	//echo $db->error_message;
-	$db->Destroy();
-	//print_r($set);
+	$db = new DB("da_powersys");
+	$res = $db->update($sql);
+	
+	$db->close();
+	
 	echo $res?$res:"FALSE";
 ?>

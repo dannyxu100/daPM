@@ -22,10 +22,10 @@
 	}
 	$sql .= " where po_id=".$_POST["poid"];
 	
-	$db = new DB(1);
-	$res = $db->Query($sql);
-	//echo $db->error_message;
-	$db->Destroy();
-	//print_r($set);
+	$db = new DB("da_powersys");
+	$res = $db->update($sql);
+	
+	$db->close();
+	
 	echo $res?$res:"FALSE";
 ?>

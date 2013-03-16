@@ -1,8 +1,7 @@
-<?php 
+ï»¿<?php 
 	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
 	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
 	//include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
-	//error_reporting(-1);
 	
 	$db = new DB("da_powersys");
 	$sql1 = "select * from p_group ";
@@ -27,7 +26,7 @@
 	}
 	$sql1 .= " order by pg_sort asc, pg_pid asc";
 	
-	if( isset($_POST["pageindex"]) ){				//·ÖÒ³
+	if( isset($_POST["pageindex"]) ){				//åˆ†é¡µ
 		$start = ($_POST["pageindex"]-1)*$_POST["pagesize"];
 		$end = $start + $_POST["pagesize"];
 		$sql1 .= " limit :start, :end";
@@ -48,20 +47,11 @@
 	// $log->write($db->geterror());
 	$db->close();
 	
-	if(is_array($set)){
-		for($i=0; $i<count($set); $i++){
-			foreach ( $set[$i] as $key => $value ) {
-				$set[$i][$key] = urlencode( $value );   
-			}
-
-		}
-	}
-	
 	$res = array(
 		"ds1"=>$count,
-		"ds11"=>$set									//¼ÇÂ¼¼¯
+		"ds11"=>$set									//è®°å½•é›†
 	);
 	
 	// $log->write($res);
-	echo urldecode(json_encode($res));
+	echo json_encode($res);
 ?>

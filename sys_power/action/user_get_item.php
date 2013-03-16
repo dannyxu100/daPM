@@ -7,21 +7,17 @@
 	// $log = new Log();
 	// $log->write($sql);
 	
-	$db = new DB(1);
-	$set = $db->GetAll($sql);
-	//echo $db->error_message;
-	$db->Destroy();
-	//print_r($set);
+	$db = new DB("da_powersys");
+	$set = $db->getone($sql);
 	
-	if(is_array($set)){
-		for($i=0; $i<count($set); $i++){
-			foreach ( $set[$i] as $key => $value ) {
-				$set[$i][$key] = urlencode( $value );   
-			}
-
-		}
+	$db->close();
+	
+	if(is_array($set) && 0<count($set)){
+		echo json_encode($set);
+	}
+	else{
+		echo "FALSE";
 	}
 	
 	// $log->write($res);
-	echo urldecode(json_encode($set));
 ?>

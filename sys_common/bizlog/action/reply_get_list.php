@@ -6,10 +6,10 @@
 	$bcid = $_POST["bcid"];
 	
 	$db = new DB("da_bizform");
-	$sql = "select * from b_bizlog, da_powersys.p_user 
-	where l_puid=pu_id 
-	and l_bcid=:bcid 
-	order by l_date desc, l_id desc ";
+	$sql = "select * from b_bizreply, da_powersys.p_user 
+	where r_puid=pu_id 
+	and r_bcid=:bcid 
+	order by r_date desc, r_id desc ";
 	$db->param(":bcid", $bcid);
 	
 	$set = $db->getlist($sql);

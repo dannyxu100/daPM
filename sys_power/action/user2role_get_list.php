@@ -1,8 +1,7 @@
-<?php 
+ï»¿<?php 
 	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
 	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
 	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
-	//error_reporting(-1);
 
 	$db = new DB("da_powersys");
 	$sql1 = "select * from p_user2role, p_user, p_role where u2r_puid=pu_id and u2r_prid=pr_id ";
@@ -11,7 +10,7 @@
 	$sql2 = "select count(u2r_id) as Column1 from p_user2role ";
 	$param2 = array();
 	
-	if( isset($_POST["prid"]) ){					//²¿ÃÅÉ¸Ñ¡
+	if( isset($_POST["prid"]) ){					//éƒ¨é—¨ç­›é€‰
 		$sql1 .= " and u2r_prid=:prid";
 		$sql2 .= " where u2r_prid=:prid";
 		
@@ -21,7 +20,7 @@
 	
 	$sql1 .= " order by u2r_id desc ";
 	
-	if( isset($_POST["pageindex"]) ){				//·ÖÒ³
+	if( isset($_POST["pageindex"]) ){				//åˆ†é¡µ
 		$start = ($_POST["pageindex"]-1)*$_POST["pagesize"];
 		$end = $start + $_POST["pagesize"];
 		$sql1 .= " limit :start, :end";
@@ -42,20 +41,11 @@
 	// $log->write($db->geterror());
 	$db->close();
 	
-	if(is_array($set)){
-		for($i=0; $i<count($set); $i++){
-			foreach ( $set[$i] as $key => $value ) {
-				$set[$i][$key] = urlencode( $value );   
-			}
-
-		}
-	}
-	
 	$res = array(
 		"ds1"=>$count,
-		"ds11"=>$set									//¼ÇÂ¼¼¯
+		"ds11"=>$set									//è®°å½•é›†
 	);
 	
 	// $log->write($res);
-	echo urldecode(json_encode($res));
+	echo json_encode($res);
 ?>

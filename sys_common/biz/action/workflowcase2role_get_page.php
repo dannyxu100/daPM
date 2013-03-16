@@ -7,7 +7,7 @@
 	$wfid = $_POST["wfid"];
 	$dbsource = $_POST["dbsource"];
 	$dbfld = $_POST["dbfld"];
-	$status = isset($_POST["status"])?$_POST["status"]:"EN";	//默认状态筛选为EN启动状态
+	$status = $_POST["status"];
 	
 	$db = new DB("da_userform");
 	
@@ -31,11 +31,14 @@
 	/******************* 根据 可参与事务变迁的实例找出 所对应的工作流实例id *****************/
 	$sql2 = "select tc_wfcid from da_workflow.w_trancase 
 	where w_trancase.tc_wfid=:wfid 
-	and w_trancase.tc_status=:status 
-	and w_trancase.tc_tid in (".implode(',', $tids).")";
+	and w_trancase.tc_tid in (".implode(',', $tids).") ";
+	
 	$param2 = array();
+	if( "" != $status ){
+		$sql2 .= "and w_trancase.tc_status=:status ";
+		array_push($param2, array(":status", $status));
+	}
 	array_push($param2, array(":wfid", $wfid));
-	array_push($param2, array(":status", $status));
 	
 	$db->paramlist($param2);
 	$set_tc = $db->getlist($sql2);

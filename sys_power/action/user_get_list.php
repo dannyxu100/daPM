@@ -40,20 +40,11 @@
 	
 	$db->close();
 	
-	if(is_array($set)){
-		for($i=0; $i<count($set); $i++){
-			foreach ( $set[$i] as $key => $value ) {
-				$set[$i][$key] = urlencode( $value );   
-			}
-
-		}
-	}
-	
 	$res = array(
 		"ds1"=>$count,
 		"ds11"=>$set									//记录集
 	);
 	
 	// $log->write(var_export($res,true));
-	echo urldecode(json_encode($res));
+	echo json_encode($res);
 ?>

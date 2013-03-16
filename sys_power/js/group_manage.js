@@ -53,14 +53,15 @@ function beforeRemove(treeId, treeNode) {
 	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 	zTree.selectNode(treeNode);
 	
-	if(confirm("确认删除部门【" + treeNode.name + "】吗？")){
-		da.runDB("action/org_get_list.php",{			//检查是否拥有下级部门
-			popid: treeNode.id
+	confirm("确认删除工作组【" + treeNode.name + "】吗？",
+	function(){
+		da.runDB("action/group_get_list.php",{			//检查是否拥有下级部门
+			pgpid: treeNode.id
 		},
 		function(res){
 			if('FALSE'==res){
-				da.runDB("action/org_delete_item.php",{
-				 oid: treeNode.id
+				da.runDB("action/group_delete_item.php",{
+					pgid: treeNode.id
 				},
 				function(res){
 					if("FALSE"==res){
@@ -70,16 +71,16 @@ function beforeRemove(treeId, treeNode) {
 				});
 			}
 			else{
-				alert("对不起，【" + treeNode.name + "】拥有下属部门，请先删除下属部门。");
+				alert("对不起，【" + treeNode.name + "】拥有子项，请先删除子项。");
 				loadtree();
 			}
 		});
 	
 		return true;
-	}
-	else{
+	},
+	function(){
 		return false;
-	}
+	});
 }
 function onRemove(e, treeId, treeNode) {
 
@@ -247,16 +248,16 @@ function addu2g(){
 		width: 650,
 		height: 500,
 		url: "/sys_power/plugin/select_user.htm",
-		back: function( res ){
-			var suids = "";
-			for(var k in res){
-				suids += k +",";
+		back: function( data ){
+			var suids = [];
+			for(var k in data){
+				suids.push(data[k].pu_id);
 			}
 			
 			da.runDB("/sys_power/action/user2group_add_list.php",{
 				pgid: g_pgid,
-				uids: suids
-			},function(res){debugger;
+				uids: suids.join(",")
+			},function(res){
 				if("FALSE" == res){
 					alert("对不起，操作失败。");
 				}
@@ -349,7 +350,7 @@ function loadtree(){
 }
 
 
-daLoader("daUI,daDate,daMsg,daTab,daTable,daWin", function(){
+daLoader("daMsg,daTab,daTable,daWin", function(){
 	//daUI();
 	$( "#pr_date" ).datepicker({
 	  defaultDate: "+1w",
