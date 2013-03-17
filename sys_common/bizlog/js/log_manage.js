@@ -42,7 +42,7 @@ function loadreplylist(){
 				function( match, idx, self ){					//替换日志模板内容
 					switch(match){
 						case "{userico}":
-							return data[i].pu_icon?data[i].pu_icon:"/images/userico/default.png";
+							return data[i].pu_icon?data[i].pu_icon:"/uploads/userico/default.png";
 						case "{puname}":
 							return data[i].pu_name;
 						case "{r_content}":
@@ -78,7 +78,7 @@ function loadloglist(){
 						case "{l_id}":
 							return data[i].l_id;
 						case "{userico}":
-							return data[i].pu_icon?data[i].pu_icon:"/images/userico/default.png";
+							return data[i].pu_icon?data[i].pu_icon:"/uploads/userico/default.png";
 						case "{puname}":
 							return data[i].pu_name;
 						case "{l_content}":

@@ -30,7 +30,7 @@ var daKey = (function(){
 		/**初始化函数
 		*/
 		init: function( kSetting ){
-			kSetting = this.kSetting = da.extend( true, {}, this.kSetting, kSetting );
+			kSetting = this.kSetting = da.extend( {}, this.kSetting, kSetting );
 			
 			this.bindEvent();
 		},

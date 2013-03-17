@@ -36,14 +36,11 @@
 				<div class="list_top_bar">
 					<div class="list_top_title"><a id="wft_title" href="javascript:void(0)" onclick="updateworkflowtype()" value=""></a></div>
 					<div class="list_top_tools">
-						<a class="item" href="javascript:void(0)" onclick="addworkflow();" ><img src="/sys_power/images/sys_icon/add.png" /> 新建</a>
+						<a class="item" href="javascript:void(0)" onclick="addworkflow();" ><img src="/images/sys_icon/add.png" /> 新建</a>
 					</div>
 				</div>
 				
 			</td>
-		</tr>
-		<tr>
-			<td style="vertical-align:top;" id="workflowlist"></td>
 		</tr>
 		<tr>
 			<td style="vertical-align:top;">
@@ -54,7 +51,7 @@
 						<div class="list_top_bar">
 							<div class="list_top_title">基本信息</div>
 							<div class="list_top_tools">
-								<a class="item" href="javascript:void(0)" onclick="updateitemtype();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+								<a class="item" href="javascript:void(0)" onclick="updateitemtype();" ><img src="/images/sys_icon/save.png" /> 保存</a>
 							</div>
 						</div>
 						
@@ -83,8 +80,8 @@
 						<div class="list_top_bar">
 							<div class="list_top_title">列表信息</div>
 							<div class="list_top_tools">
-								<a class="item" href="javascript:void(0)" onclick="additem();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加</a>
-								<a class="item" href="javascript:void(0)" onclick="deleteitem();" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+								<a class="item" href="javascript:void(0)" onclick="additem();" ><img src="/images/sys_icon/add.png" /> 添加</a>
+								<a class="item" href="javascript:void(0)" onclick="deleteitem();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 							</div>
 						</div>
 						
@@ -139,6 +136,3 @@
 <script src="/js/jquery.ui.datepicker-zh-CN.js"></script>
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
 <script type="text/javascript" src="js/item_manage.js"></script>
-
-<script charset="utf-8" src="/plugin/kindeditor/kindeditor-min.js"></script>
-<script charset="utf-8" src="/plugin/kindeditor/lang/zh_CN.js"></script>

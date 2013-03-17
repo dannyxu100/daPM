@@ -72,17 +72,16 @@ daLoading.fnStruct = daLoading.prototype = {
 		if( null !== this.setting.border ) dlBody.style.border = this.setting.border;
 		dlBody.title = "温馨提示：点击隐藏";
 		
-		dlBody.innerHTML = 
-		[
-      '<div id="dl_text_'+dlId+'" class="dl_text"></div>',
-      '<div id="dl_barbox_'+dlId+'"  class="dl_barbox">',
-         '<div id="dl_barbg_'+dlId+'" class="dl_barbg"></div>',
-         '<div id="dl_barflow_'+dlId+'" class="dl_barflow"></div>',
-      '</div>'
+		dlBody.innerHTML = [
+		  '<div id="dl_text_'+dlId+'" class="dl_text"></div>',
+		  '<div id="dl_barbox_'+dlId+'"  class="dl_barbox">',
+			 '<div id="dl_barbg_'+dlId+'" class="dl_barbg"></div>',
+			 '<div id="dl_barflow_'+dlId+'" class="dl_barflow"></div>',
+		  '</div>'
 		].join("");
 		
 		this.dlBody = dlBody;
-		this.dlParent.insertBefore( dlBody, this.dlParent.firstChild );
+		this.dlParent.insertBefore( dlBody, null );
 		
 		this.dlBox = doc.getElementById("dl_barbox_"+dlId);
 		this.dlFlow = doc.getElementById("dl_barflow_"+dlId);

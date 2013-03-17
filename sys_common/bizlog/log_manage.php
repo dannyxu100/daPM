@@ -10,11 +10,11 @@
 	<div class="list_top_bar">
 		<div class="list_top_title"><span id="log_title">日志管理</span></div>
 		<div class="list_top_tools" style="float:left;">
-			<a class="item" href="javascript:void(0)" onclick="iframeBack();" ><img src="/sys_power/images/sys_icon/arrow_back.png" /> 返回</a>
+			<a class="item" href="javascript:void(0)" onclick="iframeBack();" ><img src="/images/sys_icon/arrow_back.png" /> 返回</a>
 		</div>
 		<div class="list_top_tools">
-			<a class="item" href="javascript:void(0)" onclick="addlog();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加日志</a>
-			<a class="item" href="javascript:void(0)" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+			<a class="item" href="javascript:void(0)" onclick="addlog();" ><img src="/images/sys_icon/add.png" /> 添加日志</a>
+			<a class="item" href="javascript:void(0)" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 		</div>
 	</div>
 	
@@ -22,7 +22,7 @@
 		<div class="list_top_bar">
 			<div class="list_top_title"><span id="log_title">日志管理</span></div>
 			<div class="list_top_tools" style="float:left;">
-				<a class="item" href="javascript:void(0)" onclick="showList();" ><img src="/sys_power/images/sys_icon/arrow_back.png" /> 返回日志列表</a>
+				<a class="item" href="javascript:void(0)" onclick="showList();" ><img src="/images/sys_icon/arrow_back.png" /> 返回日志列表</a>
 			</div>
 		</div>
 		<div style="padding:5px;color:#ccc;">项目负责人:&nbsp;&nbsp;</div>

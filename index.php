@@ -25,15 +25,15 @@
 	<div id="menubar"></div>
 </div>
 <div class="info_bar">
-	<img class="userico" src="<?php echo fn_getcookie('puicon')?fn_getcookie('puicon'):'/images/userico/default.png' ?>" onmouseover="showuserinfo()" />
+	<img class="userico" id="puicon" src="/uploads/userico/default.png" onmouseover="showuserinfo()" />
 	<div class="userinfo_list" title="点击关闭" onclick="hideuserinfo()">
-		<ul><span>姓 名:&nbsp;&nbsp;</span><?php echo fn_getcookie("puname") ?> </ul>
-		<ul><span>所属部门:&nbsp;&nbsp;</span><?php echo fn_getcookie("poname") ?> </ul>
-		<ul><span>角 色:&nbsp;&nbsp;</span><?php echo fn_getcookie("rolename") ?> </ul>
-		<ul><span>工作组:&nbsp;&nbsp;</span><?php echo fn_getcookie("groupname") ?> </ul>
+		<ul>姓&nbsp;&nbsp;&nbsp;&nbsp;名:&nbsp;&nbsp;<span id="puname"></span> </ul>
+		<ul>所属部门:&nbsp;&nbsp;<span id="poname"></span> </ul>
+		<ul>角&nbsp;&nbsp;&nbsp;&nbsp;色:&nbsp;&nbsp;<span id="rolename"></span> </ul>
+		<ul>工作组:&nbsp;&nbsp;<span id="groupname"></span> </ul>
 		<ul><a href="javascript:void(0)" onclick="uploadico()">更新头像</a></ul>
 	</div> 
-	<a href="javascript:void(0)" onclick="updatepwd(<?php echo fn_getcookie("puid") ?>)">修改密码</a> | 
+	<a href="javascript:void(0)" onclick="updatepwd()">修改密码</a> | 
 	<a href="/action/loginout.php">退出</a>
 </div>
 
@@ -43,4 +43,5 @@
 </html>
 
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
+<script type="text/javascript" src="js/fn.js"></script>
 <script type="text/javascript" src="js/index.js"></script>

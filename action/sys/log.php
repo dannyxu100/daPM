@@ -91,7 +91,7 @@ class Log {
             die ( "写入日志失败" );
         }
     }
-    
+	
     /**
      *作用:判断文件是否存在
      *输入:文件的路径,要写入的文件名
@@ -143,6 +143,13 @@ class Log {
         //关闭文件
         fclose ( $this->_filehandle );
     }
+    
+	/**write函数的简写(便于记忆)
+	*/
+	public static function out($log){
+		$obj = new Log();
+		$obj->write($log);
+	}
 }
 
 ?>

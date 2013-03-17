@@ -35,8 +35,8 @@
 				<div class="list_top_bar">
 					<div class="list_top_title">成员信息列表</div>
 					<div class="list_top_tools">
-						<a class="item" href="javascript:void(0)" onclick="adduser();" ><img src="/sys_power/images/sys_icon/add.png" /> 新建</a>
-						<a class="item" href="javascript:void(0)" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+						<a class="item" href="javascript:void(0)" onclick="adduser();" ><img src="/images/sys_icon/add.png" /> 新建</a>
+						<a class="item" href="javascript:void(0)" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 					</div>
 				</div>
 				

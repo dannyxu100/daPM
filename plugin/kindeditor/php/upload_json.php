@@ -9,13 +9,26 @@
 
 require_once 'JSON.php';
 
-$php_path = dirname(__FILE__) . '/';
-$php_url = dirname($_SERVER['PHP_SELF']) . '/';
+if(isset($_POST["folder"])){
+	$php_path = rtrim($_SERVER['DOCUMENT_ROOT'], "/");
+	$php_url = "";
 
-//文件保存目录路径
-$save_path = $php_path . '../attached/';
-//文件保存目录URL
-$save_url = $php_url . '../attached/';
+	//文件保存目录路径
+	$save_path = $php_path . $_POST["folder"];
+	//文件保存目录URL
+	$save_url = $php_url . $_POST["folder"];
+}
+else{
+	$php_path = dirname(__FILE__) . '/';
+	$php_url = dirname($_SERVER['PHP_SELF']) . '/';
+
+	// 文件保存目录路径
+	$save_path = $php_path . '../attached/';
+	// 文件保存目录URL
+	$save_url = $php_url . '../attached/'; 
+}
+
+
 //定义允许上传的文件扩展名
 $ext_arr = array(
 	'image' => array('gif', 'jpg', 'jpeg', 'png', 'bmp'),

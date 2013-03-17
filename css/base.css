@@ -152,8 +152,7 @@ td.header { padding:0px 10px; background:#f5f5f5; text-align:right; vertical-ali
 .userico{position:absolute; top:1px; left:-40px; vertical-align:middle; margin-right:10px;width:30px;height:30px;border:1px solid #999; cursor:pointer;}
 
 .userinfo_list{ display:none; position:absolute; top:1px; left:-253px; z-index:2; width:200px; padding:5px; border:1px solid #000; background:#fff; cursor:pointer;}
-.userinfo_list ul{height:22px;}
-.userinfo_list ul span{font-weight:bold;}
+.userinfo_list ul{height:22px; font-weight:bold;}
 
 /******** 按钮 *********/
 a.bt_menu{display:block;margin:3px;padding:5px; font-weight:bold; color:#555; border:1px solid #999;background:#ddd url(/images/bar_bg.jpg);}
@@ -175,6 +174,10 @@ a.curmenu { background:#1a4bfe url(/images/bar_bg.jpg) 0px -35px;  border:1px so
 .list_top_tools a.item:hover{ border:1px solid #666; background-image:none; background-color:#fff; }
 .list_top_tools a.item img{vertical-align:middle;}
 
+.list_top_tools a.link{ display:block; float:left; vertical-align:middle; padding:3px 5px; margin:0px 2px; }
+.list_top_tools a.link:hover{ color:#f00; }
+.list_top_tools a.link img{vertical-align:middle;}
+
 /******** 业务单日志列表 *********/
 .logitem{width:800px;}
 .logitem .ico{float:left;width:50px; height:80px;}
@@ -195,3 +198,11 @@ a.curmenu { background:#1a4bfe url(/images/bar_bg.jpg) 0px -35px;  border:1px so
 .logreply .pr .pr_img{position:absolute; top:10px; left:-2px; width:15px;height:12px;background:url(/images/log_pointer.jpg) -15px 0px no-repeat;}
 .logreply .content{float:right; width:570px; border:1px solid #ccc; padding:5px; overflow:hidden;}
 .logreply .content .rdate{color:#ccc; border-bottom:1px #eee dashed; margin-bottom:10px;}
+
+
+
+
+/********** 帮助文档 ************/
+.doc_pad{padding:5px;}
+.doc_title { font-size:22px; font-weight:bold;}
+.doc_infobar{ font-size:14px; color:#999; margin:5px 0px 10px 0px; border-bottom:1px dashed #ccc;}

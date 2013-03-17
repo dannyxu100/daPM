@@ -3,7 +3,6 @@ var g_bttid = "",
 	g_btid = "",
 	g_btname = "";
 
-<!--
 var setting = {
 	view: {
 		addHoverDom: addHoverDom,
@@ -245,8 +244,10 @@ function viewlisthtml(){
 /** 修改表单列表页代码
 */
 function updatelisthtml(){
-	da("#bt_listhtml").val(g_editorList.html());
-
+	// da("#bt_listhtml").val(g_editorList.html());
+	// 将编辑器的HTML数据同步到textarea
+	g_editorList.sync();
+	
 	da.runDB("/sys_bizform/action/biztemplet_update_listhtml.php",{
 		bt_id: g_btid,
 		bt_listhtml: da("#bt_listhtml").val()			//编码，避免读取的时候ajax转化为json出错
@@ -264,7 +265,9 @@ function updatelisthtml(){
 /** 修改表单详细页代码
 */
 function updateformhtml(){
-	da("#bt_formhtml").val(g_editorForm.html());
+	// da("#bt_formhtml").val(g_editorForm.html());
+	// 将编辑器的HTML数据同步到textarea
+	g_editorForm.sync();
 	
 	da.runDB("/sys_bizform/action/biztemplet_update_formhtml.php",{
 		bt_id: g_btid,
@@ -378,6 +381,15 @@ function deleteu2g(){
 			});
 		});
 	}
+}
+
+/**加载可选关联单
+*/
+function loadmixform(){
+	var dbObj = da("#bt_mixfrom");
+	dbObj.empty();
+	dbObj.append('<option value="">空</option>');
+	
 }
 
 /**联动加载数据源表对应的可选字段
@@ -503,8 +515,9 @@ var g_editorList, g_editorForm;
 function loadeditor(){
 	KindEditor.ready(function(K) {
 		g_editorList = K.create('#bt_listhtml', {
-			resizeType : 1,
-			filterMode : false,		//不过滤危险标签
+			resizeType: 1,
+			filterMode: false,		//不过滤危险标签
+			newlineTag: "br",
 			allowPreviewEmoticons : false,
 			fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
 			allowFileManager : true,
@@ -523,6 +536,7 @@ function loadeditor(){
 		g_editorForm = K.create('#bt_formhtml', {
 			resizeType : 1,
 			filterMode : false,		//不过滤危险标签
+			newlineTag: "br",
 			allowPreviewEmoticons : false,
 			fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
 			allowFileManager : true,
@@ -538,11 +552,11 @@ function loadeditor(){
 			]
 		});
 	});
-}
+};
 
-daLoader("daUI,daDate,daMsg,daTab,daTable,daWin", function(){
-	//daUI();
-		loadeditor();
+daLoader("daMsg,daTab,daTable,daWin", function(){
+	//daUI(); 
+	loadeditor();
 	
 	/*页面加载完毕*/
 	da(function(){
@@ -557,5 +571,3 @@ daLoader("daUI,daDate,daMsg,daTab,daTable,daWin", function(){
 		da("#pad_config").hide();
 	});
 });
-
-//-->

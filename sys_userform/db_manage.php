@@ -31,7 +31,7 @@
 				<div class="list_top_bar">
 					<div class="list_top_title"><a id="tbtitle" href="javascript:void(0)" onclick="" ></a></div>
 					<div class="list_top_tools">
-						<a class="item" href="javascript:void(0)" onclick="addform();" ><img src="/sys_power/images/sys_icon/add.png" /> 新建</a>
+						<a class="item" href="javascript:void(0)" onclick="addform();" ><img src="/images/sys_icon/add.png" /> 新建</a>
 					</div>
 				</div>
 			</td>
@@ -75,8 +75,8 @@
 					<div class="list_top_bar">
 						<div class="list_top_title">数据表所包含的字段信息</div>
 						<div class="list_top_tools">
-							<a class="item" href="javascript:void(0)" onclick="addtran();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加</a>
-							<a class="item" href="javascript:void(0)" onclick="deleteg2r();" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+							<a class="item" href="javascript:void(0)" onclick="addtran();" ><img src="/images/sys_icon/add.png" /> 添加</a>
+							<a class="item" href="javascript:void(0)" onclick="deleteg2r();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 						</div>
 					</div>
 					

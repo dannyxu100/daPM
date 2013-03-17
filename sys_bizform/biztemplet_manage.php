@@ -1,7 +1,8 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <HEAD>
-  <TITLE>业务单管理</TITLE>
+	<?php include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php" ?>
+	<TITLE>业务单管理</TITLE>
 	<link rel="stylesheet" href="/css/base.css"/>
 	<link rel="stylesheet" href="/plugin/ztree/zTreeStyle.css" type="text/css"/>
 	<link rel="stylesheet" href="/css/jquery-ui-1.9.2.custom.min.css"/>
@@ -38,7 +39,7 @@
 				<div class="list_top_bar">
 					<div class="list_top_title"><a id="wft_title" href="javascript:void(0)" onclick="updateformtype()" value=""></a></div>
 					<div class="list_top_tools">
-						<a class="item" href="javascript:void(0)" onclick="addform();" ><img src="/sys_power/images/sys_icon/add.png" /> 新建</a>
+						<a class="item" href="javascript:void(0)" onclick="addform();" ><img src="/images/sys_icon/add.png" /> 新建</a>
 					</div>
 				</div>
 			</td>
@@ -55,7 +56,7 @@
 						<div class="list_top_bar">
 							<div class="list_top_title"></div>
 							<div class="list_top_tools">
-								<a class="item" href="javascript:void(0)" onclick="updateform();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+								<a class="item" href="javascript:void(0)" onclick="updateform();" ><img src="/images/sys_icon/save.png" /> 保存</a>
 							</div>
 						</div>
 						
@@ -89,7 +90,8 @@
 						<div class="list_top_bar">
 							<div class="list_top_title"></div>
 							<div class="list_top_tools">
-								<a class="item" href="javascript:void(0)" onclick="updatesource();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+								<a class="link" href="javascript:void(0)" onclick="fn_helper('biz_dbsource');" title="帮助文档" ><img src="/images/sys_icon/help.png" /> </a>
+								<a class="item" href="javascript:void(0)" onclick="updatesource();" ><img src="/images/sys_icon/save.png" /> 保存</a>
 							</div>
 						</div>
 						<div style="padding:20px;">
@@ -108,8 +110,9 @@
 						<div class="list_top_bar">
 							<div class="list_top_title"></div>
 							<div class="list_top_tools">
-								<a class="item" href="javascript:void(0)" onclick="viewlisthtml();" ><img src="/sys_power/images/sys_icon/search.png" /> 预览</a>
-								<a class="item" href="javascript:void(0)" onclick="updatelisthtml();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+								<a class="link" href="javascript:void(0)" onclick="fn_helper('list_templet_code');" title="帮助文档" ><img src="/images/sys_icon/help.png" /> </a>
+								<a class="item" href="javascript:void(0)" onclick="viewlisthtml();" ><img src="/images/sys_icon/search.png" /> 预览</a>
+								<a class="item" href="javascript:void(0)" onclick="updatelisthtml();" ><img src="/images/sys_icon/save.png" /> 保存</a>
 							</div>
 						</div>
 						<textarea id="bt_listhtml" name="bt_listhtml" style="width:99%;height:300px;"></textarea>
@@ -119,7 +122,8 @@
 						<div class="list_top_bar">
 							<div class="list_top_title"></div>
 							<div class="list_top_tools">
-								<a class="item" href="javascript:void(0)" onclick="updateformhtml();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+								<a class="link" href="javascript:void(0)" onclick="fn_helper('form_templet_code');" title="帮助文档" ><img src="/images/sys_icon/help.png" /> </a>
+								<a class="item" href="javascript:void(0)" onclick="updateformhtml();" ><img src="/images/sys_icon/save.png" /> 保存</a>
 							</div>
 						</div>
 						<textarea id="bt_formhtml" name="bt_formhtml" style="width:99%;height:800px;"></textarea>
@@ -144,6 +148,7 @@
 <script type="text/javascript" src="/plugin/ztree/jquery.ztree.exedit-3.5.min.js"></script>
 <script type="text/javascript" src="/plugin/ztree/jquery.ztree.excheck-3.5.min.js"></script>
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
+<script type="text/javascript" src="/js/fn.js"></script>
 <script type="text/javascript" src="js/biztemplet_manage.js"></script>
 
 

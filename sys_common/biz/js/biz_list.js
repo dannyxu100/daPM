@@ -164,28 +164,28 @@ function loadtemplet(){
 */
 function loadtab(){
 	var daTab0 = daTab(da("#tabbar").dom[0],"daTab0","myname","",true);
-	daTab0.appendItem("item01","全部","/sys_power/images/sys_icon/tables.png",{
+	daTab0.appendItem("item01","全部","/images/sys_icon/tables.png",{
 		click:function(){
 			g_transtatus = "";		//全部事务变迁
 			loaddata();
 		}
 	});
 	
-	daTab0.appendItem("item02","未处理","/sys_power/images/sys_icon/email_open.png",{
+	daTab0.appendItem("item02","未处理","/images/sys_icon/email_open.png",{
 		click:function(){
 			g_transtatus = "EN";	//事务变迁为EN(启动状态)
 			loaddata();
 		}
 	});
 
-	daTab0.appendItem("item03","处理中","/sys_power/images/sys_icon/email_edit.png",{
+	daTab0.appendItem("item03","处理中","/images/sys_icon/email_edit.png",{
 		click:function(){
 			g_transtatus = "IP";	//事务变迁为IP(处理中状态)
 			loaddata();
 		}
 	});
 	
-	daTab0.appendItem("item04","已处理","/sys_power/images/sys_icon/email_go.png",{
+	daTab0.appendItem("item04","已处理","/images/sys_icon/email_go.png",{
 		click:function(){
 			g_transtatus = "FI";	//事务变迁为EN(完成状态)
 			loaddata();

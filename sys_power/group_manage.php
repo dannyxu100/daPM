@@ -37,7 +37,7 @@
 					<div class="list_top_bar">
 						<div class="list_top_title">工作组基本信息</div>
 						<div class="list_top_tools">
-							<a class="item" href="javascript:void(0)" onclick="updategroup();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+							<a class="item" href="javascript:void(0)" onclick="updategroup();" ><img src="/images/sys_icon/save.png" /> 保存</a>
 						</div>
 					</div>
 					
@@ -60,8 +60,8 @@
 					<div class="list_top_bar">
 						<div class="list_top_title">工作组下包含的人员列表</div>
 						<div class="list_top_tools">
-							<a class="item" href="javascript:void(0)" onclick="addu2g();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加</a>
-							<a class="item" href="javascript:void(0)" onclick="deleteu2g();" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+							<a class="item" href="javascript:void(0)" onclick="addu2g();" ><img src="/images/sys_icon/add.png" /> 添加</a>
+							<a class="item" href="javascript:void(0)" onclick="deleteu2g();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 						</div>
 					</div>
 					

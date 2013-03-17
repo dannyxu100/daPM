@@ -42,7 +42,7 @@
 					<div class="list_top_bar">
 						<div class="list_top_title">基本信息</div>
 						<div class="list_top_tools">
-							<a class="item" href="javascript:void(0)" onclick="updaterole();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+							<a class="item" href="javascript:void(0)" onclick="updaterole();" ><img src="/images/sys_icon/save.png" /> 保存</a>
 						</div>
 					</div>
 					
@@ -66,8 +66,8 @@
 					<div class="list_top_bar">
 						<div class="list_top_title">角色包含的人员列表</div>
 						<div class="list_top_tools">
-							<a class="item" href="javascript:void(0)" onclick="addu2r();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加</a>
-							<a class="item" href="javascript:void(0)" onclick="deleteu2r();" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+							<a class="item" href="javascript:void(0)" onclick="addu2r();" ><img src="/images/sys_icon/add.png" /> 添加</a>
+							<a class="item" href="javascript:void(0)" onclick="deleteu2r();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 						</div>
 					</div>
 					
@@ -125,8 +125,8 @@
 					<div class="list_top_bar">
 						<div class="list_top_title">角色包含的工作组</div>
 						<div class="list_top_tools">
-							<a class="item" href="javascript:void(0)" onclick="addg2r();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加</a>
-							<a class="item" href="javascript:void(0)" onclick="deleteg2r();" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+							<a class="item" href="javascript:void(0)" onclick="addg2r();" ><img src="/images/sys_icon/add.png" /> 添加</a>
+							<a class="item" href="javascript:void(0)" onclick="deleteg2r();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 						</div>
 					</div>
 					

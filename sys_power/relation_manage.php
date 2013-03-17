@@ -33,7 +33,7 @@
 				<div class="list_top_bar">
 					<div class="list_top_title">上级列表</div>
 					<div class="list_top_tools">
-						<a class="item" href="javascript:void(0)" onclick="addleader();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加</a>
+						<a class="item" href="javascript:void(0)" onclick="addleader();" ><img src="/images/sys_icon/add.png" /> 添加</a>
 					</div>
 				</div>
 				<div id="leaderlist"></div>
@@ -42,8 +42,8 @@
 				<div class="list_top_bar">
 					<div class="list_top_title">从属列表</div>
 					<div class="list_top_tools">
-						<a class="item" href="javascript:void(0)" onclick="adduser();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加</a>
-						<a class="item" href="javascript:void(0)" onclick="deleteuser();" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+						<a class="item" href="javascript:void(0)" onclick="adduser();" ><img src="/images/sys_icon/add.png" /> 添加</a>
+						<a class="item" href="javascript:void(0)" onclick="deleteuser();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 					</div>
 				</div>
 				<div id="userlist">

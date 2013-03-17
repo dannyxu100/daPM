@@ -14,7 +14,7 @@
 	<div class="list_top_bar">
 		<div class="list_top_title"><span id="title"></span></div>
 		<div class="list_top_tools">
-			<a class="item" href="javascript:void(0)" onclick="savereply();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+			<a class="item" href="javascript:void(0)" onclick="savereply();" ><img src="/images/sys_icon/save.png" /> 保存</a>
 		</div>
 	</div>
 	<table class="tablesolid" style="width:100%; height:50px;">

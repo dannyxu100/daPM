@@ -24,7 +24,7 @@ var daIframe = (function(){
 		isSelfWinCache: true,
 		
 		extendWidth: 0,					//可允许人为控制调整的容差值，可为负数
-		extendHeight: 0,
+		extendHeight: 20,
 
 		//初始化函数
 		init: function(){
@@ -479,9 +479,9 @@ autoSize = function( type, winObj ){
 };
 
 autoframeheight = function(){
-	if( "undefined" != typeof daFrameAutoSize )						//弹出窗口模式
+	if( "undefined" != typeof daFrameAutoSize )			//弹出窗口模式
 		daFrameAutoSize();
-	else																									//框架窗口模式
+	else												//框架窗口模式
 		autoSize();
 };
 

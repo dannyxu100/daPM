@@ -5,8 +5,19 @@ function showuserinfo(){
 function hideuserinfo(){
 	da(".userinfo_list").hide();
 }
-function updatepwd(){
-	
+/**上传头像
+*/
+function uploadico(){
+	fn_uploadfile({
+        // "fileTypeDesc": "Image Files",
+		// "fileTypeExts": "*.gif; *.jpg; *.png",
+		"formData": {
+			"folder": "/uploads/userico",
+			"name": fn_getcookie("puname")+"_"+fn_getcookie("puid")
+		}
+	},function(arr, data){
+		//alert(arr[0].name);
+	});
 }
 
 /**修改密码
@@ -73,10 +84,19 @@ function listenKey(){
 	});
 }
 
+/**加载用户信息
+*/
+function loaduserinfo(){
+	da("#puicon").attr("src", fn_getcookie("puicon"));
+	da("#puname").text(fn_getcookie("puname"));
+	da("#poname").text(fn_getcookie("poname"));
+	da("#rolename").text(fn_getcookie("rolename"));
+	da("#groupname").text(fn_getcookie("groupname"));
+}
 
 daLoader("daIframe,daWin,daToolbar,daKey",function(){
 	da(function(){
-		//decodeURIComponent(da.cookie("COOKIE_FROM_DASYS"));
+		loaduserinfo();
 		loadmenu();
 		
 		listenKey();

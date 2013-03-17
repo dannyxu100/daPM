@@ -36,7 +36,7 @@
 				<div class="list_top_bar">
 					<div class="list_top_title"><a id="wft_title" href="javascript:void(0)" onclick="updateworkflowtype()" value=""></a></div>
 					<div class="list_top_tools">
-						<a class="item" href="javascript:void(0)" onclick="addworkflow();" ><img src="/sys_power/images/sys_icon/add.png" /> 新建</a>
+						<a class="item" href="javascript:void(0)" onclick="addworkflow();" ><img src="/images/sys_icon/add.png" /> 新建</a>
 					</div>
 				</div>
 				
@@ -54,7 +54,7 @@
 						<div class="list_top_bar">
 							<div class="list_top_title">基本信息</div>
 							<div class="list_top_tools">
-								<a class="item" href="javascript:void(0)" onclick="updateworkflow();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+								<a class="item" href="javascript:void(0)" onclick="updateworkflow();" ><img src="/images/sys_icon/save.png" /> 保存</a>
 							</div>
 						</div>
 						
@@ -114,8 +114,8 @@
 						<div class="list_top_bar">
 							<div class="list_top_title">库所列表</div>
 							<div class="list_top_tools">
-								<a class="item" href="javascript:void(0)" onclick="addplace();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加</a>
-								<a class="item" href="javascript:void(0)" onclick="deleteu2r();" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+								<a class="item" href="javascript:void(0)" onclick="addplace();" ><img src="/images/sys_icon/add.png" /> 添加</a>
+								<a class="item" href="javascript:void(0)" onclick="deleteu2r();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 							</div>
 						</div>
 						
@@ -163,8 +163,8 @@
 						<div class="list_top_bar">
 							<div class="list_top_title">事务变迁列表</div>
 							<div class="list_top_tools">
-								<a class="item" href="javascript:void(0)" onclick="addtran();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加</a>
-								<a class="item" href="javascript:void(0)" onclick="deleteg2r();" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+								<a class="item" href="javascript:void(0)" onclick="addtran();" ><img src="/images/sys_icon/add.png" /> 添加</a>
+								<a class="item" href="javascript:void(0)" onclick="deleteg2r();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 							</div>
 						</div>
 						
@@ -212,8 +212,8 @@
 						<div class="list_top_bar">
 							<div class="list_top_title">路由向弧列表</div>
 							<div class="list_top_tools">
-								<a class="item" href="javascript:void(0)" onclick="addarc();" ><img src="/sys_power/images/sys_icon/add.png" /> 添加</a>
-								<a class="item" href="javascript:void(0)" onclick="deleteg2r();" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+								<a class="item" href="javascript:void(0)" onclick="addarc();" ><img src="/images/sys_icon/add.png" /> 添加</a>
+								<a class="item" href="javascript:void(0)" onclick="deleteg2r();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 							</div>
 						</div>
 						

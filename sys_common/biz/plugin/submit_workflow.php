@@ -9,10 +9,10 @@
 	<div class="list_top_bar">
 		<div class="list_top_title">业务提交面板</div>
 		<div class="list_top_tools" style="float:left;display:none;">
-			<a class="item" href="javascript:void(0)" onclick="iframeBack();" ><img src="/sys_power/images/sys_icon/arrow_back.png" /> 返回</a>
+			<a class="item" href="javascript:void(0)" onclick="iframeBack();" ><img src="/images/sys_icon/arrow_back.png" /> 返回</a>
 		</div>
 		<div class="list_top_tools">
-			<a class="item" href="javascript:void(0)" onclick="updatetran();" ><img src="/sys_power/images/sys_icon/save.png" /> 确认</a>
+			<a class="item" href="javascript:void(0)" onclick="updatetran();" ><img src="/images/sys_icon/save.png" /> 确认</a>
 		</div>
 	</div>
 	

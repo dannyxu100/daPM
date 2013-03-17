@@ -19,8 +19,8 @@
 	<div class="list_top_bar">
 		<div class="list_top_title"><span id="biz_title">业务名称</span></div>
 		<div class="list_top_tools">
-			<a class="item" href="javascript:void(0)" onclick="addbiz();" ><img src="/sys_power/images/sys_icon/add.png" /> 新建</a>
-			<a class="item" href="javascript:void(0)" ><img src="/sys_power/images/sys_icon/delete.png" /> 删除</a>
+			<a class="item" href="javascript:void(0)" onclick="addbiz();" ><img src="/images/sys_icon/add.png" /> 新建</a>
+			<a class="item" href="javascript:void(0)" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 		</div>
 	</div>
 	

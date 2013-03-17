@@ -6,7 +6,7 @@
 	$sql = "insert into p_user(pu_name, pu_code, pu_pwd, pu_oid, pu_phone, pu_telephone, pu_address, pu_remark) values(";
 	$sql .= "'".$_POST["pu_name"]."',";
 	$sql .= "'".$_POST["pu_code"]."',";
-	$sql .= "'".$_POST["pu_pwd"]."',";
+	$sql .= "'".md5($_POST["pu_pwd"])."',";
 	$sql .= $_POST["pu_oid"].",";
 	$sql .= "'".$_POST["pu_phone"]."',";
 	$sql .= "'".$_POST["pu_telephone"]."',";

@@ -1,7 +1,8 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <HEAD>
-  <TITLE>添加表单</TITLE>
+	<?php include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php" ?>
+	<TITLE>添加表单</TITLE>
 	<link rel="stylesheet" href="/css/base.css">
 	<style>
 		td{padding:3px;}

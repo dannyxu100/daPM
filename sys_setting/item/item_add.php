@@ -29,7 +29,7 @@
 	<div class="list_top_bar">
 		<div class="list_top_title">基本信息</div>
 		<div class="list_top_tools">
-			<a class="item" href="javascript:void(0)" onclick="saveitem();" ><img src="/sys_power/images/sys_icon/save.png" /> 保存</a>
+			<a class="item" href="javascript:void(0)" onclick="saveitem();" ><img src="/images/sys_icon/save.png" /> 保存</a>
 		</div>
 	</div>
 	

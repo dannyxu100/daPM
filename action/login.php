@@ -7,13 +7,12 @@
 	date_default_timezone_set('ETC/GMT-8');
 
 	if(!isset($_POST['u_code']) || !isset($_POST['u_pwd']) ){
-		echo "<script language='javascript'>alert('请输入账号、密码。');location.href='/login.php';</script>";
+		echo "请输入账号、密码。";
 		return;
 	}
 	
 	$code=$_POST['u_code'];
-	$pwd=$_POST['u_pwd'];
-	//$pwd=md5($pwd);
+	$pwd=md5($_POST['u_pwd']);
 	
 	//查询用户基本信息
 	$db = new DB("da_powersys");
@@ -23,7 +22,7 @@
 	// $log->write($row['pu_code'].":".$code."----".$row['pu_pwd'].":".$pwd);
 	if ($row['pu_code']!=$code || $row['pu_pwd']!=$pwd){
 		$db->close();
-		echo "<script language='javascript'>alert('用户名不存在，或者密码错误。');location.href='/login.php';</script>";
+		echo "用户名或密码错误。";
 		return;
 	}
 	
@@ -103,5 +102,5 @@
 	setcookie('COOKIE_FROM_DASYS', urlencode(implode('|', $arrcookie)), time()+86400, "/");		//有效期24小时, 整个领域有效
 	
 	//登录成功
-	echo "<script language='javascript'>location.href='/index.php';</script>";
+	echo 1;
 ?>

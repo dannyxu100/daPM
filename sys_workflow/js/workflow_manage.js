@@ -180,7 +180,8 @@ function loadarc(){
 		
 		field: function( fld, val, row, ds ){
 			if("a_direction"==fld ){
-				return "IN"==val?'<span style="color:#9f9">-->></span>':'<span style="font-weight:bold;color:#f00"><<-</span>';
+				return "IN"==val?'<div style="width:30px;height:15px;background:url(/images/to_right.jpg)"></div>':
+				'<div style="width:30px;height:15px;background:url(/images/to_left.jpg)"></div>';
 			}
 			else if("a_type"==fld ){
 				return "SEQ"==val?"一般顺序流类型":
@@ -485,7 +486,8 @@ function addworkflow(){
 /** 修改工作流信息
 */
 function updateworkflow(){
-	da("#wf_remark").val(g_editor.html());
+	// 将编辑器的HTML数据同步到textarea
+	KindEditor.sync('#wf_remark');
 	
 	da.runDB("/sys_workflow/action/workflow_update_item.php",{
 		wf_id: g_wfid,
@@ -612,7 +614,7 @@ function loadeditor(){
 				'insertunorderedlist', '|', 'emoticons', 'image', 'link']
 		});
 	});
-}
+};
 
 daLoader("daDate,daMsg,daTab,daTable,daWin,daButton", function(){
 	//daUI();
