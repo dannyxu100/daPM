@@ -7430,7 +7430,6 @@ var daRe_until = /Until$/,
 			return false;
 		},
 		
-		
 		//输出调试信息
 		/*
 			msg: 调试信息
@@ -7643,6 +7642,41 @@ var daRe_until = /Until$/,
 				else
 					boxObj.style.display = "";
 			}
+		},
+		
+		focus: function( fromobj, toobj ){
+			if("undefined" == typeof daFx) return;
+			
+			var focusobj = da("#_da_focusbox");
+			if( 0>=focusobj.dom.length ){
+				obj = document.createElement("div");
+				obj.id = "_da_focusbox";
+				obj.style.cssText = "display:none; position:absolute; top:0px; left:0px; width:200px; height:100px; border:3px solid #666;";
+				document.body.insertBefore(obj, null);
+				focusobj = da(obj);
+			}
+		
+			var fromPos = da(fromobj).offset(),
+				toPos = da(toobj).offset(),
+				fromSize = {width:da(fromobj).width(), height:da(fromobj).height()},
+				toSize = {width:da(toobj).width(), height:da(toobj).height()};
+			
+			focusobj.css({
+				width: fromSize.width + "px",
+				height: fromSize.height + "px",
+				left: fromPos.left + "px",
+				top: fromPos.top + "px"
+			});
+			
+			focusobj.show();
+			focusobj.act({
+				width: toSize.width,
+				height: toSize.height,
+				left: toPos.left + "px",
+				top: toPos.top + "px"
+			}, 500, "easeOutQuad",function(){
+				focusobj.fadeOut();
+			});
 		},
 		
 		//设置或获取cookie

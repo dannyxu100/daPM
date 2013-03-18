@@ -220,7 +220,7 @@ var daTable = (function(){
 					fn( data );
 				}, 
 				function( msg, code, content ) {
-					alert( code+"<br/>"+content );
+					"undefined" != typeof alert2?alert2( code+"<br/>"+content ):alert( code+"<br/>"+content );
 				});
 			}
 			else if(dataType && "xml" == dataType){
@@ -231,7 +231,7 @@ var daTable = (function(){
 					}
 				}, 
 				function( msg, code, content  ) {
-					alert( code+"<br/>"+content );
+					"undefined" != typeof alert2?alert2( code+"<br/>"+content ):alert( code+"<br/>"+content );
 				});
 				
 			}

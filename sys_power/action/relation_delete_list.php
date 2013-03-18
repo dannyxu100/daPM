@@ -3,16 +3,17 @@
 	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
 	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 	
-	$arr = preg_split("/,/", $_POST["uids"]);
+	$arr = preg_split("/,/", $_POST["puids"]);
 	
 	// $log = new Log();
 	$db = new DB("da_powersys");
-	if(0<count($arr) && isset($_POST["pgid"])){
+	if(0<count($arr) && isset($_POST["poid"]) && isset($_POST["leaderid"])){
 		$db->tran();
 		
 		for($i=0; $i<count($arr); $i++){
-			$db->delete("delete from p_user2group where u2g_puid=".$arr[$i]." and u2g_pgid=".$_POST["pgid"].";");
-			// $log->write("delete from p_user2group where u2g_puid=".$arr[$i]." and u2g_pgid=".$_POST["pgid"].";");
+			$db->delete("delete from p_relation where pr_puid=".$arr[$i]." 
+			and pr_leaderid=".$_POST["leaderid"]." 
+			and pr_poid=".$_POST["poid"]);
 		}
 		
 		if($db->geterror()){
@@ -21,7 +22,7 @@
 		}
 		else{
 			$db->commit();
-			echo count($arr)-1;
+			echo count($arr);
 		}
 	}
 	else{

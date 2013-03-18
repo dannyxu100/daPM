@@ -4,6 +4,7 @@
 	include_once $_SERVER['DOCUMENT_ROOT']."action/fn.php";
 	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 	
+	$puid = fn_getcookie("puid");
 	$wfid = $_POST["wfid"];
 	$dbsource = $_POST["dbsource"];
 	$dbfld = $_POST["dbfld"];
@@ -27,11 +28,27 @@
 		array_push( $tids, $set_tran[$i]["t_id"] );
 	}
 	
+	/******************* 找出下级员工puid记录集 *********************************************/
+	$sql11 = "select pr_puid from da_powersys.p_relation 
+	where pr_leaderid=:puid";
+	$param11 = array();
+	array_push($param11, array(":puid", $puid));
+	
+	$db->paramlist($param1);
+	$set_puids = $db->getlist($sql11);
+	
+	$puids = array($puid);					//当前登录人员puid + 下级员工puid 数据集
+	for( $i=0; $i<count($set_puids); $i++){
+		array_push( $puids, $set_puids[$i]["pr_puid"] );
+	}
 	
 	/******************* 根据 可参与事务变迁的实例找出 所对应的工作流实例id *****************/
-	$sql2 = "select tc_wfcid from da_workflow.w_trancase 
+	$sql2 = "select distinct(tc_wfcid) from da_workflow.w_trancase 
 	where w_trancase.tc_wfid=:wfid 
-	and w_trancase.tc_tid in (".implode(',', $tids).") ";
+	and w_trancase.tc_puid in (".implode(',', $puids).") 
+	and w_trancase.tc_tid in (".implode(',', $tids).") ";		//事务变迁实例接单拥有者
+																//且当同一用户兼容多重角色，
+																//处理同一流程，不同业务时,也只取一条
 	
 	$param2 = array();
 	if( "" != $status ){

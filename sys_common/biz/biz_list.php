@@ -26,6 +26,7 @@
 	
 	<div id="tabbar" ></div>
 	<div id="templet_list" style="padding:3px;"></div>
+	<div id="tranlist" onclick="hidetranlist()" style="display:none; position:absolute; z-index:999; background-color:#f9f9f9; padding:10px; border:1px solid #666;"></div>
 </BODY>
 </HTML>
 

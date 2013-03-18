@@ -19,22 +19,29 @@ var setting = {
 */
 function clicknode(treeId, treeNode){
 	g_poid = treeNode.id;
-
+	g_leaderid = "";
+	da("#userlist").hide();
+	
+	var objlist = da("#leaderlist");
+	objlist.empty();
+	
+	
 	da.runDB("/sys_power/action/relation_get_leaderlist.php",{
 		dataType: "json",
 		poid: g_poid
 	},
-	function(data){debugger;
+	function(data){
 		if("FALSE"!= data){
-			var objlist = da("#leaderlist");
-			objlist.empty();
+			da("#userlist").show();
 			for(var i=0; i<data.length; i++){
 				objlist.append('<a href="javascript:void(0)" class="bt_menu" onclick="loaduserlist('+ data[i].pu_id +', this)">'+ data[i].pu_name +'</a>');
 			}
+			
+			da("a", "#leaderlist").dom[0].click();
 		}
 	},
 	function(code, msg, ex){
-		debugger;
+		// debugger;
 	});
 
 }
@@ -43,29 +50,36 @@ function clicknode(treeId, treeNode){
 /**删除可选项
 */
 function deleteuser(){
-	if(!g_itid){
-		alert("请先选择分类。");
+	if(!g_poid){
+		alert("请先选择部门。");
+		return;
+	}
+	if(!g_leaderid){
+		alert("请先选择上级。");
 		return;
 	}
 	
-	var iids = [];
+	var puids = [];
 	da("[name=chkitem]:checked").each(function(){
-		iids.push(this.value);
+		puids.push(this.value);
 	});
 	
-	if( iids ){
-		confirm("确认删除选中的可选项吗？", function(){
-			da.runDB("/sys_setting/item/action/item_delete_list.php",{
-				itid: g_itid,
-				iids: iids.join(",")
+	if( 0<puids.length ){
+		confirm("确认删除选中的下级人员吗？", function(){
+			da.runDB("/sys_power/action/relation_delete_list.php",{
+				poid: g_poid,
+				leaderid: g_leaderid,
+				puids: puids.join(",")
 			},function(res){
 				if("FALSE" == res){
 					alert("对不起，操作失败。");
 				}
 				else{
 					alert("删除成功");
-					loadlist();
+					loaduserlist(g_leaderid);
 				}
+			},function(code,msg,ex){
+				// debugger;
 			});
 		});
 	}
@@ -103,7 +117,7 @@ function adduser(){
 				}
 				else{
 					alert("添加成功");
-					loaduserlist();
+					loaduserlist( g_leaderid );		//刷新
 				}
 			});
 		}
@@ -115,9 +129,11 @@ function adduser(){
 function loaduserlist(leaderid, obj){
 	g_leaderid = leaderid;
 
-	da(".curmenu").removeClass("curmenu");
-	da(obj).addClass("curmenu");
-
+	if(obj){
+		da(".curmenu").removeClass("curmenu");
+		da(obj).addClass("curmenu");
+	}
+	
 	daTable({
 		id: "tbuser_list",
 		url: "/sys_power/action/relation_get_userlist.php",
@@ -161,6 +177,9 @@ function addleader(){
 			
 			var objlist = da("#leaderlist");
 			objlist.append('<a href="javascript:void(0)" class="bt_menu" onclick="loaduserlist('+ res[k].pu_id +', this)">'+ res[k].pu_name +'</a>');
+			
+			var leaders = da("a", "#leaderlist");
+			leaders.dom[leaders.dom.length-1].click();		//选中新添的leader
 		}
 	});
 }

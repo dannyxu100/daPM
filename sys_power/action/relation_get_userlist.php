@@ -27,7 +27,7 @@
 		array_push($param1, array(":leaderid", $_POST["leaderid"]));
 		array_push($param2, array(":leaderid", $_POST["leaderid"]));
 	}
-	$sql .= " order by pr_puid asc";
+	$sql1 .= " order by pr_puid asc";
 		
 	if( isset($_POST["pageindex"]) ){				//分页
 		$start = ($_POST["pageindex"]-1)*$_POST["pagesize"];

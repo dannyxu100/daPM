@@ -75,17 +75,62 @@ function viewbiz( dbfldid, bcid, wfcid ){
 
 /**接单
 */
-function acceptbiz(){
+function handlebiz(obj){
+	// da.focus(obj, "#item03");
 	
+	
+}
+
+
+var g_mapstatus = {
+	"EN": '<span style="color:#999; font-weight:bold;">未处理</span>',
+	"IP": '<span style="color:#f93; font-weight:bold;">ing..</span>',
+	"FI": '<span style="color:#090; font-weight:bold;">ok!</span>',
+	"CA": '<span style="color:#ccc; font-weight:bold;">已取消</span>'
+}
+/**显示事务处理列表
+*/
+function showtranlist(obj, wfcid){
+	var pos = da(obj).offset(),
+		widthObj = da(obj).width(),
+		listObj = da("#tranlist");
+		
+	listObj.empty();
+	listObj.css({
+		left:( pos.left + widthObj + 10 )+"px",
+		top:pos.top+"px"
+	});
+	
+	da.runDB("/sys_common/biz/action/trancase2workflowcase_get_list.php",{
+		dataType: "json",
+		wfcid: wfcid
+		
+	},function(data){
+		if("FALSE"!=data){
+			for(var i=0; i<data.length; i++){
+				da("#tranlist").append('<div>'
+				+ (i+1) +". " 
+				+ data[i].a_name +" - "
+				+ g_mapstatus[data[i].tc_status] 
+				+" - "+ da.fmtDate(data[i].tc_finishdate, "yyyy-mm-dd/p") 
+				+'</div>');
+			}
+			listObj.show();
+		}
+	});
+}
+
+function hidetranlist(){
+	da("#tranlist").hide();
 }
 
 /**加载工具按钮
 */
-function appendtools( fld, val, row, ds ){
+function tools( fld, val, row, ds ){
 	var arrhtml = [
-		'<a href="javascript:void(0)" class="txt_tool" onclick="acceptbiz(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">接单</a>',
+		'<a href="javascript:void(0)" class="txt_tool" onclick="handlebiz(this,\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">处理</a>',
 		'<a href="javascript:void(0)" class="txt_tool" onclick="viewbizlog(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">日志</a>',
-		'<a href="javascript:void(0)" class="ico_tool" title="删除" style="background:url(/sys_power/images/sys_icon/delete.png)"></a>'
+		'<a href="javascript:void(0)" class="ico_tool" title="删除" style="background:url(/images/sys_icon/delete.png)"></a>'
 		];
 	return arrhtml.join("");
 }
@@ -120,10 +165,10 @@ function loaddata(){
 				idxfld = 0;
 			}
 			else if( 1 == idxfld ){
-				val = '<a href="javascript:void(0)" title="点击查看详细信息" onclick="viewbiz(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">'+ val +'</a>';
+				val = '<a href="javascript:void(0)" onclick="viewbiz(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')" onmouseover="showtranlist(this,'+ row["wfc_id"] +')" onmouseout="hidetranlist()">'+ val +'</a>';
 			}
 			else if("tools"==fld){
-				val = appendtools(fld, val, row, ds);
+				val = tools(fld, val, row, ds);
 			}
 			
 			idxfld++;
@@ -227,5 +272,6 @@ daLoader("daMsg,daKey,daTab,daTable,daIframe,daWin",function(){
 		loadtab();
 		loadtemplet();
 		listenKey();
+		
 	});
 });
