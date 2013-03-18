@@ -8,15 +8,27 @@ function hideuserinfo(){
 /**上传头像
 */
 function uploadico(){
+	var newfilename = fn_getcookie("puname")+"_"+fn_getcookie("puid");
+
 	fn_uploadfile({
-        // "fileTypeDesc": "Image Files",
-		// "fileTypeExts": "*.gif; *.jpg; *.png",
+        "fileTypeDesc": "图片文件",
+		// "multi": true,
+		"fileTypeExts": "*.gif; *.jpg; *.png",
 		"formData": {
 			"folder": "/uploads/userico",
-			"name": fn_getcookie("puname")+"_"+fn_getcookie("puid")
+			"name": newfilename
 		}
-	},function(arr, data){
-		//alert(arr[0].name);
+	},function(files){
+		var imgurl = "";
+		for( var k in files ){
+			imgurl = "/uploads/userico/"+ newfilename + files[k].type;
+		}
+		
+		da.runDB("/sys_power/action/user_update_puicon.php",{
+			dataType: "json",
+			puid: fn_getcookie("puid"),
+			puicon: imgurl
+		});
 	});
 }
 

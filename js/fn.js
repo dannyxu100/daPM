@@ -43,14 +43,14 @@ function fn_uploadfile( param, fn ){
 	daWin({
 		width: 500,
 		height: 300,
-		// backclose: false,
+		backclose: false,
 		title: "上传文件",
 		url: "/plugin/uploadify/index.php",
 		load: function(){
 			this.setparam(param);
 		},
-		back: function(file, data){
-			fn(file, data);
+		back: function(files){
+			fn(files);
 		}
 	});
 }

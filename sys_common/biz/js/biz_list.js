@@ -73,12 +73,17 @@ function viewbiz( dbfldid, bcid, wfcid ){
 	}
 }
 
+/**接单
+*/
+function acceptbiz(){
+	
+}
 
 /**加载工具按钮
 */
 function appendtools( fld, val, row, ds ){
 	var arrhtml = [
-		'<a href="javascript:void(0)" class="txt_tool" onclick="viewbiz(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">接单</a>',
+		'<a href="javascript:void(0)" class="txt_tool" onclick="acceptbiz(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">接单</a>',
 		'<a href="javascript:void(0)" class="txt_tool" onclick="viewbizlog(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">日志</a>',
 		'<a href="javascript:void(0)" class="ico_tool" title="删除" style="background:url(/sys_power/images/sys_icon/delete.png)"></a>'
 		];

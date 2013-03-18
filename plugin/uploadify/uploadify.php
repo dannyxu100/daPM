@@ -4,7 +4,9 @@ Uploadify
 Copyright (c) 2012 Reactive Apps, Ronnie Garcia
 Released under the MIT License <http://www.opensource.org/licenses/mit-license.php> 
 */
-include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
+
+
+// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 
 function makeDir($path) {
 	//根目录物理路径
@@ -40,7 +42,7 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
 	
 	$targetPath = trim($targetFolder, '/');
 	$targetFile = $_SERVER['DOCUMENT_ROOT'].$targetPath.'/'.$filename.'.'.$fileType;
-	Log::out($targetFile);
+	// Log::out($targetFile);
 	
 	move_uploaded_file($tempFile, iconv("UTF-8","gb2312", $targetFile));	//swf编码问题，需要转一次编码
 }

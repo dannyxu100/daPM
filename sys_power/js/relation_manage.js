@@ -39,6 +39,38 @@ function clicknode(treeId, treeNode){
 
 }
 
+
+/**删除可选项
+*/
+function deleteuser(){
+	if(!g_itid){
+		alert("请先选择分类。");
+		return;
+	}
+	
+	var iids = [];
+	da("[name=chkitem]:checked").each(function(){
+		iids.push(this.value);
+	});
+	
+	if( iids ){
+		confirm("确认删除选中的可选项吗？", function(){
+			da.runDB("/sys_setting/item/action/item_delete_list.php",{
+				itid: g_itid,
+				iids: iids.join(",")
+			},function(res){
+				if("FALSE" == res){
+					alert("对不起，操作失败。");
+				}
+				else{
+					alert("删除成功");
+					loadlist();
+				}
+			});
+		});
+	}
+}
+
 /**选择下级人员
 */
 function adduser(){

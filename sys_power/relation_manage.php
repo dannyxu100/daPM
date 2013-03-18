@@ -58,7 +58,7 @@
 						</tbody>
 						<tbody name="body" style="display:none">
 							<tr value="{pu_id}">
-								<td name="checkbox">{checkbox}</td>
+								<td name="checkbox"><input type="checkbox" name="chkitem" value="{pu_id}" /></td>
 								<td name="order">{order}</td>
 								<td name="pu_name" >{pu_name}</td>
 								<td name="pu_phone" >{pu_phone}</td>

@@ -19,8 +19,6 @@
 <script type="text/javascript">
 	<?php $timestamp = time();?>
 	
-	var g_res = [];
-	
 	var g_param = {
 		'swf': 'uploadify.swf',
 		'uploader': 'uploadify.php',
@@ -54,14 +52,10 @@
 			alert("您未安装FLASH控件，无法上传！请安装FLASH控件后再试。");
 		},
 		"onUploadComplete": function(file){			//队列中的每个文件上传完成时触发一次
-			g_res.push(file);
-			
-			if( !g_param["multi"] ){
-				back( g_res );
-			}
+			//
 		},
 		"onQueueComplete" : function(stats) {		//当队列中的所有文件全部完成上传时触发
-		　　back(g_res, stats);
+		　　back(stats.files);
 		}
 	}
 	

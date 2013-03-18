@@ -11,7 +11,7 @@
 	<title>项目进度管理-桌面</title>
 
 	<style>
-	#title_bar{border-bottom:solid 1px #666; height:35px; background:#ddd url(/images/bar_bg.jpg) repeat-x;}
+	#title_bar{border-bottom:solid 1px #666; height:34px; background:#ddd url(/images/bar_bg.jpg) repeat-x;}
 	
 	#menubar{height:30px; position:absolute;left:250px;top:0px;}
 	</style>
