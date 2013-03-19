@@ -92,13 +92,13 @@ var g_mapstatus = {
 */
 function showtranlist(obj, wfcid){
 	var pos = da(obj).offset(),
-		widthObj = da(obj).width(),
+		heightObj = da(obj).height(),
 		listObj = da("#tranlist");
 		
 	listObj.empty();
 	listObj.css({
-		left:( pos.left + widthObj + 10 )+"px",
-		top:pos.top+"px"
+		left: pos.left + "px",
+		top: ( pos.top + heightObj + 4 )+"px"
 	});
 	
 	da.runDB("/sys_common/biz/action/trancase2workflowcase_get_list.php",{
@@ -110,7 +110,8 @@ function showtranlist(obj, wfcid){
 			for(var i=0; i<data.length; i++){
 				da("#tranlist").append('<div>'
 				+ (i+1) +". " 
-				+ data[i].a_name +" - "
+				+ data[i].t_name +" - "
+				+ data[i].pu_name +" - "
 				+ g_mapstatus[data[i].tc_status] 
 				+" - "+ ("0000-00-00 00:00:00"!=data[i].tc_finishdate?da.fmtDate(data[i].tc_finishdate, "yyyy-mm-dd/p"):"") 
 				+'</div>');
