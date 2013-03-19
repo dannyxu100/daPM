@@ -112,7 +112,7 @@ function showtranlist(obj, wfcid){
 				+ (i+1) +". " 
 				+ data[i].a_name +" - "
 				+ g_mapstatus[data[i].tc_status] 
-				+" - "+ da.fmtDate(data[i].tc_finishdate, "yyyy-mm-dd/p") 
+				+" - "+ ("0000-00-00 00:00:00"!=data[i].tc_finishdate?da.fmtDate(data[i].tc_finishdate, "yyyy-mm-dd/p"):"") 
 				+'</div>');
 			}
 			listObj.show();

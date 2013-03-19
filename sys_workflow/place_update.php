@@ -3,7 +3,7 @@
  <HEAD>
 	<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
 	
-	<TITLE>添加工作流库所</TITLE>
+	<TITLE>修改工作流库所</TITLE>
 	<link rel="stylesheet" href="/css/base.css">
 	<style>
 		td{padding:3px;}
@@ -11,8 +11,11 @@
 	</style>
  </HEAD>
 <BODY>
-	<div style="height:30px;line-height:30px; border-bottom:#999; text-align:right; padding:0px 20px;">
-		<a href="javascript:void(0)" onclick="saveplace();" >保存</a> |
+	<div class="list_top_bar">
+		<div class="list_top_title"></div>
+		<div class="list_top_tools">
+			<a class="item" href="javascript:void(0)" onclick="saveplace();" ><img src="/images/sys_icon/save.png" /> 保存</a>
+		</div>
 	</div>
 	<table class="tablesolid" style="width:100%">
 		<tr>
@@ -46,5 +49,5 @@
 
 
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
-<script type="text/javascript" src="js/place_add.js"></script>
+<script type="text/javascript" src="js/place_update.js"></script>
 

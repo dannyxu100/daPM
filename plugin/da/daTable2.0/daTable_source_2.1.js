@@ -55,7 +55,8 @@ var daTable = (function(){
 			field: null,				//数据格式回调函数
 			loaded: null,				//数据装载完毕回调函数
 			itemClick: null,			//行点击事件
-			itemDblclick: null			//行双击事件
+			itemDblclick: null,			//行双击事件
+			error: null					//错误事件
 		},
 		
 		css: {
@@ -220,7 +221,7 @@ var daTable = (function(){
 					fn( data );
 				}, 
 				function( msg, code, content ) {
-					"undefined" != typeof alert2?alert2( code+"<br/>"+content ):alert( code+"<br/>"+content );
+					setting.error && setting.error( msg, code, content );
 				});
 			}
 			else if(dataType && "xml" == dataType){
@@ -231,7 +232,7 @@ var daTable = (function(){
 					}
 				}, 
 				function( msg, code, content  ) {
-					"undefined" != typeof alert2?alert2( code+"<br/>"+content ):alert( code+"<br/>"+content );
+					setting.error && setting.error( msg, code, content );
 				});
 				
 			}

@@ -218,6 +218,9 @@ function loadtran(){
 			if("t_type"==fld ){
 				return "USER"==val?"人工操作":"AUTO"==val?"自动执行":"TIME"==val?"限时触发":"消息触发";
 			}
+			if("t_name"==fld){
+				return '<a href="javascript:void(0)" onclick="updatetran('+ row.t_id +')">'+ row.t_name +'</a>';
+			}
 			else if( "t_rolename" == fld ){
 				return '<a href="javascript:void(0)" onclick="selectrole('+ row.t_id +', this)">'+ (val?val:"空") +'</a>';
 			}
@@ -254,6 +257,11 @@ function loadplace(){
 					return '<input type="checkbox" name="chkitem" value="'+ row.p_id +'" />';
 				}
 			}
+			if("p_name"==fld){
+				if( "1"!=row.p_type && "999"!=row.p_type ){		//起点、终点库所不能被删除
+					return '<a href="javascript:void(0)" onclick="updateplace('+ row.p_id +')">'+ row.p_name +'</a>';
+				}
+			}
 			else if("p_type"==fld ){
 				return "1"==val?"起点库所":"999"==val?"终点库所":"过程";
 			}
@@ -262,6 +270,9 @@ function loadplace(){
 		loaded: function( idx, xml, json, ds ){
 			//link_click("#tb_list tbody[name=details_auto] tr");
 			// toExcel();
+		},
+		error: function(code,msg,ex){
+			//debugger;
 		}
 	}).load();
 }
@@ -482,6 +493,33 @@ function addworkflow(){
 	});
 }
 
+/**修改工作流事务变迁
+*/
+function updatetran( tid ){
+	daWin({
+		width: 550,
+		height: 450,
+		title: g_wfname +"> 修改事务变迁",
+		url: "/sys_workflow/tran_update.php?wfid="+ g_wfid +"&tid="+ tid,
+		after: function(){
+			loadplace();
+		}
+	});
+}
+
+/**修改工作流库所
+*/
+function updateplace( pid ){
+	daWin({
+		width: 550,
+		height: 450,
+		title: g_wfname +"> 修改库所",
+		url: "/sys_workflow/place_update.php?wfid="+ g_wfid +"&pid="+ pid,
+		after: function(){
+			loadplace();
+		}
+	});
+}
 
 /** 修改工作流信息
 */
@@ -510,6 +548,7 @@ function updateworkflow(){
 		}
 	});
 }
+
 
 /** 修改工作流类型信息
 */
@@ -554,6 +593,8 @@ function loadtab(){
 			da("#pad_arclist").hide();
 			//da("#pad_map").hide();
 			da("#pad_workflow").show();
+			
+			loadinfo();
 		}
 	});
 
@@ -574,6 +615,8 @@ function loadtab(){
 			da("#pad_workflow").hide();
 			//da("#pad_map").hide();
 			da("#pad_placelist").show();
+			
+			loadplace();
 		}
 	});
 	
@@ -584,6 +627,8 @@ function loadtab(){
 			da("#pad_workflow").hide();
 			//da("#pad_map").hide();
 			da("#pad_tranlist").show();
+			
+			loadtran();
 		}
 	});
 	daTab0.appendItem("item05","路由向弧","",{
@@ -593,6 +638,8 @@ function loadtab(){
 			da("#pad_workflow").hide();
 			//da("#pad_map").hide();
 			da("#pad_arclist").show();
+			
+			loadarc();
 		}
 	});
 	daTab0.click("item01");

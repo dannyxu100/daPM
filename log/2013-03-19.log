@@ -1,0 +1,9 @@
+【FROM 'place_update_item.php' log】: [错误报告]--(SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from w_place 
+	set p_name='所属部门经理', 
+	p_sort='5', 
+	p_type='50', ' at line 1)
+【FROM 'place_update_item.php' log】: 
+【FROM 'place_update_item.php' log】: 
+【FROM 'place_update_item.php' log】: 
+【FROM 'place_update_item.php' log】: 
+【FROM 'helper_get_item.php' log】: select * from s_helper where h_id=:hid order by h_sort asc, h_id asc
