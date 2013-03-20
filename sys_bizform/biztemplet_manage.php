@@ -116,6 +116,8 @@
 							</div>
 						</div>
 						<textarea id="bt_listhtml" name="bt_listhtml" style="width:99%;height:300px;"></textarea>
+						自定义脚本：
+						<textarea id="bt_listscript" name="bt_listscript" style="width:99%;height:300px;"></textarea>
 					</div>
 					
 					<div id="pad_form" style="display:none;">
@@ -127,6 +129,8 @@
 							</div>
 						</div>
 						<textarea id="bt_formhtml" name="bt_formhtml" style="width:99%;height:800px;"></textarea>
+						自定义脚本：
+						<textarea id="bt_formscript" name="bt_formscript" style="width:99%;height:300px;"></textarea>
 					</div>
 				</div>
 				

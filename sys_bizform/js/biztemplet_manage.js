@@ -182,7 +182,9 @@ function loadinfo(){
 			
 			g_editorList.html(res[0].bt_listhtml);
 			g_editorForm.html(res[0].bt_formhtml);
-			
+			da("#bt_listscript").val(res[0].bt_listscript);
+			da("#bt_formscript").val(res[0].bt_formscript);
+
 			loaddbsource(function(dbObj){		//加载数据源下拉
 				dbObj.val(res[0].bt_dbsource);
 				
@@ -227,7 +229,7 @@ function loadformlist(){
 			da(da(".bt_menu").dom[0]).click();
 		}
 	},function(a,b,c){
-		debugger;
+		//debugger;
 	});
 }
 
@@ -250,7 +252,8 @@ function updatelisthtml(){
 	
 	da.runDB("/sys_bizform/action/biztemplet_update_listhtml.php",{
 		bt_id: g_btid,
-		bt_listhtml: da("#bt_listhtml").val()			//编码，避免读取的时候ajax转化为json出错
+		bt_listhtml: da("#bt_listhtml").val(),
+		bt_listscript: da("#bt_listscript").val()
 		
 	},function(data){
 		if("FALSE" != data){
@@ -271,7 +274,8 @@ function updateformhtml(){
 	
 	da.runDB("/sys_bizform/action/biztemplet_update_formhtml.php",{
 		bt_id: g_btid,
-		bt_formhtml: da("#bt_formhtml").val()			//编码，避免读取的时候ajax转化为json出错
+		bt_formhtml: da("#bt_formhtml").val(),
+		bt_listscript: da("#bt_formscript").val()
 		
 	},function(data){
 		if("FALSE" != data){
