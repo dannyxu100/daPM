@@ -3,7 +3,7 @@
  <HEAD>
 	<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
 	
-	<TITLE>添加工作流路由向弧</TITLE>
+	<TITLE>修改工作流路由向弧</TITLE>
 	<link rel="stylesheet" href="/css/base.css">
 	<style>
 		td{padding:3px;}
@@ -19,8 +19,8 @@
 	</div>
 	<table class="tablesolid" style="width:100%">
 		<tr>
-			<td class="header">名称</td>
-			<td><input type="text" id="a_name" valid="account,false" validinfo="不能为空。"  /> (提交流程可选项)</td>
+			<td class="header" style="width:60px">名称</td>
+			<td><input type="text" id="a_name" valid="account,false" validinfo="不能为空。" /> (提交流程可选项)</td>
 		</tr>
 		<tr>
 			<td class="header">排序</td>
@@ -53,7 +53,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td class="header" style="width:80px;">&nbsp;</td>
+			<td class="header">&nbsp;</td>
 			<td>
 				<span id="pad_place">库所：<select id="a_pid"></select></span>&nbsp;&nbsp;&nbsp;
 				<span id="pad_tran">变迁：<select id="a_tid"></select></span>
@@ -73,5 +73,5 @@
 
 
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
-<script type="text/javascript" src="js/arc_add.js"></script>
+<script type="text/javascript" src="js/arc_update.js"></script>
 

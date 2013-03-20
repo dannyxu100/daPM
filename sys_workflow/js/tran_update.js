@@ -4,6 +4,8 @@ var g_wfid = "",
 
 
 function savetran(){
+	if(!daValid.all()) return;
+
 	da.runDB("action/tran_update_item.php",{
 		tid: g_tid,
 		tname: da("#t_name").val(),
@@ -40,7 +42,7 @@ function loadtran(){
 	});
 }
 
-daLoader("daTable,daWin,daMsg", function(){
+daLoader("daTable,daValid,daWin,daMsg", function(){
 	//da.out("加载成功");
 	var arrParam = da.urlParams();
 	g_wfid = arrParam["wfid"];

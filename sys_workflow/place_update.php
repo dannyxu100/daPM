@@ -20,11 +20,11 @@
 	<table class="tablesolid" style="width:100%">
 		<tr>
 			<td class="header" style="width:60px;">名称</td>
-			<td><input id="p_name" /><span class="must">*</span></td>
+			<td><input id="p_name" valid="account,false" validinfo="不能为空。"  /><span class="must">*</span></td>
 		</tr>
 		<tr>
 			<td class="header">排序</td>
-			<td><input type="text" id="p_sort" value="0" /></td>
+			<td><input type="text" id="p_sort" value="999" valid="int" validinfo="只能为数字。" /></td>
 		</tr>
 		<tr>
 			<td class="header" style="width:80px;">类型</td>

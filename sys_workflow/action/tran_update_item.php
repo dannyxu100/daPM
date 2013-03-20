@@ -6,7 +6,7 @@
 	
 	$db = new DB("da_workflow");
 	$sql = "update w_transition 
-	set t_name=:pname, 
+	set t_name=:tname, 
 	t_sort=:tsort, 
 	t_type=:ttype, 
 	t_limit=:tlimit, 
@@ -15,7 +15,7 @@
 	where t_id=:tid";
 	
 	$db->param(":tid", $_POST["tid"]);
-	$db->param(":pname", $_POST["pname"]);
+	$db->param(":tname", $_POST["tname"]);
 	$db->param(":tsort", $_POST["tsort"]);
 	$db->param(":ttype", $_POST["ttype"]);
 	$db->param(":tlimit", $_POST["tlimit"]);

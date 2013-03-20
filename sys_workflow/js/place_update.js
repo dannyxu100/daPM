@@ -3,6 +3,8 @@ var g_wfid = "",
 	g_pid = "";
 
 function saveplace(){
+	if(!daValid.all()) return;
+	
 	da.runDB("/sys_workflow/action/place_update_item.php",{
 		pid: g_pid,
 		pname: da("#p_name").val(),
@@ -37,7 +39,7 @@ function loadplace(){
 	});
 }
 
-daLoader("daMsg,daTable,daWin", function(){
+daLoader("daMsg,daValid,daTable,daWin", function(){
 	//da.out("加载成功");
 	var arrParam = da.urlParams();
 	g_wfid = arrParam["wfid"];

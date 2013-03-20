@@ -115,7 +115,7 @@
 							<div class="list_top_title">库所列表</div>
 							<div class="list_top_tools">
 								<a class="item" href="javascript:void(0)" onclick="addplace();" ><img src="/images/sys_icon/add.png" /> 添加</a>
-								<a class="item" href="javascript:void(0)" onclick="deleteu2r();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
+								<a class="item" href="javascript:void(0)" onclick="deleteplace();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 							</div>
 						</div>
 						
@@ -213,7 +213,7 @@
 							<div class="list_top_title">路由向弧列表</div>
 							<div class="list_top_tools">
 								<a class="item" href="javascript:void(0)" onclick="addarc();" ><img src="/images/sys_icon/add.png" /> 添加</a>
-								<a class="item" href="javascript:void(0)" onclick="deleteg2r();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
+								<a class="item" href="javascript:void(0)" onclick="deletearc();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 							</div>
 						</div>
 						
@@ -233,7 +233,7 @@
 							</tbody>
 							<tbody name="body" style="display:none">
 								<tr value="{a_id}">
-									<td style="text-align:center;"><input type="checkbox" name="chkitem" value="{a_id}" /></td>
+									<td style="text-align:center;"><input type="checkbox" name="chkitem_arc" value="{a_id}" /></td>
 									<td name="order">{order}</td>
 									<td name="a_name" style="font-weight:bold;" >{a_name}</td>
 									<td name="p_name" >{p_name}</td>

@@ -2,6 +2,8 @@
 var wfid = "";
 
 function savetran(){
+	if(!daValid.all()) return;
+	
 	da.runDB("action/tran_add_item.php",{
 		t_wfid: wfid,
 		t_name: da("#t_name").val(),
@@ -17,7 +19,7 @@ function savetran(){
 	});
 }
 
-daLoader("daTable,daWin,daMsg", function(){
+daLoader("daMsg,daValid,daTable,daWin", function(){
 	//da.out("加载成功");
 	var arrParam = da.urlParams();
 	wfid = arrParam["wfid"];

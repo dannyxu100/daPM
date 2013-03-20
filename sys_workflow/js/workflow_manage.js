@@ -68,7 +68,7 @@ function beforeRemove(treeId, treeNode) {
 				function(res){
 					debugger;
 					if("FALSE"==res){
-						alert("操作失败");
+						alert("对不起，操作失败");
 						loadtree();
 					}
 				},
@@ -110,7 +110,7 @@ function beforeRename(treeId, treeNode, newName) {
 			},
 			success: function(res){
 				if(res=="FALSE"){
-					alert("操作失败");
+					alert("对不起，操作失败");
 					loadtree();
 				}
 				
@@ -179,7 +179,10 @@ function loadarc(){
 		pageSize: 50,
 		
 		field: function( fld, val, row, ds ){
-			if("a_direction"==fld ){
+			if("a_name"==fld){
+				return '<a href="javascript:void(0)" onclick="updatearc('+ row.a_id +')">'+ (row.a_name?row.a_name:"未填写") +'</a>';
+			}
+			else if("a_direction"==fld ){
 				return "IN"==val?'<div style="width:30px;height:15px;background:url(/images/to_right.jpg)"></div>':
 				'<div style="width:30px;height:15px;background:url(/images/to_left.jpg)"></div>';
 			}
@@ -219,7 +222,7 @@ function loadtran(){
 				return "USER"==val?"人工操作":"AUTO"==val?"自动执行":"TIME"==val?"限时触发":"消息触发";
 			}
 			if("t_name"==fld){
-				return '<a href="javascript:void(0)" onclick="updatetran('+ row.t_id +')">'+ row.t_name +'</a>';
+				return '<a href="javascript:void(0)" onclick="updatetran('+ row.t_id +')">'+ (row.t_name?row.t_name:"未填写") +'</a>';
 			}
 			else if( "t_rolename" == fld ){
 				return '<a href="javascript:void(0)" onclick="selectrole('+ row.t_id +', this)">'+ (val?val:"空") +'</a>';
@@ -254,7 +257,7 @@ function loadplace(){
 		field: function( fld, val, row, ds ){
 			if("checkbox"==fld){
 				if( "1"!=row.p_type && "999"!=row.p_type ){		//起点、终点库所不能被删除
-					return '<input type="checkbox" name="chkitem" value="'+ row.p_id +'" />';
+					return '<input type="checkbox" name="chkitem_place" value="'+ row.p_id +'" />';
 				}
 			}
 			if("p_name"==fld){
@@ -419,6 +422,58 @@ function selectmainform(){
 	});
 }
 
+/**删除工作流路由向弧
+*/
+function deletearc(){
+	var aids = [];
+	da("[name=chkitem_arc]:checked").each(function(){
+		aids.push(this.value);
+	});
+	
+	if( 0<aids.length ){
+		confirm("确认删除选中的向弧吗？",function(){
+			da.runDB("/sys_workflow/action/arc_delete_list.php",{
+				wfid: g_wfid,
+				aids: aids.join(",")
+			},function(res){
+				if("FALSE" == res){
+					alert("对不起，操作失败。");
+				}
+				else{
+					alert("删除成功");
+					loadarc();
+				}
+			});
+		});
+	}
+}
+
+/**删除工作流库所
+*/
+function deleteplace(){
+	var pids = [];
+	da("[name=chkitem_place]:checked").each(function(){
+		pids.push(this.value);
+	});
+	
+	if( 0<pids.length ){
+		confirm("确认删除选中的库所吗？",function(){
+			da.runDB("/sys_workflow/action/place_delete_list.php",{
+				wfid: g_wfid,
+				pids: pids.join(",")
+			},function(res){
+				if("FALSE" == res){
+					alert("对不起，操作失败。");
+				}
+				else{
+					alert("删除成功");
+					loadplace();
+				}
+			});
+		});
+	}
+}
+
 /**新建工作流路由向弧
 */
 function addarc(){
@@ -493,6 +548,19 @@ function addworkflow(){
 	});
 }
 
+function updatearc( aid ){
+	daWin({
+		width: 550,
+		height: 500,
+		title: g_wfname +"> 修改向弧",
+		url: "/sys_workflow/arc_update.php?wfid="+ g_wfid +"&aid="+ aid,
+		after: function(){
+			loadarc();
+		}
+	});
+	
+}
+
 /**修改工作流事务变迁
 */
 function updatetran( tid ){
@@ -502,7 +570,7 @@ function updatetran( tid ){
 		title: g_wfname +"> 修改事务变迁",
 		url: "/sys_workflow/tran_update.php?wfid="+ g_wfid +"&tid="+ tid,
 		after: function(){
-			loadplace();
+			loadtran();
 		}
 	});
 }
@@ -544,7 +612,7 @@ function updateworkflow(){
 			alert("修改成功。");
 		}
 		else{
-			alert("操作失败！");
+			alert("对不起，操作失败！");
 		}
 	});
 }

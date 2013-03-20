@@ -11,9 +11,7 @@ function savebiz(){
 		return;
 	}
 	
-	if( !daValid.all() ){
-		return;
-	}
+	if( !daValid.all() ) return;
 	
 	var data = {
 		dataType: "json",
@@ -41,8 +39,9 @@ function savebiz(){
 
 /**初始化表单控件
 */
-function inittools(){
-
+function init(){
+	
+	
 }
 
 /**加载工作流对应 表单列表页模板
@@ -63,7 +62,7 @@ function loadtemplet(){
 			formObj.append( data[0].bt_formhtml );
 			g_dbsource = data[0].bt_dbsource;
 			
-			inittools();
+			init();
 		}
 	});
 }

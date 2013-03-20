@@ -11,17 +11,20 @@
 	</style>
  </HEAD>
 <BODY>
-	<div style="height:30px;line-height:30px; border-bottom:#999; text-align:right; padding:0px 20px;">
-		<a href="javascript:void(0)" onclick="saveplace();" >保存</a> |
+	<div class="list_top_bar">
+		<div class="list_top_title"></div>
+		<div class="list_top_tools">
+			<a class="item" href="javascript:void(0)" onclick="saveplace();" ><img src="/images/sys_icon/save.png" /> 保存</a>
+		</div>
 	</div>
 	<table class="tablesolid" style="width:100%">
 		<tr>
 			<td class="header" style="width:60px;">名称</td>
-			<td><input id="p_name" /><span class="must">*</span></td>
+			<td><input id="p_name" valid="account,false" validinfo="不能为空。" /><span class="must">*</span></td>
 		</tr>
 		<tr>
 			<td class="header">排序</td>
-			<td><input type="text" id="p_sort" value="0" /></td>
+			<td><input type="text" id="p_sort" value="999" valid="int" validinfo="只能为数字。" /></td>
 		</tr>
 		<tr>
 			<td class="header" style="width:80px;">类型</td>

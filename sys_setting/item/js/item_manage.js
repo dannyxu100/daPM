@@ -188,7 +188,7 @@ function loadlist(){
 		},
 		//loading: false,
 		//page: false,
-		pageSize: 50,
+		pageSize: 30,
 		
 		field: function( fld, val, row, ds ){
 			return val;

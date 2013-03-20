@@ -20,11 +20,11 @@
 	<table class="tablesolid" style="width:100%">
 		<tr>
 			<td class="header" style="width:60px;">名称</td>
-			<td><input id="t_name" /><span class="must">*</span></td>
+			<td><input id="t_name" valid="account,false" validinfo="不能为空。" /><span class="must">*</span></td>
 		</tr>
 		<tr>
 			<td class="header">排序</td>
-			<td><input type="text" id="t_sort" value="0" />(编号最好别紧贴,可以预留步骤位置)</td>
+			<td><input type="text" id="t_sort" value="999" valid="int" validinfo="只能为数字。" />(编号最好别紧贴,可以预留步骤位置)</td>
 		</tr>
 		<tr>
 			<td class="header" style="width:80px;">类型</td>
@@ -39,7 +39,7 @@
 		</tr>
 		<tr>
 			<td class="header">时限</td>
-			<td><input id="t_limit" style="width:60px;"/> 个小时</td>
+			<td><input id="t_limit" style="width:60px;" valid="int" validinfo="只能为数字。" /> 个小时</td>
 		</tr>
 		<tr>
 			<td class="header">完毕任务</td>
