@@ -9,7 +9,7 @@ function savelog(){
 		dataType: "json",
 		bcid: g_bcid,
 		tagname: da("[name=chktag]:checked").val(),
-		content: g_editor.html()
+		content: encodeURIComponent(g_editor.html())
 		
 	},function(res){
 		if("FALSE"!=res){

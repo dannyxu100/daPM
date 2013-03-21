@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
 	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
 	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
@@ -8,10 +8,11 @@
 	$sql = "update b_biztemplet 
 	set bt_listhtml=:bt_listhtml, 
 	bt_listscript=:bt_listscript 
-	where bt_id='".$_POST["bt_id"]."' ";
+	where bt_id=:bt_id ";
 	
-	$db->param(":bt_listhtml", $_POST["bt_listhtml"]);
-	$db->param(":bt_listscript", $_POST["bt_listscript"]);
+	$db->param(":bt_listhtml", urldecode($_POST['bt_listhtml']));
+	$db->param(":bt_listscript", urldecode($_POST['bt_listscript']));
+	$db->param(":bt_id", $_POST['bt_id']);
 	
 	$res = $db->update($sql);
 	// Log::out($db->geterror());

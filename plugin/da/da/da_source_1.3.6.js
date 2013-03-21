@@ -8221,7 +8221,7 @@ da.extend({
 		
 		var isPost = da.isPlainObj(data),
 			isScript = /\.js/.test(url.toLowerCase());
-
+		
 		da.ajax({
 			url: url,
 			type: (isPost && !isScript) ? "POST" : "GET",

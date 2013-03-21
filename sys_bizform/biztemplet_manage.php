@@ -144,8 +144,6 @@
 
 
 <script type="text/javascript" src="/js/jquery-1.8.3.js"></script>
-<script charset="utf-8" src="/plugin/kindeditor/kindeditor-min.js"></script>
-<script charset="utf-8" src="/plugin/kindeditor/lang/zh_CN.js"></script>
 <script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="/js/jquery.ui.datepicker-zh-CN.js"></script>
 <script type="text/javascript" src="/plugin/ztree/jquery.ztree.core-3.5.min.js"></script>
@@ -155,4 +153,52 @@
 <script type="text/javascript" src="/js/fn.js"></script>
 <script type="text/javascript" src="js/biztemplet_manage.js"></script>
 
+<script charset="utf-8" src="/plugin/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/plugin/kindeditor/lang/zh_CN.js"></script>
+<script>
+var g_editorList, g_editorForm;
+/**加载在线编辑器
+*/
+KindEditor.ready(function(K) {
+	g_editorList = K.create('#bt_listhtml', {
+		resizeType: 1,
+		filterMode: false,		//不过滤危险标签
+		newlineTag: "br",
+		allowPreviewEmoticons : false,
+		fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
+		allowFileManager : true,
+		items : [
+			'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+			'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+			'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+			'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+			'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
+			'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+			'anchor', 'link', 'unlink', '/',
+			'da_list_fld'
+		]
+	});
+	
+	g_editorForm = K.create('#bt_formhtml', {
+		resizeType : 1,
+		filterMode : false,		//不过滤危险标签
+		newlineTag: "br",
+		allowPreviewEmoticons : false,
+		fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
+		allowFileManager : true,
+		items : [
+			'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+			'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+			'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+			'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+			'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
+			'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+			'anchor', 'link', 'unlink', '|'
+		]
+	});
+});
+
+</script>
 

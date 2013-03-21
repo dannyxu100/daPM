@@ -9,13 +9,11 @@
 	bt_formscript=:bt_formscript 
 	where bt_id='".$_POST["bt_id"]."' ";
 	
-	$db->param(":bt_formhtml", $_POST["bt_formhtml"]);
-	$db->param(":bt_formscript", $_POST["bt_formscript"]);
-	
-	// $log = new Log();
-	// $log->write($_POST["bt_formhtml"]);
+	$db->param(":bt_formhtml", urldecode($_POST["bt_formhtml"]));
+	$db->param(":bt_formscript", urldecode($_POST["bt_formscript"]));
 	
 	$res = $db->update($sql);
+	// Log::out($db->geterror());
 	
 	$db->close();
 	

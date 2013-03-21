@@ -7,7 +7,7 @@
 	date_default_timezone_set('ETC/GMT-8');
 	
 	$bcid=$_POST['bcid'];
-	$content=$_POST['content'];
+	$content=urldecode($_POST['content']);
 	$tagname=$_POST['tagname'];
 	$puid=fn_getcookie('puid');
 	$puname=fn_getcookie('puname');

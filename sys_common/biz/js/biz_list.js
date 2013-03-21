@@ -73,14 +73,6 @@ function viewbiz( dbfldid, bcid, wfcid ){
 	}
 }
 
-/**接单
-*/
-function handlebiz(obj){
-	// da.focus(obj, "#item03");
-	
-	
-}
-
 
 var g_mapstatus = {
 	"EN": '<span style="color:#999; font-weight:bold;">未处理</span>',
@@ -88,18 +80,23 @@ var g_mapstatus = {
 	"FI": '<span style="color:#090; font-weight:bold;">ok!</span>',
 	"CA": '<span style="color:#ccc; font-weight:bold;">已取消</span>'
 }
-/**显示事务处理列表
+
+/**查看事务处理信息
 */
-function showtranlist(obj, wfcid){
-	var pos = da(obj).offset(),
-		heightObj = da(obj).height(),
-		listObj = da("#tranlist");
+function viewtran( obj, bcid, wfcid ){
+	var trObj = da(obj).parents("tr"),
+		nexttrObj = trObj.next("tr"),
+		wfpadObj = da("td[name=workflowinfo]", nexttrObj);
+
+	if( !nexttrObj.is(":hidden")){
+		nexttrObj.hide();
+		return;
+	}
+	else{
+		nexttrObj.show();
+	}
 		
-	listObj.empty();
-	listObj.css({
-		left: pos.left + "px",
-		top: ( pos.top + heightObj + 4 )+"px"
-	});
+	wfpadObj.empty();
 	
 	da.runDB("/sys_common/biz/action/trancase2workflowcase_get_list.php",{
 		dataType: "json",
@@ -108,22 +105,25 @@ function showtranlist(obj, wfcid){
 	},function(data){
 		if("FALSE"!=data){
 			for(var i=0; i<data.length; i++){
-				da("#tranlist").append('<div>'
+				wfpadObj.append('<div>'
 				+ (i+1) +". " 
-				+ data[i].t_name +" - "
-				+ data[i].pu_name +" - "
-				+ g_mapstatus[data[i].tc_status] 
-				+" - "+ ("0000-00-00 00:00:00"!=data[i].tc_finishdate?da.fmtDate(data[i].tc_finishdate, "yyyy-mm-dd/p"):"") 
+				+ data[i].t_name +"&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ data[i].pu_name +"&nbsp;&nbsp;&nbsp;&nbsp;"
+				+ g_mapstatus[data[i].tc_status] +"&nbsp;&nbsp;&nbsp;&nbsp;" 
+				+ ("0000-00-00 00:00:00"!=data[i].tc_finishdate?da.fmtDate(data[i].tc_finishdate, "yyyy-mm-dd/p"):"") 
 				+'</div>');
 			}
-			listObj.show();
 		}
 	});
 }
 
-function hidetranlist(){
-	da("#tranlist").hide();
+/**接单
+*/
+function handlebiz(obj, bcid, wfcid ){
+	// da.focus(obj, "#item03");
+	
 }
+
 
 /**加载工具按钮
 */
@@ -148,7 +148,7 @@ function loaddata(){
 	
 	daTable({
 		id: "tb_list",
-		url: "/sys_common/biz/action/workflowcase2role_get_page.php",
+		url: "/sys_common/biz/action/workflowcase2role_get_page2.php",
 		data: {
 			// opt: "qry",
 			dataType: "json",
@@ -167,6 +167,7 @@ function loaddata(){
 			}
 			else if( 1 == idxfld ){
 				val = '<a href="javascript:void(0)" onclick="viewbiz(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')" onmouseover="showtranlist(this,'+ row["wfc_id"] +')" onmouseout="hidetranlist()">'+ val +'</a>';
+				val += '<img style="margin-left:10px; vertical-align:middle;" src="/images/sys_icon/down.png" onclick="viewtran(this,'+ row["bc_id"] +', '+ row["wfc_id"] +')" />';
 			}
 			else if("tools"==fld){
 				val = tools(fld, val, row, ds);
@@ -178,6 +179,9 @@ function loaddata(){
 		loaded: function( idx, xml, json, ds ){
 			//link_click("#tb_list tbody[name=details_auto] tr");
 			// toExcel();
+		},
+		error: function(code,msg,ex){
+			debugger;
 		}
 	}).load();
 }
