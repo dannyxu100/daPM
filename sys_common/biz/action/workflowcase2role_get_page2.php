@@ -2,7 +2,7 @@
 	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
 	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
 	include_once $_SERVER['DOCUMENT_ROOT']."action/fn.php";
-	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
+	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 	
 	$puid = fn_getcookie("puid");
 	$wfid = $_POST["wfid"];
@@ -12,7 +12,7 @@
 	
 	$db = new DB("da_userform");
 	
-	/**************************** 根据角色 找出该工作流可参与的事务变迁（工作项） *********************************/
+	/******************* 根据角色 找出该工作流可参与的事务变迁（工作项） *********************************/
 	$sql1 = "select t_id from da_workflow.w_transition, da_workflow.w_tran2role 
 	where t_wfid=:wfid 
 	and t_id=t2r_tid 
@@ -34,8 +34,9 @@
 	$param11 = array();
 	array_push($param11, array(":puid", $puid));
 	
-	$db->paramlist($param1);
+	$db->paramlist($param11);
 	$set_puids = $db->getlist($sql11);
+	// Log::out($sql11);
 	
 	$puids = array($puid);					//当前登录人员puid + 下级员工puid 数据集
 	for( $i=0; $i<count($set_puids); $i++){
@@ -43,29 +44,7 @@
 	}
 	
 	/******************* 根据 可参与事务变迁的实例找出 所对应的工作流实例id *****************/
-	/*$sql2 = "select distinct(tc_wfcid) from da_workflow.w_trancase 
-	where w_trancase.tc_wfid=:wfid 
-	and w_trancase.tc_puid in (".implode(',', $puids).") 
-	and w_trancase.tc_tid in (".implode(',', $tids).") ";		//事务变迁实例接单拥有者
-																// 且当同一用户兼容多重角色，
-																// 处理同一流程，不同业务时,也只取一条
-	
-	$param2 = array();
-	if( "" != $status ){
-		$sql2 .= "and w_trancase.tc_status=:status ";
-		array_push($param2, array(":status", $status));
-	}
-	array_push($param2, array(":wfid", $wfid));
-	
-	$db->paramlist($param2);
-	$set_tc = $db->getlist($sql2);
-	
-	$wfcids = array(0);					//工作流实例id记录集
-	for( $i=0; $i<count($set_tc); $i++){
-		array_push( $wfcids, $set_tc[$i]["tc_wfcid"] );
-	}
-	*/
-	/**************************** 查询数据源记录集 *********************************/
+	/******************* 查询数据源记录集 ***************************************************/
 	$sql31 = "select ".$dbsource.".*, TC.*, b_bizcase.bc_id, w_workflowcase.wfc_id from ".$dbsource.", ";
 	$param31 = array();
 	
@@ -74,12 +53,19 @@
 
 	$sql4 = "da_bizform.b_bizcase, da_workflow.w_workflowcase, 
 	(select * from da_workflow.w_trancase 
-	where w_trancase.tc_wfid='".$wfid."' 
-	and w_trancase.tc_puid in (".implode(',', $puids).") 
+	where w_trancase.tc_wfid='".$wfid."' ";
+	
+	if( "" != $status ){
+		$sql4 .= "and w_trancase.tc_status='".$status."' ";
+	}
+	
+	$sql4 .= "and (w_trancase.tc_puid in (".implode(',', $puids).") or w_trancase.tc_puid=0) 
 	and w_trancase.tc_tid in (".implode(',', $tids).")) as TC 
 	where ".$dbsource."." .$dbfld."=b_bizcase.bc_dbsourceid 
 	and b_bizcase.bc_wfcid = w_workflowcase.wfc_id 
-	and w_workflowcase.wfc_id = TC.tc_wfcid";
+	and w_workflowcase.wfc_id = TC.tc_wfcid";					// 事务变迁实例接单拥有者
+																// 且当同一用户兼容多重角色，
+																// 处理同一流程，不同业务时,也只取一条
 
 	$sql31 .= $sql4;
 	// array_push($param31, array(":wfid", $wfid));
@@ -96,17 +82,17 @@
 		array_push($param31, array(":start", $start));
 		array_push($param31, array(":end", $end));
 	}
-	Log::out($sql31);
-	Log::out($wfid);
+	// Log::out($sql31);
+	// Log::out($wfid);
 	
 	
 	$db->paramlist($param31);
 	$set = $db->getlist($sql31);
-	Log::out($db->geterror());
+	// Log::out($db->geterror());
 	
 	$db->paramlist($param32);
 	$count = $db->getlist($sql32);
-	Log::out($db->geterror());
+	// Log::out($db->geterror());
 	
 	$db->close();
 	

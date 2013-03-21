@@ -255,7 +255,7 @@ function updatelisthtml(){
 		bt_listhtml: encodeURIComponent(da("#bt_listhtml").val()),
 		bt_listscript: encodeURIComponent(da("#bt_listscript").val())
 		
-	},function(data){debugger;
+	},function(data){
 		if("FALSE" != data){
 			alert("修改成功。");
 		}

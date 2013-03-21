@@ -1,6 +1,7 @@
 <?php 
 	// json_encode($arr);
 	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."/action/fn.php";
 	include_once $_SERVER['DOCUMENT_ROOT']."/action/sys/db.php";
 	// include_once $_SERVER['DOCUMENT_ROOT']."/action/sys/log.php";
 	date_default_timezone_set('ETC/GMT-8');
@@ -48,7 +49,7 @@
 	
 	/************************** 创建下一步事务变迁(工作项)  实例***************************************/
 	$sql_tc = "insert into da_workflow.w_trancase( tc_wfid, tc_tid, tc_wfcid, tc_type, tc_limit, 
-	tc_firetaskid, tc_context, tc_status, tc_enabledate, tc_userid ) 
+	tc_firetaskid, tc_context, tc_status, tc_enabledate, tc_puid ) 
 	
 	select t_wfid, t_id, :wfcid, t_type, t_limit, 
 	t_firetaskid, :context, :status, :enabledate, :userid 
@@ -63,7 +64,7 @@
 	array_push($param_tc, array(":status", "EN"));					//事务变迁(工作项)状态；EN：启用；IP：处理中；CA：取消； FI：完成
 	array_push($param_tc, array(":enabledate", $nowdate));
 	array_push($param_tc, array(":context", ""));
-	array_push($param_tc, array(":userid", ""));
+	array_push($param_tc, array(":userid", fn_getcookie("puid")));
 	$db->paramlist($param_tc);
 	$db->insert($sql_tc);
 	
@@ -107,8 +108,7 @@
 	$db->paramlist($param_bc);
 	$res = $db->insert($sql_bc);
 	
-	// $log = new Log();
-	// $log->write($sql);
+	// Log::out($db->geterror());
 	
 	if($db->geterror()){
 		$db->back();

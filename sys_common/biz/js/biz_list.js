@@ -75,7 +75,7 @@ function viewbiz( dbfldid, bcid, wfcid ){
 
 
 var g_mapstatus = {
-	"EN": '<span style="color:#999; font-weight:bold;">未处理</span>',
+	"EN": '<span style="color:#999; font-weight:bold;">未提交</span>',
 	"IP": '<span style="color:#f93; font-weight:bold;">ing..</span>',
 	"FI": '<span style="color:#090; font-weight:bold;">ok!</span>',
 	"CA": '<span style="color:#ccc; font-weight:bold;">已取消</span>'

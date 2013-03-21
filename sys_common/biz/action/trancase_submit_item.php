@@ -1,7 +1,7 @@
 <?php 
 	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
 	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
-	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
+	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 	date_default_timezone_set('ETC/GMT-8');
 	
 	$nowdate = date("Y-m-d H:i:s");
@@ -134,7 +134,7 @@
 		
 		/************************** 创建下一步事务变迁(工作项)  实例***************************************/
 		$sql_tc3 = "insert into da_workflow.w_trancase( tc_wfid, tc_tid, tc_wfcid, tc_type, tc_limit, 
-		tc_firetaskid, tc_context, tc_status, tc_enabledate, tc_userid ) 
+		tc_firetaskid, tc_context, tc_status, tc_enabledate, tc_puid ) 
 		
 		select t_wfid, t_id, :wfcid, t_type, t_limit, 
 		t_firetaskid, :context, :status, :enabledate, :userid 
@@ -155,8 +155,8 @@
 	}
 	
 	
-	$log = new Log();
-	$log->write($db->geterror());
+	// $log = new Log();
+	// $log->write($db->geterror());
 	
 	if($db->geterror()){
 		$db->back();

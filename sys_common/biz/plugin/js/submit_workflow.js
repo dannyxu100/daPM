@@ -11,7 +11,8 @@ function updatetran(){
 		wfcid: g_wfcid,
 		aid: da("#arclist").val()
 	},
-	function(data){debugger;
+	function(data){
+		// debugger;
 		if( "FALSE" != data ){
 			alert("提交成功。");
 		}
@@ -19,7 +20,7 @@ function updatetran(){
 			alert("操作失败。");
 		}
 	},function(a,b,c){
-		debugger;
+		// debugger;
 	});
 }
 
@@ -33,6 +34,7 @@ function loadarclist(){
 		wfcid: g_wfcid
 	},
 	function(data){
+		// debugger;
 		if( "FALSE" != data ){
 			var arcObj = da("#arclist");
 			
@@ -41,11 +43,11 @@ function loadarclist(){
 			}
 		}
 	},function(a,b,c){
-		debugger;
+		// debugger;
 	});
 }
 
-daLoader("daIframe",function(){
+daLoader("daMsg,daIframe",function(){
 	da(function(){
 		var arrparam = da.urlParams();
 		g_wfid = arrparam["wfid"];

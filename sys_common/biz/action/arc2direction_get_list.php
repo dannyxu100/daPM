@@ -22,9 +22,9 @@
 	$tids = array();					//事务变迁id记录集。
 	for( $i=0; $i<count($set_tran); $i++){
 		array_push( $tids, $set_tran[$i]["t_id"] );
-	}
+	}	
 	
-	/**************** 根据可参与事务变迁处理中状态的实例 找出下一步直线库所的 可选择向弧（路由） *****************/
+	/**************** 根据可参与事务变迁处理中状态的实例 找出下一步指向库所的 可选择向弧（路由） *****************/
 	$sql2 = "select w_arc.* from w_arc, w_trancase 
 	where a_tid=tc_tid 
 	and a_direction='OUT' 
@@ -33,19 +33,16 @@
 	and tc_tid in (".implode(',', $tids).")";	//通过工作流实例wfcid缩小范围。
 												//向弧走向；IN：库所走向事务变迁；OUT：事务变迁走向库所。
 												//事务变迁（工作项）状态；EN：启用；IP：处理中；CA：取消； FI：完成
-												
+									
 	$sql2 .= " order by a_sort asc, a_id asc";
-	
+	// Log::out($sql2);	
 	$param2 = array();
 	array_push($param2, array(":wfcid", $wfcid));
 	
 	$db->paramlist($param2);
 	$set = $db->getlist($sql2);
 	
-	// $log = new Log();
-	// $log->write($sql1);
-	// $log->write($sql2);
-	// $log->write($db->geterror());
+	// Log::out($db->geterror());	
 	
 	$db->close();
 	

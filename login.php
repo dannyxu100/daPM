@@ -88,7 +88,12 @@
 		daKey({
 			keyup: function(key, isctrl, isalt, isshift){
 				if("Enter"==key){
-					login();
+					if(g_focuscode){
+						inputfocus();
+					}
+					else{
+						login();
+					}
 				}
 				if("Tab"==key){
 					inputfocus();
