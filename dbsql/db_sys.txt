@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 03 月 20 日 10:03
+-- 生成日期: 2013 年 03 月 22 日 10:05
 -- 服务器版本: 5.0.45
 -- PHP 版本: 5.2.5
 
@@ -29,16 +29,15 @@ CREATE TABLE `b_bizcase` (
   `bc_dbsourceid` varchar(50) NOT NULL COMMENT '数据源联系字段值（一般为主键值）',
   `bc_lastlog` text NOT NULL COMMENT '业务单最新日志内容',
   PRIMARY KEY  (`bc_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='业务表单实例表' AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='业务表单实例表' AUTO_INCREMENT=8 ;
 
 --
 -- 导出表中的数据 `b_bizcase`
 --
 
 INSERT INTO `b_bizcase` (`bc_id`, `bc_btid`, `bc_tcid`, `bc_wfcid`, `bc_dbsourceid`, `bc_lastlog`) VALUES
-(3, 1, 0, 7, '3', '进度快一点！<img src="http://localhost:8800/plugin/kindeditor/plugins/emoticons/images/35.gif" border="0" alt="" /><img src="http://localhost:8800/plugin/kindeditor/plugins/emoticons/images/35.gif" border="0" alt="" /><img src="http://localhost:8800/plugin/kindeditor/plugins/emoticons/images/35.gif" border="0" alt="" />'),
-(4, 1, 0, 8, '4', '<span>项目研讨中</span>'),
-(5, 1, 0, 9, '5', '<span>项目研讨中</span><br />');
+(6, 1, 0, 10, '11', ''),
+(7, 1, 0, 11, '12', '');
 
 -- --------------------------------------------------------
 
@@ -61,13 +60,6 @@ CREATE TABLE `b_bizlog` (
 -- 导出表中的数据 `b_bizlog`
 --
 
-INSERT INTO `b_bizlog` (`l_id`, `l_bcid`, `l_content`, `l_date`, `l_puid`, `l_puname`, `l_tagname`) VALUES
-(1, 2, '<p>\n	fdsfdsfdsa\n</p>\n<p>\n	fds\n</p>\n<p>\n	f\n</p>\n<p>\n	ds\n</p>\n<p>\n	af\n</p>\n<p>\n	d\n</p>\n<p>\n	safdsafdsfdsfa\n</p>', '2013-03-15 15:59:25', 1, '徐飞', '1'),
-(2, 3, '<p>\n	111111\n</p>\n<p>\n	12222\n</p>\n<p>\n	22222\n</p>', '2013-03-15 16:14:49', 1, '徐飞', '1'),
-(3, 3, '<img src="/plugin/kindeditor/attached/image/20130315/20130315135903_59023.jpg" width="600" height="1214" alt="" />', '2013-03-15 21:59:28', 1, '徐飞', '1'),
-(4, 3, '进度快一点！<img src="http://localhost:8800/plugin/kindeditor/plugins/emoticons/images/35.gif" border="0" alt="" /><img src="http://localhost:8800/plugin/kindeditor/plugins/emoticons/images/35.gif" border="0" alt="" /><img src="http://localhost:8800/plugin/kindeditor/plugins/emoticons/images/35.gif" border="0" alt="" />', '2013-03-15 22:09:26', 12, '高思伟', '1'),
-(5, 5, '<span>项目研讨中</span><br />', '2013-03-15 22:49:16', 1, '徐飞', '1'),
-(6, 4, '<span>项目研讨中</span>', '2013-03-15 22:49:28', 1, '徐飞', '1');
 
 -- --------------------------------------------------------
 
@@ -90,10 +82,6 @@ CREATE TABLE `b_bizreply` (
 -- 导出表中的数据 `b_bizreply`
 --
 
-INSERT INTO `b_bizreply` (`r_id`, `r_lid`, `r_bcid`, `r_content`, `r_date`, `r_puid`, `r_puname`) VALUES
-(1, 2, 3, '111111111111111111111', '2013-03-15 21:31:52', 1, '徐飞'),
-(2, 3, 3, '图片太大了，哥哥<img src="http://localhost:8800/plugin/kindeditor/plugins/emoticons/images/13.gif" border="0" alt="" />', '2013-03-15 22:00:07', 1, '徐飞'),
-(3, 3, 3, '设计得太难看了！！<img src="http://localhost:8800/plugin/kindeditor/plugins/emoticons/images/28.gif" border="0" alt="" />', '2013-03-15 22:00:31', 1, '徐飞');
 
 -- --------------------------------------------------------
 
@@ -125,8 +113,8 @@ CREATE TABLE `b_biztemplet` (
 --
 
 INSERT INTO `b_biztemplet` (`bt_id`, `bt_name`, `bt_bttid`, `bt_sort`, `bt_dbsource`, `bt_dbfld`, `bt_listhtml`, `bt_listscript`, `bt_formhtml`, `bt_formscript`, `bt_remark`, `bt_user`, `bt_date`, `bt_edituser`, `bt_editdate`) VALUES
-(1, '请假单', 2, 0, 'hsd_leave', 'l_id', '<table id=\\"tb_list\\" style=\\"width:100%;\\">\n	<tbody name=\\"head\\">\n		<tr>\n			<td style=\\"width:30px;\\">\n				序\n			</td>\n			<td style=\\"width:80px;\\">\n				请假人\n			</td>\n			<td style=\\"width:100px;\\">\n				请假日期\n			</td>\n			<td>\n				请假事由\n			</td>\n			<td style=\\"width:80px;\\">\n				部门经理\n			</td>\n			<td style=\\"width:80px;\\">\n				部门总监\n			</td>\n			<td style=\\"width:100px;\\">\n				审核日期\n			</td>\n			<td style=\\"width:100px;\\">\n				&nbsp;\n			</td>\n		</tr>\n	</tbody>\n	<tbody name=\\"body\\">\n		<tr>\n			<td name=\\"order\\">\n				{order}\n			</td>\n			<td name=\\"l_puname\\">\n				{l_puname}\n			</td>\n			<td name=\\"l_date\\" fmt=\\"yyyy-mm-dd\\">\n				{l_date}\n			</td>\n			<td name=\\"l_content\\">\n				{l_content}\n			</td>\n			<td>\n				{l_manager}\n			</td>\n			<td>\n				{l_general}\n			</td>\n			<td name=\\"l_date2\\" fmt=\\"yyyy-mm-dd\\">\n				{l_date2}\n			</td>\n			<td>\n				{tools}\n			</td>\n		</tr>\n	</tbody>\n	<tbody>\n		<tr>\n			<td colspan=\\"9\\">\n				<span style=\\"white-space:nowrap;\\">共<span id=\\"tb_list_recordcount2\\">0</span>&nbsp;条，\n				共<span id=\\"tb_list_pagecount2\\">0</span>&nbsp;页，\n				当前在第<span id=\\"tb_list_pageindex2\\">0</span>&nbsp;页　 <span id=\\"tb_list_pageinfo\\">&nbsp;</span> </span> \n			</td>\n		</tr>\n	</tbody>\n</table>', '', '<p style="text-align:center;">\n	<span style="font-size:24px;line-height:1.5;font-family:KaiTi_GB2312;">请假单</span> \n</p>\n<table style="width:100%;" cellpadding="5" cellspacing="0" border="1" bordercolor="#CCCCCC">\n	<tbody>\n		<tr>\n			<td style="width:80px;text-align:right;">\n				请假人：\n			</td>\n			<td>\n				<input id="l_puname" valid="abcnumber,false" /> \n			</td>\n			<td style="width:80px;text-align:right;">\n				日期：\n			</td>\n			<td>\n				<input id="l_date" /> \n			</td>\n			<td style="width:80px;text-align:right;">\n				编号：\n			</td>\n			<td>\n				<input id="l_id" disabled="disabled" /> \n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;">\n				假期始于：\n			</td>\n			<td>\n				<input id="l_fromdate" /> \n			</td>\n			<td style="text-align:right;">\n				止于：\n			</td>\n			<td>\n				<input id="l_todate" /> \n			</td>\n			<td>\n				<br />\n			</td>\n			<td>\n				<br />\n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;vertical-align:top;">\n				事 &nbsp; 由：\n			</td>\n			<td colspan="5">\n				<textarea id="l_content" style="width:100%;height:100px;"></textarea> \n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;">\n				部门经理：\n			</td>\n			<td>\n				<input id="l_manager" disabled="disabled" /> \n			</td>\n			<td style="text-align:right;">\n				部门总监：\n			</td>\n			<td>\n				<input id="l_general" disabled="disabled" /> \n			</td>\n			<td style="text-align:right;">\n				审批日期：\n			</td>\n			<td>\n				<input id="l_date2" disabled="disabled" /> \n			</td>\n		</tr>\n	</tbody>\n</table>', '', '', '徐飞', '2013-02-16 19:43:01', '徐飞', '2013-02-16 21:33:07'),
-(2, '企业网建业务单', 2, 2, 'td_website', 'ws_id', '<table id=\\"\\\\&quot;tb_list\\\\&quot;\\" style=\\"width:100%;\\">\n	<tbody name=\\"\\\\&quot;head\\\\&quot;\\">\n		<tr>\n			<td style=\\"width:30px;\\">\n				序\n			</td>\n			<td>\n				客户名称\n			</td>\n			<td style=\\"width:120px;\\">\n				合同号\n			</td>\n			<td style=\\"width:80px;\\">\n				销售人员\n			</td>\n			<td style=\\"width:80px;\\">\n				联系人\n			</td>\n			<td style=\\"width:80px;\\">\n				联系电话\n			</td>\n			<td style=\\"width:100px;\\">\n				提交日期\n			</td>\n		</tr>\n	</tbody>\n	<tbody name=\\"\\\\&quot;body\\\\&quot;\\">\n		<tr>\n			<td name=\\"\\\\&quot;order\\\\&quot;\\">\n				{order}\n			</td>\n			<td>\n				{ws_cstname}\n			</td>\n			<td>\n				{ws_code}\n			</td>\n			<td>\n				{ws_solename}\n			</td>\n			<td>\n				{ws_connname}\n			</td>\n			<td>\n				{ws_connphone}\n			</td>\n			<td name=\\"\\\\&quot;ws_date\\\\&quot;\\" fmt=\\"\\\\&quot;yyyy-mm-dd/p\\\\&quot;\\">\n				{ws_date}\n			</td>\n		</tr>\n	</tbody>\n	<tbody>\n		<tr>\n			<td colspan=\\"\\\\&quot;8\\\\&quot;\\">\n				共<span id=\\"\\\\&quot;tb_list_recordcount2\\\\&quot;\\" style=\\"color:#c26220;\\">0</span>&nbsp;条， \n                            共<span id=\\"\\\\&quot;tb_list_pagecount2\\\\&quot;\\" style=\\"color:#c26220;\\">0</span>&nbsp;页， \n                            当前在第<span id=\\"\\\\&quot;tb_list_pageindex2\\\\&quot;\\" style=\\"color:#c26220;\\">0</span>&nbsp;页　&nbsp; <span id=\\"\\\\&quot;tb_list_pageinfo\\\\&quot;\\" style=\\"color:#c26220;\\">&nbsp;</span> \n			</td>\n		</tr>\n	</tbody>\n</table>', '', '<div style="text-align:center;">\n	<span style="font-family:KaiTi_GB2312;line-height:1.5;font-size:24px;">企业建站单</span> \n</div>\n<p>\n	<span style="font-family:KaiTi_GB2312;"> \n	<table style="width:100%;" cellpadding="2" cellspacing="0" border="1" bordercolor="#CCCCCC">\n		<tbody>\n			<tr>\n				<td style="text-align:right;width:80px;">\n					客户名称：\n				</td>\n				<td>\n					<input id="ws_cstname" style="width:200px;" valid="account,false" validinfo="不能为空" /> \n				</td>\n				<td style="text-align:right;width:80px;">\n					销售人员：\n				</td>\n				<td>\n					<input id="ws_solename" /> \n				</td>\n				<td style="text-align:right;width:80px;">\n					合同号：\n				</td>\n				<td>\n					<input id="ws_code" valid="abcnumber,false" validinfo="不能为空,格式为：HT201303150020" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;">\n					联系人：\n				</td>\n				<td>\n					<input id="ws_connname" /> \n				</td>\n				<td style="text-align:right;">\n					联系电话：\n				</td>\n				<td>\n					<input id="ws_connphone" valid="phone,false" /> \n				</td>\n				<td style="text-align:right;">\n					提单日期：\n				</td>\n				<td>\n					<input id="ws_date" disabled="disabled" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;">\n					地 &nbsp; 址：\n				</td>\n				<td colspan="5">\n					<input id="ws_connaddr" style="width:300px;" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;vertical-align:top;">\n					备 &nbsp; 注：\n				</td>\n				<td colspan="5">\n					<textarea id="ws_remark" style="width:100%;height:200px;"></textarea> \n				</td>\n			</tr>\n		</tbody>\n	</table>\n<br />\n<br />\n</span> \n</p>\n<p>\n	<br />\n</p>', '', '3232', '徐飞', '2013-02-16 19:48:36', '', '0000-00-00 00:00:00'),
+(1, '请假单', 2, 0, 'hsd_leave', 'l_id', '<table id="tb_list" style="width:100%;">\n	<tbody name="head">\n		<tr>\n			<td style="width:30px;">\n				序\n			</td>\n			<td style="width:80px;">\n				请假人\n			</td>\n			<td style="width:100px;">\n				请假日期\n			</td>\n			<td>\n				请假事由\n			</td>\n			<td style="width:80px;">\n				部门经理\n			</td>\n			<td style="width:80px;">\n				部门总监\n			</td>\n			<td style="width:100px;">\n				审核日期\n			</td>\n			<td style="width:100px;">\n				&nbsp;\n			</td>\n		</tr>\n	</tbody>\n	<tbody name="body">\n		<tr>\n			<td name="order">\n				{order}\n			</td>\n			<td name="l_puname">\n				{l_puname}\n			</td>\n			<td name="l_date" fmt="yyyy-mm-dd">\n				{l_date}\n			</td>\n			<td name="l_content">\n				{l_content}\n			</td>\n			<td>\n				{l_manager}\n			</td>\n			<td>\n				{l_general}\n			</td>\n			<td name="l_date2" fmt="yyyy-mm-dd">\n				{l_date2}\n			</td>\n			<td>\n				{tools}\n			</td>\n		</tr>\n		<tr style="display:none;background-color:#666;">\n			<td style="border-right:0px;">\n				&nbsp;\n			</td>\n			<td colspan="8" name="workflowinfo" style="padding:0px;padding-bottom:10px;">\n				&nbsp;\n			</td>\n		</tr>\n	</tbody>\n	<tbody>\n		<tr>\n			<td colspan="9">\n				共<span id="tb_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条， \n				共<span id="tb_list_pagecount2" style="color:#c26220;">0</span>&nbsp;页， \n				当前在第<span id="tb_list_pageindex2" style="color:#c26220;">0</span>&nbsp;页　&nbsp; <span id="tb_list_pageinfo" style="color:#c26220;">&nbsp;</span> \n			</td>\n		</tr>\n	</tbody>\n</table>', '', '<p style="text-align:center;">\n	<span style="font-size:24px;line-height:1.5;font-family:KaiTi_GB2312;">请假单</span> \n</p>\n<table style="width:100%;" cellpadding="5" cellspacing="0" border="1" bordercolor="#CCCCCC">\n	<tbody>\n		<tr>\n			<td style="width:80px;text-align:right;">\n				请假人：\n			</td>\n			<td>\n				<input id="l_puname" valid="account,false" /> \n			</td>\n			<td style="width:80px;text-align:right;">\n				日期：\n			</td>\n			<td>\n				<input id="l_date" /> \n			</td>\n			<td style="width:80px;text-align:right;">\n				编号：\n			</td>\n			<td>\n				<input id="l_id" disabled="disabled" /> \n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;">\n				假期始于：\n			</td>\n			<td>\n				<input id="l_fromdate" /> \n			</td>\n			<td style="text-align:right;">\n				止于：\n			</td>\n			<td>\n				<input id="l_todate" /> \n			</td>\n			<td>\n				<br />\n			</td>\n			<td>\n				<br />\n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;vertical-align:top;">\n				事 &nbsp; 由：\n			</td>\n			<td colspan="5">\n				<textarea id="l_content" style="width:100%;height:100px;"></textarea> \n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;">\n				部门经理：\n			</td>\n			<td>\n				<input id="l_manager" disabled="disabled" /> \n			</td>\n			<td style="text-align:right;">\n				部门总监：\n			</td>\n			<td>\n				<input id="l_general" disabled="disabled" /> \n			</td>\n			<td style="text-align:right;">\n				审批日期：\n			</td>\n			<td>\n				<input id="l_date2" disabled="disabled" /> \n			</td>\n		</tr>\n	</tbody>\n</table>', '', '', '徐飞', '2013-02-16 19:43:01', '徐飞', '2013-02-16 21:33:07'),
+(2, '企业网建业务单', 2, 2, 'td_website', 'ws_id', '<table id="tb_list" style="width:100%;">\n	<tbody name="head">\n		<tr>\n			<td style="width:30px;">\n				序\n			</td>\n			<td>\n				客户名称\n			</td>\n			<td style="width:120px;">\n				合同号\n			</td>\n			<td style="width:80px;">\n				销售人员\n			</td>\n			<td style="width:80px;">\n				联系人\n			</td>\n			<td style="width:80px;">\n				联系电话\n			</td>\n			<td style="width:100px;">\n				提交日期\n			</td>\n		</tr>\n	</tbody>\n	<tbody name="body">\n		<tr>\n			<td name="order">\n				{order}\n			</td>\n			<td>\n				{ws_cstname}\n			</td>\n			<td>\n				{ws_code}\n			</td>\n			<td>\n				{ws_solename}\n			</td>\n			<td>\n				{ws_connname}\n			</td>\n			<td>\n				{ws_connphone}\n			</td>\n			<td name="ws_date" fmt="yyyy-mm-dd/p">\n				{ws_date}\n			</td>\n		</tr>\n	</tbody>\n	<tbody>\n		<tr>\n			<td colspan="8">\n				共<span id="tb_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条， \n                            共<span id="tb_list_pagecount2" style="color:#c26220;">0</span>&nbsp;页， \n                            当前在第<span id="tb_list_pageindex2" style="color:#c26220;">0</span>&nbsp;页　&nbsp; <span id="tb_list_pageinfo" style="color:#c26220;">&nbsp;</span> \n			</td>\n		</tr>\n	</tbody>\n</table>', '', '<div style="text-align:center;">\n	<span style="font-family:KaiTi_GB2312;line-height:1.5;font-size:24px;">企业建站单</span> \n</div>\n<p>\n	<span style="font-family:KaiTi_GB2312;"> \n	<table style="width:100%;" cellpadding="2" cellspacing="0" border="1" bordercolor="#CCCCCC">\n		<tbody>\n			<tr>\n				<td style="text-align:right;width:80px;">\n					客户名称：\n				</td>\n				<td>\n					<input id="ws_cstname" style="width:200px;" valid="account,false" validinfo="不能为空" /> \n				</td>\n				<td style="text-align:right;width:80px;">\n					销售人员：\n				</td>\n				<td>\n					<input id="ws_solename" /> \n				</td>\n				<td style="text-align:right;width:80px;">\n					合同号：\n				</td>\n				<td>\n					<input id="ws_code" valid="abcnumber,false" validinfo="不能为空,格式为：HT201303150020" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;">\n					联系人：\n				</td>\n				<td>\n					<input id="ws_connname" /> \n				</td>\n				<td style="text-align:right;">\n					联系电话：\n				</td>\n				<td>\n					<input id="ws_connphone" valid="phone,false" /> \n				</td>\n				<td style="text-align:right;">\n					提单日期：\n				</td>\n				<td>\n					<input id="ws_date" disabled="disabled" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;">\n					地 &nbsp; 址：\n				</td>\n				<td colspan="5">\n					<input id="ws_connaddr" style="width:300px;" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;vertical-align:top;">\n					备 &nbsp; 注：\n				</td>\n				<td colspan="5">\n					<textarea id="ws_remark" style="width:100%;height:200px;"></textarea> \n				</td>\n			</tr>\n		</tbody>\n	</table>\n<br />\n<br />\n</span> \n</p>\n<p>\n	<br />\n</p>', '', '3232', '徐飞', '2013-02-16 19:48:36', '', '0000-00-00 00:00:00'),
 (3, 'SEO业务单', 2, 3, '', '', '', '', '<p>\n	fdsfdsfdsafdsfdsf\n</p>\n<p>\n	ds\n</p>\n<p>\n	f\n</p>\n<p>\n	ds\n</p>\n<p>\n	af\n</p>\n<p>\n	d\n</p>\n<p>\n	safdddddddddddddddddddd\n</p>', '', '', '徐飞', '2013-02-16 19:50:12', '徐飞', '2013-02-16 20:09:42');
 
 -- --------------------------------------------------------
@@ -242,7 +230,7 @@ CREATE TABLE `p_menu` (
   `pm_img` varchar(1000) character set utf8 NOT NULL COMMENT '图标文件地址',
   `pm_remark` text character set utf8 NOT NULL COMMENT '备注',
   PRIMARY KEY  (`pm_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='系统菜单表' AUTO_INCREMENT=40 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='系统菜单表' AUTO_INCREMENT=39 ;
 
 --
 -- 导出表中的数据 `p_menu`
@@ -570,15 +558,15 @@ CREATE TABLE `p_user` (
 --
 
 INSERT INTO `p_user` (`pu_id`, `pu_oid`, `pu_code`, `pu_pwd`, `pu_name`, `pu_icon`, `pu_gender`, `pu_phone`, `pu_telephone`, `pu_address`, `pu_lastlogin`, `pu_logincount`, `pu_remark`) VALUES
-(1, 1, 'xufei', 'c4ca4238a0b923820dcc509a6f75849b', '徐飞', '/uploads/userico/徐飞_1.jpg', '男', '13688387776', '', '成都市青羊区八宝街', '2013-03-20 13:28:26', 0, '徐飞'),
+(1, 1, 'xufei', 'c4ca4238a0b923820dcc509a6f75849b', '徐飞', '/uploads/userico/徐飞_1.jpg', '男', '13688387776', '', '成都市青羊区八宝街', '2013-03-21 14:43:49', 0, '徐飞'),
 (2, 3, 'yangjun', 'fae0b27c451c728867a567e8c1bb4e53', '杨俊', '', '男', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (3, 3, 'zhangkai', 'fae0b27c451c728867a567e8c1bb4e53', '张凯', '', '男', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(4, 38, 'xiaodan', 'fae0b27c451c728867a567e8c1bb4e53', '肖丹', '', '女', '', '', '', '2013-03-16 00:19:31', 0, ''),
+(4, 38, 'xiaodan', 'fae0b27c451c728867a567e8c1bb4e53', '肖丹', '', '女', '', '', '', '2013-03-22 16:39:13', 0, ''),
 (5, 1, 'gaoyan', 'fae0b27c451c728867a567e8c1bb4e53', '高燕', '', '女', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (6, 38, 'jiujun', 'fae0b27c451c728867a567e8c1bb4e53', '刘峻', '', '男', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (7, 1, 'wangzheng', 'fae0b27c451c728867a567e8c1bb4e53', '王正', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (8, 1, 'wangyuting', 'fae0b27c451c728867a567e8c1bb4e53', '王钰婷', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(9, 38, 'wangxiujuan', 'fae0b27c451c728867a567e8c1bb4e53', '王秀娟', '', '女', '', '', '', '2013-03-16 00:26:49', 0, ''),
+(9, 38, 'wangxiujuan', 'fae0b27c451c728867a567e8c1bb4e53', '王秀娟', '', '女', '', '', '', '2013-03-22 09:50:56', 0, ''),
 (10, 1, 'dongting', 'fae0b27c451c728867a567e8c1bb4e53', '董婷', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (11, 1, 'chencong', 'fae0b27c451c728867a567e8c1bb4e53', '陈聪', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (12, 58, 'gaosiwei', 'fae0b27c451c728867a567e8c1bb4e53', '高思伟', '', '', '', '', '', '2013-03-15 22:54:16', 0, ''),
@@ -592,7 +580,7 @@ INSERT INTO `p_user` (`pu_id`, `pu_oid`, `pu_code`, `pu_pwd`, `pu_name`, `pu_ico
 (20, 64, 'zhangxiang', 'fae0b27c451c728867a567e8c1bb4e53', '张祥', '', '', '13688387777', '13688387777', '北京12318文化市场举报热线药品服务许可证(京)-经营-2010-0048', '2013-03-16 00:30:01', 0, ''),
 (22, 64, 'leijiaxin', 'fae0b27c451c728867a567e8c1bb4e53', '雷佳欣', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (23, 64, 'zhouyunpeng', 'fae0b27c451c728867a567e8c1bb4e53', '周澐芃', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(24, 38, 'lina', 'fae0b27c451c728867a567e8c1bb4e53', '李娜', '', '', '', '', '', '2013-03-16 00:28:25', 0, ''),
+(24, 38, 'lina', 'fae0b27c451c728867a567e8c1bb4e53', '李娜', '', '', '', '', '', '2013-03-22 16:36:41', 0, ''),
 (25, 3, 'fengxin', 'fae0b27c451c728867a567e8c1bb4e53', '冯欣', '', '', '', '', '', '2013-03-15 23:19:41', 0, '');
 
 -- --------------------------------------------------------
@@ -841,23 +829,15 @@ CREATE TABLE `hsd_leave` (
   `l_general` varchar(50) NOT NULL COMMENT '部门总监',
   `l_date2` datetime NOT NULL COMMENT '审核日期',
   PRIMARY KEY  (`l_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='人力资源部请假单表' AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='人力资源部请假单表' AUTO_INCREMENT=13 ;
 
 --
 -- 导出表中的数据 `hsd_leave`
 --
 
 INSERT INTO `hsd_leave` (`l_id`, `l_puname`, `l_puid`, `l_date`, `l_fromdate`, `l_todate`, `l_content`, `l_manager`, `l_general`, `l_date2`) VALUES
-(1, '222222222', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '333333333333333', '', '', '0000-00-00 00:00:00'),
-(2, '徐飞', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '处理家事', '', '', '0000-00-00 00:00:00'),
-(3, '徐飞', 0, '2013-03-02 00:00:00', '2013-03-02 00:00:00', '2013-03-22 00:00:00', '处理家事', '', '', '0000-00-00 00:00:00'),
-(4, '张凯', 0, '2013-03-22 00:00:00', '2013-03-22 00:00:00', '2013-03-30 00:00:00', '处理私事处理私事处理私事处理私事', '', '', '0000-00-00 00:00:00'),
-(5, '冯欣', 0, '2013-02-03 00:00:00', '2013-02-03 00:00:00', '2013-02-03 00:00:00', '2013-2-32013-2-32013-2-32013-2-32013-2-3', '', '', '0000-00-00 00:00:00'),
-(6, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00'),
-(7, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00'),
-(8, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00'),
-(9, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00'),
-(10, '', 0, '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '', '', '0000-00-00 00:00:00');
+(11, '王秀娟', 0, '2013-05-06 00:00:00', '2013-05-06 00:00:00', '2013-05-06 00:00:00', '2013-5-62013-5-62013-5-62013-5-62013-5-62013-5-62013-5-6', '', '', '0000-00-00 00:00:00'),
+(12, '李娜', 0, '2013-05-02 00:00:00', '2013-05-02 00:00:00', '2013-05-03 00:00:00', '成都网联天下成都网联天下', '', '', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -946,7 +926,7 @@ CREATE TABLE `w_arc` (
   `a_type` varchar(20) NOT NULL COMMENT '向弧类型；（分支或汇聚类型）SEQ：一般顺序流类型；Explicit Or Split：显示条件分支；Implicit Or Split：隐式条件分支； Or Join：条件汇聚（显示和隐式）；And Split：并行分支； And Join：并行汇聚',
   `a_precondition` text NOT NULL COMMENT '只有当a_type为Explicit Or Split时有效，这个包含了我们知道的值只有true或false的guard表达式。',
   PRIMARY KEY  (`a_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流向弧表' AUTO_INCREMENT=23 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流向弧表' AUTO_INCREMENT=19 ;
 
 --
 -- 导出表中的数据 `w_arc`
@@ -956,7 +936,7 @@ INSERT INTO `w_arc` (`a_id`, `a_name`, `a_wfid`, `a_sort`, `a_pid`, `a_tid`, `a_
 (1, '提单', 7, 1, 1, 3, 'IN', 'SEQ', ''),
 (2, '部门经理审核', 7, 5, 9, 3, 'OUT', 'SEQ', ''),
 (3, '审核中', 7, 15, 9, 1, 'IN', 'SEQ', ''),
-(4, '部门总监审核', 7, 20, 10, 3, 'OUT', 'SEQ', ''),
+(4, '部门总监审核', 7, 20, 10, 1, 'OUT', 'SEQ', ''),
 (5, '审核中', 7, 25, 10, 2, 'IN', 'SEQ', ''),
 (6, '通过', 7, 30, 2, 2, 'OUT', 'SEQ', ''),
 (7, '', 15, 0, 25, 5, 'IN', 'SEQ', ''),
@@ -986,7 +966,7 @@ CREATE TABLE `w_place` (
   `p_type` varchar(20) NOT NULL COMMENT '库所类型；1：开始库所；50：中间库所；999：结束库所（当创建了一个新的工作流程时，会自动创建一个开始库所和结束库所）',
   `p_remark` text NOT NULL COMMENT '备注',
   PRIMARY KEY  (`p_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流库节点表' AUTO_INCREMENT=37 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流库节点表' AUTO_INCREMENT=34 ;
 
 --
 -- 导出表中的数据 `w_place`
@@ -1034,31 +1014,17 @@ CREATE TABLE `w_token` (
   `t_consumedate` datetime NOT NULL COMMENT '令牌被事务变迁发射时消耗日期',
   `t_context` text NOT NULL COMMENT '前一个事务变迁传递过来的sql where语句形式，或者是数据库基建。',
   PRIMARY KEY  (`t_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流实例进度令牌表' AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流实例进度令牌表' AUTO_INCREMENT=26 ;
 
 --
 -- 导出表中的数据 `w_token`
 --
 
 INSERT INTO `w_token` (`t_id`, `t_wfid`, `t_wfcid`, `t_pid`, `t_status`, `t_createdate`, `t_canceldate`, `t_consumedate`, `t_context`) VALUES
-(2, 15, 6, 25, 'FREE', '2013-03-10 15:47:38', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(3, 7, 7, 1, 'FREE', '2013-03-10 16:47:54', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(4, 7, 8, 1, 'FREE', '2013-03-10 20:12:45', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(5, 7, 9, 1, 'FREE', '2013-03-10 20:47:30', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(6, 7, 10, 1, 'FREE', '2013-03-11 01:52:02', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(7, 7, 11, 1, 'FREE', '2013-03-12 01:44:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(8, 7, 12, 1, 'FREE', '2013-03-12 01:45:38', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(9, 7, 13, 1, 'FREE', '2013-03-12 01:45:50', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(10, 7, 14, 1, 'FREE', '2013-03-12 02:19:35', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(11, 7, 9, 27, 'FREE', '2013-03-13 01:10:28', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(12, 7, 8, 27, 'FREE', '2013-03-13 01:12:17', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(13, 7, 9, 27, 'FREE', '2013-03-13 01:14:46', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(14, 7, 9, 27, 'FREE', '2013-03-13 01:19:31', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(15, 7, 9, 9, 'FREE', '2013-03-13 01:28:58', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(17, 7, 11, 9, 'FREE', '2013-03-13 01:48:10', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(18, 7, 7, 9, 'FREE', '2013-03-15 22:03:41', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(19, 7, 7, 9, 'FREE', '2013-03-15 22:53:26', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(20, 7, 7, 10, 'FREE', '2013-03-15 22:54:34', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '');
+(22, 7, 10, 1, 'FREE', '2013-03-22 09:52:17', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
+(23, 7, 10, 9, 'FREE', '2013-03-22 10:33:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
+(24, 7, 11, 1, 'FREE', '2013-03-22 16:38:36', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
+(25, 7, 11, 9, 'FREE', '2013-03-22 16:39:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -1091,7 +1057,7 @@ CREATE TABLE `w_tran2role` (
   `t2r_tid` int(10) NOT NULL COMMENT '事务变迁id',
   `t2r_prid` int(10) NOT NULL COMMENT '角色id',
   PRIMARY KEY  (`t2r_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='事务变迁映射角色表' AUTO_INCREMENT=65 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='事务变迁映射角色表' AUTO_INCREMENT=68 ;
 
 --
 -- 导出表中的数据 `w_tran2role`
@@ -1104,12 +1070,9 @@ INSERT INTO `w_tran2role` (`t2r_id`, `t2r_tid`, `t2r_prid`) VALUES
 (35, 7, 2),
 (36, 12, 5),
 (37, 13, 5),
-(49, 3, 4),
-(50, 3, 5),
-(61, 2, 5),
-(62, 2, 8),
-(63, 1, 3),
-(64, 1, 5);
+(65, 3, 4),
+(66, 1, 3),
+(67, 2, 8);
 
 -- --------------------------------------------------------
 
@@ -1132,18 +1095,17 @@ CREATE TABLE `w_trancase` (
   `tc_limit` int(10) NOT NULL COMMENT '只有当wi_type为TIME时才有效，表示小时数。',
   `tc_puid` int(10) NOT NULL COMMENT '工作项执行者用户id',
   PRIMARY KEY  (`tc_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='事务变迁实例' AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='事务变迁实例' AUTO_INCREMENT=22 ;
 
 --
 -- 导出表中的数据 `w_trancase`
 --
 
 INSERT INTO `w_trancase` (`tc_id`, `tc_wfid`, `tc_tid`, `tc_wfcid`, `tc_type`, `tc_firetaskid`, `tc_context`, `tc_status`, `tc_enabledate`, `tc_canceldate`, `tc_finishdate`, `tc_limit`, `tc_puid`) VALUES
-(4, 7, 3, 7, 'USER', 0, '', 'FI', '2013-03-10 16:47:54', '0000-00-00 00:00:00', '2013-03-15 22:53:26', 0, 1),
-(5, 7, 3, 8, 'USER', 0, '', 'EN', '2013-03-10 20:12:45', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 1),
-(6, 7, 3, 9, 'USER', 0, '', 'EN', '2013-03-10 20:47:30', '0000-00-00 00:00:00', '2013-03-13 01:28:58', 0, 1),
-(16, 7, 1, 7, 'USER', 0, '', 'FI', '2013-03-15 22:53:26', '0000-00-00 00:00:00', '2013-03-15 22:54:34', 0, 1),
-(17, 7, 2, 7, 'USER', 0, '', 'EN', '2013-03-15 22:54:34', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 1);
+(18, 7, 3, 10, 'USER', 0, '', 'FI', '2013-03-22 09:52:17', '0000-00-00 00:00:00', '2013-03-22 10:33:01', 0, 9),
+(19, 7, 1, 10, 'USER', 0, '', 'EN', '2013-03-22 10:33:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0),
+(20, 7, 3, 11, 'USER', 0, '', 'FI', '2013-03-22 16:38:36', '0000-00-00 00:00:00', '2013-03-22 16:39:00', 0, 24),
+(21, 7, 1, 11, 'USER', 0, '', 'EN', '2013-03-22 16:39:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1170,9 +1132,9 @@ CREATE TABLE `w_transition` (
 --
 
 INSERT INTO `w_transition` (`t_id`, `t_wfid`, `t_name`, `t_sort`, `t_remark`, `t_type`, `t_limit`, `t_firetaskid`, `t_rolename`, `t_formname`) VALUES
-(1, 7, '部门经理审核', 5, '', 'USER', 0, 0, '部门经理,超级管理员,', ''),
-(2, 7, '部门总监确定', 10, '', 'USER', 0, 0, '超级管理员,部门总监,', ''),
-(3, 7, '创建假事单', 0, '', 'USER', 0, 0, '普通员工,超级管理员,', '请假单,'),
+(1, 7, '部门经理审核', 5, '', 'USER', 0, 0, '部门经理,', ''),
+(2, 7, '部门总监确定', 10, '', 'USER', 0, 0, '部门总监,', ''),
+(3, 7, '创建假事单', 0, '', 'USER', 0, 0, '普通员工,', '请假单,'),
 (4, 11, '创建KPI表', 1, '', 'USER', 0, 0, '超级管理员,', ''),
 (5, 15, '创建企业建站单', 0, '', 'USER', 0, 0, '超级管理员,', ''),
 (6, 14, '创建网站Bug维护单', 0, '', 'USER', 0, 0, '超级管理员,', ''),
@@ -1235,16 +1197,15 @@ CREATE TABLE `w_workflowcase` (
   `wfc_enddate` datetime NOT NULL COMMENT '工作流实例关闭日期（令牌放入结束库时）',
   `wfc_context` text NOT NULL COMMENT 'sql where语句形式的，或者是数据库基建。这个由对应工作流的启动任务id（w_starttaskid）产生的',
   PRIMARY KEY  (`wfc_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流实例表' AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流实例表' AUTO_INCREMENT=12 ;
 
 --
 -- 导出表中的数据 `w_workflowcase`
 --
 
 INSERT INTO `w_workflowcase` (`wfc_id`, `wfc_wfid`, `wfc_status`, `wfc_startdate`, `wfc_enddate`, `wfc_context`) VALUES
-(7, 7, 'OP', '2013-03-10 16:47:54', '0000-00-00 00:00:00', ''),
-(8, 7, 'OP', '2013-03-10 20:12:45', '0000-00-00 00:00:00', ''),
-(9, 7, 'OP', '2013-03-10 20:47:30', '0000-00-00 00:00:00', '');
+(10, 7, 'OP', '2013-03-22 09:52:17', '0000-00-00 00:00:00', ''),
+(11, 7, 'OP', '2013-03-22 16:38:36', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 

@@ -27,6 +27,49 @@
 	<div id="tabbar" ></div>
 	<div id="templet_list" style="padding:3px;"></div>
 	
+	
+	<div id="templet_sublist" style="display:none;">
+			<table id="tb_list_tran" style="width:400px;background-color:#fff;">
+				<tbody name="head">
+					<tr>
+						<td style="width:30px;">
+							序
+						</td>
+						<td style="width:80px;">
+							事务步骤
+						</td>
+						<td style="width:80px;">
+							状态
+						</td>
+						<td style="width:100px;">
+							执行人
+						</td>
+						<td>
+							完成日期
+						</td>
+					</tr>
+				</tbody>
+				<tbody name="body">
+					<tr>
+						<td name="order">
+							{order}
+						</td>
+						<td name="t_name">
+							{t_name}
+						</td>
+						<td name="tc_status">
+							{tc_status}
+						</td>
+						<td name="pu_name">
+							{pu_name}
+						</td>
+						<td name="tc_finishdate" fmt="yyyy-mm-dd">
+							{tc_finishdate}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+	</div>
 </BODY>
 </HTML>
 

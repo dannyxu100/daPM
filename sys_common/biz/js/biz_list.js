@@ -29,9 +29,11 @@ function slideleft(){
 }
 
 /**查看业务表单详细信息
+* obj: 标签对象
 * dbfldid: 数据源主键 id
 * bcid: 业务单实例 id
 * wfcid: 工作流实例 id
+* tcid: 事务变迁实例 id
 */
 function viewbizlog( dbfldid, bcid, wfcid ){
 	if( g_isctrl ){
@@ -51,11 +53,13 @@ function viewbizlog( dbfldid, bcid, wfcid ){
 }
 
 /**查看业务表单详细信息
+* obj: 标签对象
 * dbfldid: 数据源主键 id
 * bcid: 业务单实例 id
 * wfcid: 工作流实例 id
+* tcid: 事务变迁实例 id
 */
-function viewbiz( dbfldid, bcid, wfcid ){
+function viewbiz( obj, dbfldid, bcid, wfcid, tcid ){
 	if( g_isctrl ){
 		daWin({
 			width: 800,
@@ -75,15 +79,19 @@ function viewbiz( dbfldid, bcid, wfcid ){
 
 
 var g_mapstatus = {
-	"EN": '<span style="color:#999; font-weight:bold;">未提交</span>',
-	"IP": '<span style="color:#f93; font-weight:bold;">ing..</span>',
-	"FI": '<span style="color:#090; font-weight:bold;">ok!</span>',
-	"CA": '<span style="color:#ccc; font-weight:bold;">已取消</span>'
+	"EN": '<span style="color:#999; font-weight:bold;">In Waiting</span>',
+	"IP": '<span style="color:#f93; font-weight:bold;">Processing..</span>',
+	"FI": '<span style="color:#090; font-weight:bold;">Finished!</span>',
+	"CA": '<span style="color:#ccc; font-weight:bold;">Cancelled</span>'
 }
 
 /**查看事务处理信息
+* obj: 标签对象
+* bcid: 业务单实例 id
+* wfcid: 工作流实例 id
+* tcid: 事务变迁实例 id
 */
-function viewtran( obj, bcid, wfcid ){
+function viewtran( obj, bcid, wfcid, tcid ){
 	var trObj = da(obj).parents("tr"),
 		nexttrObj = trObj.next("tr"),
 		wfpadObj = da("td[name=workflowinfo]", nexttrObj);
@@ -98,29 +106,85 @@ function viewtran( obj, bcid, wfcid ){
 		
 	wfpadObj.empty();
 	
-	da.runDB("/sys_common/biz/action/trancase2workflowcase_get_list.php",{
-		dataType: "json",
-		wfcid: wfcid
+	var tranlist = da("#tb_list_tran").dom[0].cloneNode(true);
+	tranlist.id = "tb_list_tran_"+wfcid;
+	tranlist.setAttribute("id", "tb_list_tran_"+wfcid);
+	wfpadObj.append(tranlist);
+			
+	daTable({
+		id: tranlist.id,
+		url: "/sys_common/biz/action/trancase2workflowcase_get_page.php",
+		data: {
+			// opt: "qry",
+			dataType: "json",
+			wfcid: wfcid
+		},
+		// loading: false,
+		// page: false,
+		pageSize: 99999,
 		
-	},function(data){
-		if("FALSE"!=data){
-			for(var i=0; i<data.length; i++){
-				wfpadObj.append('<div>'
-				+ (i+1) +". " 
-				+ data[i].t_name +"&nbsp;&nbsp;&nbsp;&nbsp;"
-				+ data[i].pu_name +"&nbsp;&nbsp;&nbsp;&nbsp;"
-				+ g_mapstatus[data[i].tc_status] +"&nbsp;&nbsp;&nbsp;&nbsp;" 
-				+ ("0000-00-00 00:00:00"!=data[i].tc_finishdate?da.fmtDate(data[i].tc_finishdate, "yyyy-mm-dd/p"):"") 
-				+'</div>');
+		field: function( fld, val, row, ds ){
+			if( "tc_status" == fld ){
+				return g_mapstatus[val];
 			}
+			else if( "pu_name" == fld ){
+				return (null!=val?val:"");
+			}
+			else if( "tc_finishdate" == fld ){
+				return ("0000-00-00 00:00:00"!=val?val:"");
+			}
+			return val;
+		},
+		loaded: function( idx, xml, json, ds ){
+			// link_click("#tb_list tbody[name=details_auto] tr");
+			
+		},
+		error: function(code,msg,ex){
+			// debugger;
 		}
-	});
+	}).load(); 
+	
+	// da.runDB("/sys_common/biz/action/trancase2workflowcase_get_list.php",{
+		// dataType: "json",
+		// wfcid: wfcid
+		
+	// },function(data){
+		// if("FALSE"!=data){
+			// for(var i=0; i<data.length; i++){
+				// wfpadObj.append('<div>'
+				// + (i+1) +". " 
+				// + data[i].t_name +"&nbsp;&nbsp;&nbsp;&nbsp;"
+				// + g_mapstatus[data[i].tc_status] +"&nbsp;&nbsp;&nbsp;&nbsp;" 
+				// + (null!=data[i].pu_name?data[i].pu_name:"") +"&nbsp;&nbsp;&nbsp;&nbsp;"
+				// + ("0000-00-00 00:00:00"!=data[i].tc_finishdate?da.fmtDate(data[i].tc_finishdate, "yyyy-mm-dd/p"):"") 
+				// +'</div>');
+			// }
+		// }
+	// });
 }
 
 /**接单
+* obj: 标签对象
+* bcid: 业务单实例 id
+* wfcid: 工作流实例 id
+* tcid: 事务变迁实例 id
 */
-function handlebiz(obj, bcid, wfcid ){
+function handlebiz(obj, bcid, wfcid, tcid ){
 	// da.focus(obj, "#item03");
+	alert(tcid)
+	confirm("你确定要接单吗？", function(){
+		da.runDB("/sys_common/biz/action/trancase_accept_item.php",{
+			tcid: tcid
+		},
+		function( res ){
+			if("FALSE" != res){
+				alert("接单成功。");
+			}
+			else{
+				alert("操作失败。");
+			}
+		});
+	});
 	
 }
 
@@ -129,8 +193,8 @@ function handlebiz(obj, bcid, wfcid ){
 */
 function tools( fld, val, row, ds ){
 	var arrhtml = [
-		'<a href="javascript:void(0)" class="txt_tool" onclick="handlebiz(this,\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">处理</a>',
-		'<a href="javascript:void(0)" class="txt_tool" onclick="viewbizlog(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')">日志</a>',
+		'<a href="javascript:void(0)" class="txt_tool" onclick="handlebiz(this,\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +', '+ row["tc_id"] +')">处理</a>',
+		'<a href="javascript:void(0)" class="txt_tool" onclick="viewbizlog(this,\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +', '+ row["tc_id"] +')">日志</a>',
 		'<a href="javascript:void(0)" class="ico_tool" title="删除" style="background:url(/images/sys_icon/delete.png)"></a>'
 		];
 	return arrhtml.join("");
@@ -166,7 +230,7 @@ function loaddata(){
 				idxfld = 0;
 			}
 			else if( 1 == idxfld ){
-				val = '<a href="javascript:void(0)" onclick="viewbiz(\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +')" onmouseover="showtranlist(this,'+ row["wfc_id"] +')" onmouseout="hidetranlist()">'+ val +'</a>';
+				val = '<a href="javascript:void(0)" onclick="viewbiz(this, \''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +', '+ row["tc_id"] +')" onmouseover="showtranlist(this,'+ row["wfc_id"] +')" onmouseout="hidetranlist()">'+ val +'</a>';
 				val += '<img style="margin-left:10px; vertical-align:middle;" src="/images/sys_icon/down.png" onclick="viewtran(this,'+ row["bc_id"] +', '+ row["wfc_id"] +')" />';
 			}
 			else if("tools"==fld){
@@ -181,7 +245,7 @@ function loaddata(){
 			// toExcel();
 		},
 		error: function(code,msg,ex){
-			debugger;
+			// debugger;
 		}
 	}).load();
 }

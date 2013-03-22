@@ -45,7 +45,7 @@
 	
 	/******************* 根据 可参与事务变迁的实例找出 所对应的工作流实例id *****************/
 	/******************* 查询数据源记录集 ***************************************************/
-	$sql31 = "select ".$dbsource.".*, TC.*, b_bizcase.bc_id, w_workflowcase.wfc_id from ".$dbsource.", ";
+	$sql31 = "select ".$dbsource.".*, w_trancase.*, b_bizcase.bc_id, w_workflowcase.wfc_id from ".$dbsource.", ";
 	$param31 = array();
 	
 	$sql32 = "select count(bc_id) as Column1 from ".$dbsource.", ";
@@ -60,10 +60,10 @@
 	}
 	
 	$sql4 .= "and (w_trancase.tc_puid in (".implode(',', $puids).") or w_trancase.tc_puid=0) 
-	and w_trancase.tc_tid in (".implode(',', $tids).")) as TC 
+	and w_trancase.tc_tid in (".implode(',', $tids).")) as w_trancase 
 	where ".$dbsource."." .$dbfld."=b_bizcase.bc_dbsourceid 
 	and b_bizcase.bc_wfcid = w_workflowcase.wfc_id 
-	and w_workflowcase.wfc_id = TC.tc_wfcid";					// 事务变迁实例接单拥有者
+	and w_workflowcase.wfc_id = w_trancase.tc_wfcid";			// 事务变迁实例接单拥有者
 																// 且当同一用户兼容多重角色，
 																// 处理同一流程，不同业务时,也只取一条
 
