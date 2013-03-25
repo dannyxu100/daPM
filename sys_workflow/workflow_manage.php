@@ -47,7 +47,7 @@
 		</tr>
 		<tr>
 			<td style="vertical-align:top;">
-				<div id="pad_config">
+				<div id="pad_config" style="display:none;">
 					<div id="tabbar"></div>
 					
 					<div id="pad_workflow">
@@ -61,13 +61,7 @@
 						<table class="tablesolid" style="width:100%">
 							<tr>
 								<td class="header" style="width:60px;">名称</td>
-								<td><input id="wf_name" style="width:200px;" /><span class="must">*</span></td>
-								<td class="header" style="width:80px;">主表单</td>
-								<td>
-									<input id="wf_btname" disabled="true"/>
-									<input id="wf_btid" type="hidden" disabled="true"/>
-									<a href="javascript:void(0)" onclick="selectmainform()">选择</a>
-								</td>
+								<td colspan="3"><input id="wf_name" style="width:200px;" /><span class="must">*</span></td>
 							</tr>
 							<tr>
 								<td class="header">排序</td>
@@ -103,12 +97,48 @@
 						</table>
 					</div>
 					
-					<!--
-					<div id="pad_map">
-						<div></div>
-						<div><img id=""/></div>
+					<div id="pad_power">
+						<div class="list_top_bar">
+							<div class="list_top_title"></div>
+							<div class="list_top_tools">
+							</div>
+						</div>
+						
+						<table class="tablesolid" style="width:100%">
+							<tr>
+								<td class="header" style="width:60px;">主表单</td>
+								<td>
+									<input id="wf_btname" disabled="true"/>
+									<input id="wf_btid" type="hidden" disabled="true"/>
+									<a href="javascript:void(0)" onclick="selectmainform()">选择</a>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2">&nbsp;</td>
+							</tr>
+							<tr>
+								<td class="header">新 建</td>
+								<td>
+									<input id="new_rolename" disabled="true" style="width:200px"/>
+									<a href="javascript:void(0)" onclick="selectnewrole()">选择</a>
+								</td>
+							</tr>
+							<tr>
+								<td class="header">分 单</td>
+								<td>
+									<input id="assign_rolename" disabled="true" style="width:200px"/>
+									<a href="javascript:void(0)" onclick="selectassignrole()">选择</a>
+								</td>
+							</tr>
+							<tr>
+								<td class="header">删 除</td>
+								<td>
+									<input id="del_rolename" disabled="true" style="width:200px"/>
+									<a href="javascript:void(0)" onclick="selectdelrole()">选择</a>
+								</td>
+							</tr>
+						</table>
 					</div>
-					-->
 					
 					<div id="pad_placelist">
 						<div class="list_top_bar">
@@ -164,7 +194,7 @@
 							<div class="list_top_title">事务变迁列表</div>
 							<div class="list_top_tools">
 								<a class="item" href="javascript:void(0)" onclick="addtran();" ><img src="/images/sys_icon/add.png" /> 添加</a>
-								<a class="item" href="javascript:void(0)" onclick="deleteg2r();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
+								<a class="item" href="javascript:void(0)" onclick="deletetran();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 							</div>
 						</div>
 						

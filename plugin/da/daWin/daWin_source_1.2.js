@@ -74,10 +74,10 @@ var daWin = (function(){
 			status: null,									//状态栏信息
 			backclose: true,								//当窗体内页操作完毕返回时是否关闭窗体，默认是true
 			rootwin: true,									//创建的窗体是否都属于顶级框架页面中
-			modal: false,									//是否以模式对话框的方式显示，可选[true|false]
+			isover: false,									//是否以模式对话框的方式显示，可选[true|false]
 			
 			place: null, 									//窗体打开的位置
-			act: false,										//是否融入动画特效
+			act: true,										//是否融入动画特效
 			time: 200,										//动画特效默认时长
 			easing: "easeOutQuad",							//动画特效类型
 			
@@ -173,8 +173,8 @@ var daWin = (function(){
 			};
 			
 			this.isDialog = ( "" === setting.url ) ? true : false;		//如果没有内页url地址，说明就是对话框模式
-			if( !setting.modal ){
-				setting.modal = this.isDialog;
+			if( !setting.isover ){
+				setting.isover = this.isDialog;
 			}
 			
 			setting.act = "undefined" != typeof daFx && setting.act;
@@ -219,11 +219,13 @@ var daWin = (function(){
 		                    '<div id="dw_caption_',  dwId, '" class="dwCaption"></div>',
 		                  '</div>',
 		               '</td>',
-		               '<td style="width:60px">',
+		               '<td>',
+						 '<div style="width:60px">',
 		                 '<a id="dw_btmin_',  dwId, '" href="javascript:void(0)" class="btmin" title="最小化"></a>',
 		                 '<a id="dw_btmax_',  dwId, '" href="javascript:void(0)" class="btmax" title="窗口/最大化"></a>',
 		                 '<a id="dw_btclose_',  dwId, '" href="javascript:void(0)" class="btclose" title="关闭"></a>',
-		               '</td>',
+						 '</div>',
+					   '</td>',
 		             '</tr>',
 		           '</table>',
 		       '</td>',
@@ -331,8 +333,10 @@ var daWin = (function(){
 			//设置初始尺寸和位置
 			if(null === this.dwSize.left)										//校正窗体位置
 				this.dwSize.left = (da(win).width() - this.dwSize.w)/2;
-			if(null === this.dwSize.top)
+			if(null === this.dwSize.top){
 				this.dwSize.top = (da(win).height() - this.dwSize.h)/2;
+				this.dwSize.top = 0<=this.dwSize.top?this.dwSize.top:0;
+			}
 			if(null === this.dwSize.right)
 				this.dwSize.right = "auto";
 			if(null === this.dwSize.bottom)
@@ -346,11 +350,11 @@ var daWin = (function(){
 			
 			if( !setting.act ){
 					this.setSize( this.dwSize.w, this.dwSize.h );
-//					this.setPos( this.dwSize.top, this.dwSize.right, this.dwSize.bottom, this.dwSize.left );
-					this.setPos( ( da(win).height() - this.dwSize.h )/2, this.dwSize.right, this.dwSize.bottom, ( da(win).width() - this.dwSize.w )/2 );
+					this.setPos( this.dwSize.top, this.dwSize.right, this.dwSize.bottom, this.dwSize.left );
+					// this.setPos( ( da(win).height() - this.dwSize.h )/2, this.dwSize.right, this.dwSize.bottom, ( da(win).width() - this.dwSize.w )/2 );
 					if( !this.isDialog ){
 						this.setCnt( setting );												//设置iframe
-						this.showCnt();
+						
 					}
 			}
 			else if( setting.act && "image" != setting.type ){
@@ -362,8 +366,8 @@ var daWin = (function(){
 				this.setPos( setting.place.top, null, null, setting.place.left );
 					
 				da(this.dwPad).act({
-					top: ( da(win).height() - this.dwSize.h )/2,
-					left: ( da(win).width() - this.dwSize.w )/2,
+					top: this.dwSize.top,
+					left: this.dwSize.left,
 					width: this.dwSize.w,
 					height: this.dwSize.h
 				},
@@ -399,7 +403,7 @@ var daWin = (function(){
 
 						if( !context.isDialog ){
 							context.setCnt( setting );			//设置iframe
-							context.showCnt();
+							
 						}
 						//
 						//nowPos = null;
@@ -457,7 +461,7 @@ var daWin = (function(){
 				},
 				
 				after: function(){			//拖动后
-					if( !context.setting.modal ) da.daMaskHide( win );		//隐藏遮罩
+					if( !context.setting.isover ) da.daMaskHide( win );		//隐藏遮罩
 					if( !context.isDialog && !context.isLoading)
 						context.dwLoadover.style.display = "none";
 						
@@ -651,8 +655,8 @@ var daWin = (function(){
 	              }
 	          },
 	          complete: function(){
-							context.setPos( 0, null, null, 0 );						//设置改变位置（开一个小缝隙）
-							context.setSize( winWidth, winHeight );				//设置改变尺寸
+					context.setPos( 0, null, null, 0 );						//设置改变位置（开一个小缝隙）
+					context.setSize( winWidth, winHeight );				//设置改变尺寸
 	          }
 	      });
 			}
@@ -781,7 +785,7 @@ var daWin = (function(){
 			this.hideCnt();
 			
 			var removeWin = function(){
-					if( this.setting.modal ) da.daMaskHide( win );
+					if( this.setting.isover ) da.daMaskHide( win );
 
 					if( this.setting.after )
 						this.setting.after.apply( this.insideWinObj );		//内页关闭完毕 如果需要回调处理，就触发回调
@@ -827,8 +831,8 @@ var daWin = (function(){
 									nowSize = {w:null,h:null};
 									
 				      da(this.dwPad).stop().act({
-									top: context.setting.place.top,
-									left: context.setting.place.left,
+						top: context.setting.place.top,
+						left: context.setting.place.left,
 				          width: context.dwCssSize.win_w,
 				          height: context.dwCssSize.win_h
 				      },
@@ -964,7 +968,7 @@ var daWin = (function(){
 					else if(objDragSrc.releaseCapture)
 						objDragSrc.releaseCapture();
 					
-					if( !context.setting.modal )da.daMaskHide( win );				//隐藏遮罩
+					if( !context.setting.isover )da.daMaskHide( win );				//隐藏遮罩
 					if( !context.isDialog && !context.isLoading)
 						context.dwLoadover.style.display = "none";
 	
@@ -1014,7 +1018,7 @@ var daWin = (function(){
 			this.dwPad.style.zIndex = this.dwActzIndex;			//z 坐标设置为默认高度
 			this.dwBody.className = "dwBody";								//设置为活动状态
 			this.isActiving = true;
-			if( this.setting.modal ) da.daMaskShow( win, 70 );			//如果是模式窗口，就给一个遮罩啊~
+			if( this.setting.isover ) da.daMaskShow( win, 70 );			//如果是模式窗口，就给一个遮罩啊~
 			if( this.isDialog || !this.isLoading )										//去掉daWin内部遮罩
 				this.dwLoadover.style.display = "none";
 				
@@ -1037,28 +1041,28 @@ var daWin = (function(){
 				var cSign = sSize.match(/[\^＾＜<vV>＞=＝]/g);
 				if(null == cSign) return da.isNull( parseInt(sSize), 0 );
 				
-//				for(var i=0,len=cSign.length; i<len; i++){
-//					switch(cSign[i]){
-//						case "＾":
-//						case "^":
-//							this.dwSize.top = 0;
-//							break;
-//						case "V":
-//						case "v":
-//							this.dwSize.top = "auto";
-//							this.dwSize.bottom = 0;
-//							break;
-//						case "＞":
-//						case ">":
-//							this.dwSize.left = "auto";
-//							this.dwSize.right = 0;
-//							break;
-//						case "＜":
-//						case "<":
-//							this.dwSize.left = 0;
-//							break;
-//					}
-//				}
+				// for(var i=0,len=cSign.length; i<len; i++){
+					// switch(cSign[i]){
+						// case "＾":
+						// case "^":
+							// this.dwSize.top = 0;
+							// break;
+						// case "V":
+						// case "v":
+							// this.dwSize.top = "auto";
+							// this.dwSize.bottom = 0;
+							// break;
+						// case "＞":
+						// case ">":
+							// this.dwSize.left = "auto";
+							// this.dwSize.right = 0;
+							// break;
+						// case "＜":
+						// case "<":
+							// this.dwSize.left = 0;
+							// break;
+					// }
+				// }
 				sSize = sSize.replace(/[\^＾＜<vV>＞=＝]/g,"");
 				return da.isNull( parseInt(sSize), 0 );
 			}
@@ -1070,7 +1074,7 @@ var daWin = (function(){
 			nWidth: 窗口宽
 			nHeight: 窗口高
 		*/
-		setSize:　function( nWidth, nHeight ){
+		setSize: function( nWidth, nHeight ){
 			var cs = this.dwCssSize;
 	
 			//边框尺寸
@@ -1129,7 +1133,7 @@ var daWin = (function(){
 			nRight: 右
 			nBottom: 下
 		*/
-		setPos:　function(nTop, nRight, nBottom, nLeft){
+		setPos: function(nTop, nRight, nBottom, nLeft){
 			this.dwPad.style.top = (null == da.isNull(nTop,null)) ? "auto": (("auto"==nTop)?nTop:(nTop+ "px"));
 			this.dwPad.style.left = (null == da.isNull(nLeft,null)) ? "auto": (("auto"==nLeft)?nLeft:(nLeft+ "px"));
 			this.dwPad.style.right = (null == da.isNull(nRight,null)) ? "auto": (("auto"==nRight)?nRight:(nRight+ "px"));
@@ -1141,7 +1145,7 @@ var daWin = (function(){
 		/*
 			setting: 用户自定义参数
 		*/
-		setTitle:　function( setting ){
+		setTitle: function( setting ){
 			if( null === this.dwIframe ) return;
 	
 			var nWidth = this.dwSize.w - ( this.dwCssSize.l_w + this.dwCssSize.r_w + this.dwCssSize.l2_w + this.dwCssSize.r2_w );				//减去标题栏左右样式预留宽度
@@ -1253,6 +1257,7 @@ var daWin = (function(){
 					load: function(){
 						context.isLoading = false;
 						context.setStatus("");
+						context.showCnt();
 						
 						if(context.isActiving)																									//如果是当前活动窗口并已经加载完毕，就撤销遮罩层
 							context.dwLoadover.style.display = "none";
@@ -2036,7 +2041,7 @@ function dialog2( winWidth, winHeight, winURL, winTitle, fnLoaded, fnBack, fnClo
 			title: winTitle,
 			url: winURL,
 			
-			modal: true,
+			isover: true,
 			
 			load: fnLoaded,
 			after: fnClose,

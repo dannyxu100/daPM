@@ -228,7 +228,7 @@ daLoader.def('daLoading', {path: _p+'/daLoading/daLoading_source.js', need:"da,d
 daLoader.def('daMsg_CSS', {path: _p+'/daMsg/daMsg.css'});
 daLoader.def('daMsg', {path: _p+'/daMsg/daMsg_source.js', need:"da,daFx,daMsg_CSS" });						//消息类
 //-------------------------------------
-daLoader.def('daIframe', {path: _p+'/daIframe/daIframe_source.js', need:"da,daFx,daLoading" });				//缓存框架类
+daLoader.def('daIframe', {path: _p+'/daIframe/daIframe_source_1.3.js', need:"da,daFx,daLoading" });			//缓存框架类
 //-------------------------------------
 daLoader.def('daFrame_CSS', {path: _p+'/daFrame/daFrame.css'});
 daLoader.def('daFrame', {path: _p+'/daFrame/daFrame_source.js', need:"da,daFx,daDrag,daWheel,daLoading,daFrame_CSS" });		//容器框架类

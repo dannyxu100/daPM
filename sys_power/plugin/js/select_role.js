@@ -49,21 +49,21 @@ function loadtree(){
 
 
 var g_chkItems = {};
-/**选择人员
+/**选择角色
 */
 function selectitem( prid ){
 	g_chkItems[prid] = g_ds[prid];
 	showitem();
 }
 
-/**取消选中的人员
+/**取消选中的角色
 */
 function cancelitem( prid ){
 	delete g_chkItems[prid];
 	showitem();
 }
 
-/**显示选中的人员
+/**显示选中的角色
 */
 function showitem(){
 	var outObj = da("#out_pad"),
@@ -90,7 +90,7 @@ function clearitem(){
 	showitem();
 }
 
-daLoader(function(){
+daLoader("daMsg", function(){
 	arrParams = da.urlParams();
 	g_prid = arrParams["prid"];
 	g_ismulti = !!arrParams["ismulti"];

@@ -23,6 +23,9 @@
 </BODY>
 </HTML>
 
+<script charset="utf-8" src="/plugin/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/plugin/kindeditor/lang/zh_CN.js"></script>
+
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
 <script type="text/javascript" src="/js/fn.js"></script>
 <script type="text/javascript" src="js/biz_add_detail.js"></script>

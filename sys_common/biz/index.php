@@ -16,7 +16,7 @@
 			<td class="frame_slide" onclick="slideleft()">
 				<div id="bt_slide" class="bt_slideleft"></div>
 			</td>
-			<td style="vertical-align:top;">
+			<td style="vertical-align:top;padding:2px">
 				<iframe id="mainframe" src="" frameborder="0" style="width:100%;" defaultHeight="600"></iframe>
 				
 			</td>

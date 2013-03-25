@@ -18,34 +18,34 @@
 <BODY>
 	<div class="list_top_bar">
 		<div class="list_top_title"><span id="biz_title">业务名称</span></div>
-		<div class="list_top_tools">
-			<a class="item" href="javascript:void(0)" onclick="addbiz();" ><img src="/images/sys_icon/add.png" /> 新建</a>
-			<a class="item" href="javascript:void(0)" ><img src="/images/sys_icon/delete.png" /> 删除</a>
-		</div>
+		<div class="list_top_tools" id="toptools"></div>
 	</div>
 	
 	<div id="tabbar" ></div>
-	<div id="templet_list" style="padding:3px;"></div>
+	<div id="templet_list"></div>
 	
 	
 	<div id="templet_sublist" style="display:none;">
-			<table id="tb_list_tran" style="width:400px;background-color:#fff;">
+			<table id="tb_list_tran" style="width:600px;background-color:#fff;">
 				<tbody name="head">
 					<tr>
 						<td style="width:30px;">
 							序
 						</td>
 						<td style="width:80px;">
-							事务步骤
+							业务步骤
 						</td>
-						<td style="width:80px;">
+						<td style="width:50px;">
 							状态
 						</td>
-						<td style="width:100px;">
+						<td style="width:50px;">
 							执行人
 						</td>
-						<td>
+						<td style="width:80px;">
 							完成日期
+						</td>
+						<td>
+							备注
 						</td>
 					</tr>
 				</tbody>
@@ -65,6 +65,9 @@
 						</td>
 						<td name="tc_finishdate" fmt="yyyy-mm-dd">
 							{tc_finishdate}
+						</td>
+						<td name="tc_remark">
+							{tc_remark}
 						</td>
 					</tr>
 				</tbody>

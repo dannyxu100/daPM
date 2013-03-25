@@ -5225,20 +5225,20 @@ var daRe_until = /Until$/,
 						da.cleanData( [ elem ] );
 					}
 					
-          if( da.browser.ie && elem.parentNode){
-              var ownerWin = elem.ownerDocument.parentWindow;           //获取被删除对象所属窗体对象（找到相应的垃圾桶）
-          
-              if( !ownerWin.da.dustbin ){
-              	var obj = ownerWin.document.createElement('div');
-              	obj.id = "da_Dustbin";
-//              	document.body.insertBefore( d );
-								ownerWin.da.dustbin = obj;
-              }
+				  if( da.browser.ie && elem.parentNode){
+					  var ownerWin = elem.ownerDocument.parentWindow;           //获取被删除对象所属窗体对象（找到相应的垃圾桶）
+				  
+					  if( !ownerWin.da.dustbin ){
+						var obj = ownerWin.document.createElement('div');
+						obj.id = "da_Dustbin";
+						//document.body.insertBefore( d );
+						ownerWin.da.dustbin = obj;
+					  }
 
-              ownerWin.da.dustbin.insertBefore( elem );
-              ownerWin.da.dustbin.innerHTML = '';
-              
-          }
+					  ownerWin.da.dustbin.insertBefore( elem );
+					  ownerWin.da.dustbin.innerHTML = '';
+					  
+				  }
 					else if ( elem.parentNode ) {
 						elem.parentNode.removeChild( elem );
 					}
@@ -7199,7 +7199,7 @@ var daRe_until = /Until$/,
 					width: "auto",
 					height: "auto",
 					opacity: true,
-					src: "javascript:false;"
+					src: "about:blank"
 		    };
 		    
 		    params = da.extend( {}, def, params );

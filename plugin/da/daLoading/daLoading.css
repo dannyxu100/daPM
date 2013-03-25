@@ -5,16 +5,25 @@
 */
 
 .dl_body{
-	position:absolute; z-index:99999; top:0px; left:0px;
-	padding:6px; margin:5px;
-	border:1px solid #000;
-	background:#000;
+	position:absolute; z-index:99999; top:-2px; left:0px;
+	padding:6px;
+	border:1px solid #e73c3c;
+	background:#fff281;
 	font-size:12px;
 	cursor:pointer;
 	text-align:center;
+	
+	-moz-box-shadow: 0px 2px 10px #999;	
+	-webkit-box-shadow: 0px 2px 10px #999;
+	box-shadow: 0px 2px 10px #999;
+	filter:
+	progid:DXImageTransform.Microsoft.Shadow(Strength=3, Direction=0, Color='#cccccc') 
+	progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=90, Color='#cccccc') 
+	progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=180, Color='#cccccc') 
+	progid:DXImageTransform.Microsoft.Shadow(Strength=5, Direction=270, Color='#cccccc');
 }
-.dl_body .dl_text{ text-align:center; color:#f0f0f0;}
-.dl_body .dl_text .loadingGif{width:32px;height:32px;background:#000 url("images/loading.gif") center no-repeat; }
+.dl_body .dl_text{ text-align:center; color:#8b0000;}
+.dl_body .dl_text .loadingGif{width:32px;height:32px;background: url("images/loading.gif") center no-repeat; }
 
 .dl_body .dl_barbox{
 	position:relative;

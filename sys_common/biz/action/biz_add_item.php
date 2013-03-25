@@ -49,10 +49,10 @@
 	
 	/************************** 创建下一步事务变迁(工作项)  实例***************************************/
 	$sql_tc = "insert into da_workflow.w_trancase( tc_wfid, tc_tid, tc_wfcid, tc_type, tc_limit, 
-	tc_firetaskid, tc_context, tc_status, tc_enabledate, tc_puid ) 
+	tc_firetaskid, tc_context, tc_status, tc_enabledate, tc_puid, tc_puname ) 
 	
 	select t_wfid, t_id, :wfcid, t_type, t_limit, 
-	t_firetaskid, :context, :status, :enabledate, :userid 
+	t_firetaskid, :context, :status, :enabledate, :userid, :username 
 	
 	from da_workflow.w_transition, da_workflow.w_arc 
 	where t_wfid=:wfid and t_id=a_tid and a_direction='IN' and a_pid=:pid";		//通过IN向弧，找出开始库所下一步的事务变迁(工作项)
@@ -65,6 +65,7 @@
 	array_push($param_tc, array(":enabledate", $nowdate));
 	array_push($param_tc, array(":context", ""));
 	array_push($param_tc, array(":userid", fn_getcookie("puid")));
+	array_push($param_tc, array(":username", fn_getcookie("puname")));
 	$db->paramlist($param_tc);
 	$db->insert($sql_tc);
 	

@@ -8,7 +8,12 @@
 <body>
 	<form>
 		<div id="queue"></div>
+		
 		<input id="file_upload" name="file_upload" type="file" multiple="true">
+		<div style="padding:5px; margin-top:5px; border:1px solid #ccc; font-size:12px;">
+			<li>上传文件大小，请不要超过2MB。</li>
+			<li id="info" style="color:#900;"></li>
+		</div>
 	</form>
 </body>
 </html>
@@ -57,6 +62,10 @@
 		"onQueueComplete" : function(stats) {		//当队列中的所有文件全部完成上传时触发
 		　　back(stats.files);
 		}
+	}
+	
+	function setinfo( info ){
+		$("#info").append( info );
 	}
 	
 	function setparam( userparam ){

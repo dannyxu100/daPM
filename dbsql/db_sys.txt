@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 2.11.2.1
+-- version 3.2.0.1
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 03 月 22 日 10:05
--- 服务器版本: 5.0.45
--- PHP 版本: 5.2.5
+-- 生成日期: 2013 年 03 月 25 日 18:13
+-- 服务器版本: 5.5.8
+-- PHP 版本: 5.3.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -21,23 +21,23 @@ USE `da_bizform`;
 -- 表的结构 `b_bizcase`
 --
 
-CREATE TABLE `b_bizcase` (
-  `bc_id` int(10) NOT NULL auto_increment COMMENT '业务表单实例id',
+CREATE TABLE IF NOT EXISTS `b_bizcase` (
+  `bc_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '业务表单实例id',
   `bc_btid` int(10) NOT NULL COMMENT '表单模板id',
   `bc_tcid` int(10) NOT NULL COMMENT '工作流事务变迁实例id(过程表单)',
   `bc_wfcid` int(10) NOT NULL COMMENT '工作流实例id(主表单)',
   `bc_dbsourceid` varchar(50) NOT NULL COMMENT '数据源联系字段值（一般为主键值）',
   `bc_lastlog` text NOT NULL COMMENT '业务单最新日志内容',
-  PRIMARY KEY  (`bc_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='业务表单实例表' AUTO_INCREMENT=8 ;
+  PRIMARY KEY (`bc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='业务表单实例表' AUTO_INCREMENT=3 ;
 
 --
--- 导出表中的数据 `b_bizcase`
+-- 转存表中的数据 `b_bizcase`
 --
 
 INSERT INTO `b_bizcase` (`bc_id`, `bc_btid`, `bc_tcid`, `bc_wfcid`, `bc_dbsourceid`, `bc_lastlog`) VALUES
-(6, 1, 0, 10, '11', ''),
-(7, 1, 0, 11, '12', '');
+(1, 2, 0, 2, '1', ''),
+(2, 2, 0, 3, '2', '');
 
 -- --------------------------------------------------------
 
@@ -45,19 +45,19 @@ INSERT INTO `b_bizcase` (`bc_id`, `bc_btid`, `bc_tcid`, `bc_wfcid`, `bc_dbsource
 -- 表的结构 `b_bizlog`
 --
 
-CREATE TABLE `b_bizlog` (
-  `l_id` int(10) NOT NULL auto_increment COMMENT '业务单日志id',
+CREATE TABLE IF NOT EXISTS `b_bizlog` (
+  `l_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '业务单日志id',
   `l_bcid` int(10) NOT NULL COMMENT '业务单实例id',
   `l_content` text NOT NULL COMMENT '业务单日志内容',
   `l_date` datetime NOT NULL COMMENT '业务单日志日期',
   `l_puid` int(10) NOT NULL COMMENT '写日志用户id',
   `l_puname` varchar(50) NOT NULL COMMENT '写日志用户名',
   `l_tagname` varchar(50) NOT NULL COMMENT '业务单日志标签名称',
-  PRIMARY KEY  (`l_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='业务单处理日志' AUTO_INCREMENT=7 ;
+  PRIMARY KEY (`l_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='业务单处理日志' AUTO_INCREMENT=1 ;
 
 --
--- 导出表中的数据 `b_bizlog`
+-- 转存表中的数据 `b_bizlog`
 --
 
 
@@ -67,19 +67,19 @@ CREATE TABLE `b_bizlog` (
 -- 表的结构 `b_bizreply`
 --
 
-CREATE TABLE `b_bizreply` (
-  `r_id` int(10) NOT NULL auto_increment COMMENT '日志回复id',
+CREATE TABLE IF NOT EXISTS `b_bizreply` (
+  `r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '日志回复id',
   `r_lid` int(10) NOT NULL COMMENT '日志id',
   `r_bcid` int(10) NOT NULL COMMENT '业务单实例id',
   `r_content` text NOT NULL COMMENT '回复内容',
   `r_date` datetime NOT NULL COMMENT '回复日期',
   `r_puid` int(10) NOT NULL COMMENT '回复人id',
   `r_puname` varchar(50) NOT NULL COMMENT '回复人姓名',
-  PRIMARY KEY  (`r_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='表单实例日志回复表' AUTO_INCREMENT=4 ;
+  PRIMARY KEY (`r_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='表单实例日志回复表' AUTO_INCREMENT=1 ;
 
 --
--- 导出表中的数据 `b_bizreply`
+-- 转存表中的数据 `b_bizreply`
 --
 
 
@@ -89,8 +89,8 @@ CREATE TABLE `b_bizreply` (
 -- 表的结构 `b_biztemplet`
 --
 
-CREATE TABLE `b_biztemplet` (
-  `bt_id` int(10) NOT NULL auto_increment COMMENT '业务单据id',
+CREATE TABLE IF NOT EXISTS `b_biztemplet` (
+  `bt_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '业务单据id',
   `bt_name` varchar(50) NOT NULL COMMENT '业务单名称',
   `bt_bttid` int(10) NOT NULL COMMENT '业务单分类id',
   `bt_sort` int(10) NOT NULL COMMENT '排序',
@@ -105,16 +105,16 @@ CREATE TABLE `b_biztemplet` (
   `bt_date` datetime NOT NULL COMMENT '业务单创建日期',
   `bt_edituser` varchar(50) NOT NULL COMMENT '最近一次变更者',
   `bt_editdate` datetime NOT NULL COMMENT '最近一次变更日期',
-  PRIMARY KEY  (`bt_id`)
+  PRIMARY KEY (`bt_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='业务表单模板表' AUTO_INCREMENT=4 ;
 
 --
--- 导出表中的数据 `b_biztemplet`
+-- 转存表中的数据 `b_biztemplet`
 --
 
 INSERT INTO `b_biztemplet` (`bt_id`, `bt_name`, `bt_bttid`, `bt_sort`, `bt_dbsource`, `bt_dbfld`, `bt_listhtml`, `bt_listscript`, `bt_formhtml`, `bt_formscript`, `bt_remark`, `bt_user`, `bt_date`, `bt_edituser`, `bt_editdate`) VALUES
-(1, '请假单', 2, 0, 'hsd_leave', 'l_id', '<table id="tb_list" style="width:100%;">\n	<tbody name="head">\n		<tr>\n			<td style="width:30px;">\n				序\n			</td>\n			<td style="width:80px;">\n				请假人\n			</td>\n			<td style="width:100px;">\n				请假日期\n			</td>\n			<td>\n				请假事由\n			</td>\n			<td style="width:80px;">\n				部门经理\n			</td>\n			<td style="width:80px;">\n				部门总监\n			</td>\n			<td style="width:100px;">\n				审核日期\n			</td>\n			<td style="width:100px;">\n				&nbsp;\n			</td>\n		</tr>\n	</tbody>\n	<tbody name="body">\n		<tr>\n			<td name="order">\n				{order}\n			</td>\n			<td name="l_puname">\n				{l_puname}\n			</td>\n			<td name="l_date" fmt="yyyy-mm-dd">\n				{l_date}\n			</td>\n			<td name="l_content">\n				{l_content}\n			</td>\n			<td>\n				{l_manager}\n			</td>\n			<td>\n				{l_general}\n			</td>\n			<td name="l_date2" fmt="yyyy-mm-dd">\n				{l_date2}\n			</td>\n			<td>\n				{tools}\n			</td>\n		</tr>\n		<tr style="display:none;background-color:#666;">\n			<td style="border-right:0px;">\n				&nbsp;\n			</td>\n			<td colspan="8" name="workflowinfo" style="padding:0px;padding-bottom:10px;">\n				&nbsp;\n			</td>\n		</tr>\n	</tbody>\n	<tbody>\n		<tr>\n			<td colspan="9">\n				共<span id="tb_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条， \n				共<span id="tb_list_pagecount2" style="color:#c26220;">0</span>&nbsp;页， \n				当前在第<span id="tb_list_pageindex2" style="color:#c26220;">0</span>&nbsp;页　&nbsp; <span id="tb_list_pageinfo" style="color:#c26220;">&nbsp;</span> \n			</td>\n		</tr>\n	</tbody>\n</table>', '', '<p style="text-align:center;">\n	<span style="font-size:24px;line-height:1.5;font-family:KaiTi_GB2312;">请假单</span> \n</p>\n<table style="width:100%;" cellpadding="5" cellspacing="0" border="1" bordercolor="#CCCCCC">\n	<tbody>\n		<tr>\n			<td style="width:80px;text-align:right;">\n				请假人：\n			</td>\n			<td>\n				<input id="l_puname" valid="account,false" /> \n			</td>\n			<td style="width:80px;text-align:right;">\n				日期：\n			</td>\n			<td>\n				<input id="l_date" /> \n			</td>\n			<td style="width:80px;text-align:right;">\n				编号：\n			</td>\n			<td>\n				<input id="l_id" disabled="disabled" /> \n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;">\n				假期始于：\n			</td>\n			<td>\n				<input id="l_fromdate" /> \n			</td>\n			<td style="text-align:right;">\n				止于：\n			</td>\n			<td>\n				<input id="l_todate" /> \n			</td>\n			<td>\n				<br />\n			</td>\n			<td>\n				<br />\n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;vertical-align:top;">\n				事 &nbsp; 由：\n			</td>\n			<td colspan="5">\n				<textarea id="l_content" style="width:100%;height:100px;"></textarea> \n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;">\n				部门经理：\n			</td>\n			<td>\n				<input id="l_manager" disabled="disabled" /> \n			</td>\n			<td style="text-align:right;">\n				部门总监：\n			</td>\n			<td>\n				<input id="l_general" disabled="disabled" /> \n			</td>\n			<td style="text-align:right;">\n				审批日期：\n			</td>\n			<td>\n				<input id="l_date2" disabled="disabled" /> \n			</td>\n		</tr>\n	</tbody>\n</table>', '', '', '徐飞', '2013-02-16 19:43:01', '徐飞', '2013-02-16 21:33:07'),
-(2, '企业网建业务单', 2, 2, 'td_website', 'ws_id', '<table id="tb_list" style="width:100%;">\n	<tbody name="head">\n		<tr>\n			<td style="width:30px;">\n				序\n			</td>\n			<td>\n				客户名称\n			</td>\n			<td style="width:120px;">\n				合同号\n			</td>\n			<td style="width:80px;">\n				销售人员\n			</td>\n			<td style="width:80px;">\n				联系人\n			</td>\n			<td style="width:80px;">\n				联系电话\n			</td>\n			<td style="width:100px;">\n				提交日期\n			</td>\n		</tr>\n	</tbody>\n	<tbody name="body">\n		<tr>\n			<td name="order">\n				{order}\n			</td>\n			<td>\n				{ws_cstname}\n			</td>\n			<td>\n				{ws_code}\n			</td>\n			<td>\n				{ws_solename}\n			</td>\n			<td>\n				{ws_connname}\n			</td>\n			<td>\n				{ws_connphone}\n			</td>\n			<td name="ws_date" fmt="yyyy-mm-dd/p">\n				{ws_date}\n			</td>\n		</tr>\n	</tbody>\n	<tbody>\n		<tr>\n			<td colspan="8">\n				共<span id="tb_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条， \n                            共<span id="tb_list_pagecount2" style="color:#c26220;">0</span>&nbsp;页， \n                            当前在第<span id="tb_list_pageindex2" style="color:#c26220;">0</span>&nbsp;页　&nbsp; <span id="tb_list_pageinfo" style="color:#c26220;">&nbsp;</span> \n			</td>\n		</tr>\n	</tbody>\n</table>', '', '<div style="text-align:center;">\n	<span style="font-family:KaiTi_GB2312;line-height:1.5;font-size:24px;">企业建站单</span> \n</div>\n<p>\n	<span style="font-family:KaiTi_GB2312;"> \n	<table style="width:100%;" cellpadding="2" cellspacing="0" border="1" bordercolor="#CCCCCC">\n		<tbody>\n			<tr>\n				<td style="text-align:right;width:80px;">\n					客户名称：\n				</td>\n				<td>\n					<input id="ws_cstname" style="width:200px;" valid="account,false" validinfo="不能为空" /> \n				</td>\n				<td style="text-align:right;width:80px;">\n					销售人员：\n				</td>\n				<td>\n					<input id="ws_solename" /> \n				</td>\n				<td style="text-align:right;width:80px;">\n					合同号：\n				</td>\n				<td>\n					<input id="ws_code" valid="abcnumber,false" validinfo="不能为空,格式为：HT201303150020" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;">\n					联系人：\n				</td>\n				<td>\n					<input id="ws_connname" /> \n				</td>\n				<td style="text-align:right;">\n					联系电话：\n				</td>\n				<td>\n					<input id="ws_connphone" valid="phone,false" /> \n				</td>\n				<td style="text-align:right;">\n					提单日期：\n				</td>\n				<td>\n					<input id="ws_date" disabled="disabled" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;">\n					地 &nbsp; 址：\n				</td>\n				<td colspan="5">\n					<input id="ws_connaddr" style="width:300px;" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;vertical-align:top;">\n					备 &nbsp; 注：\n				</td>\n				<td colspan="5">\n					<textarea id="ws_remark" style="width:100%;height:200px;"></textarea> \n				</td>\n			</tr>\n		</tbody>\n	</table>\n<br />\n<br />\n</span> \n</p>\n<p>\n	<br />\n</p>', '', '3232', '徐飞', '2013-02-16 19:48:36', '', '0000-00-00 00:00:00'),
+(1, '请假单', 2, 0, 'hsd_leave', 'l_id', '<table id="tb_list" style="width:100%;">\n	<tbody name="head">\n		<tr>\n			<td style="width:30px;">\n				序\n			</td>\n			<td style="width:80px;">\n				请假人\n			</td>\n			<td style="width:100px;">\n				请假日期\n			</td>\n			<td>\n				请假事由\n			</td>\n			<td style="width:80px;">\n				部门经理\n			</td>\n			<td style="width:80px;">\n				部门总监\n			</td>\n			<td style="width:100px;">\n				审核日期\n			</td>\n			<td style="width:100px;">\n				&nbsp;\n			</td>\n		</tr>\n	</tbody>\n	<tbody name="body">\n		<tr>\n			<td name="order">\n				{order}\n			</td>\n			<td name="l_puname">\n				{l_puname}\n			</td>\n			<td name="l_date" fmt="yyyy-mm-dd">\n				{l_date}\n			</td>\n			<td name="l_content">\n				{l_content}\n			</td>\n			<td>\n				{l_manager}\n			</td>\n			<td>\n				{l_general}\n			</td>\n			<td name="l_date2" fmt="yyyy-mm-dd">\n				{l_date2}\n			</td>\n			<td>\n				{tools}\n			</td>\n		</tr>\n		<tr name="tranpad" style="display:none;background-color:#444;">\n			<td style="border-right:0px;">\n				&nbsp;\n			</td>\n			<td colspan="8" name="workflowinfo" style="padding:0px;padding-bottom:10px;">\n				&nbsp;\n			</td>\n		</tr>\n	</tbody>\n	<tbody>\n		<tr>\n			<td colspan="9">\n				共<span id="tb_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条， \n				共<span id="tb_list_pagecount2" style="color:#c26220;">0</span>&nbsp;页， \n				当前在第<span id="tb_list_pageindex2" style="color:#c26220;">0</span>&nbsp;页　&nbsp; <span id="tb_list_pageinfo" style="color:#c26220;">&nbsp;</span> \n			</td>\n		</tr>\n	</tbody>\n</table>', '', '<p style="text-align:center;">\n	<span style="font-size:24px;line-height:1.5;font-family:KaiTi_GB2312;">请假单</span> \n</p>\n<table style="width:100%;" cellpadding="5" cellspacing="0" border="1" bordercolor="#CCCCCC">\n	<tbody>\n		<tr>\n			<td style="width:80px;text-align:right;">\n				请假人：\n			</td>\n			<td>\n				<input id="l_puname" valid="account,false" source="user" /> \n			</td>\n			<td style="width:80px;text-align:right;">\n				日期：\n			</td>\n			<td>\n				<input id="l_date" source="date" /> \n			</td>\n			<td style="width:80px;text-align:right;">\n				编号：\n			</td>\n			<td>\n				<input id="l_id" disabled="disabled" /> \n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;">\n				假期始于：\n			</td>\n			<td>\n				<input id="l_fromdate" source="date" /> \n			</td>\n			<td style="text-align:right;">\n				止于：\n			</td>\n			<td>\n				<input id="l_todate" source="date" /> \n			</td>\n			<td>\n				<br />\n			</td>\n			<td>\n				<br />\n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;vertical-align:top;">\n				事 &nbsp; 由：\n			</td>\n			<td colspan="5">\n				<textarea id="l_content" source="editorbox" style="width:100%;height:100px;"></textarea> \n			</td>\n		</tr>\n		<tr>\n			<td style="text-align:right;">\n				部门经理：\n			</td>\n			<td>\n				<input id="l_manager" disabled="disabled" /> \n			</td>\n			<td style="text-align:right;">\n				部门总监：\n			</td>\n			<td>\n				<input id="l_general" disabled="disabled" /> \n			</td>\n			<td style="text-align:right;">\n				审批日期：\n			</td>\n			<td>\n				<input id="l_date2" disabled="disabled" /> \n			</td>\n		</tr>\n	</tbody>\n</table>', '', '', '徐飞', '2013-02-16 19:43:01', '徐飞', '2013-02-16 21:33:07'),
+(2, '企业网建业务单', 2, 2, 'td_website', 'ws_id', '<table id="tb_list" style="width:100%;">\n	<tbody name="head">\n		<tr>\n			<td style="width:30px;">\n				序\n			</td>\n			<td>\n				客户名称\n			</td>\n			<td style="width:120px;">\n				合同号\n			</td>\n			<td style="width:80px;">\n				销售人员\n			</td>\n			<td style="width:80px;">\n				联系人\n			</td>\n			<td style="width:80px;">\n				联系电话\n			</td>\n			<td style="width:100px;">\n				提交日期\n			</td>\n			<td style="width:100px;">\n				&nbsp;\n			</td>\n		</tr>\n	</tbody>\n	<tbody name="body">\n		<tr>\n			<td name="order">\n				{order}\n			</td>\n			<td>\n				{ws_cstname}\n			</td>\n			<td>\n				{ws_code}\n			</td>\n			<td>\n				{ws_solename}\n			</td>\n			<td>\n				{ws_connname}\n			</td>\n			<td>\n				{ws_connphone}\n			</td>\n			<td name="ws_date" fmt="yyyy-mm-dd/p">\n				{ws_date}\n			</td>\n			<td>\n				{tools}\n			</td>\n		</tr>\n		<tr name="tranpad" style="display:none;background-color:#444;">\n			<td style="border-right:0px;">\n				&nbsp;\n			</td>\n			<td colspan="8" name="workflowinfo" style="padding:0px;padding-bottom:10px;">\n				&nbsp;\n			</td>\n		</tr>\n	</tbody>\n	<tbody>\n		<tr>\n			<td colspan="9">\n				共<span id="tb_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条， \n                            共<span id="tb_list_pagecount2" style="color:#c26220;">0</span>&nbsp;页， \n                            当前在第<span id="tb_list_pageindex2" style="color:#c26220;">0</span>&nbsp;页　&nbsp; <span id="tb_list_pageinfo" style="color:#c26220;">&nbsp;</span> \n			</td>\n		</tr>\n	</tbody>\n</table>', '', '<div style="text-align:center;">\n	<span style="font-family:KaiTi_GB2312;line-height:1.5;font-size:24px;">企业建站单</span> \n</div>\n<p>\n	<span style="font-family:KaiTi_GB2312;"> \n	<table style="width:100%;" cellpadding="2" cellspacing="0" border="1" bordercolor="#CCCCCC">\n		<tbody>\n			<tr>\n				<td style="text-align:right;width:80px;">\n					客户名称：\n				</td>\n				<td>\n					<input id="ws_cstname" style="width:200px;" valid="account,false" validinfo="不能为空" /> \n				</td>\n				<td style="text-align:right;width:80px;">\n					销售人员：\n				</td>\n				<td>\n					<input id="ws_solename" valid="account,false" validinfo="不能为空" source="user" /> \n				</td>\n				<td style="text-align:right;width:80px;">\n					合同号：\n				</td>\n				<td>\n					<input id="ws_code" valid="abcnumber,false" validinfo="不能为空" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;">\n					联系人：\n				</td>\n				<td>\n					<input id="ws_connname" /> \n				</td>\n				<td style="text-align:right;">\n					联系电话：\n				</td>\n				<td>\n					<input id="ws_connphone" valid="phone,false" /> \n				</td>\n				<td style="text-align:right;">\n					提单日期：\n				</td>\n				<td>\n					<input id="ws_date" valid="anything,false" source="date" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;">\n					地 &nbsp; 址：\n				</td>\n				<td colspan="5">\n					<input id="ws_connaddr" style="width:300px;" /> \n				</td>\n			</tr>\n			<tr>\n				<td style="text-align:right;vertical-align:top;">\n					备 &nbsp; 注：\n				</td>\n				<td colspan="5">\n				<textarea id="ws_remark" name="ws_remark" style="width:100%;height:200px;" source="editorbox"></textarea> \n				</td>\n			</tr>\n		</tbody>\n	</table>\n<br />\n<br />\n</span> \n</p>\n<p>\n	<br />\n</p>', '', '3232', '徐飞', '2013-02-16 19:48:36', '', '0000-00-00 00:00:00'),
 (3, 'SEO业务单', 2, 3, '', '', '', '', '<p>\n	fdsfdsfdsafdsfdsf\n</p>\n<p>\n	ds\n</p>\n<p>\n	f\n</p>\n<p>\n	ds\n</p>\n<p>\n	af\n</p>\n<p>\n	d\n</p>\n<p>\n	safdddddddddddddddddddd\n</p>', '', '', '徐飞', '2013-02-16 19:50:12', '徐飞', '2013-02-16 20:09:42');
 
 -- --------------------------------------------------------
@@ -123,18 +123,18 @@ INSERT INTO `b_biztemplet` (`bt_id`, `bt_name`, `bt_bttid`, `bt_sort`, `bt_dbsou
 -- 表的结构 `b_biztemplettype`
 --
 
-CREATE TABLE `b_biztemplettype` (
-  `btt_id` int(10) NOT NULL auto_increment COMMENT '业务单分类id',
+CREATE TABLE IF NOT EXISTS `b_biztemplettype` (
+  `btt_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '业务单分类id',
   `btt_pid` int(10) NOT NULL COMMENT '业务单分类父id',
   `btt_name` varchar(50) NOT NULL COMMENT '业务单分类名称',
   `btt_sort` int(10) NOT NULL COMMENT '排序',
   `btt_date` datetime NOT NULL COMMENT '创建日期',
   `btt_remark` text NOT NULL COMMENT '备注',
-  PRIMARY KEY  (`btt_id`)
+  PRIMARY KEY (`btt_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='业务表单模板分类表' AUTO_INCREMENT=3 ;
 
 --
--- 导出表中的数据 `b_biztemplettype`
+-- 转存表中的数据 `b_biztemplettype`
 --
 
 INSERT INTO `b_biztemplettype` (`btt_id`, `btt_pid`, `btt_name`, `btt_sort`, `btt_date`, `btt_remark`) VALUES
@@ -152,18 +152,18 @@ USE `da_powersys`;
 -- 表的结构 `p_group`
 --
 
-CREATE TABLE `p_group` (
-  `pg_id` int(10) NOT NULL auto_increment COMMENT '组id',
+CREATE TABLE IF NOT EXISTS `p_group` (
+  `pg_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '组id',
   `pg_pid` int(10) NOT NULL COMMENT '所属父组id',
   `pg_sort` int(10) NOT NULL COMMENT '排序',
   `pg_name` varchar(50) NOT NULL COMMENT '组名称',
   `pg_date` datetime NOT NULL COMMENT '组创建时间',
   `pg_remark` text NOT NULL COMMENT '备注',
-  PRIMARY KEY  (`pg_id`)
+  PRIMARY KEY (`pg_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作组表' AUTO_INCREMENT=6 ;
 
 --
--- 导出表中的数据 `p_group`
+-- 转存表中的数据 `p_group`
 --
 
 INSERT INTO `p_group` (`pg_id`, `pg_pid`, `pg_sort`, `pg_name`, `pg_date`, `pg_remark`) VALUES
@@ -171,7 +171,7 @@ INSERT INTO `p_group` (`pg_id`, `pg_pid`, `pg_sort`, `pg_name`, `pg_date`, `pg_r
 (2, 1, 10, '行政1组', '0000-00-00 00:00:00', ''),
 (3, 1, 0, '总监1组', '0000-00-00 00:00:00', ''),
 (4, 1, 5, '经理1组', '0000-00-00 00:00:00', ''),
-(5, 1, 30, '普通员工', '0000-00-00 00:00:00', '');
+(5, 1, 30, '员工', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -179,15 +179,15 @@ INSERT INTO `p_group` (`pg_id`, `pg_pid`, `pg_sort`, `pg_name`, `pg_date`, `pg_r
 -- 表的结构 `p_group2role`
 --
 
-CREATE TABLE `p_group2role` (
-  `g2r_id` int(10) NOT NULL auto_increment COMMENT '工作组映射角色流水id',
+CREATE TABLE IF NOT EXISTS `p_group2role` (
+  `g2r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '工作组映射角色流水id',
   `g2r_pgid` int(10) NOT NULL COMMENT '组id',
   `g2r_prid` int(10) NOT NULL COMMENT '角色id',
-  PRIMARY KEY  (`g2r_id`)
+  PRIMARY KEY (`g2r_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作组映射角色表' AUTO_INCREMENT=3 ;
 
 --
--- 导出表中的数据 `p_group2role`
+-- 转存表中的数据 `p_group2role`
 --
 
 INSERT INTO `p_group2role` (`g2r_id`, `g2r_pgid`, `g2r_prid`) VALUES
@@ -200,17 +200,17 @@ INSERT INTO `p_group2role` (`g2r_id`, `g2r_pgid`, `g2r_prid`) VALUES
 -- 表的结构 `p_log`
 --
 
-CREATE TABLE `p_log` (
-  `pl_id` int(10) NOT NULL auto_increment COMMENT '日志id',
+CREATE TABLE IF NOT EXISTS `p_log` (
+  `pl_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '日志id',
   `pl_type` varchar(20) NOT NULL COMMENT '操作类型',
   `pl_conent` varchar(2000) NOT NULL COMMENT '操作内容',
   `pl_puid` int(10) NOT NULL COMMENT '操作人',
   `pl_date` datetime NOT NULL COMMENT '操作时间',
-  PRIMARY KEY  (`pl_id`)
+  PRIMARY KEY (`pl_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='日志表' AUTO_INCREMENT=1 ;
 
 --
--- 导出表中的数据 `p_log`
+-- 转存表中的数据 `p_log`
 --
 
 
@@ -220,25 +220,25 @@ CREATE TABLE `p_log` (
 -- 表的结构 `p_menu`
 --
 
-CREATE TABLE `p_menu` (
-  `pm_id` int(10) NOT NULL auto_increment COMMENT '菜单id',
+CREATE TABLE IF NOT EXISTS `p_menu` (
+  `pm_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '菜单id',
   `pm_pid` int(10) NOT NULL COMMENT '菜单父id',
-  `pm_name` varchar(50) character set utf8 NOT NULL COMMENT '菜单名',
+  `pm_name` varchar(50) CHARACTER SET utf8 NOT NULL COMMENT '菜单名',
   `pm_level` int(10) NOT NULL COMMENT '菜单级别',
   `pm_sort` int(10) NOT NULL COMMENT '排序',
-  `pm_url` varchar(1000) character set utf8 NOT NULL COMMENT '页面链接地址',
-  `pm_img` varchar(1000) character set utf8 NOT NULL COMMENT '图标文件地址',
-  `pm_remark` text character set utf8 NOT NULL COMMENT '备注',
-  PRIMARY KEY  (`pm_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='系统菜单表' AUTO_INCREMENT=39 ;
+  `pm_url` varchar(1000) CHARACTER SET utf8 NOT NULL COMMENT '页面链接地址',
+  `pm_img` varchar(1000) CHARACTER SET utf8 NOT NULL COMMENT '图标文件地址',
+  `pm_remark` text CHARACTER SET utf8 NOT NULL COMMENT '备注',
+  PRIMARY KEY (`pm_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='系统菜单表' AUTO_INCREMENT=49 ;
 
 --
--- 导出表中的数据 `p_menu`
+-- 转存表中的数据 `p_menu`
 --
 
 INSERT INTO `p_menu` (`pm_id`, `pm_pid`, `pm_name`, `pm_level`, `pm_sort`, `pm_url`, `pm_img`, `pm_remark`) VALUES
 (1, -1, '成都网联天下（菜单管理）', 0, 1, '#', '/image/menu/logo.jpg', ''),
-(2, 1, '项目进度', 1, 5, '/main.php?menu=2', '/images/menu_icon/time.png', ''),
+(2, 1, '项目进度', 1, 99, '/main.php?menu=2', '/images/menu_icon/time.png', ''),
 (3, 1, '权限管理', 1, 50, '/sys_power/index.php?menu=3', '/images/menu_icon/power.png', ''),
 (5, 3, '部门管理', 2, 1, '/sys_power/org_manage.php', '/images/menu_icon/depart.png', ''),
 (6, 3, '人员管理', 2, 10, '/sys_power/user_manage.php', '/images/menu_icon/user.png', ''),
@@ -263,9 +263,19 @@ INSERT INTO `p_menu` (`pm_id`, `pm_pid`, `pm_name`, `pm_level`, `pm_sort`, `pm_u
 (32, 3, '角色流程权限', 2, 33, '', '', ''),
 (33, 3, '角色模块权限', 2, 32, '', '', ''),
 (34, 3, '角色菜单权限', 2, 31, '', '', ''),
-(35, 1, '我的桌面', 1, 0, '/web/mydesk/mydesk.htm', '/images/menu_icon/desk.png', '/sys_msg/sendemail.php\n/desk.php'),
-(36, 21, '帮助文档', 2, 0, '/sys_setting/helper/helper_manage.php', '/images/sys_icon/help.png', ''),
-(38, 1, 'CRM系统', 1, 0, '', '/images/menu_icon/group.png', '');
+(35, 1, '我的桌面', 1, 0, '/sys_common/mydesk/mydesk.php', '/images/menu_icon/desk.png', '/sys_msg/sendemail.php\n/desk.php'),
+(36, 21, '帮助文档', 2, 99, '/sys_setting/helper/helper_manage.php', '/images/sys_icon/help.png', ''),
+(38, 1, 'CRM系统', 1, 0, '', '/images/menu_icon/group.png', ''),
+(39, 1, '统计分析', 1, 35, '/sys_common/chart/index.htm?menu=39', '/images/menu_icon/chart_bar.png', ''),
+(40, 39, '企业建站项目统计', 2, 20, '', '', ''),
+(41, 25, '发送邮件', 2, 99, '/sys_common/email/sendmail.php', '/images/sys_icon/email_go.png', ''),
+(42, 39, '员工假事统计', 2, 10, '/sys_common/chart/leave.htm', '', ''),
+(43, 25, '倒计时', 2, 0, '', '/images/menu_icon/time.png', ''),
+(44, 25, '总经理意见箱', 2, 0, '', '', ''),
+(45, 1, '产品库', 1, 37, '', '', ''),
+(46, 25, '企业制度文档', 2, 0, '', '', ''),
+(47, 25, '新建菜单', 0, 0, '', '', ''),
+(48, 21, '系统意见反馈', 2, 0, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -273,15 +283,15 @@ INSERT INTO `p_menu` (`pm_id`, `pm_pid`, `pm_name`, `pm_level`, `pm_sort`, `pm_u
 -- 表的结构 `p_menu2role`
 --
 
-CREATE TABLE `p_menu2role` (
-  `m2r_id` int(10) NOT NULL auto_increment COMMENT '菜单角色映射id',
+CREATE TABLE IF NOT EXISTS `p_menu2role` (
+  `m2r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '菜单角色映射id',
   `m2r_pmid` int(10) NOT NULL COMMENT '菜单id',
   `m2r_prid` int(10) NOT NULL COMMENT '角色id',
-  PRIMARY KEY  (`m2r_id`)
+  PRIMARY KEY (`m2r_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='菜单角色映射表' AUTO_INCREMENT=4 ;
 
 --
--- 导出表中的数据 `p_menu2role`
+-- 转存表中的数据 `p_menu2role`
 --
 
 INSERT INTO `p_menu2role` (`m2r_id`, `m2r_pmid`, `m2r_prid`) VALUES
@@ -295,18 +305,18 @@ INSERT INTO `p_menu2role` (`m2r_id`, `m2r_pmid`, `m2r_prid`) VALUES
 -- 表的结构 `p_org`
 --
 
-CREATE TABLE `p_org` (
-  `po_id` int(10) NOT NULL auto_increment COMMENT '部门id',
+CREATE TABLE IF NOT EXISTS `p_org` (
+  `po_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '部门id',
   `po_pid` int(10) NOT NULL COMMENT '父级部门id',
   `po_sort` int(10) NOT NULL COMMENT '排序',
   `po_name` varchar(50) NOT NULL COMMENT '部门名称',
   `po_date` datetime NOT NULL COMMENT '创建时间',
   `po_remark` text NOT NULL COMMENT '备注',
-  PRIMARY KEY  (`po_id`)
+  PRIMARY KEY (`po_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='部门表' AUTO_INCREMENT=71 ;
 
 --
--- 导出表中的数据 `p_org`
+-- 转存表中的数据 `p_org`
 --
 
 INSERT INTO `p_org` (`po_id`, `po_pid`, `po_sort`, `po_name`, `po_date`, `po_remark`) VALUES
@@ -324,8 +334,7 @@ INSERT INTO `p_org` (`po_id`, `po_pid`, `po_sort`, `po_name`, `po_date`, `po_rem
 (64, 0, 0, '人事行政部', '0000-00-00 00:00:00', ''),
 (65, 2, 0, 'ShopEx客服组', '0000-00-00 00:00:00', ''),
 (66, 0, 5, '市场部', '0000-00-00 00:00:00', ''),
-(69, 66, 0, '新建部门', '0000-00-00 00:00:00', ''),
-(70, 1, 0, '新建部门', '0000-00-00 00:00:00', '');
+(69, 66, 0, '新建部门', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -333,19 +342,19 @@ INSERT INTO `p_org` (`po_id`, `po_pid`, `po_sort`, `po_name`, `po_date`, `po_rem
 -- 表的结构 `p_power`
 --
 
-CREATE TABLE `p_power` (
-  `pp_id` int(10) NOT NULL auto_increment COMMENT '权限id',
+CREATE TABLE IF NOT EXISTS `p_power` (
+  `pp_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '权限id',
   `pp_pid` int(10) NOT NULL COMMENT '父权限id',
   `pp_name` varchar(50) NOT NULL COMMENT '权限名称',
   `pp_code` varchar(50) NOT NULL COMMENT '权限编码',
   `pp_sort` int(10) NOT NULL COMMENT '排序',
   `pp_date` datetime NOT NULL COMMENT '创建日期',
   `pp_remark` text NOT NULL COMMENT '备注',
-  PRIMARY KEY  (`pp_id`)
+  PRIMARY KEY (`pp_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='功能权限表' AUTO_INCREMENT=19 ;
 
 --
--- 导出表中的数据 `p_power`
+-- 转存表中的数据 `p_power`
 --
 
 INSERT INTO `p_power` (`pp_id`, `pp_pid`, `pp_name`, `pp_code`, `pp_sort`, `pp_date`, `pp_remark`) VALUES
@@ -373,16 +382,16 @@ INSERT INTO `p_power` (`pp_id`, `pp_pid`, `pp_name`, `pp_code`, `pp_sort`, `pp_d
 -- 表的结构 `p_power2group`
 --
 
-CREATE TABLE `p_power2group` (
-  `p2g_id` int(10) NOT NULL auto_increment COMMENT '组映射权限id',
+CREATE TABLE IF NOT EXISTS `p_power2group` (
+  `p2g_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '组映射权限id',
   `p2g_pgid` int(10) NOT NULL COMMENT '组id',
   `p2g_ppid` int(10) NOT NULL COMMENT '权限id',
   `p2g_ptid` int(10) NOT NULL COMMENT '权限类型id',
-  PRIMARY KEY  (`p2g_id`)
+  PRIMARY KEY (`p2g_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='功能权限映射工作组表' AUTO_INCREMENT=1 ;
 
 --
--- 导出表中的数据 `p_power2group`
+-- 转存表中的数据 `p_power2group`
 --
 
 
@@ -392,16 +401,16 @@ CREATE TABLE `p_power2group` (
 -- 表的结构 `p_power2role`
 --
 
-CREATE TABLE `p_power2role` (
-  `p2r_id` int(10) NOT NULL auto_increment COMMENT '角色映射权限id',
+CREATE TABLE IF NOT EXISTS `p_power2role` (
+  `p2r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '角色映射权限id',
   `p2r_prid` int(10) NOT NULL COMMENT '角色id',
   `p2r_ppid` int(10) NOT NULL COMMENT '权限id',
   `p2r_ptid` int(10) NOT NULL COMMENT '权限类型id',
-  PRIMARY KEY  (`p2r_id`)
+  PRIMARY KEY (`p2r_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='功能权限映射角色表' AUTO_INCREMENT=38 ;
 
 --
--- 导出表中的数据 `p_power2role`
+-- 转存表中的数据 `p_power2role`
 --
 
 INSERT INTO `p_power2role` (`p2r_id`, `p2r_prid`, `p2r_ppid`, `p2r_ptid`) VALUES
@@ -437,16 +446,16 @@ INSERT INTO `p_power2role` (`p2r_id`, `p2r_prid`, `p2r_ppid`, `p2r_ptid`) VALUES
 -- 表的结构 `p_power2user`
 --
 
-CREATE TABLE `p_power2user` (
-  `p2u_id` int(10) NOT NULL auto_increment COMMENT '用户映射权限id',
+CREATE TABLE IF NOT EXISTS `p_power2user` (
+  `p2u_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户映射权限id',
   `p2u_puid` int(10) NOT NULL COMMENT '用户id',
   `p2u_ppid` int(10) NOT NULL COMMENT '权限id',
   `p2u_ptid` int(10) NOT NULL COMMENT '权限类型id',
-  PRIMARY KEY  (`p2u_id`)
+  PRIMARY KEY (`p2u_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='功能权限映射用户表' AUTO_INCREMENT=1 ;
 
 --
--- 导出表中的数据 `p_power2user`
+-- 转存表中的数据 `p_power2user`
 --
 
 
@@ -456,17 +465,17 @@ CREATE TABLE `p_power2user` (
 -- 表的结构 `p_powertype`
 --
 
-CREATE TABLE `p_powertype` (
-  `pt_id` int(10) NOT NULL auto_increment COMMENT '权限类型id',
+CREATE TABLE IF NOT EXISTS `p_powertype` (
+  `pt_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '权限类型id',
   `pt_code` varchar(20) NOT NULL COMMENT '权限类型编码',
   `pt_name` varchar(100) NOT NULL COMMENT '权限类型名称',
   `pt_sort` int(10) NOT NULL COMMENT '排序',
   `pt_remark` text NOT NULL COMMENT '备注',
-  PRIMARY KEY  (`pt_id`)
+  PRIMARY KEY (`pt_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='功能权限分类表' AUTO_INCREMENT=5 ;
 
 --
--- 导出表中的数据 `p_powertype`
+-- 转存表中的数据 `p_powertype`
 --
 
 INSERT INTO `p_powertype` (`pt_id`, `pt_code`, `pt_name`, `pt_sort`, `pt_remark`) VALUES
@@ -481,16 +490,16 @@ INSERT INTO `p_powertype` (`pt_id`, `pt_code`, `pt_name`, `pt_sort`, `pt_remark`
 -- 表的结构 `p_relation`
 --
 
-CREATE TABLE `p_relation` (
-  `pr_id` int(10) NOT NULL auto_increment COMMENT '上下属关系id',
+CREATE TABLE IF NOT EXISTS `p_relation` (
+  `pr_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '上下属关系id',
   `pr_poid` int(10) NOT NULL COMMENT '所在部门id',
   `pr_leaderid` int(10) NOT NULL COMMENT '领导人id',
   `pr_puid` int(10) NOT NULL COMMENT '从属人id',
-  PRIMARY KEY  (`pr_id`)
+  PRIMARY KEY (`pr_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='上下属关系表' AUTO_INCREMENT=8 ;
 
 --
--- 导出表中的数据 `p_relation`
+-- 转存表中的数据 `p_relation`
 --
 
 INSERT INTO `p_relation` (`pr_id`, `pr_poid`, `pr_leaderid`, `pr_puid`) VALUES
@@ -508,27 +517,34 @@ INSERT INTO `p_relation` (`pr_id`, `pr_poid`, `pr_leaderid`, `pr_puid`) VALUES
 -- 表的结构 `p_role`
 --
 
-CREATE TABLE `p_role` (
-  `pr_id` int(10) NOT NULL auto_increment COMMENT '角色id',
+CREATE TABLE IF NOT EXISTS `p_role` (
+  `pr_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '角色id',
   `pr_pid` int(10) NOT NULL COMMENT '父级角色id',
   `pr_name` varchar(50) NOT NULL COMMENT '角色名称',
   `pr_sort` int(10) NOT NULL COMMENT '排序',
   `pr_date` datetime NOT NULL COMMENT '角色创建时间',
   `pr_remark` text NOT NULL COMMENT '备注',
-  PRIMARY KEY  (`pr_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='角色表' AUTO_INCREMENT=9 ;
+  PRIMARY KEY (`pr_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='角色表' AUTO_INCREMENT=19 ;
 
 --
--- 导出表中的数据 `p_role`
+-- 转存表中的数据 `p_role`
 --
 
 INSERT INTO `p_role` (`pr_id`, `pr_pid`, `pr_name`, `pr_sort`, `pr_date`, `pr_remark`) VALUES
 (1, -1, '成都网联天下（角色）', 0, '0000-00-00 00:00:00', ''),
-(2, 1, '总经理', 1, '2013-02-13 00:00:00', ''),
-(3, 1, '部门经理', 20, '2013-02-13 00:00:00', ''),
-(4, 1, '普通员工', 999, '2013-02-13 00:00:00', ''),
+(4, 1, '员工', 999, '2013-02-13 00:00:00', ''),
 (5, 1, '超级管理员', 0, '2013-02-13 00:00:00', ''),
-(8, 1, '部门总监', 10, '0000-00-00 00:00:00', '');
+(9, 1, '技术部门', 0, '0000-00-00 00:00:00', ''),
+(10, 9, '技术总监', 1, '0000-00-00 00:00:00', ''),
+(11, 9, '首席设计师', 30, '0000-00-00 00:00:00', ''),
+(12, 9, '高级软件工程师', 40, '0000-00-00 00:00:00', ''),
+(13, 9, '设计师', 30, '0000-00-00 00:00:00', ''),
+(14, 9, '软件工程师', 50, '0000-00-00 00:00:00', ''),
+(15, 1, '总经办', 0, '0000-00-00 00:00:00', ''),
+(16, 15, '总经理', 1, '0000-00-00 00:00:00', ''),
+(17, 9, '总监助理', 10, '0000-00-00 00:00:00', ''),
+(18, 15, '总经理助理', 10, '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -536,8 +552,8 @@ INSERT INTO `p_role` (`pr_id`, `pr_pid`, `pr_name`, `pr_sort`, `pr_date`, `pr_re
 -- 表的结构 `p_user`
 --
 
-CREATE TABLE `p_user` (
-  `pu_id` int(10) NOT NULL auto_increment COMMENT '用户id号',
+CREATE TABLE IF NOT EXISTS `p_user` (
+  `pu_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户id号',
   `pu_oid` int(10) NOT NULL COMMENT '所属组织id号',
   `pu_code` varchar(50) NOT NULL COMMENT '账号',
   `pu_pwd` varchar(50) NOT NULL COMMENT '密码',
@@ -550,26 +566,26 @@ CREATE TABLE `p_user` (
   `pu_lastlogin` datetime NOT NULL COMMENT '最后一次登陆系统',
   `pu_logincount` int(11) NOT NULL COMMENT '登陆系统次数',
   `pu_remark` text NOT NULL COMMENT '备注',
-  PRIMARY KEY  (`pu_id`)
+  PRIMARY KEY (`pu_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户表' AUTO_INCREMENT=26 ;
 
 --
--- 导出表中的数据 `p_user`
+-- 转存表中的数据 `p_user`
 --
 
 INSERT INTO `p_user` (`pu_id`, `pu_oid`, `pu_code`, `pu_pwd`, `pu_name`, `pu_icon`, `pu_gender`, `pu_phone`, `pu_telephone`, `pu_address`, `pu_lastlogin`, `pu_logincount`, `pu_remark`) VALUES
-(1, 1, 'xufei', 'c4ca4238a0b923820dcc509a6f75849b', '徐飞', '/uploads/userico/徐飞_1.jpg', '男', '13688387776', '', '成都市青羊区八宝街', '2013-03-21 14:43:49', 0, '徐飞'),
+(1, 1, 'xufei', 'c4ca4238a0b923820dcc509a6f75849b', '徐飞', '/uploads/userico/徐飞_1.jpg', '男', '13688387776', '', '成都市青羊区八宝街', '2013-03-26 02:05:09', 0, '徐飞'),
 (2, 3, 'yangjun', 'fae0b27c451c728867a567e8c1bb4e53', '杨俊', '', '男', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(3, 3, 'zhangkai', 'fae0b27c451c728867a567e8c1bb4e53', '张凯', '', '男', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(4, 38, 'xiaodan', 'fae0b27c451c728867a567e8c1bb4e53', '肖丹', '', '女', '', '', '', '2013-03-22 16:39:13', 0, ''),
+(3, 3, 'zhangkai', 'fae0b27c451c728867a567e8c1bb4e53', '张凯', '/uploads/userico/张凯_3.jpg', '男', '', '', '', '2013-03-24 20:22:59', 0, ''),
+(4, 38, 'xiaodan', 'fae0b27c451c728867a567e8c1bb4e53', '肖丹', '/uploads/userico/肖丹_4.jpg', '女', '', '', '', '2013-03-26 02:09:28', 0, ''),
 (5, 1, 'gaoyan', 'fae0b27c451c728867a567e8c1bb4e53', '高燕', '', '女', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (6, 38, 'jiujun', 'fae0b27c451c728867a567e8c1bb4e53', '刘峻', '', '男', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (7, 1, 'wangzheng', 'fae0b27c451c728867a567e8c1bb4e53', '王正', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (8, 1, 'wangyuting', 'fae0b27c451c728867a567e8c1bb4e53', '王钰婷', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(9, 38, 'wangxiujuan', 'fae0b27c451c728867a567e8c1bb4e53', '王秀娟', '', '女', '', '', '', '2013-03-22 09:50:56', 0, ''),
+(9, 38, 'wangxiujuan', 'fae0b27c451c728867a567e8c1bb4e53', '王秀娟', '/uploads/userico/王秀娟_9.jpg', '女', '', '', '', '2013-03-26 01:47:59', 0, ''),
 (10, 1, 'dongting', 'fae0b27c451c728867a567e8c1bb4e53', '董婷', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (11, 1, 'chencong', 'fae0b27c451c728867a567e8c1bb4e53', '陈聪', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(12, 58, 'gaosiwei', 'fae0b27c451c728867a567e8c1bb4e53', '高思伟', '', '', '', '', '', '2013-03-15 22:54:16', 0, ''),
+(12, 58, 'gaosiwei', 'fae0b27c451c728867a567e8c1bb4e53', '高思伟', '', '', '', '', '', '2013-03-22 21:21:21', 0, ''),
 (13, 1, 'zhuyunsheng', 'fae0b27c451c728867a567e8c1bb4e53', '朱芸生', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (14, 1, 'yantao', 'fae0b27c451c728867a567e8c1bb4e53', '闫涛', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (15, 1, 'zhouwei', 'fae0b27c451c728867a567e8c1bb4e53', '周维', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
@@ -580,8 +596,8 @@ INSERT INTO `p_user` (`pu_id`, `pu_oid`, `pu_code`, `pu_pwd`, `pu_name`, `pu_ico
 (20, 64, 'zhangxiang', 'fae0b27c451c728867a567e8c1bb4e53', '张祥', '', '', '13688387777', '13688387777', '北京12318文化市场举报热线药品服务许可证(京)-经营-2010-0048', '2013-03-16 00:30:01', 0, ''),
 (22, 64, 'leijiaxin', 'fae0b27c451c728867a567e8c1bb4e53', '雷佳欣', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
 (23, 64, 'zhouyunpeng', 'fae0b27c451c728867a567e8c1bb4e53', '周澐芃', '', '', '', '', '', '0000-00-00 00:00:00', 0, ''),
-(24, 38, 'lina', 'fae0b27c451c728867a567e8c1bb4e53', '李娜', '', '', '', '', '', '2013-03-22 16:36:41', 0, ''),
-(25, 3, 'fengxin', 'fae0b27c451c728867a567e8c1bb4e53', '冯欣', '', '', '', '', '', '2013-03-15 23:19:41', 0, '');
+(24, 38, 'lina', 'fae0b27c451c728867a567e8c1bb4e53', '李娜', '/uploads/userico/李娜_24.jpg', '', '', '', '', '2013-03-26 02:08:09', 0, ''),
+(25, 3, 'fengxin', 'fae0b27c451c728867a567e8c1bb4e53', '冯欣', '/uploads/userico/冯欣_25.jpg', '', '', '', '', '2013-03-26 02:07:53', 0, '');
 
 -- --------------------------------------------------------
 
@@ -589,15 +605,15 @@ INSERT INTO `p_user` (`pu_id`, `pu_oid`, `pu_code`, `pu_pwd`, `pu_name`, `pu_ico
 -- 表的结构 `p_user2group`
 --
 
-CREATE TABLE `p_user2group` (
-  `u2g_id` int(10) NOT NULL auto_increment COMMENT '用户映射组id',
+CREATE TABLE IF NOT EXISTS `p_user2group` (
+  `u2g_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户映射组id',
   `u2g_puid` int(10) NOT NULL COMMENT '用户id',
   `u2g_pgid` int(10) NOT NULL COMMENT '组id',
-  PRIMARY KEY  (`u2g_id`)
+  PRIMARY KEY (`u2g_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户映射工作组表' AUTO_INCREMENT=123 ;
 
 --
--- 导出表中的数据 `p_user2group`
+-- 转存表中的数据 `p_user2group`
 --
 
 INSERT INTO `p_user2group` (`u2g_id`, `u2g_puid`, `u2g_pgid`) VALUES
@@ -621,15 +637,15 @@ INSERT INTO `p_user2group` (`u2g_id`, `u2g_puid`, `u2g_pgid`) VALUES
 -- 表的结构 `p_user2role`
 --
 
-CREATE TABLE `p_user2role` (
-  `u2r_id` int(10) NOT NULL auto_increment COMMENT '用户映射角色id',
+CREATE TABLE IF NOT EXISTS `p_user2role` (
+  `u2r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '用户映射角色id',
   `u2r_puid` int(10) NOT NULL COMMENT '用户id',
   `u2r_prid` int(10) NOT NULL COMMENT '角色id',
-  PRIMARY KEY  (`u2r_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户映射角色表' AUTO_INCREMENT=25 ;
+  PRIMARY KEY (`u2r_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户映射角色表' AUTO_INCREMENT=35 ;
 
 --
--- 导出表中的数据 `p_user2role`
+-- 转存表中的数据 `p_user2role`
 --
 
 INSERT INTO `p_user2role` (`u2r_id`, `u2r_puid`, `u2r_prid`) VALUES
@@ -645,7 +661,16 @@ INSERT INTO `p_user2role` (`u2r_id`, `u2r_puid`, `u2r_prid`) VALUES
 (20, 3, 3),
 (21, 4, 3),
 (22, 1, 8),
-(24, 20, 8);
+(24, 20, 8),
+(26, 9, 13),
+(27, 25, 14),
+(28, 3, 12),
+(29, 4, 11),
+(30, 6, 13),
+(31, 24, 13),
+(32, 2, 14),
+(33, 1, 10),
+(34, 12, 16);
 --
 -- 数据库: `da_setting`
 --
@@ -658,8 +683,8 @@ USE `da_setting`;
 -- 表的结构 `s_helper`
 --
 
-CREATE TABLE `s_helper` (
-  `h_id` int(10) NOT NULL auto_increment COMMENT '系统帮助文档id',
+CREATE TABLE IF NOT EXISTS `s_helper` (
+  `h_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '系统帮助文档id',
   `h_name` varchar(100) NOT NULL COMMENT '帮助文档标题',
   `h_code` varchar(100) NOT NULL COMMENT '帮助文档编码',
   `h_htid` int(10) NOT NULL COMMENT '系统帮助文档分类id',
@@ -667,17 +692,17 @@ CREATE TABLE `s_helper` (
   `h_content` text NOT NULL COMMENT '帮助内容',
   `h_editordate` datetime NOT NULL COMMENT '撰写日期',
   `h_editorname` varchar(50) NOT NULL COMMENT '撰写人',
-  PRIMARY KEY  (`h_id`)
+  PRIMARY KEY (`h_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='系统帮助文档表' AUTO_INCREMENT=8 ;
 
 --
--- 导出表中的数据 `s_helper`
+-- 转存表中的数据 `s_helper`
 --
 
 INSERT INTO `s_helper` (`h_id`, `h_name`, `h_code`, `h_htid`, `h_sort`, `h_content`, `h_editordate`, `h_editorname`) VALUES
 (1, '自定义表单列表页默认简单代码', 'list_templet_code', 6, 1, '代码如下：<br />\n<br />\n<pre class="prettyprint lang-html">&lt;table id="tb_list" style="width:100%;"&gt;\n	&lt;tbody name="head"&gt;\n		&lt;tr&gt;\n			&lt;td style="width:30px;"&gt;\n				序\n			&lt;/td&gt;\n			&lt;td style="width:80px;"&gt;\n				请假人\n			&lt;/td&gt;\n			&lt;td style="width:100px;"&gt;\n				请假日期\n			&lt;/td&gt;\n			&lt;td&gt;\n				请假事由\n			&lt;/td&gt;\n			&lt;td style="width:80px;"&gt;\n				部门经理\n			&lt;/td&gt;\n			&lt;td style="width:80px;"&gt;\n				部门总监\n			&lt;/td&gt;\n			&lt;td style="width:100px;"&gt;\n				审核日期\n			&lt;/td&gt;\n			&lt;td style="width:100px;"&gt;\n				&amp;nbsp;\n			&lt;/td&gt;\n		&lt;/tr&gt;\n	&lt;/tbody&gt;\n	&lt;tbody name="body"&gt;\n		&lt;tr&gt;\n			&lt;td name="order"&gt;\n				{order}\n			&lt;/td&gt;\n			&lt;td name="l_puname"&gt;\n				{l_puname}\n			&lt;/td&gt;\n			&lt;td name="l_date" fmt="yyyy-mm-dd"&gt;\n				{l_date}\n			&lt;/td&gt;\n			&lt;td name="l_content"&gt;\n				{l_content}\n			&lt;/td&gt;\n			&lt;td&gt;\n				{l_manager}\n			&lt;/td&gt;\n			&lt;td&gt;\n				{l_general}\n			&lt;/td&gt;\n			&lt;td name="l_date2" fmt="yyyy-mm-dd"&gt;\n				{l_date2}\n			&lt;/td&gt;\n			&lt;td&gt;\n				{tools}\n			&lt;/td&gt;\n		&lt;/tr&gt;\n	&lt;/tbody&gt;\n	&lt;tbody&gt;\n		&lt;tr&gt;\n			&lt;td colspan="9"&gt;\n				共&lt;span id="tb_list_recordcount2"&gt;0&lt;/span&gt;&amp;nbsp;条，\n				共&lt;span id="tb_list_pagecount2"&gt;0&lt;/span&gt;&amp;nbsp;页，\n				当前在第&lt;span id="tb_list_pageindex2"&gt;0&lt;/span&gt;&amp;nbsp;页　 &lt;span id="tb_list_pageinfo"&gt;&amp;nbsp;&lt;/span&gt; \n			&lt;/td&gt;\n		&lt;/tr&gt;\n	&lt;/tbody&gt;\n&lt;/table&gt;</pre>\n呈现效果：<br />\n<img src="/sys_setting/helper/image/20130317/20130317140147_48122.jpg" width="823" height="82" alt="" /><br />\n<br />\n<br />\n<img src="/sys_setting/helper/image/20130317/20130317140203_70515.jpg" width="1040" height="137" alt="" />', '2013-03-17 18:50:52', '徐飞'),
 (4, '标识符', 'biz_templet_flag', 6, 2, '<span style="font-size:14px;">代码编写说明：</span><br />\n<span style="font-size:14px;"></span><br />\n<span style="font-size:14px;"></span><span style="font-size:14px;">&nbsp; &nbsp; 用花括号包裹数据源字段名，代表在该位置，加载该字段的值，如:</span><span style="font-size:14px;color:#E56600;">&nbsp;</span><span style="font-size:14px;color:#E56600;">{p_username}<br />\n<br />\n</span>', '2013-03-17 22:27:32', '徐飞'),
-(6, '业务单详细页代码编写', 'form_templet_code', 7, 1, '<h3>\n	控件绑定字段值：\n</h3>\n&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:18px;font-family:SimHei;"><span style="font-family:SimSun;font-size:14px;">&lt;input <span style="color:#E53333;">id="l_date"</span> /&gt;&nbsp;</span><span style="font-family:SimSun;font-size:14px;"></span><span style="font-family:SimSun;font-size:14px;"></span><br />\n<br />\n</span> \n<h3>\n	数据验证： &nbsp; &nbsp;\n</h3>\n&nbsp;&nbsp;&nbsp;&nbsp;在input，textarea控件上加入valid属性，如&lt;input id="count"&nbsp;<span style="color:#E53333;">valid="abcnumber,false"</span> /&gt;<br />\n<br />\n&nbsp; &nbsp; 相关验证类型有：<br />\n<pre class="prettyprint lang-js">//验证函数映射表，可以通过名称获得对应的验证处理函数\ndaValid.mapFnValid = {\n	match: da.isMatch,								//通用正则表达式判定函数\n	int: da.isInt,						//只能整数\n	plusint: da.isIntUp,							//只能正整数\n	plusint0: da.isInt0Up,							//只能非负整数（正整数 + "0"）\n	minusint: da.isIntLower,						//只能负整数\n	minusint0: da.isInt0Lower,						//只能非正整数（负整数 + "0"） \n	\n	float: da.isFloat,					//只能浮点数 \n	plusfloat: da.isFloatUp,						//只能正浮点数\n	plusfloat0: da.isFloat0Up, 						//只能非负浮点数（正浮点数 + "0"）\n	minusfloat: da.isFloatLower,					//只能负浮点数\n	minusfloat0: da.isFloat0Lower,					//只能非正浮点数（负浮点数 + 0） \n	\n	abc: da.isLetter,          			//只能26个英文字母 组成\n	upperabc: da.isLetterUpper,						//只能26个大写英文字母  组成\n	lowerabc: da.isLetterLower,						//只能26个小写英文字母  组成\n	abcnumber: da.isNumLetter,						//只能数字 和 26个英文字母 组成\n	\n	code: da.isCode,								//只能数字、26个英文字母 或者下划线 组成 \n	cn: da.isCN,									//只能中文字符串 组成\n	name: da.isName,								//只能中文字符串、26个英文字母 或者下划线（一般的名称验证）\n	account: da.isAccount,							//只能中文字符串、数字、26个英文字母 或者下划线（一般的账号验证）\n	phone: da.isPhone,								//判断是否电话号码（包括手机）\n	mobile: da.ismobile,							//判断是否手机号码\n	email: da.isEmail,								//判断是否电子邮件地址\n	http: da.isHTTP,								//判断是否是IP地址\n	html: da.isHTML,								//判断是否是HTML代码\n	\n	postcode: da.isPostCode,					//判断是否是中国邮政编码\n	idcard: da.isIDCard,						//判断是否中国身份证号码\n	backcard: da.isBankCard,					//判断是否是银行卡号码\n	ip:	da.isIP									//判断是否是IP地址\n	\n};</pre>\n<br />', '2013-03-17 22:47:57', '徐飞'),
+(6, '业务单详细页代码编写', 'form_templet_code', 7, 1, '<h3>\n	控件绑定字段值：\n</h3>\n&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size:18px;font-family:SimHei;"><span style="font-family:SimSun;font-size:14px;">&lt;input <span style="color:#E53333;">id="l_date"</span> /&gt;&nbsp;</span><span style="font-family:SimSun;font-size:14px;"></span><span style="font-family:SimSun;font-size:14px;"></span><br />\n<br />\n</span> \n<h3>\n	数据验证： &nbsp; &nbsp;\n</h3>\n&nbsp;&nbsp;&nbsp;&nbsp;在input，textarea控件上加入valid属性，如&lt;input id="count"&nbsp;<span style="color:#E53333;">valid="abcnumber,false"</span> /&gt;<br />\n<br />\n&nbsp; &nbsp; 相关验证类型有：<br />\n<pre class="prettyprint lang-js">//验证函数映射表，可以通过名称获得对应的验证处理函数\ndaValid.mapFnValid = {\n	match: da.isMatch,						        //通用正则表达式判定函数\n	anything: da.isAnything,						//任意内容（通常为了判断非空用）\n	int: da.isInt,						//只能整数\n	plusint: da.isIntUp,							//只能正整数\n	plusint0: da.isInt0Up,							//只能非负整数（正整数 + "0"）\n	minusint: da.isIntLower,						//只能负整数\n	minusint0: da.isInt0Lower,						//只能非正整数（负整数 + "0"） \n	\n	float: da.isFloat,					//只能浮点数 \n	plusfloat: da.isFloatUp,						//只能正浮点数\n	plusfloat0: da.isFloat0Up, 						//只能非负浮点数（正浮点数 + "0"）\n	minusfloat: da.isFloatLower,					//只能负浮点数\n	minusfloat0: da.isFloat0Lower,					//只能非正浮点数（负浮点数 + 0） \n	\n	abc: da.isLetter,          			//只能26个英文字母 组成\n	upperabc: da.isLetterUpper,						//只能26个大写英文字母  组成\n	lowerabc: da.isLetterLower,						//只能26个小写英文字母  组成\n	abcnumber: da.isNumLetter,						//只能数字 和 26个英文字母 组成\n	\n	code: da.isCode,								//只能数字、26个英文字母 或者下划线 组成 \n	cn: da.isCN,									//只能中文字符串 组成\n	name: da.isName,								//只能中文字符串、26个英文字母 或者下划线（一般的名称验证）\n	account: da.isAccount,							//只能中文字符串、数字、26个英文字母 或者下划线（一般的账号验证）\n	phone: da.isPhone,								//判断是否电话号码（包括手机）\n	mobile: da.ismobile,							//判断是否手机号码\n	email: da.isEmail,								//判断是否电子邮件地址\n	http: da.isHTTP,								//判断是否是IP地址\n	html: da.isHTML,								//判断是否是HTML代码\n	\n	postcode: da.isPostCode,					//判断是否是中国邮政编码\n	idcard: da.isIDCard,						//判断是否中国身份证号码\n	backcard: da.isBankCard,					//判断是否是银行卡号码\n	ip:	da.isIP									//判断是否是IP地址\n	\n};</pre>\n<span style="font-size:16px;"><strong>弹出选择窗口：<br />\n</strong><br />\n<span style="font-size:12px;">设置source属性值<br />\n<br />\n</span><span style="font-size:12px;"></span><span style="font-size:12px;">选择人员：&lt;input <span style="color:#E53333;">source="user"</span>/&gt;<br />\n<br />\n<span style="white-space:normal;"></span><span style="white-space:normal;"></span><span style="white-space:normal;">选择客户：&lt;input&nbsp;<span style="color:#E53333;">source="cst"</span>/&gt;</span><br />\n<br />\n<br />\n<strong style="font-size:16px;line-height:24px;white-space:normal;">嵌入在线编辑器：</strong></span><span><br />\n<span style="font-size:12px;"><span style="white-space:normal;">设置source属性值</span><br />\n<span style="white-space:normal;">&lt;input&nbsp;</span><span style="white-space:normal;color:#E53333;">source="editorbox"</span><span style="white-space:normal;">/&gt;<br />\n<br />\n<br />\n</span></span></span></span>', '2013-03-17 22:47:57', '徐飞'),
 (7, '数据源的作用', 'biz_dbsource', 8, 1, '<span style="font-size:14px;">&nbsp;&nbsp;&nbsp;&nbsp;项目可以自定义数据表，这些数据表可以作为，自定义业务单的数据来源</span><span style="white-space:normal;"><span style="font-size:14px;">（当然需要确定一个关联字段，一般为</span><span style="color:#E56600;font-size:14px;">主键</span></span><span style="white-space:normal;font-size:14px;">）</span><span style="font-size:14px;">。<br />\n<br />\n&nbsp;&nbsp;&nbsp;&nbsp;而自定义数据表可以在，“数据库管理”里面新建。<br />\n<br />\n&nbsp;&nbsp;&nbsp;&nbsp;<img src="/sys_setting/helper/image/20130317/20130317143709_57117.jpg" alt="" /><br />\n&nbsp;&nbsp;&nbsp;&nbsp;</span>', '2013-03-17 22:49:01', '徐飞');
 
 -- --------------------------------------------------------
@@ -686,18 +711,18 @@ INSERT INTO `s_helper` (`h_id`, `h_name`, `h_code`, `h_htid`, `h_sort`, `h_conte
 -- 表的结构 `s_helpertype`
 --
 
-CREATE TABLE `s_helpertype` (
-  `ht_id` int(10) NOT NULL auto_increment COMMENT '帮助文档分类id',
+CREATE TABLE IF NOT EXISTS `s_helpertype` (
+  `ht_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '帮助文档分类id',
   `ht_pid` int(10) NOT NULL COMMENT '帮助文档分类父id',
   `ht_name` varchar(100) NOT NULL COMMENT '帮助文档分类名称',
   `ht_code` varchar(100) NOT NULL COMMENT '帮助文档分类编码',
   `ht_sort` int(10) NOT NULL COMMENT '排序',
   `ht_remark` text NOT NULL COMMENT '备注',
-  PRIMARY KEY  (`ht_id`)
+  PRIMARY KEY (`ht_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='帮助文档分类表' AUTO_INCREMENT=9 ;
 
 --
--- 导出表中的数据 `s_helpertype`
+-- 转存表中的数据 `s_helpertype`
 --
 
 INSERT INTO `s_helpertype` (`ht_id`, `ht_pid`, `ht_name`, `ht_code`, `ht_sort`, `ht_remark`) VALUES
@@ -715,18 +740,18 @@ INSERT INTO `s_helpertype` (`ht_id`, `ht_pid`, `ht_name`, `ht_code`, `ht_sort`, 
 -- 表的结构 `s_item`
 --
 
-CREATE TABLE `s_item` (
-  `i_id` int(10) NOT NULL auto_increment COMMENT '常量可选项id',
+CREATE TABLE IF NOT EXISTS `s_item` (
+  `i_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '常量可选项id',
   `i_itid` int(10) NOT NULL COMMENT '常量可选项分类id',
   `i_name` varchar(200) NOT NULL COMMENT '可选项名称',
   `i_value` varchar(200) NOT NULL COMMENT '可选项对应值',
   `i_sort` int(10) NOT NULL COMMENT '可选项排序',
   `i_remark` text NOT NULL COMMENT '可选项备注',
-  PRIMARY KEY  (`i_id`)
+  PRIMARY KEY (`i_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='系统常量可选项表' AUTO_INCREMENT=54 ;
 
 --
--- 导出表中的数据 `s_item`
+-- 转存表中的数据 `s_item`
 --
 
 INSERT INTO `s_item` (`i_id`, `i_itid`, `i_name`, `i_value`, `i_sort`, `i_remark`) VALUES
@@ -787,18 +812,18 @@ INSERT INTO `s_item` (`i_id`, `i_itid`, `i_name`, `i_value`, `i_sort`, `i_remark
 -- 表的结构 `s_itemtype`
 --
 
-CREATE TABLE `s_itemtype` (
-  `it_id` int(10) NOT NULL auto_increment COMMENT '可选项分类id',
+CREATE TABLE IF NOT EXISTS `s_itemtype` (
+  `it_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '可选项分类id',
   `it_pid` int(10) NOT NULL COMMENT '可选项分类父id',
   `it_code` varchar(100) NOT NULL COMMENT '可选项分类编码',
   `it_name` varchar(50) NOT NULL COMMENT '可选项分类名称',
   `it_sort` int(10) NOT NULL COMMENT '可选项分类排序',
   `it_remark` text NOT NULL COMMENT '可选项分类备注',
-  PRIMARY KEY  (`it_id`)
+  PRIMARY KEY (`it_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='可选项分类表' AUTO_INCREMENT=4 ;
 
 --
--- 导出表中的数据 `s_itemtype`
+-- 转存表中的数据 `s_itemtype`
 --
 
 INSERT INTO `s_itemtype` (`it_id`, `it_pid`, `it_code`, `it_name`, `it_sort`, `it_remark`) VALUES
@@ -817,8 +842,8 @@ USE `da_userform`;
 -- 表的结构 `hsd_leave`
 --
 
-CREATE TABLE `hsd_leave` (
-  `l_id` int(10) NOT NULL auto_increment COMMENT '请假单id',
+CREATE TABLE IF NOT EXISTS `hsd_leave` (
+  `l_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '请假单id',
   `l_puname` varchar(50) NOT NULL COMMENT '请假人',
   `l_puid` int(10) NOT NULL COMMENT '请假人id',
   `l_date` datetime NOT NULL COMMENT '请假日期',
@@ -828,16 +853,13 @@ CREATE TABLE `hsd_leave` (
   `l_manager` varchar(50) NOT NULL COMMENT '部门经理',
   `l_general` varchar(50) NOT NULL COMMENT '部门总监',
   `l_date2` datetime NOT NULL COMMENT '审核日期',
-  PRIMARY KEY  (`l_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='人力资源部请假单表' AUTO_INCREMENT=13 ;
+  PRIMARY KEY (`l_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='人力资源部请假单表' AUTO_INCREMENT=1 ;
 
 --
--- 导出表中的数据 `hsd_leave`
+-- 转存表中的数据 `hsd_leave`
 --
 
-INSERT INTO `hsd_leave` (`l_id`, `l_puname`, `l_puid`, `l_date`, `l_fromdate`, `l_todate`, `l_content`, `l_manager`, `l_general`, `l_date2`) VALUES
-(11, '王秀娟', 0, '2013-05-06 00:00:00', '2013-05-06 00:00:00', '2013-05-06 00:00:00', '2013-5-62013-5-62013-5-62013-5-62013-5-62013-5-62013-5-6', '', '', '0000-00-00 00:00:00'),
-(12, '李娜', 0, '2013-05-02 00:00:00', '2013-05-02 00:00:00', '2013-05-03 00:00:00', '成都网联天下成都网联天下', '', '', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -845,7 +867,7 @@ INSERT INTO `hsd_leave` (`l_id`, `l_puname`, `l_puid`, `l_date`, `l_fromdate`, `
 -- 表的结构 `tb_bill`
 --
 
-CREATE TABLE `tb_bill` (
+CREATE TABLE IF NOT EXISTS `tb_bill` (
   `b_id` int(10) NOT NULL COMMENT '订单流水号',
   `b_name` varchar(50) NOT NULL COMMENT '订单标题',
   `b_user` varchar(50) NOT NULL COMMENT '下定订单销售人员',
@@ -853,7 +875,7 @@ CREATE TABLE `tb_bill` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单';
 
 --
--- 导出表中的数据 `tb_bill`
+-- 转存表中的数据 `tb_bill`
 --
 
 
@@ -863,15 +885,15 @@ CREATE TABLE `tb_bill` (
 -- 表的结构 `tb_test`
 --
 
-CREATE TABLE `tb_test` (
-  `a_id` int(10) NOT NULL auto_increment COMMENT '流水号',
+CREATE TABLE IF NOT EXISTS `tb_test` (
+  `a_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '流水号',
   `a_name` varchar(50) NOT NULL COMMENT '名称',
-  `a_date` datetime default NULL COMMENT '日期',
-  PRIMARY KEY  (`a_id`)
+  `a_date` datetime DEFAULT NULL COMMENT '日期',
+  PRIMARY KEY (`a_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='测试表' AUTO_INCREMENT=1 ;
 
 --
--- 导出表中的数据 `tb_test`
+-- 转存表中的数据 `tb_test`
 --
 
 
@@ -881,8 +903,8 @@ CREATE TABLE `tb_test` (
 -- 表的结构 `td_website`
 --
 
-CREATE TABLE `td_website` (
-  `ws_id` int(10) NOT NULL auto_increment COMMENT '企业建站订单id',
+CREATE TABLE IF NOT EXISTS `td_website` (
+  `ws_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '企业建站订单id',
   `ws_code` varchar(20) NOT NULL COMMENT '合同编号',
   `ws_soleid` int(10) NOT NULL COMMENT '销售人员id',
   `ws_solename` varchar(50) NOT NULL COMMENT '销售人员名称',
@@ -894,15 +916,16 @@ CREATE TABLE `td_website` (
   `ws_connaddr` varchar(500) NOT NULL COMMENT '联系地址',
   `ws_date` datetime NOT NULL COMMENT ' 提交日期',
   `ws_remark` text NOT NULL COMMENT '备注',
-  PRIMARY KEY  (`ws_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='企业建站订单表' AUTO_INCREMENT=18 ;
+  PRIMARY KEY (`ws_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='企业建站订单表' AUTO_INCREMENT=3 ;
 
 --
--- 导出表中的数据 `td_website`
+-- 转存表中的数据 `td_website`
 --
 
 INSERT INTO `td_website` (`ws_id`, `ws_code`, `ws_soleid`, `ws_solename`, `ws_cstid`, `ws_cstname`, `ws_connname`, `ws_connphone`, `ws_conntel`, `ws_connaddr`, `ws_date`, `ws_remark`) VALUES
-(17, 'HTT00023324', 0, '刘力瑞', 0, '成都科迪仪器仪表有限公司', '高正波', '13880280241', '', '成都市金府路502号金府机电城A区17栋11-12号', '0000-00-00 00:00:00', '成都市金府路502号金府机电城A区17栋11-12号\n成都市金府路502号金府机电城A区17栋11-12号\n成都市金府路502号金府机电城A区17栋11-12号\n成都市金府路502号金府机电城A区17栋11-12号');
+(1, 'HT00023232442', 0, '周澐芃', 0, '成都网联天下科技有限公司', '黄总', '13688387772', '', '成都高新区天府新股', '2013-03-26 00:00:00', ''),
+(2, 'HT1293232132', 0, '张祥', 0, '富华大厦发的身份的', '', '13677444663', '', '富华大厦发的身份的', '2013-03-25 00:00:00', '');
 --
 -- 数据库: `da_workflow`
 --
@@ -915,8 +938,8 @@ USE `da_workflow`;
 -- 表的结构 `w_arc`
 --
 
-CREATE TABLE `w_arc` (
-  `a_id` int(10) NOT NULL auto_increment COMMENT '工作流向弧id',
+CREATE TABLE IF NOT EXISTS `w_arc` (
+  `a_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '工作流向弧id',
   `a_name` varchar(50) NOT NULL COMMENT '向弧名称（路由名称）',
   `a_wfid` int(10) NOT NULL COMMENT '工作流id',
   `a_sort` int(10) NOT NULL COMMENT '排序',
@@ -925,32 +948,28 @@ CREATE TABLE `w_arc` (
   `a_direction` varchar(20) NOT NULL COMMENT '向弧走向；IN：库所走向事务变迁；OUT：事务变迁走向库所',
   `a_type` varchar(20) NOT NULL COMMENT '向弧类型；（分支或汇聚类型）SEQ：一般顺序流类型；Explicit Or Split：显示条件分支；Implicit Or Split：隐式条件分支； Or Join：条件汇聚（显示和隐式）；And Split：并行分支； And Join：并行汇聚',
   `a_precondition` text NOT NULL COMMENT '只有当a_type为Explicit Or Split时有效，这个包含了我们知道的值只有true或false的guard表达式。',
-  PRIMARY KEY  (`a_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流向弧表' AUTO_INCREMENT=19 ;
+  PRIMARY KEY (`a_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流向弧表' AUTO_INCREMENT=22 ;
 
 --
--- 导出表中的数据 `w_arc`
+-- 转存表中的数据 `w_arc`
 --
 
 INSERT INTO `w_arc` (`a_id`, `a_name`, `a_wfid`, `a_sort`, `a_pid`, `a_tid`, `a_direction`, `a_type`, `a_precondition`) VALUES
 (1, '提单', 7, 1, 1, 3, 'IN', 'SEQ', ''),
 (2, '部门经理审核', 7, 5, 9, 3, 'OUT', 'SEQ', ''),
-(3, '审核中', 7, 15, 9, 1, 'IN', 'SEQ', ''),
+(3, '经理审核中', 7, 15, 9, 1, 'IN', 'SEQ', ''),
 (4, '部门总监审核', 7, 20, 10, 1, 'OUT', 'SEQ', ''),
-(5, '审核中', 7, 25, 10, 2, 'IN', 'SEQ', ''),
+(5, '总监审核中', 7, 25, 10, 2, 'IN', 'SEQ', ''),
 (6, '通过', 7, 30, 2, 2, 'OUT', 'SEQ', ''),
-(7, '', 15, 0, 25, 5, 'IN', 'SEQ', ''),
-(8, '', 15, 0, 27, 5, 'OUT', 'SEQ', ''),
-(9, '', 15, 0, 27, 7, 'IN', 'SEQ', ''),
-(10, '', 15, 0, 28, 7, 'OUT', 'SEQ', ''),
-(11, '', 15, 0, 28, 8, 'IN', 'SEQ', ''),
-(12, '', 15, 0, 29, 8, 'OUT', 'SEQ', ''),
-(13, '', 15, 0, 29, 9, 'IN', 'SEQ', ''),
-(14, '', 15, 0, 29, 9, 'OUT', 'SEQ', ''),
-(15, '', 15, 0, 29, 10, 'IN', 'SEQ', ''),
-(16, '', 15, 0, 27, 10, 'OUT', 'SEQ', ''),
-(17, '', 15, 0, 27, 11, 'IN', 'SEQ', ''),
-(18, '', 15, 0, 26, 11, 'OUT', 'SEQ', '');
+(7, '提交企业建站单', 15, 1, 25, 5, 'IN', 'SEQ', ''),
+(8, '网页设计中', 15, 10, 28, 5, 'OUT', 'SEQ', ''),
+(9, '设计完成', 15, 20, 28, 7, 'IN', 'SEQ', ''),
+(10, '设计审核通过', 15, 30, 29, 7, 'OUT', 'SEQ', ''),
+(11, '编写程序中', 15, 40, 29, 8, 'IN', 'SEQ', ''),
+(19, '程序审核通过', 15, 50, 27, 8, 'OUT', 'SEQ', ''),
+(20, '总监审核中', 15, 60, 27, 9, 'IN', 'SEQ', ''),
+(21, '竣工', 15, 999, 26, 9, 'OUT', 'SEQ', '');
 
 -- --------------------------------------------------------
 
@@ -958,18 +977,18 @@ INSERT INTO `w_arc` (`a_id`, `a_name`, `a_wfid`, `a_sort`, `a_pid`, `a_tid`, `a_
 -- 表的结构 `w_place`
 --
 
-CREATE TABLE `w_place` (
-  `p_id` int(10) NOT NULL auto_increment COMMENT '库所id',
+CREATE TABLE IF NOT EXISTS `w_place` (
+  `p_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '库所id',
   `p_wfid` int(10) NOT NULL COMMENT '工作流id',
   `p_name` varchar(50) NOT NULL COMMENT '库所名称',
   `p_sort` int(10) NOT NULL COMMENT '排序',
   `p_type` varchar(20) NOT NULL COMMENT '库所类型；1：开始库所；50：中间库所；999：结束库所（当创建了一个新的工作流程时，会自动创建一个开始库所和结束库所）',
   `p_remark` text NOT NULL COMMENT '备注',
-  PRIMARY KEY  (`p_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流库节点表' AUTO_INCREMENT=34 ;
+  PRIMARY KEY (`p_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流库节点表' AUTO_INCREMENT=35 ;
 
 --
--- 导出表中的数据 `w_place`
+-- 转存表中的数据 `w_place`
 --
 
 INSERT INTO `w_place` (`p_id`, `p_wfid`, `p_name`, `p_sort`, `p_type`, `p_remark`) VALUES
@@ -989,13 +1008,14 @@ INSERT INTO `w_place` (`p_id`, `p_wfid`, `p_name`, `p_sort`, `p_type`, `p_remark
 (22, 13, '结束', 9999, '999', ''),
 (25, 15, '开始', 0, '1', ''),
 (26, 15, '结束', 9999, '999', ''),
-(27, 15, '技术总监', 0, '50', ''),
+(27, 15, '技术总监', 40, '50', ''),
 (28, 15, '设计师', 10, '50', ''),
 (29, 15, '程序员', 30, '50', ''),
 (30, 16, '开始', 0, '1', ''),
 (31, 16, '结束', 9999, '999', ''),
 (32, 17, '开始', 0, '1', ''),
-(33, 17, '结束', 9999, '999', '');
+(33, 17, '结束', 9999, '999', ''),
+(34, 15, '部门经理', 35, '50', '');
 
 -- --------------------------------------------------------
 
@@ -1003,8 +1023,8 @@ INSERT INTO `w_place` (`p_id`, `p_wfid`, `p_name`, `p_sort`, `p_type`, `p_remark
 -- 表的结构 `w_token`
 --
 
-CREATE TABLE `w_token` (
-  `t_id` int(10) NOT NULL auto_increment COMMENT '令牌id',
+CREATE TABLE IF NOT EXISTS `w_token` (
+  `t_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '令牌id',
   `t_wfid` int(10) NOT NULL COMMENT '工作流id',
   `t_wfcid` int(10) NOT NULL COMMENT '工作流实例id',
   `t_pid` int(10) NOT NULL COMMENT '所处库所id',
@@ -1013,18 +1033,17 @@ CREATE TABLE `w_token` (
   `t_canceldate` datetime NOT NULL COMMENT '令牌取消日期',
   `t_consumedate` datetime NOT NULL COMMENT '令牌被事务变迁发射时消耗日期',
   `t_context` text NOT NULL COMMENT '前一个事务变迁传递过来的sql where语句形式，或者是数据库基建。',
-  PRIMARY KEY  (`t_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流实例进度令牌表' AUTO_INCREMENT=26 ;
+  PRIMARY KEY (`t_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流实例进度令牌表' AUTO_INCREMENT=6 ;
 
 --
--- 导出表中的数据 `w_token`
+-- 转存表中的数据 `w_token`
 --
 
 INSERT INTO `w_token` (`t_id`, `t_wfid`, `t_wfcid`, `t_pid`, `t_status`, `t_createdate`, `t_canceldate`, `t_consumedate`, `t_context`) VALUES
-(22, 7, 10, 1, 'FREE', '2013-03-22 09:52:17', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(23, 7, 10, 9, 'FREE', '2013-03-22 10:33:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(24, 7, 11, 1, 'FREE', '2013-03-22 16:38:36', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
-(25, 7, 11, 9, 'FREE', '2013-03-22 16:39:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '');
+(3, 15, 2, 25, 'FREE', '2013-03-26 01:18:15', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
+(4, 15, 2, 28, 'FREE', '2013-03-26 01:23:33', '0000-00-00 00:00:00', '0000-00-00 00:00:00', ''),
+(5, 15, 3, 25, 'FREE', '2013-03-26 01:27:26', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -1032,15 +1051,15 @@ INSERT INTO `w_token` (`t_id`, `t_wfid`, `t_wfcid`, `t_pid`, `t_status`, `t_crea
 -- 表的结构 `w_tran2form`
 --
 
-CREATE TABLE `w_tran2form` (
-  `t2f_id` int(10) NOT NULL auto_increment COMMENT '事物变迁映射业务表单id',
+CREATE TABLE IF NOT EXISTS `w_tran2form` (
+  `t2f_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '事物变迁映射业务表单id',
   `t2f_tid` int(10) NOT NULL COMMENT '事物变迁id',
   `t2f_btid` int(10) NOT NULL COMMENT '业务表单模板id',
-  PRIMARY KEY  (`t2f_id`)
+  PRIMARY KEY (`t2f_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='事物变迁映射业务表单表' AUTO_INCREMENT=4 ;
 
 --
--- 导出表中的数据 `w_tran2form`
+-- 转存表中的数据 `w_tran2form`
 --
 
 INSERT INTO `w_tran2form` (`t2f_id`, `t2f_tid`, `t2f_btid`) VALUES
@@ -1052,27 +1071,29 @@ INSERT INTO `w_tran2form` (`t2f_id`, `t2f_tid`, `t2f_btid`) VALUES
 -- 表的结构 `w_tran2role`
 --
 
-CREATE TABLE `w_tran2role` (
-  `t2r_id` int(10) NOT NULL auto_increment COMMENT '事务变迁映射角色id',
+CREATE TABLE IF NOT EXISTS `w_tran2role` (
+  `t2r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '事务变迁映射角色id',
   `t2r_tid` int(10) NOT NULL COMMENT '事务变迁id',
   `t2r_prid` int(10) NOT NULL COMMENT '角色id',
-  PRIMARY KEY  (`t2r_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='事务变迁映射角色表' AUTO_INCREMENT=68 ;
+  PRIMARY KEY (`t2r_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='事务变迁映射角色表' AUTO_INCREMENT=88 ;
 
 --
--- 导出表中的数据 `w_tran2role`
+-- 转存表中的数据 `w_tran2role`
 --
 
 INSERT INTO `w_tran2role` (`t2r_id`, `t2r_tid`, `t2r_prid`) VALUES
-(30, 4, 5),
 (33, 6, 5),
-(34, 5, 5),
-(35, 7, 2),
 (36, 12, 5),
 (37, 13, 5),
 (65, 3, 4),
 (66, 1, 3),
-(67, 2, 8);
+(67, 2, 8),
+(75, 7, 11),
+(76, 8, 12),
+(85, 5, 13),
+(86, 5, 14),
+(87, 9, 10);
 
 -- --------------------------------------------------------
 
@@ -1080,8 +1101,8 @@ INSERT INTO `w_tran2role` (`t2r_id`, `t2r_tid`, `t2r_prid`) VALUES
 -- 表的结构 `w_trancase`
 --
 
-CREATE TABLE `w_trancase` (
-  `tc_id` int(10) NOT NULL auto_increment COMMENT '事务变迁工作项id',
+CREATE TABLE IF NOT EXISTS `w_trancase` (
+  `tc_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '事务变迁工作项id',
   `tc_wfid` int(10) NOT NULL COMMENT '工作流id',
   `tc_tid` int(10) NOT NULL COMMENT '事务变迁id',
   `tc_wfcid` int(10) NOT NULL COMMENT '工作流实例id',
@@ -1094,18 +1115,19 @@ CREATE TABLE `w_trancase` (
   `tc_finishdate` datetime NOT NULL COMMENT '工作项完成日期',
   `tc_limit` int(10) NOT NULL COMMENT '只有当wi_type为TIME时才有效，表示小时数。',
   `tc_puid` int(10) NOT NULL COMMENT '工作项执行者用户id',
-  PRIMARY KEY  (`tc_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='事务变迁实例' AUTO_INCREMENT=22 ;
+  `tc_puname` varchar(50) NOT NULL COMMENT '工作项执行人name',
+  `tc_remark` text NOT NULL COMMENT '事务变迁实例备注信息',
+  PRIMARY KEY (`tc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='事务变迁实例' AUTO_INCREMENT=6 ;
 
 --
--- 导出表中的数据 `w_trancase`
+-- 转存表中的数据 `w_trancase`
 --
 
-INSERT INTO `w_trancase` (`tc_id`, `tc_wfid`, `tc_tid`, `tc_wfcid`, `tc_type`, `tc_firetaskid`, `tc_context`, `tc_status`, `tc_enabledate`, `tc_canceldate`, `tc_finishdate`, `tc_limit`, `tc_puid`) VALUES
-(18, 7, 3, 10, 'USER', 0, '', 'FI', '2013-03-22 09:52:17', '0000-00-00 00:00:00', '2013-03-22 10:33:01', 0, 9),
-(19, 7, 1, 10, 'USER', 0, '', 'EN', '2013-03-22 10:33:01', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0),
-(20, 7, 3, 11, 'USER', 0, '', 'FI', '2013-03-22 16:38:36', '0000-00-00 00:00:00', '2013-03-22 16:39:00', 0, 24),
-(21, 7, 1, 11, 'USER', 0, '', 'EN', '2013-03-22 16:39:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0);
+INSERT INTO `w_trancase` (`tc_id`, `tc_wfid`, `tc_tid`, `tc_wfcid`, `tc_type`, `tc_firetaskid`, `tc_context`, `tc_status`, `tc_enabledate`, `tc_canceldate`, `tc_finishdate`, `tc_limit`, `tc_puid`, `tc_puname`, `tc_remark`) VALUES
+(3, 15, 5, 2, 'USER', 0, '', 'FI', '2013-03-26 01:18:15', '0000-00-00 00:00:00', '2013-03-26 01:23:33', 0, 24, '李娜', ''),
+(4, 15, 7, 2, 'USER', 0, '', 'EN', '2013-03-26 01:23:33', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 0, '', ''),
+(5, 15, 5, 3, 'USER', 0, '', 'EN', '2013-03-26 01:27:26', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 0, 4, '肖丹', '');
 
 -- --------------------------------------------------------
 
@@ -1113,8 +1135,8 @@ INSERT INTO `w_trancase` (`tc_id`, `tc_wfid`, `tc_tid`, `tc_wfcid`, `tc_type`, `
 -- 表的结构 `w_transition`
 --
 
-CREATE TABLE `w_transition` (
-  `t_id` int(10) NOT NULL auto_increment COMMENT '事务变迁id',
+CREATE TABLE IF NOT EXISTS `w_transition` (
+  `t_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '事务变迁id',
   `t_wfid` int(10) NOT NULL COMMENT '工作流id',
   `t_name` varchar(50) NOT NULL COMMENT '事务变迁名称',
   `t_sort` int(10) NOT NULL COMMENT '排序',
@@ -1124,25 +1146,23 @@ CREATE TABLE `w_transition` (
   `t_firetaskid` int(10) NOT NULL COMMENT '事务变迁发射fire时，需要执行的任务id；若该任务id是一个工作流的开始任务，不能被任何变迁使用执行，因为这会导致另一个工作流实例产生，有可能会变成死循环。',
   `t_rolename` text NOT NULL COMMENT '事务变迁映射角色',
   `t_formname` text NOT NULL COMMENT '事务变迁映射表单',
-  PRIMARY KEY  (`t_id`)
+  PRIMARY KEY (`t_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流事务变迁节点表' AUTO_INCREMENT=14 ;
 
 --
--- 导出表中的数据 `w_transition`
+-- 转存表中的数据 `w_transition`
 --
 
 INSERT INTO `w_transition` (`t_id`, `t_wfid`, `t_name`, `t_sort`, `t_remark`, `t_type`, `t_limit`, `t_firetaskid`, `t_rolename`, `t_formname`) VALUES
 (1, 7, '部门经理审核', 5, '', 'USER', 0, 0, '部门经理,', ''),
 (2, 7, '部门总监确定', 10, '', 'USER', 0, 0, '部门总监,', ''),
 (3, 7, '创建假事单', 0, '', 'USER', 0, 0, '普通员工,', '请假单,'),
-(4, 11, '创建KPI表', 1, '', 'USER', 0, 0, '超级管理员,', ''),
-(5, 15, '创建企业建站单', 0, '', 'USER', 0, 0, '超级管理员,', ''),
+(4, 11, '创建KPI表', 1, '', 'USER', 0, 0, '', ''),
+(5, 15, '提交企业建站单', 0, '', 'USER', 0, 0, '设计师,软件工程师,', ''),
 (6, 14, '创建网站Bug维护单', 0, '', 'USER', 0, 0, '超级管理员,', ''),
-(7, 15, '技术总监审核', 10, '', 'USER', 0, 0, '总经理,', ''),
-(8, 15, '完成网页设计', 20, '', 'USER', 0, 0, '', ''),
-(9, 15, '技术总监设计审核', 30, '', 'USER', 0, 0, '', ''),
-(10, 15, '网站程序编写完成', 40, '', 'USER', 0, 0, '', ''),
-(11, 15, '技术总监确认项目竣工', 50, '', 'USER', 0, 0, '', ''),
+(7, 15, '设计经理审核', 10, '', 'USER', 0, 0, '首席设计师,', ''),
+(8, 15, '程序经理审核', 20, '', 'USER', 0, 0, '高级软件工程师,', ''),
+(9, 15, '技术总监审核', 30, '', 'USER', 0, 0, '技术总监,', ''),
 (12, 17, '创建商派产品订单', 0, '', 'USER', 0, 0, '超级管理员,', ''),
 (13, 16, '创建SEO订单', 0, '', 'USER', 0, 0, '超级管理员,', '');
 
@@ -1152,8 +1172,8 @@ INSERT INTO `w_transition` (`t_id`, `t_wfid`, `t_name`, `t_sort`, `t_remark`, `t
 -- 表的结构 `w_workflow`
 --
 
-CREATE TABLE `w_workflow` (
-  `wf_id` int(10) NOT NULL auto_increment COMMENT '工作流id',
+CREATE TABLE IF NOT EXISTS `w_workflow` (
+  `wf_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '工作流id',
   `wf_wftid` int(10) NOT NULL COMMENT '工作流类型id',
   `wf_name` varchar(50) NOT NULL COMMENT '工作流名称',
   `wf_sort` int(10) NOT NULL COMMENT '排序',
@@ -1166,11 +1186,11 @@ CREATE TABLE `w_workflow` (
   `wf_edituser` varchar(50) NOT NULL COMMENT '最近一次变更者',
   `wf_btid` int(10) NOT NULL COMMENT '工作流映射主表单模板id',
   `wf_btname` varchar(50) NOT NULL COMMENT '工作流映射主表单模板名称',
-  PRIMARY KEY  (`wf_id`)
+  PRIMARY KEY (`wf_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流表' AUTO_INCREMENT=18 ;
 
 --
--- 导出表中的数据 `w_workflow`
+-- 转存表中的数据 `w_workflow`
 --
 
 INSERT INTO `w_workflow` (`wf_id`, `wf_wftid`, `wf_name`, `wf_sort`, `wf_remark`, `wf_starttaskid`, `wf_isrun`, `wf_date`, `wf_user`, `wf_editdate`, `wf_edituser`, `wf_btid`, `wf_btname`) VALUES
@@ -1181,7 +1201,39 @@ INSERT INTO `w_workflow` (`wf_id`, `wf_wftid`, `wf_name`, `wf_sort`, `wf_remark`
 (14, 3, '网站Bug修复', 5, '', 0, 0, '2013-03-08 23:45:12', '徐飞', '2013-03-08 23:56:29', '徐飞', 0, ''),
 (15, 3, '企业建站', 1, '', 0, 1, '2013-03-08 23:47:33', '徐飞', '2013-03-09 20:21:13', '徐飞', 2, '企业网建业务单'),
 (16, 4, 'SEO优化', 0, '', 0, 0, '2013-03-10 15:32:14', '徐飞', '0000-00-00 00:00:00', '', 0, ''),
-(17, 3, '商派直销动力', 0, '', 0, 0, '2013-03-10 15:34:20', '徐飞', '0000-00-00 00:00:00', '', 0, '');
+(17, 3, '商派直销动力', 10, '', 0, 0, '2013-03-10 15:34:20', '徐飞', '2013-03-25 22:46:14', '徐飞', 0, '');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `w_workflow2role`
+--
+
+CREATE TABLE IF NOT EXISTS `w_workflow2role` (
+  `wf2r_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '工作流关联角色信息id',
+  `wf2r_type` varchar(20) NOT NULL COMMENT '操作权限类型(NEW:创建表单权限；ASSIGN:分单权限；DELETE:删除工作流实例操作)',
+  `wf2r_wfid` int(10) NOT NULL COMMENT '工作流id',
+  `wf2r_prid` int(10) NOT NULL COMMENT '角色id',
+  PRIMARY KEY (`wf2r_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流关联角色操作权限表' AUTO_INCREMENT=53 ;
+
+--
+-- 转存表中的数据 `w_workflow2role`
+--
+
+INSERT INTO `w_workflow2role` (`wf2r_id`, `wf2r_type`, `wf2r_wfid`, `wf2r_prid`) VALUES
+(33, 'ASSIGN', 7, 3),
+(34, 'ASSIGN', 7, 8),
+(35, 'DELETE', 7, 8),
+(36, 'NEW', 7, 3),
+(37, 'NEW', 7, 8),
+(43, 'NEW', 15, 10),
+(44, 'NEW', 15, 11),
+(45, 'NEW', 15, 12),
+(49, 'DELETE', 15, 10),
+(50, 'ASSIGN', 15, 10),
+(51, 'ASSIGN', 15, 11),
+(52, 'ASSIGN', 15, 12);
 
 -- --------------------------------------------------------
 
@@ -1189,23 +1241,23 @@ INSERT INTO `w_workflow` (`wf_id`, `wf_wftid`, `wf_name`, `wf_sort`, `wf_remark`
 -- 表的结构 `w_workflowcase`
 --
 
-CREATE TABLE `w_workflowcase` (
-  `wfc_id` int(10) NOT NULL auto_increment COMMENT '工作流实例id',
+CREATE TABLE IF NOT EXISTS `w_workflowcase` (
+  `wfc_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '工作流实例id',
   `wfc_wfid` int(10) NOT NULL COMMENT '工作流id',
   `wfc_status` varchar(20) NOT NULL COMMENT '工作流实例当前状态；OP：开放；CL：关闭；SU：挂起；CA：取消；',
   `wfc_startdate` datetime NOT NULL COMMENT '工作流实例启动日期',
   `wfc_enddate` datetime NOT NULL COMMENT '工作流实例关闭日期（令牌放入结束库时）',
   `wfc_context` text NOT NULL COMMENT 'sql where语句形式的，或者是数据库基建。这个由对应工作流的启动任务id（w_starttaskid）产生的',
-  PRIMARY KEY  (`wfc_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流实例表' AUTO_INCREMENT=12 ;
+  PRIMARY KEY (`wfc_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流实例表' AUTO_INCREMENT=4 ;
 
 --
--- 导出表中的数据 `w_workflowcase`
+-- 转存表中的数据 `w_workflowcase`
 --
 
 INSERT INTO `w_workflowcase` (`wfc_id`, `wfc_wfid`, `wfc_status`, `wfc_startdate`, `wfc_enddate`, `wfc_context`) VALUES
-(10, 7, 'OP', '2013-03-22 09:52:17', '0000-00-00 00:00:00', ''),
-(11, 7, 'OP', '2013-03-22 16:38:36', '0000-00-00 00:00:00', '');
+(2, 15, 'OP', '2013-03-26 01:18:15', '0000-00-00 00:00:00', ''),
+(3, 15, 'OP', '2013-03-26 01:27:26', '0000-00-00 00:00:00', '');
 
 -- --------------------------------------------------------
 
@@ -1213,18 +1265,18 @@ INSERT INTO `w_workflowcase` (`wfc_id`, `wfc_wfid`, `wfc_status`, `wfc_startdate
 -- 表的结构 `w_workflowtype`
 --
 
-CREATE TABLE `w_workflowtype` (
-  `wft_id` int(10) NOT NULL auto_increment COMMENT '工作流分类id',
+CREATE TABLE IF NOT EXISTS `w_workflowtype` (
+  `wft_id` int(10) NOT NULL AUTO_INCREMENT COMMENT '工作流分类id',
   `wft_pid` int(10) NOT NULL COMMENT '工作流分类父id',
   `wft_name` varchar(50) NOT NULL COMMENT '工作流分类名称',
   `wft_sort` int(10) NOT NULL COMMENT '排序',
   `wft_date` datetime NOT NULL COMMENT '创建日期',
   `wft_remark` text NOT NULL COMMENT '备注',
-  PRIMARY KEY  (`wft_id`)
+  PRIMARY KEY (`wft_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='工作流分类表' AUTO_INCREMENT=6 ;
 
 --
--- 导出表中的数据 `w_workflowtype`
+-- 转存表中的数据 `w_workflowtype`
 --
 
 INSERT INTO `w_workflowtype` (`wft_id`, `wft_pid`, `wft_name`, `wft_sort`, `wft_date`, `wft_remark`) VALUES

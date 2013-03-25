@@ -19,6 +19,11 @@ da.extend({
 		else return regexp.test(val);
 	},
 	
+	//任意内容
+	isAnything: function(val,allowEmpty){
+		return da.isMatch(val, /^.*$/, allowEmpty);
+	},
+	
 	//只能整数
 	isInt: function(val,allowEmpty){
 		return da.isMatch(val, /^-?\d+$/, allowEmpty);
@@ -370,6 +375,7 @@ daValid.all = function(){
 //验证函数映射表，可以通过名称获得对应的验证处理函数
 daValid.mapFnValid = {
 	match: da.isMatch,								//通用正则表达式判定函数
+	anything: da.isAnything,						//任意内容（通常为了判断非空用）
 	int: da.isInt,						//只能整数
 	plusint: da.isIntUp,							//只能正整数
 	plusint0: da.isInt0Up,							//只能非负整数（正整数 + "0"）

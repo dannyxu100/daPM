@@ -70,15 +70,15 @@
 		});
 	}
 	
-	var g_focuscode=false;
+	var g_focuscode="";
 	function inputfocus(){
-		if(!g_focuscode){
+		if(""==g_focuscode || "pwd"==g_focuscode){
 			da("#u_code").select();
-			g_focuscode = true;
+			g_focuscode = "code";
 		}
 		else{
 			da("#u_pwd").select();
-			g_focuscode = false;
+			g_focuscode = "pwd";
 		}
 	}
 	
@@ -88,7 +88,7 @@
 		daKey({
 			keyup: function(key, isctrl, isalt, isshift){
 				if("Enter"==key){
-					if(g_focuscode){
+					if("code"==g_focuscode){
 						inputfocus();
 					}
 					else{

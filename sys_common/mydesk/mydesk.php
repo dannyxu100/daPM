@@ -9,55 +9,60 @@
 <body >
 	<table style="width:100%;">
 		<tr>
-			<td style="width:500px;">&nbsp;</td>
-			<td style="width:500px; padding:5px;">
-				<h3>最新日志</h3>
+			<td style="width:500px;">
 				<div id="listPad" style="padding:5px;"></div>
-				
-				<div id="logtemplet" style="display:none;">
-					<ul id="log_{l_id}" class="logitem" >
-						<div class="ico" >
-							<img src="{userico}"/>
-							<div class="txt">{puname}</div>
-						</div>
-						<div class="pl" >
-							<div class="pl_img"></div>
-						</div>
-						<div class="content" >
-							<div class="ldate">{l_date}</div>
-							{l_content}
-						</div>
-						<div style="clear:both;"></div>
-						<div class="logtoolbar" >
-							<a href="javascript:void(0)" onclick="addreply({l_id})">回复</a>
-						</div>
-						<div id="reply_{l_id}" class="logreply" ></div>
-					</ul>
-				</div>
-				<div id="replytemplet" style="display:none;">
-					<ul class="item">
-						<div class="ico" >
-							<img src="{userico}"/>
-							<div class="txt">{puname}</div>
-						</div>
-						<div class="pr">
-							<div class="pr_img"></div>
-						</div>
-						<div class="content" >
-							<div class="rdate">{r_date}</div>
-							{r_content}
-						</div>
-						<div style="clear:both;"></div>
-					</ul>
-				</div>
+			</td>
+			<td style="width:500px; padding:5px;">
 			</td>
 		</tr>
 	</table>
+	
+	
+	<div id="logtemplet" style="display:none;">
+		<ul id="log_{l_id}" class="logitem" >
+			<div class="ico" >
+				<img src="{userico}"/>
+				<div class="txt">{puname}</div>
+			</div>
+			<div class="pl" >
+				<div class="pl_img"></div>
+			</div>
+			<div class="content" >
+				<div class="ldate">{l_date}</div>
+				{l_content}
+			</div>
+			<div style="clear:both;"></div>
+			<div class="logtoolbar" >
+				<a href="javascript:void(0);" onclick="addreply('{l_id}')">回复</a>
+			</div>
+			<div id="reply_{l_id}" class="logreply" ></div>
+		</ul>
+	</div>
+	<div id="replytemplet" style="display:none;">
+		<ul class="item">
+			<div class="ico" >
+				<img src="{userico}"/>
+				<div class="txt">{puname}</div>
+			</div>
+			<div class="pr">
+				<div class="pr_img"></div>
+			</div>
+			<div class="content" >
+				<div class="rdate">{r_date}</div>
+				{r_content}
+			</div>
+			<div style="clear:both;"></div>
+		</ul>
+	</div>
 </body>
 </html>
 
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
 <script>
+
+function addreply(){
+
+}
 
 /**加载日志列表
 */
@@ -85,6 +90,7 @@ function loadreplylist(lids){
 					}
 				}));
 			}
+			
 			autoframeheight();
 		}
 	},function(msg, code, ex){
@@ -127,7 +133,6 @@ function loadloglist(){
 			}
 			
 			loadreplylist(lids.join(","));
-			autoframeheight();
 		}
 	},function(msg, code, ex){
 		// debugger;

@@ -256,6 +256,7 @@ function updatelisthtml(){
 		bt_listscript: encodeURIComponent(da("#bt_listscript").val())
 		
 	},function(data){
+		// debugger;
 		if("FALSE" != data){
 			alert("修改成功。");
 		}
@@ -277,9 +278,10 @@ function updateformhtml(){
 		dataType: "json",
 		bt_id: g_btid,
 		bt_formhtml: encodeURIComponent(da("#bt_formhtml").val()),
-		bt_listscript: encodeURIComponent(da("#bt_formscript").val())
+		bt_formscript: encodeURIComponent(da("#bt_formscript").val())
 		
 	},function(data){
+		// debugger;
 		if("FALSE" != data){
 			alert("修改成功。");
 		}
@@ -465,6 +467,8 @@ function loadtab(){
 			da("#pad_form").hide();
 			da("#pad_db").hide();
 			da("#pad_info").show();
+			
+			autoframeheight();
 		}
 	});
 
@@ -474,6 +478,8 @@ function loadtab(){
 			da("#pad_list").hide();
 			da("#pad_form").hide();
 			da("#pad_db").show();
+			
+			autoframeheight();
 		}
 	});
 	
@@ -483,6 +489,8 @@ function loadtab(){
 			da("#pad_form").hide();
 			da("#pad_db").hide();
 			da("#pad_list").show();
+			
+			autoframeheight();
 		}
 	});
 	
@@ -492,6 +500,8 @@ function loadtab(){
 			da("#pad_list").hide();
 			da("#pad_db").hide();
 			da("#pad_form").show();
+			
+			autoframeheight();
 		}
 	});
 	daTab0.click("item01");
@@ -518,7 +528,51 @@ function loadtree(){
 	});
 }
 
-daLoader("daMsg,daTab,daTable,daWin", function(){
+var g_editorList, g_editorForm;
+/**加载在线编辑器
+*/
+function loadeditor(){
+	g_editorList = KindEditor.create('#bt_listhtml', {
+		resizeType: 1,
+		filterMode: false,		//不过滤危险标签
+		newlineTag: "br",
+		allowPreviewEmoticons : false,
+		fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
+		allowFileManager : true,
+		items : [
+			'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+			'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+			'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+			'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+			'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
+			'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+			'anchor', 'link', 'unlink', '/',
+			'da_list_fld'
+		]
+	});
+	
+	g_editorForm = KindEditor.create('#bt_formhtml', {
+		resizeType : 1,
+		filterMode : false,		//不过滤危险标签
+		newlineTag: "br",
+		allowPreviewEmoticons : false,
+		fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
+		allowFileManager : true,
+		items : [
+			'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+			'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+			'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+			'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+			'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
+			'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+			'anchor', 'link', 'unlink', '|'
+		]
+	});
+}
+
+daLoader("daMsg,daTab,daTable,daIframe,daWin", function(){
 	//daUI(); 
 	
 	/*页面加载完毕*/
@@ -530,6 +584,7 @@ daLoader("daMsg,daTab,daTable,daWin", function(){
 	
 		loadtree();
 		loadtab();
+		loadeditor();
 		
 		da("#pad_config").hide();
 	});

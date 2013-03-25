@@ -38,7 +38,7 @@ function loadtree(){
 }
 
 
-daLoader(function(){
+daLoader("daMsg",function(){
 	arrParams = da.urlParams();
 	g_poid = arrParams["poid"];
 	//alert(g_poid);

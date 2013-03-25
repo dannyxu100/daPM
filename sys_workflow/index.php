@@ -15,12 +15,14 @@
 <div>
 	<table class="tablesolid" style="width:100%">
 		<tr>
-			<td id="left_frame" style="vertical-align:top; width:120px; padding:0px;"><div id="menu_list"></div></td>
+			<td id="left_frame" style="vertical-align:top; width:120px; padding:0px;">
+				<div id="menu_list" style="width:120px;"></div>
+			</td>
 			<td class="frame_slide" onclick="slideleft()">
 				<div id="bt_slide" class="bt_slideleft"></div>
 			</td>
 			<td style="vertical-align:top;">
-				<iframe id="mainframe" src="" frameborder="0" style="width:100%;height:500px;" defaultHeight="600"></iframe>
+				<iframe id="mainframe" src="" frameborder="0" style="height:500px;" defaultHeight="600"></iframe>
 			</td>
 		</tr>
 	</table>

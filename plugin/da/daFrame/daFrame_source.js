@@ -57,8 +57,8 @@ var daFrame = (function(){
 				box: "daCntBox",
 				over: "daCntOver",
 				sclV: "scl_v",
-				sclH: "scl_h",
 				sclV2: "scl_v2",
+				sclH: "scl_h",
 				sclH2: "scl_h2"
 			},
 			border: "1px solid #666",
@@ -251,44 +251,16 @@ var daFrame = (function(){
 		*/
 		bindWheel:function( objPad ){
 			var context = this,
-					nWheelDeltaStep = 30,										//滚轮没滚一次，移动像素值
-			    maxY, nTop;
-			
-			da( objPad ).bind("mousemove",function( evt ){								//滚动条显示隐藏
-				var wCnt = da( context.cntObj).width(),
-						hCnt = da( context.cntObj).height(),
-						leftBox = context.cntBoxObj.offsetLeft,
-						topBox = context.cntBoxObj.offsetTop,
-						vRect = {
-							minX: wCnt + ( -leftBox ) -50,
-//							maxX: wCnt + ( -leftBox ),
-							minY: hCnt + ( -topBox ) -50
-//							maxY: hCnt + ( -topBox )
-						};
-				
-				if( vRect.minX < evt.pageX ){
-					context.showScrollBarV();
-				}
-				else{
-					context.hideScrollBarV();
-				}
-				
-				if( vRect.minY < evt.pageY ){
-					context.showScrollBarH();
-				}
-				else{
-					context.hideScrollBarH();
-				}
-				
-			});
+				nWheelDeltaStep = 30,										//滚轮没滚一次，移动像素值
+				maxY, nTop;
 			
 			objPad.daWheelObj = daWheel({
 				target: objPad,
 				before: function(){
-			    maxY = 2 + da(context.cntBoxObj).height() - da(context.cntMainObj).height()/* - context.cntCorner*/,	//可滚动最大高度
-					nTop = context.cntBoxObj.offsetTop;																																		//获取当前位置
+					maxY = 2 + da(context.cntBoxObj).height() - da(context.cntMainObj).height()/* - context.cntCorner*/,	//可滚动最大高度
+					nTop = context.cntBoxObj.offsetTop;						//获取当前位置
 					
-					context.showScrollBarV();
+					// context.showScrollBarV();
 						
 				},
 				up: function(){//alert("up");
@@ -298,12 +270,12 @@ var daFrame = (function(){
 					nTop = nTop - nWheelDeltaStep;
 				},
 				after: function(){//alert("after");
-	        nTop = ( 0 < nTop ) ? 0 : ( -maxY > nTop ) ? -maxY : nTop;
+					nTop = ( 0 < nTop ) ? 0 : ( -maxY > nTop ) ? -maxY : nTop;
 
 					context.cntBoxObj.style.top = nTop +"px";			//更新位置
-	        context.cntScrollV.style.top = -( nTop * context.cntScale.h ) + "px";
+					context.cntScrollV.style.top = -( nTop * context.cntScale.h ) + "px";
 					
-					context.hideScrollBarV();
+					// context.hideScrollBarV();
 				}
 	
 			});
@@ -619,8 +591,7 @@ var daFrame = (function(){
 		*/
 		showScrollBarV: function(){
 			if( this.isShowScrollV ){
-				if( this.TimerScrollV ) da.clearTimer( this.TimerScrollV );
-				da( this.cntScrollV ).stop(true,true).fadeIn();
+				da( this.cntScrollV ).show();
 			}
 		},
 		
@@ -628,10 +599,7 @@ var daFrame = (function(){
 		*/
 		hideScrollBarV: function(){
 			if( this.isShowScrollV ){
-				if( this.TimerScrollV ) da.clearTimer( this.TimerScrollV );
-				this.TimerScrollV = da.timer.call( this, 200, function(){
-					da( this.cntScrollV ).stop(true,true).fadeOut();
-				});
+				da( this.cntScrollV ).hide();
 			}
 		},
 		
@@ -639,8 +607,7 @@ var daFrame = (function(){
 		*/
 		showScrollBarH: function(){
 			if( this.isShowScrollH ){
-				if( this.TimerScrollH ) da.clearTimer( this.TimerScrollH );
-				da( this.cntScrollH ).stop(true,true).fadeIn();
+				da( this.cntScrollH ).show();
 			}
 		},
 		
@@ -648,10 +615,7 @@ var daFrame = (function(){
 		*/
 		hideScrollBarH: function(){
 			if( this.isShowScrollH ){
-				if( this.TimerScrollH ) da.clearTimer( this.TimerScrollH );
-				this.TimerScrollH = da.timer.call( this, 150, function(){
-					da( this.cntScrollH ).stop(true,true).fadeOut();
-				});
+				da( this.cntScrollH ).hide();
 			}
 		},
 		
@@ -770,17 +734,10 @@ var daFrame = (function(){
 				
 				da( this.cntScrollV ).stop(true,true).act({
 					top: scrollTop
-				},{
-						complete: function(){
-							if( context.isShowScrollV ) context.hideScrollBarV();
-					}
 				});
+				
 				da( this.cntScrollH ).stop(true,true).act({
 					left: scrollLeft
-				},{
-						complete: function(){
-							if( context.isShowScrollH ) context.hideScrollBarH();
-					}
 				});
 				
 			}

@@ -50,6 +50,39 @@ function loaddata(){
 	});
 }
 
+/**初始化表单控件
+*/
+function init(){
+	da("input[source],textarea[source]").each(function(idx, tag){
+		var daObj = da(tag);
+		var source = daObj.attr("source");
+
+		switch( source ){
+			case "date":
+				daDate({
+					target: tag, 
+					// showFootBar: true,
+					selectTime: true
+				});
+				break;
+			case "user":
+				daObj.bind("click",function(){
+					daWin({
+						width: 600,
+						height: 500,
+						isover: true,
+						url: "/sys_power/plugin/select_user.htm",
+						back: function( data ){
+							for(var k in data){
+								daObj.val(data[k].pu_name);
+							}
+						}
+					});
+				});
+		}
+	});
+}
+
 /**加载工作流对应 表单列表页模板
 */
 function loadtemplet(){
@@ -66,14 +99,15 @@ function loadtemplet(){
 		if("FALSE" != data ){
 			var formObj = da("#templet_form");
 			formObj.append( data[0].bt_formhtml );
-
+			
+			init();
 			loaddata();
 		}
 	});
 }
 
 
-daLoader("daIframe,daWin",function(){
+daLoader("daMsg,daValid,daDate,daIframe,daWin",function(){
 	da(function(){
 		var arrparam = da.urlParams();
 		g_btid = arrparam["btid"];

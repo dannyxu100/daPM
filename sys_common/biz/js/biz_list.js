@@ -35,7 +35,7 @@ function slideleft(){
 * wfcid: 工作流实例 id
 * tcid: 事务变迁实例 id
 */
-function viewbizlog( dbfldid, bcid, wfcid ){
+function viewbizlog( obj, dbfldid, bcid, wfcid, tcid ){
 	if( g_isctrl ){
 		daWin({
 			width: 800,
@@ -79,23 +79,28 @@ function viewbiz( obj, dbfldid, bcid, wfcid, tcid ){
 
 
 var g_mapstatus = {
-	"EN": '<span style="color:#999; font-weight:bold;">In Waiting</span>',
-	"IP": '<span style="color:#f93; font-weight:bold;">Processing..</span>',
-	"FI": '<span style="color:#090; font-weight:bold;">Finished!</span>',
-	"CA": '<span style="color:#ccc; font-weight:bold;">Cancelled</span>'
+	"EN": '<span style="color:#999; font-weight:bold;">等待..</span>',
+	"IP": '<span style="color:#f93; font-weight:bold;">处理中</span>',
+	"FI": '<span style="color:#090; font-weight:bold;">完成</span>',
+	"CA": '<span style="color:#ccc; font-weight:bold;">取消</span>'
 }
 
 /**查看事务处理信息
 * obj: 标签对象
+* dbfldid: 数据源主键 id
 * bcid: 业务单实例 id
 * wfcid: 工作流实例 id
 * tcid: 事务变迁实例 id
 */
-function viewtran( obj, bcid, wfcid, tcid ){
+function viewtran( obj, dbfldid, bcid, wfcid, tcid ){
 	var trObj = da(obj).parents("tr"),
-		nexttrObj = trObj.next("tr"),
+		nexttrObj = trObj.next("tr[name=tranpad]"),
 		wfpadObj = da("td[name=workflowinfo]", nexttrObj);
 
+	if( 0>=nexttrObj.dom.length ){
+		alert("后台没有配置，显示业务进度面板");
+	}
+	
 	if( !nexttrObj.is(":hidden")){
 		nexttrObj.hide();
 		return;
@@ -110,7 +115,7 @@ function viewtran( obj, bcid, wfcid, tcid ){
 	tranlist.id = "tb_list_tran_"+wfcid;
 	tranlist.setAttribute("id", "tb_list_tran_"+wfcid);
 	wfpadObj.append(tranlist);
-			
+	
 	daTable({
 		id: tranlist.id,
 		url: "/sys_common/biz/action/trancase2workflowcase_get_page.php",
@@ -137,10 +142,10 @@ function viewtran( obj, bcid, wfcid, tcid ){
 		},
 		loaded: function( idx, xml, json, ds ){
 			// link_click("#tb_list tbody[name=details_auto] tr");
-			
+			autoframeheight();
 		},
 		error: function(code,msg,ex){
-			// debugger;
+			debugger;
 		}
 	}).load(); 
 	
@@ -165,13 +170,13 @@ function viewtran( obj, bcid, wfcid, tcid ){
 
 /**接单
 * obj: 标签对象
+* dbfldid: 数据源主键 id
 * bcid: 业务单实例 id
 * wfcid: 工作流实例 id
 * tcid: 事务变迁实例 id
 */
-function handlebiz(obj, bcid, wfcid, tcid ){
+function handlebiz(obj, dbfldid, bcid, wfcid, tcid ){
 	// da.focus(obj, "#item03");
-	alert(tcid)
 	confirm("你确定要接单吗？", function(){
 		da.runDB("/sys_common/biz/action/trancase_accept_item.php",{
 			tcid: tcid
@@ -179,6 +184,7 @@ function handlebiz(obj, bcid, wfcid, tcid ){
 		function( res ){
 			if("FALSE" != res){
 				alert("接单成功。");
+				loaddata();
 			}
 			else{
 				alert("操作失败。");
@@ -188,16 +194,70 @@ function handlebiz(obj, bcid, wfcid, tcid ){
 	
 }
 
+/**分单
+* obj: 标签对象
+* dbfldid: 数据源主键 id
+* bcid: 业务单实例 id
+* wfcid: 工作流实例 id
+* tcid: 事务变迁实例 id
+*/
+function assignbiz( obj, dbfldid, bcid, wfcid, tcid ){
+	daWin({
+		width: 650,
+		height: 500,
+		url: "/sys_power/plugin/select_user.htm",
+		back: function( data ){
+			var puid, puname;
+			for(var k in data){
+				puid = k;
+				puname = data[k].pu_name;
+			}
+			
+			da.runDB("/sys_common/biz/action/trancase_assign_item.php",{
+				tcid: tcid,
+				newpuid: puid,
+				newpuname: puname
+				
+			},function(res){debugger;
+				if("FALSE" == res){
+					alert("对不起，操作失败。");
+				}
+				else{
+					da(obj).text(puname);
+				}
+			});
+		}
+	});
+}
 
 /**加载工具按钮
 */
 function tools( fld, val, row, ds ){
-	var arrhtml = [
-		'<a href="javascript:void(0)" class="txt_tool" onclick="handlebiz(this,\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +', '+ row["tc_id"] +')">处理</a>',
-		'<a href="javascript:void(0)" class="txt_tool" onclick="viewbizlog(this,\''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +', '+ row["tc_id"] +')">日志</a>',
-		'<a href="javascript:void(0)" class="ico_tool" title="删除" style="background:url(/images/sys_icon/delete.png)"></a>'
-		];
-	return arrhtml.join("");
+	var toolhtml = [];
+	
+	toolhtml.push('<a href="javascript:void(0)" class="txt_tool" onclick="viewbizlog(this,\''
+	+ row[g_dbfld] +'\', '
+	+ row["bc_id"] +', '
+	+ row["wfc_id"] +', '
+	+ row["tc_id"] +')">日志</a>');
+	
+
+	if( g_enassign ){
+		toolhtml.push('<a href="javascript:void(0)" class="txt_tool" style="color:#900;" onclick="assignbiz(this,\''
+		+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +', '+ row["tc_id"] +')">'
+		+ (row["tc_puname"]?row["tc_puname"]:"未分配") +'</a>');
+	}
+	
+	if( "EN" == row.tc_status && ("" == row.tc_puid || 0 == row.tc_puid) ){
+		toolhtml.push('<a href="javascript:void(0)" class="txt_tool" style="color:#900;" onclick="handlebiz(this,\''
+		+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +', '+ row["tc_id"] +')">接受</a>');
+	}
+
+	
+	
+	// toolhtml.push('<a href="javascript:void(0)" class="ico_tool" title="删除" style="background:url(/images/sys_icon/delete.png)"></a>');
+	
+	return toolhtml.join("");
 }
 
 /**加载表单数据
@@ -209,17 +269,19 @@ function loaddata(){
 	}
 	
 	var idxfld = 0;
-	
+
 	daTable({
 		id: "tb_list",
-		url: "/sys_common/biz/action/workflowcase2role_get_page2.php",
+		url: "/sys_common/biz/action/workflowcase2role_get_page.php",
 		data: {
 			// opt: "qry",
 			dataType: "json",
 			wfid: g_wfid,
 			status: g_transtatus,
 			dbsource: g_dbsource,
-			dbfld: g_dbfld
+			dbfld: g_dbfld,
+			
+			enassign: g_enassign		//是否拥有分单权限
 		},
 		//loading: false,
 		//page: false,
@@ -228,10 +290,20 @@ function loaddata(){
 		field: function( fld, val, row, ds ){
 			if( "order" == fld ){
 				idxfld = 0;
+				val = '<label><input type="checkbox" name="chkitem" value="'+ row[g_dbfld] +'" /> ' + val +'</label>';
 			}
 			else if( 1 == idxfld ){
-				val = '<a href="javascript:void(0)" onclick="viewbiz(this, \''+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +', '+ row["tc_id"] +')" onmouseover="showtranlist(this,'+ row["wfc_id"] +')" onmouseout="hidetranlist()">'+ val +'</a>';
-				val += '<img style="margin-left:10px; vertical-align:middle;" src="/images/sys_icon/down.png" onclick="viewtran(this,'+ row["bc_id"] +', '+ row["wfc_id"] +')" />';
+				val = '<a href="javascript:void(0)" onclick="viewbiz(this, \''
+				+ row[g_dbfld] +'\', '
+				+ row["bc_id"] +', '
+				+ row["wfc_id"] +', '
+				+ row["tc_id"] +')" >'+ val +'</a>';
+				
+				val += '<img style="margin-left:10px; vertical-align:middle;" src="/images/sys_icon/down.png" onclick="viewtran(this, \''
+				+ row[g_dbfld] +'\', '
+				+ row["bc_id"] +', '
+				+ row["wfc_id"] +', '
+				+ row["tc_id"] +')" />';
 			}
 			else if("tools"==fld){
 				val = tools(fld, val, row, ds);
@@ -245,7 +317,7 @@ function loaddata(){
 			// toExcel();
 		},
 		error: function(code,msg,ex){
-			// debugger;
+			debugger;
 		}
 	}).load();
 }
@@ -278,6 +350,7 @@ function loadtemplet(){
 		}
 	});
 }
+
 
 /**加载分页按钮
 */
@@ -315,6 +388,51 @@ function loadtab(){
 }
 
 
+var g_ennew = false,		//允许新建
+	g_enassign = false,		//允许分单
+	g_endel = false;		//允许删除
+/**初始化当前人员可操作权限
+*/
+function loadoptpower( fn ){
+	da.runDB("action/workflow2role_get_optpower.php",{
+		dataType: "json",
+		wfid: g_wfid
+	},function(data){
+		if("FALSE"!= data){
+			for(var i=0; i<data.length; i++){
+				switch( data[i].wf2r_type ){
+					case "NEW":
+						if( !g_ennew ) g_ennew = true;
+						break;
+					case "ASSIGN":
+						if( !g_enassign ) g_enassign = true;
+						break;
+					case "DELETE":
+						if( !g_endel ) g_endel = true;
+						break;
+				}
+			}
+
+			var toptools = da("#toptools");
+
+			//是否可新建
+			if( g_ennew ){
+				toptools.append('<a class="item" href="javascript:void(0)" onclick="addbiz();" ><img src="/images/sys_icon/add.png" /> 新建</a>');
+			}
+			
+			//是否可删除
+			if( g_endel ){
+				toptools.append('<a class="item" href="javascript:void(0)" ><img src="/images/sys_icon/delete.png" /> 删除</a>');
+			}
+			
+			if(da.isFunction(fn)) fn();
+		}
+	},function(code,msg,ex){
+		// debugger;
+	});
+
+}
+
 var g_isctrl = false;
 /**监听按键
 */
@@ -338,9 +456,11 @@ daLoader("daMsg,daKey,daTab,daTable,daIframe,daWin",function(){
 		var arrparam = da.urlParams();
 		g_wfid = arrparam["wfid"];
 		
-		loadtab();
-		loadtemplet();
 		listenKey();
 		
+		loadoptpower(function(){
+			loadtab();
+			loadtemplet();
+		});
 	});
 });

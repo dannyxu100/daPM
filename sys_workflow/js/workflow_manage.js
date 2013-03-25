@@ -222,7 +222,7 @@ function loadtran(){
 				return "USER"==val?"人工操作":"AUTO"==val?"自动执行":"TIME"==val?"限时触发":"消息触发";
 			}
 			if("t_name"==fld){
-				return '<a href="javascript:void(0)" onclick="updatetran('+ row.t_id +')">'+ (row.t_name?row.t_name:"未填写") +'</a>';
+				return '<a href="javascript:void(0)" onclick="updatetran('+ row.t_id +')">'+ (row.t_name?row.t_name:"空") +'</a>';
 			}
 			else if( "t_rolename" == fld ){
 				return '<a href="javascript:void(0)" onclick="selectrole('+ row.t_id +', this)">'+ (val?val:"空") +'</a>';
@@ -279,6 +279,37 @@ function loadplace(){
 		}
 	}).load();
 }
+
+/**加载工作流操作权限信息
+*/
+function loadworkflowpower(){
+	da.runDB("action/workflow2role_get_list.php",{
+		dataType: "json",
+		wfid: g_wfid
+	},function(data){
+		if("FALSE"!= data){
+			var newrole = [], assignrole = [], delrole = [];
+			
+			for(var i=0; i<data.length; i++){
+				switch( data[i].wf2r_type ){
+					case "NEW":
+						newrole.push( data[i].pr_name );
+						break;
+					case "ASSIGN":
+						assignrole.push( data[i].pr_name );
+						break;
+					case "DELETE":
+						delrole.push( data[i].pr_name );
+						break;
+				}
+			}
+			da("#new_rolename").val(newrole.join(","));
+			da("#assign_rolename").val(assignrole.join(","));
+			da("#del_rolename").val(delrole.join(","));
+		}
+	});
+}
+
 /**加载工作流基本信息
 */
 function loadinfo(){
@@ -310,6 +341,7 @@ function loadworkflow(wfid, obj){
 	
 
 	loadinfo();
+	loadworkflowpower();
 	loadplace();
 	loadtran();
 	loadarc();
@@ -326,9 +358,11 @@ function loadworkflowlist(){
 		
 	},function(data){
 		if("FALSE" != data){
+			var listObj = da("#workflowlist");
 			for( var i=0; i<data.length; i++ ){
 				//delegate
-				da("#workflowlist").append('<a href="javascript:void(0)" class="bt_menu" style="float:left;" onclick="loadworkflow('+ data[i].wf_id +', this)">'+ (i+1)+"、"+data[i].wf_name +'</a>');
+				listObj.append('<a href="javascript:void(0)" class="bt_menu" style="float:left;" onclick="loadworkflow('
+				+ data[i].wf_id +', this)">'+ (i+1)+"、"+data[i].wf_name +'</a>');
 			}
 			
 			da(da(".bt_menu").dom[0]).click();
@@ -384,7 +418,7 @@ function selectform( tid, obj ){
 				btids: btids,
 				btnames: btnames,
 				tid: tid
-			},function(res){debugger;
+			},function(res){
 				if("FALSE"!=res){
 					da(obj).text(btnames?btnames:"空");
 				}
@@ -394,10 +428,64 @@ function selectform( tid, obj ){
 	});
 }
 
+
+/**更新工作流操作权限对应角色
+*/
+function workflow2role( opttype, obj ){
+	daWin({
+		width: 400,
+		height:400,
+		url: "/sys_power/plugin/select_role.htm?ismulti=true",
+		back: function( data ){
+			var rids = [], rnames = [];
+			
+			for(var puid in data){
+				rids.push(puid);
+				rnames.push(data[puid].pr_name);
+			}
+			
+			rids = rids.join(",");
+			rnames = rnames.join(",");
+			
+			da.runDB("/sys_workflow/action/workflow2role_update_list.php",{
+				rids: rids,
+				rnames: rnames,
+				type: opttype,
+				wfid: g_wfid
+			},function(res){
+				if("FALSE"!=res){
+					da(obj).val( rnames );
+				}
+			},function(code, msg, ex){
+				// debugger;
+			});
+		}
+	});
+}
+
+/**为工作流删除权限 选择执行角色
+*/
+function selectdelrole(){
+	workflow2role( "DELETE", "#del_rolename" );
+}
+
+/**为工作流分单权限 选择执行角色
+*/
+function selectassignrole(){
+	workflow2role( "ASSIGN", "#assign_rolename" );
+}
+
+/**为工作流创建表单权限 选择执行角色
+*/
+function selectnewrole(){
+	workflow2role( "NEW", "#new_rolename" );
+}
+
 /**为工作流 选择主表单
 */
 function selectmainform(){
 	daWin({
+	
 		width: 600,
 		height:400,
 		url: "/sys_bizform/plugin/select_biztemplet.htm",
@@ -442,6 +530,32 @@ function deletearc(){
 				else{
 					alert("删除成功");
 					loadarc();
+				}
+			});
+		});
+	}
+}
+
+/**删除工作流事务变迁
+*/
+function deletetran(){
+	var tids = [];
+	da("[name=chkitem_tran]:checked").each(function(){
+		tids.push(this.value);
+	});
+	
+	if( 0<tids.length ){
+		confirm("确认删除选中的事务变迁吗？",function(){
+			da.runDB("/sys_workflow/action/tran_delete_list.php",{
+				wfid: g_wfid,
+				tids: tids.join(",")
+			},function(res){
+				if("FALSE" == res){
+					alert("对不起，操作失败。");
+				}
+				else{
+					alert("删除成功");
+					loadtran();
 				}
 			});
 		});
@@ -659,29 +773,29 @@ function loadtab(){
 			da("#pad_placelist").hide();
 			da("#pad_tranlist").hide();
 			da("#pad_arclist").hide();
-			//da("#pad_map").hide();
+			da("#pad_power").hide();
 			da("#pad_workflow").show();
 			
 			loadinfo();
 		}
 	});
 
-	// daTab0.appendItem("item02","流程图","",{
-		// click:function(){
-			// da("#pad_tranlist").hide();
-			// da("#pad_arclist").hide();
-			// da("#pad_workflow").hide();
-			// da("#pad_placelist").hide();
-			// da("#pad_map").show();
-		// }
-	// });
+	daTab0.appendItem("item02","操作权限","",{
+		click:function(){
+			da("#pad_tranlist").hide();
+			da("#pad_arclist").hide();
+			da("#pad_workflow").hide();
+			da("#pad_placelist").hide();
+			da("#pad_power").show();
+		}
+	});
 	
 	daTab0.appendItem("item03","库所节点","",{
 		click:function(){
 			da("#pad_tranlist").hide();
 			da("#pad_arclist").hide();
 			da("#pad_workflow").hide();
-			//da("#pad_map").hide();
+			da("#pad_power").hide();
 			da("#pad_placelist").show();
 			
 			loadplace();
@@ -693,7 +807,7 @@ function loadtab(){
 			da("#pad_placelist").hide();
 			da("#pad_arclist").hide();
 			da("#pad_workflow").hide();
-			//da("#pad_map").hide();
+			da("#pad_power").hide();
 			da("#pad_tranlist").show();
 			
 			loadtran();
@@ -704,7 +818,7 @@ function loadtab(){
 			da("#pad_placelist").hide();
 			da("#pad_tranlist").hide();
 			da("#pad_workflow").hide();
-			//da("#pad_map").hide();
+			da("#pad_power").hide();
 			da("#pad_arclist").show();
 			
 			loadarc();
@@ -717,28 +831,26 @@ var g_editor;
 /**加载在线编辑器
 */
 function loadeditor(){
-	KindEditor.ready(function(K) {
-		g_editor = K.create('#wf_remark', {
-			resizeType : 1,
-			allowPreviewEmoticons : false,
-			fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
-			allowFileManager : true,
-			items : [
-				'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-				'insertunorderedlist', '|', 'emoticons', 'image', 'link']
-		});
+	g_editor = KindEditor.create('#wf_remark', {
+		resizeType : 1,
+		allowPreviewEmoticons : false,
+		fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
+		allowFileManager : true,
+		items : [
+			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist', '|', 'emoticons', 'image', 'link']
 	});
 };
 
 daLoader("daDate,daMsg,daTab,daTable,daWin,daButton", function(){
 	//daUI();
-	loadeditor();
 	
 	/*页面加载完毕*/
 	da(function(){
 		loadtree();
 		loadtab();
+		loadeditor();
 		
 		da("#pad_config").hide();
 	});

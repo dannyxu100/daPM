@@ -9,7 +9,8 @@ function updatetran(){
 		dataType: "json",
 		wfid: g_wfid,
 		wfcid: g_wfcid,
-		aid: da("#arclist").val()
+		aid: da("#arclist").val(),
+		remark: da("#remark").val()
 	},
 	function(data){
 		// debugger;

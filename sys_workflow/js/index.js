@@ -14,6 +14,8 @@ function slideleft(){
 		tdObj.hide();
 		btObj.dom[0].className = "bt_slideright";
 	}
+	
+	autoframeheight();
 }
 
 /**点击二级菜单
@@ -36,7 +38,8 @@ function loadlevel2menu(){
 			var listObj = da("#menu_list");
 			
 			for(var i=0; i<data.length; i++){
-				listObj.append('<a class="bt_menu" href="javascript:void(0)" onclick="clickmenu(\''+data[i].pm_url+'\', this)"><img src="'+data[i].pm_img+'"/> '+ data[i].pm_name +'</a>');
+				listObj.append('<a class="bt_menu" href="javascript:void(0)" onclick="clickmenu(\''
+				+data[i].pm_url+'\', this)"><img src="'+data[i].pm_img+'"/> '+ data[i].pm_name +'</a>');
 
 			}
 			

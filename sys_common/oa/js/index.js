@@ -14,6 +14,7 @@ function slideleft(){
 		tdObj.hide();
 		btObj.dom[0].className = "bt_slideright";
 	}
+	autoframeheight();
 }
 
 /**点击二级菜单

@@ -111,7 +111,7 @@ daLoading.fnStruct = daLoading.prototype = {
 				break;
 			case "text":
 			default:
-				this.dlText.innerHTML = this.setting.text;
+				this.dlText.innerText = this.setting.text;
 				break;
 		}
 		
@@ -134,7 +134,7 @@ daLoading.fnStruct = daLoading.prototype = {
 		da( this.dlBody ).bind( "click", function(){
 			context.dlnum = 100;
 			context.isFinished = true;
-			context.clear( true );
+			context.remove( true );
 			
 			//点击后回调自定义事件
 			if(setting.click) setting.click.call( context );
@@ -148,7 +148,7 @@ daLoading.fnStruct = daLoading.prototype = {
 		if(null==this.dlBody) return;
 		
 		if( 99 <= this.dlnum && this.isFinished ){
-			this.clear();
+			this.remove();
 			return;
 		}
 		
@@ -170,16 +170,16 @@ daLoading.fnStruct = daLoading.prototype = {
 	finished: function(){
 		this.isFinished = true;
 		if( 99 <= this.dlnum || !this.isShowBar )
-			this.clear();
+			this.remove();
 		
 	},
 	
-	clear: function( isHide ){
+	remove: function( isHide ){
 		if( !this.isRemoved ){
 			if( isHide )
 				this.dlBody.style.display = "none";
 			else{
-				this.dlParent.removeChild( this.dlBody );
+				da( this.dlBody ).remove();
 				this.isRemoved = true;
 			}
 		}

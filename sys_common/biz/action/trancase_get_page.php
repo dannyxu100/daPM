@@ -33,17 +33,17 @@
 		array_push($param1, array(":start", $start));
 		array_push($param1, array(":end", $end));
 	}
-	// $log = new Log();
-	// $log->write($sql1);
-	// $log->write($sql2);
+	// Log::out($sql1);
+	// Log::out($sql2);
 	
 	$db->paramlist($param1);
 	$set = $db->getlist($sql1);
+	// Log::out($db->geterror());
 	
 	$db->paramlist($param2);
 	$count = $db->getlist($sql2);
 	
-	// $log->write($db->geterror());
+	// Log::out($db->geterror());
 	$db->close();
 	
 	$res = array(

@@ -18,10 +18,7 @@
 	opacity:0.01; 					/* FF */
 }
 
-.scl_v,
-.scl_h,
-.scl_v2,
-.scl_h2 {
+.scl_v,.scl_h,.scl_v2,.scl_h2 {
 	position:absolute;
 	display:none;
 	background:#a0a0a0;
@@ -29,12 +26,11 @@
 	-khtml-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	border:1px solid #666;
 }
-.scl_v, .scl_v2 {width:5px;height:50px;right:1px;top:0px;}
-.scl_h, .scl_h2 {width:50px;height:5px;bottom:1px;left:0px;}
+.scl_v, .scl_v2 {width:8px;height:50px;right:1px;top:0px;}
+.scl_h, .scl_h2 {width:50px;height:8px;bottom:1px;left:0px;}
 
-.scl_v2, .scl_h2 {background:#222; }
+.scl_v2, .scl_h2 {background:#222;}
 
 
 /* shandowborder 内阴影样式 */

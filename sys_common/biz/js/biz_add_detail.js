@@ -11,6 +11,8 @@ function savebiz(){
 		return;
 	}
 	
+	// g_editor.sync();
+	
 	if( !daValid.all() ) return;
 	
 	var data = {
@@ -29,7 +31,7 @@ function savebiz(){
 		// debugger;
 		if("FALSE" != res ){
 			alert("保存成功。");
-			// iframeBack();
+			iframeBack();
 		}
 		else{
 			alert("操作失败。");
@@ -42,8 +44,59 @@ function savebiz(){
 /**初始化表单控件
 */
 function init(){
-	
-	
+	da("input[source],textarea[source]").each(function(idx, tag){
+		var daObj = da(tag);
+		var source = daObj.attr("source");
+
+		switch( source ){
+			case "date":
+				daDate({
+					target: tag, 
+					// showFootBar: true,
+					selectTime: true
+				});
+				break;
+			case "user":
+				daObj.bind("click",function(){
+					daWin({
+						width: 600,
+						height: 500,
+						isover: true,
+						url: "/sys_power/plugin/select_user.htm",
+						back: function( data ){
+							for(var k in data){
+								daObj.val(data[k].pu_name);
+							}
+						}
+					});
+				});
+				break;
+			case "editorbox":
+				var g_editor;
+				
+				g_editor = KindEditor.create("#"+tag.id, {
+					resizeType : 1,
+					// filterMode : false,		//不过滤危险标签
+					newlineTag: "br",
+					allowPreviewEmoticons : false,
+					fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
+					allowFileManager : true,
+					items : [
+						'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+						'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+						'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+						'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+						'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+						'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
+						'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+						'anchor', 'link', 'unlink', '|'
+					]
+				});
+					
+				
+				break;
+		}
+	});
 }
 
 /**加载工作流对应 表单列表页模板
@@ -70,7 +123,7 @@ function loadtemplet(){
 }
 
 
-daLoader("daMsg,daIframe,daWin,daValid",function(){
+daLoader("daMsg,daIframe,daWin,daValid,daDate",function(){
 	da(function(){
 		var arrparam = da.urlParams();
 		g_btid = arrparam["btid"];

@@ -607,6 +607,16 @@ var daDate = (function(){
 			da( this.targetObj ).bind( "focus.daDate", function(evt){				//日期选中 绑定自定义事件函数
 				context.show();
 			});
+			// da( this.targetObj ).bind( "blur.daDate", function(evt){
+				// context.hidetimer = da.timer("300", function(daDateObj){
+					// daDateObj.hide()
+				// }, context);
+			// });
+			
+			// da(this.cntObj).bind("click.daDate",function(){
+				// alert(111);
+				// da.clearTimer(context.hidetimer);
+			// });
 			
 			da( this.arrTdHead ).bind( "click.daDate", function(){						//日历头 绑定自定义事件函数
 				var res = true;
@@ -882,7 +892,7 @@ var daDate = (function(){
 			
 			data.date.setHours( this.footObj.sltHour.value, this.footObj.sltMinute.value, this.footObj.sltSecond.value );
 			
-			this.targetObj.value = fmt ? da.fmtDate( data.date, fmt ) : data.date;
+			this.targetObj.value = fmt ? da.fmtDate( data.date, fmt ) : da.fmtDate( data.date, "yyyy-mm-dd hh:nn:ss" );
 			this.hide();
 		},
 		
@@ -896,7 +906,7 @@ var daDate = (function(){
 				this.cntObj.style.display = "block";
 			}
 			else{
-				da( this.cntObj ).slideDown(300);
+				da( this.cntObj ).show();
 			}
 			
 			this.isShowed = true;

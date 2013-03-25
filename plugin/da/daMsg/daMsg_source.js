@@ -128,21 +128,21 @@ daMsg.fnStruct = daMsg.prototype = {
 		//显示提示框
 		show: function(){
 			var context = this,
-					h = da( this.daPtObj ).height();
+				h = da( this.daPtObj ).height();
 			
 			this.daPtObj.style.display = "block";
 			
 			if( this.isFx ){
-				da( this.daPtObj ).css({ top: -50, opacity: 0 });
+				da( this.daPtObj ).css({ top: -50+"px", opacity: 0 });
 				
 				da( this.daPtObj ).act({
-					top: 10 + daMsg.height,
+					top: 10 + daMsg.height +"px",
 					opacity: 1
 				},{
-	        duration: 300,
-	        complete: function(){
-	        	context.destroy( context.daPtSetting.delay );
-	        }
+					duration: 300,
+					complete: function(){
+						context.destroy( context.daPtSetting.delay );
+					}
 	        
 				});
 				
@@ -150,7 +150,7 @@ daMsg.fnStruct = daMsg.prototype = {
 				
 			}
 			else{
-				da( this.daPtObj ).css({ top: 0, opacity: 1 });
+				da( this.daPtObj ).css({ top: 0+"px", opacity: 1 });
 				context.destroy( context.daPtSetting.delay );
 			}
 			
@@ -167,19 +167,19 @@ daMsg.fnStruct = daMsg.prototype = {
 				}
 				
 				da( this.daPtObj ).act({
-					top: -50,
+					top: -50 +"px",
 					opacity: 0
 					
 				},{ 
-	        duration: 500,
-	        complete: function(){
-	        	if( !context.daPtObj ) return;
-	        	
-	        	context.daPtParentObj.removeChild( this );
-	        	context.daPtObj = null;
-	        	
+					duration: 500,
+					complete: function(){
+						if( !context.daPtObj ) return;
+						
+						context.daPtParentObj.removeChild( this );
+						context.daPtObj = null;
+						
 						daMsg.height = daMsg.height - ( h + 5 );
-	        }
+					}
 	        
 				});
 				

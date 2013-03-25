@@ -519,7 +519,7 @@ function addu2r(){
 	daWin({
 		width: 650,
 		height: 500,
-		url: "/sys_power/plugin/select_user.htm",
+		url: "/sys_power/plugin/select_user.htm?ismulti=true",
 		back: function( res ){
 			var suids = [];
 			for(var k in res){
@@ -553,7 +553,7 @@ function addg2r(){
 	daWin({
 		width: 650,
 		height: 500,
-		url: "/sys_power/plugin/select_group.htm",
+		url: "/sys_power/plugin/select_group.htm?ismulti=true",
 		back: function( res ){
 			var sgids = [];
 			for(var k in res){

@@ -8,7 +8,7 @@ function addlog(){
 		height:600,
 		url: "/sys_common/bizlog/log_add_item.php?bcid="+ g_bcid,
 		back: function(){
-			loadlist();
+			loadloglist();
 		}
 	});
 }
@@ -75,6 +75,8 @@ function loadloglist(){
 				objlist.append(loghtml.replace(/{\w*}/g, 
 				function( match, idx, self ){					//替换日志模板内容
 					switch(match){
+						case "{dot}":
+							return 0==i?'<img src="/images/sys_icon/dot1.png" />':'<img src="/images/sys_icon/dot0.png" />';
 						case "{l_id}":
 							return data[i].l_id;
 						case "{userico}":

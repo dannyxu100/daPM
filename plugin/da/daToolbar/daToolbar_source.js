@@ -26,10 +26,10 @@ var daToolbar = (function(){
 			id: "",
 			parent: null,
 			css: {
-				bar: "daToolbar ",
-				item: "item ",
-				hover: "hover ",
-				cur: "current "
+				bar: "daToolbar",
+				item: "item",
+				hover: "hover",
+				cur: "current"
 			},
 			
 			showCurrent: true
@@ -87,7 +87,9 @@ var daToolbar = (function(){
 			
 			if( params.id )
 				itemObj.id = params.id;
-			itemObj.className = setting.css.item + (params.select?setting.css.cur:"");
+			
+			da(itemObj).addClass(params.select?setting.css.cur:setting.css.item);
+				
 			itemObj.innerHTML = params.html;
 			
 			if( params.data )
@@ -96,10 +98,10 @@ var daToolbar = (function(){
 			da(itemObj).bind("mousedown", function(){
 				if( setting.showCurrent ){
 					if( null != context.curObj ){
-						context.curObj.className = context.curObj.className.replace(setting.css.cur, "");
+						da(context.curObj).removeClass(setting.css.cur);
 					}
 					var css = this.className;
-					this.className = css + context.setting.css.cur;
+					da(this).addClass(context.setting.css.cur);
 					context.curObj = this;
 				}
 				
@@ -108,12 +110,12 @@ var daToolbar = (function(){
 			}).bind("mouseover", function(){
 				var css = this.className;
 				if( 0 > css.indexOf(context.setting.css.hover) )
-					this.className = css + context.setting.css.hover;
+					da(this).addClass(context.setting.css.hover);
 				
 			}).bind("mouseout", function(){
 				var css = this.className;
 				if( 0 <= css.indexOf(context.setting.css.hover) )
-					this.className = css.replace(context.setting.css.hover, "");
+					da(this).removeClass(context.setting.css.hover);
 				
 			});
 			
@@ -136,6 +138,13 @@ var daToolbar = (function(){
 				item: this.curObj,
 				data: da.data( this.curObj, "daToolbar_itemData" )
 			}
+		},
+		
+		/**选择或设置当前item
+		*/
+		cancelselect: function(){
+			da(this.curObj).removeClass(this.setting.css.cur);
+			this.curObj = null;
 		},
 		
 		/**移除item

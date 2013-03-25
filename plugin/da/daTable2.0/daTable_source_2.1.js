@@ -114,10 +114,10 @@ var daTable = (function(){
 				if( "undefined" != typeof daLoading ){
 					this.loadingObj = daLoading({					//开始loading动画
 						window: win,
-						parent: this.tbObj,
+						parent: this.tbObj.parentNode,
 						type: "text",
 						click: function(){
-							this.loadingObj.finished();						//点击结束loading动画
+							this.loadingObj.finished();				//点击结束loading动画
 						}
 					});
 				}

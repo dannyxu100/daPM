@@ -134,7 +134,18 @@ class DB{
 	/**添加1个sql参数
 	*/
 	function param( $name, $value ){
-		array_push($this->m_paramlist, array("name"=>$name, "value"=>$value, "type"=>$this->getdbtype($value)));
+		$idx = -1;
+		for( $i=0; $i<count($this->m_paramlist); $i++){
+			if($name == $this->m_paramlist[$i]["name"]){	//判断参数是否已存在
+				$idx = $i;
+			}
+		}
+		if(-1 != $idx){		//覆盖旧参数值
+			$this->m_paramlist[$idx] = array("name"=>$name, "value"=>$value, "type"=>$this->getdbtype($value));
+		}
+		else{				//未设置过
+			array_push($this->m_paramlist, array("name"=>$name, "value"=>$value, "type"=>$this->getdbtype($value)));
+		}
 	}
 	
 	/**根据添加的数据，返回对应的数据库类型

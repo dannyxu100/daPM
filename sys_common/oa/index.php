@@ -15,7 +15,9 @@
 <div>
 	<table class="tablesolid" style="width:100%">
 		<tr>
-			<td id="left_frame" style="vertical-align:top; width:120px; padding:0px;"><div id="menu_list"></div></td>
+			<td id="left_frame" style="vertical-align:top; width:200px; padding:0px;">
+				<div id="menu_list"></div>
+			</td>
 			<td class="frame_slide" onclick="slideleft()">
 				<div id="bt_slide" class="bt_slideleft"></div>
 			</td>

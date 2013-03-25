@@ -63,6 +63,11 @@
 	
 	<div id="logtemplet" style="display:none;">
 		<ul id="log_{l_id}" class="logitem" >
+			<div class="line">
+				<div class="dot">{dot}</div>
+				<div class="txt">{l_date}</div>
+			</div>
+			
 			<div class="ico" >
 				<img src="{userico}"/>
 				<div class="txt">{puname}</div>
@@ -71,7 +76,6 @@
 				<div class="pl_img"></div>
 			</div>
 			<div class="content" >
-				<div class="ldate">{l_date}</div>
 				{l_content}
 			</div>
 			<div style="clear:both;"></div>

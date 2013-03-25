@@ -34,7 +34,7 @@ function fn_helper( code ){
 
 /**上传文件
 */
-function fn_uploadfile( param, fn ){
+function fn_uploadfile( info, param, fn ){
 	if(da.isFunction(param)){
 		fn = param;
 		param = {};
@@ -47,6 +47,7 @@ function fn_uploadfile( param, fn ){
 		title: "上传文件",
 		url: "/plugin/uploadify/index.php",
 		load: function(){
+			this.setinfo(info);
 			this.setparam(param);
 		},
 		back: function(files){

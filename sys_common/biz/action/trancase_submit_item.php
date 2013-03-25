@@ -1,5 +1,6 @@
 <?php 
 	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
+	include_once $_SERVER['DOCUMENT_ROOT']."action/fn.php";
 	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
 	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
 	date_default_timezone_set('ETC/GMT-8');
@@ -8,6 +9,7 @@
 	$wfid = $_POST["wfid"];		//工作流id
 	$wfcid = $_POST["wfcid"];	//工作流实例id
 	$aid = $_POST["aid"];		//当前事务变迁的OUT向弧(指向下一个库所)id
+	$remark = $_POST["remark"];	//提交备注留言
 	
 	$db = new DB("da_workflow");
 	
@@ -36,12 +38,17 @@
 	/***************** 更新事务变迁实例状态 和完成日期 ***********************************************/
 	$sql_tc2 = "update w_trancase 
 	set tc_status='FI', 
-	tc_finishdate=:date 
-	
+	tc_puid=:puid, 
+	tc_puname=:puname, 
+	tc_finishdate=:date, 
+	tc_remark=:remark 
 	where tc_id=:tcid";
 	
 	$param_tc2 = array();
+	array_push($param_tc2, array(":puid", fn_getcookie("puid")));
+	array_push($param_tc2, array(":puname", fn_getcookie("puname")));
 	array_push($param_tc2, array(":date", $nowdate));
+	array_push($param_tc2, array(":remark", $remark));
 	array_push($param_tc2, array(":tcid", $set_tc["tc_id"]));
 	
 	$db->paramlist($param_tc2);
@@ -134,10 +141,10 @@
 		
 		/************************** 创建下一步事务变迁(工作项)  实例***************************************/
 		$sql_tc3 = "insert into da_workflow.w_trancase( tc_wfid, tc_tid, tc_wfcid, tc_type, tc_limit, 
-		tc_firetaskid, tc_context, tc_status, tc_enabledate, tc_puid ) 
+		tc_firetaskid, tc_context, tc_status, tc_enabledate, tc_puid, tc_puname ) 
 		
 		select t_wfid, t_id, :wfcid, t_type, t_limit, 
-		t_firetaskid, :context, :status, :enabledate, :userid 
+		t_firetaskid, :context, :status, :enabledate, :userid, :username 
 		
 		from da_workflow.w_transition, da_workflow.w_arc 
 		where t_wfid=:wfid and t_id=a_tid and a_direction='IN' and a_pid=:pid";		//通过IN向弧，找出开始库所下一步的事务变迁(工作项)
@@ -150,6 +157,7 @@
 		array_push($param_tc3, array(":enabledate", $nowdate));
 		array_push($param_tc3, array(":context", ""));
 		array_push($param_tc3, array(":userid", ""));
+		array_push($param_tc3, array(":username", ""));
 		$db->paramlist($param_tc3);
 		$res = $db->insert($sql_tc3);
 	}

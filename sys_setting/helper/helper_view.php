@@ -4,7 +4,6 @@
 	<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
 	
 	<TITLE>查看帮助文档</TITLE>
-	<link rel="stylesheet" href="/css/base.css"/>
 	<link rel="stylesheet" href="/plugin/prettify/prettify.css"/>
  
 	<style type="text/css">
