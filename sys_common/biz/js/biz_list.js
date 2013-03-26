@@ -133,7 +133,13 @@ function viewtran( obj, dbfldid, bcid, wfcid, tcid ){
 				return g_mapstatus[val];
 			}
 			else if( "pu_name" == fld ){
-				return (null!=val?val:"");
+				if( g_enassign && ("EN"==row["tc_status"] || "IP"==row["tc_status"]) ){
+					return ('<a href="javascript:void(0)" onclick="assignbiz(this, '+ row["tc_id"] +')">'
+					+ (row["tc_puname"]?row["tc_puname"]:"未分配") +'</a>');
+				}
+				else{
+					return ""!=val?val:"";
+				}
 			}
 			else if( "tc_finishdate" == fld ){
 				return ("0000-00-00 00:00:00"!=val?val:"");
@@ -195,13 +201,9 @@ function handlebiz(obj, dbfldid, bcid, wfcid, tcid ){
 }
 
 /**分单
-* obj: 标签对象
-* dbfldid: 数据源主键 id
-* bcid: 业务单实例 id
-* wfcid: 工作流实例 id
 * tcid: 事务变迁实例 id
 */
-function assignbiz( obj, dbfldid, bcid, wfcid, tcid ){
+function assignbiz( obj, tcid ){
 	daWin({
 		width: 650,
 		height: 500,
@@ -235,23 +237,23 @@ function assignbiz( obj, dbfldid, bcid, wfcid, tcid ){
 function tools( fld, val, row, ds ){
 	var toolhtml = [];
 	
-	toolhtml.push('<a href="javascript:void(0)" class="txt_tool" onclick="viewbizlog(this,\''
-	+ row[g_dbfld] +'\', '
-	+ row["bc_id"] +', '
-	+ row["wfc_id"] +', '
-	+ row["tc_id"] +')">日志</a>');
+	// toolhtml.push('<a href="javascript:void(0)" class="txt_tool" onclick="viewbizlog(this,\''
+	// + row[g_dbfld] +'\', '
+	// + row["bc_id"] +', '
+	// + row["wfc_id"] +', '
+	// + row["tc_id"] +')">日志</a>');
 	
 
-	if( g_enassign ){
-		toolhtml.push('<a href="javascript:void(0)" class="txt_tool" style="color:#900;" onclick="assignbiz(this,\''
-		+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +', '+ row["tc_id"] +')">'
-		+ (row["tc_puname"]?row["tc_puname"]:"未分配") +'</a>');
-	}
+	// if( g_enassign ){
+		// toolhtml.push('<a href="javascript:void(0)" class="txt_tool" style="color:#900;" onclick="assignbiz(this,\''
+		// + row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +', '+ row["tc_id"] +')">'
+		// + (row["tc_puname"]?row["tc_puname"]:"未分配") +'</a>');
+	// }
 	
-	if( "EN" == row.tc_status && ("" == row.tc_puid || 0 == row.tc_puid) ){
-		toolhtml.push('<a href="javascript:void(0)" class="txt_tool" style="color:#900;" onclick="handlebiz(this,\''
-		+ row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +', '+ row["tc_id"] +')">接受</a>');
-	}
+	// if( "EN" == row.tc_status && ("" == row.tc_puid || 0 == row.tc_puid) ){
+		// toolhtml.push('<a href="javascript:void(0)" class="txt_tool" style="color:#900;" onclick="handlebiz(this,\''
+		// + row[g_dbfld] +'\', '+ row["bc_id"] +', '+ row["wfc_id"] +', '+ row["tc_id"] +')">接受</a>');
+	// }
 
 	
 	
@@ -304,6 +306,12 @@ function loaddata(){
 				+ row["bc_id"] +', '
 				+ row["wfc_id"] +', '
 				+ row["tc_id"] +')" />';
+				
+				val +='<a href="javascript:void(0)" class="txt_tool" style="margin-left:10px;" onclick="viewbizlog(this,\''
+				+ row[g_dbfld] +'\', '
+				+ row["bc_id"] +', '
+				+ row["wfc_id"] +', '
+				+ row["tc_id"] +')">日志</a>'
 			}
 			else if("tools"==fld){
 				val = tools(fld, val, row, ds);

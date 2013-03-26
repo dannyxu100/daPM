@@ -30,7 +30,7 @@
 	}
 	
 	//没有分单权限，就只能获得自己和下属的数据集
-	if( "false" == $enassign ){
+	// if( "false" == $enassign ){
 		/******************* 找出下级员工puid记录集 *********************************************/
 		$sql11 = "select pr_puid from da_powersys.p_relation 
 		where pr_leaderid=:puid";
@@ -45,7 +45,7 @@
 		for( $i=0; $i<count($set_puids); $i++){
 			array_push( $puids, $set_puids[$i]["pr_puid"] );
 		}
-	}
+	// }
 	
 	/******************* 根据 可参与事务变迁的实例找出 所对应的工作流实例id *****************/
 	/******************* 查询数据源记录集 ***************************************************/
@@ -63,11 +63,11 @@
 		$sql4 .= "and w_trancase.tc_status='".$status."' ";
 	}
 	
-	if( "false" == $enassign ){
+	// if( "false" == $enassign ){
 		$sql4 .= "and (w_trancase.tc_puid in (".implode(',', $puids).") or w_trancase.tc_puid=0) ";
-		$sql4 .= "and w_trancase.tc_tid in (".implode(',', $tids).") ";
-	}
-	
+	// }
+	$sql4 .= "and w_trancase.tc_tid in (".implode(',', $tids).") ";
+		
 	$sql4 .= ") as w_trancase 
 	where ".$dbsource."." .$dbfld."=b_bizcase.bc_dbsourceid 
 	and b_bizcase.bc_wfcid=w_workflowcase.wfc_id 

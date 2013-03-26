@@ -32,7 +32,7 @@
 						<td style="width:30px;">
 							序
 						</td>
-						<td style="width:80px;">
+						<td style="width:100px;">
 							业务步骤
 						</td>
 						<td style="width:50px;">
