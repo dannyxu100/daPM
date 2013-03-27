@@ -24,6 +24,10 @@ function submitworkflow(){
 */
 function savebiz(){
 	//goto("");
+	for(var id in g_editors){		//同步在线编辑器的内容
+		g_editors[ id ].sync();
+	}
+	
 }
 
 
@@ -43,13 +47,20 @@ function loaddata(){
 		
 	},function(data){
 		if( "FALSE" != data ){
+			var daObj;
 			for(var key in data){
+				if( g_editors[key] ){	//如果是在线编辑器内容
+					g_editors[key].html(data[key]);
+				}
 				da("#"+key).val(data[key]);
 			}
 		}
+		
+		autoframeheight();
 	});
 }
 
+var g_editors = {};
 /**初始化表单控件
 */
 function init(){
@@ -79,6 +90,32 @@ function init(){
 						}
 					});
 				});
+				break;
+			case "editorbox":
+				var g_editor;
+				
+				g_editor = KindEditor.create("#"+tag.id, {
+					resizeType : 1,
+					// filterMode : false,		//不过滤危险标签
+					newlineTag: "br",
+					allowPreviewEmoticons : false,
+					fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
+					allowFileManager : true,
+					items : [
+						'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+						'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+						'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+						'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+						'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+						'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
+						'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+						'anchor', 'link', 'unlink', '|'
+					]
+				});
+				
+				g_editors[ tag.id ]=g_editor;		//保存线编辑器对象（保存表单前需要同步内容）
+				
+				break;
 		}
 	});
 }
@@ -97,10 +134,14 @@ function loadtemplet(){
 		
 	},function(data){
 		if("FALSE" != data ){
+			g_dbsource = data[0].bt_dbsource;
+			g_dbfld = data[0].bt_dbfld;
+			
 			var formObj = da("#templet_form");
 			formObj.append( data[0].bt_formhtml );
 			
 			init();
+			autoframeheight();
 			loaddata();
 		}
 	});
@@ -114,8 +155,6 @@ daLoader("daMsg,daValid,daDate,daIframe,daWin",function(){
 		g_bcid = arrparam["bcid"];
 		g_wfid = arrparam["wfid"];
 		g_wfcid = arrparam["wfcid"];
-		g_dbsource = arrparam["dbsource"];
-		g_dbfld = arrparam["dbfld"];
 		g_dbfldid = arrparam["dbfldid"];
 		
 		loadtemplet();

@@ -230,6 +230,13 @@ a.curmenu2, a.curmenu2:hover { background:#222; border:1px solid #000; color:#f5
 .list_top_tools a.link:hover{ color:#f00; }
 .list_top_tools a.link img{vertical-align:middle;}
 
+/******** 业务单公共页面 *********/
+.itemHover td a.txt_tool{display:inline; margin-right:5px;}
+a.txt_tool{display:none;}
+
+.itemHover td a.ico_tool{display:inline-block; vertical-align:middle; width:16px; height:16px; }
+a.ico_tool{display:none;}
+
 /******** 业务单日志列表 *********/
 .logitem{padding-left:100px; width:800px; position:relative; overflow:hidden;}
 .logitem .ico{float:left;width:50px; height:80px;}

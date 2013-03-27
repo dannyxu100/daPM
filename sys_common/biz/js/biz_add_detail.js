@@ -11,7 +11,9 @@ function savebiz(){
 		return;
 	}
 	
-	// g_editor.sync();
+	for(var id in g_editors){		//同步在线编辑器的内容
+		g_editors[ id ].sync();
+	}
 	
 	if( !daValid.all() ) return;
 	
@@ -41,6 +43,7 @@ function savebiz(){
 	});
 }
 
+var g_editors = {};
 /**初始化表单控件
 */
 function init(){
@@ -92,7 +95,8 @@ function init(){
 						'anchor', 'link', 'unlink', '|'
 					]
 				});
-					
+				
+				g_editors[ tag.id ]=g_editor;		//保存线编辑器对象（保存表单前需要同步内容）
 				
 				break;
 		}
@@ -118,6 +122,7 @@ function loadtemplet(){
 			g_dbsource = data[0].bt_dbsource;
 			
 			init();
+			autoframeheight();
 		}
 	});
 }

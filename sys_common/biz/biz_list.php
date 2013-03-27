@@ -5,14 +5,6 @@
 	
 	<TITLE>业务处理-列表页</TITLE>
 	<link rel="stylesheet" href="/css/base.css" >
-	<style>
-		.itemHover td a.txt_tool{display:inline; margin-right:5px;}
-		a.txt_tool{display:none;}
-		
-		.itemHover td a.ico_tool{display:inline-block; vertical-align:middle; width:16px; height:16px; }
-		a.ico_tool{display:none;}
-	</style>
-	
 	
  </HEAD>
 <BODY>
@@ -22,6 +14,20 @@
 	</div>
 	
 	<div id="tabbar" ></div>
+	<div class="list_top_bar">
+		<div class="list_top_title"></div>
+		<div class="list_top_tools">
+			<select id="fld_search" style="float:left;">
+				<option value="ws_cstname">客户名称</option>
+				<option value="ws_code">合同号</option>
+				<option value="ws_solename">销售人员</option>
+				<option value="ws_connphone">手机号码</option>
+			</select>
+			<input id="key_search" style="float:left; height:20px;"/>
+			<a class="item" style="float:left;" href="javascript:void(0)" onclick="clearkey()">清空</a>
+			<a class="item" style="float:left;" href="javascript:void(0)" onclick="searchkey()"><img src="/images/sys_icon/search.png" />搜索</a>
+		</div>
+	</div>
 	<div id="templet_list"></div>
 	
 	

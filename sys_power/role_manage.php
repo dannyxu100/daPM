@@ -78,7 +78,6 @@
 								<td style="width:20px;">序</td>
 								<td style="width:50px;">名称</td>
 								<td style="width:80px;">账号</td>
-								<td style="width:50px;">密码</td>
 								<td style="width:80px;">手机</td>
 								<td style="width:80px;">电话</td>
 								<td>地址</td>
@@ -93,23 +92,17 @@
 								<td name="order">{order}</td>
 								<td name="pu_name" >{pu_name}</td>
 								<td name="pu_code" >{pu_code}</td>
-								<td name="pu_pwd" >{pu_pwd}</td>
 								<td name="pu_phone" >{pu_phone}</td>
 								<td name="pu_telephone" >{pu_telephone}</td>
 								<td name="pu_address" >{pu_address}</td>
-								<td fmt="yyyy-mm-dd/p" edit="1">{pu_lastlogin}</td>
-								<td name="pu_logincount" edit="1">{pu_logincount}</td>
-								<td name="pu_remark" edit="1">{pu_remark}</td>
+								<td fmt="yyyy-mm-dd/p">{pu_lastlogin}</td>
+								<td name="pu_logincount">{pu_logincount}</td>
+								<td name="pu_remark">{pu_remark}</td>
 							</tr>
-							<!--
-							<tr>
-								<td colspan="7" name="order">{order}</td>
-							</tr>
-							-->
 						</tbody>
 						<tbody name="foot">
 							<tr>
-								<td  colspan="11" name="sum_order">
+								<td  colspan="10" name="sum_order">
 									共<span id="tb_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条，
 									共<span id="tb_list_pagecount2" style="color:#c26220">0</span>&nbsp;页，
 									当前在第<span id="tb_list_pageindex2" style="color:#c26220">0</span>&nbsp;页　

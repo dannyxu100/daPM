@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <HEAD>
+	<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
+	
+	<TITLE>业务表表</TITLE>
+	<link rel="stylesheet" href="/css/base.css" >
+	<style>
+		.itemHover td a.txt_tool{display:inline; margin-right:5px;}
+		a.txt_tool{display:none;}
+		
+		.itemHover td a.ico_tool{display:inline-block; vertical-align:middle; width:16px; height:16px; }
+		a.ico_tool{display:none;}
+	</style>
+	
+	
+ </HEAD>
+<BODY>
+	<div class="list_top_bar">
+		<div class="list_top_title"><span id="biz_title">报表名称</span></div>
+		<div class="list_top_tools">
+			<a class="item" href="javascript:void(0)" onclick="runchart();" ><img src="/images/sys_icon/search.png" /> 开始统计</a>
+		</div>
+	</div>
+	
+	<div id="tabbar" ></div>
+	<div id="templet_list" style="padding:3px;"></div>
+	
+	<div id="viewchart"></div>
+	
+	<div style="margin:10px 0px;">
+		<label onclick="showtable()"><input type="checkbox" id="bt_showtable" /> 显示数据表格</label>
+	</div>
+	<div id="templet_sublist" style="display:none;">
+		<table id="tb_list" style="width:100%;">
+			<tbody name="head">
+				<tr>
+					<td style="width:30px;">
+						序
+					</td>
+					<td style="width:80px;">
+						业务员
+					</td>
+					<td style="width:100px;">
+						处理业务数
+					</td>
+					<td>
+						&nbsp;
+					</td>
+				</tr>
+			</tbody>
+			<tbody name="body">
+				<tr>
+					<td name="order">
+						{order}
+					</td>
+					<td name="tc_status">
+						{tc_status}
+					</td>
+					<td name="sum_count">
+						{sum_count}
+					</td>
+					<td>
+						{tools}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+</BODY>
+</HTML>
+
+<script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
+<script type="text/javascript" src="/plugin/ichartjs/ichart.1.1.min.js"></script>
+<script type="text/javascript" src="js/website.js"></script>
+

@@ -40,7 +40,7 @@ function loadarclist(){
 			var arcObj = da("#arclist");
 			
 			for(var i=0; i<data.length; i++){
-				arcObj.append('<option value="'+ data[0].a_id +'">'+ data[0].a_name +'</option>');
+				arcObj.append('<option value="'+ data[i].a_id +'">'+ data[i].a_name +'</option>');
 			}
 		}
 	},function(a,b,c){

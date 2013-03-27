@@ -9,6 +9,10 @@
 	$dbsource = $_POST["dbsource"];
 	$dbfld = $_POST["dbfld"];
 	$status = $_POST["status"];
+	
+	$searchfld = $_POST["searchfld"];
+	$searchkey = $_POST["searchkey"];
+	
 	$enassign = isset($_POST["enassign"])?$_POST["enassign"]:"false";		//是否拥有分单权限
 	
 	$db = new DB("da_userform");
@@ -56,31 +60,44 @@
 	$param32 = array();
 
 	$sql4 = "da_bizform.b_bizcase, da_workflow.w_workflowcase, 
-	(select * from da_workflow.w_trancase 
-	where w_trancase.tc_wfid='".$wfid."' ";
+	(";
 	
-	if( "" != $status ){
-		$sql4 .= "and w_trancase.tc_status='".$status."' ";
+	if( "true" == $enassign &&  "" == $status  ){		//拥有分单权限，且查看全部
+		$sql4 .= "select * from da_workflow.w_trancase 
+		where w_trancase.tc_wfid='".$wfid."' ";
+		
+		$sql4 .= "and ( w_trancase.tc_status='EN' or w_trancase.tc_status='IP' ) group by tc_wfcid ";
 	}
-	
-	// if( "false" == $enassign ){
+	else{			//没有分单权限，或查看待处理、处理中、已处理
+		$sql4 .= "select * from da_workflow.w_trancase 
+		where w_trancase.tc_wfid='".$wfid."' ";
+		
+		if( "" != $status ){
+			$sql4 .= "and w_trancase.tc_status='".$status."' ";
+		}
+		
 		$sql4 .= "and (w_trancase.tc_puid in (".implode(',', $puids).") or w_trancase.tc_puid=0) ";
-	// }
-	$sql4 .= "and w_trancase.tc_tid in (".implode(',', $tids).") ";
+		$sql4 .= "and w_trancase.tc_tid in (".implode(',', $tids).") group by tc_id";
+	}
 		
 	$sql4 .= ") as w_trancase 
 	where ".$dbsource."." .$dbfld."=b_bizcase.bc_dbsourceid 
 	and b_bizcase.bc_wfcid=w_workflowcase.wfc_id 
-	and w_workflowcase.wfc_id=w_trancase.tc_wfcid";		// 事务变迁实例接单拥有者
+	and w_workflowcase.wfc_id=w_trancase.tc_wfcid ";	// 事务变迁实例接单拥有者
 														// 且当同一用户兼容多重角色，
 														// 处理同一流程，不同业务时,也只取一条
 
+	if( "" != $searchkey ){
+		$sql4 .= "and ".$searchfld." like :searchkey ";
+		array_push($param31, array(":searchkey", "%".$searchkey."%"));
+		array_push($param32, array(":searchkey", "%".$searchkey."%"));
+		
+	}
+	
 	$sql31 .= $sql4;
-	// array_push($param31, array(":wfid", $wfid));
 	$sql31 .= " order by tc_id desc ";
 	
 	$sql32 .= $sql4;
-	// array_push($param32, array(":wfid", $wfid));
 	
 	if( isset($_POST["pageindex"]) ){				//分页
 		$start = ($_POST["pageindex"]-1)*$_POST["pagesize"];

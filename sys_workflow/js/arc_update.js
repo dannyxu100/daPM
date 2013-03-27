@@ -5,6 +5,7 @@ var g_wfid = "",
 function loadtran(){
 	da.runDB("/sys_workflow/action/tran_get_list.php",{
 		dataType: "json",
+		async: false,
 		wfid: g_wfid
 	},function( data ){
 		if("FALSE"!=data ){
@@ -19,6 +20,7 @@ function loadtran(){
 function loadplace(){
 	da.runDB("/sys_workflow/action/place_get_list.php",{
 		dataType: "json",
+		async: false,
 		wfid: g_wfid
 	},function( data ){
 		if("FALSE"!=data ){

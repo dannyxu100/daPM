@@ -8227,6 +8227,7 @@ da.extend({
 			type: (isPost && !isScript) ? "POST" : "GET",
 			data: (isPost && !isScript) ? data : null,
 			dataType: (isPost && data.dataType) ? data.dataType : "",
+			async: ("undefined" != typeof data.async) ? data.async : true,
 			
 			error: function( xhr, status, exception ) {
 				var msg = xhr.statusText,
