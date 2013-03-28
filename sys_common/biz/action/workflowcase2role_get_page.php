@@ -63,10 +63,9 @@
 	(";
 	
 	if( "true" == $enassign &&  "" == $status  ){		//拥有分单权限，且查看全部
-		$sql4 .= "select * from da_workflow.w_trancase 
-		where w_trancase.tc_wfid='".$wfid."' ";
+		$sql4 .= "select * from da_workflow.w_trancase  
+		where w_trancase.tc_wfid='".$wfid."' group by tc_wfcid ";
 		
-		$sql4 .= "and ( w_trancase.tc_status='EN' or w_trancase.tc_status='IP' ) group by tc_wfcid ";
 	}
 	else{			//没有分单权限，或查看待处理、处理中、已处理
 		$sql4 .= "select * from da_workflow.w_trancase 
@@ -77,7 +76,7 @@
 		}
 		
 		$sql4 .= "and (w_trancase.tc_puid in (".implode(',', $puids).") or w_trancase.tc_puid=0) ";
-		$sql4 .= "and w_trancase.tc_tid in (".implode(',', $tids).") group by tc_id";
+		$sql4 .= "and w_trancase.tc_tid in (".implode(',', $tids).") group by tc_wfcid ";
 	}
 		
 	$sql4 .= ") as w_trancase 

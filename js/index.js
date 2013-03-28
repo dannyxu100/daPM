@@ -118,9 +118,11 @@ function loadmenu(){
 		if("FALSE" != data ){
 			var listmoreObj = da("#list_menumore"),
 				num_show = 5;
-
+			
 			if( num_show < data.length ){		//超过默认显示一级菜单数，显示更多
-				da("#menumorebox").fadeIn();
+				da.out("----------------");
+				da("#menumorebox").show();
+				da.out("----------------");
 			}
 			
 			g_toolbar = daToolbar({
@@ -212,6 +214,9 @@ daLoader("daMsg,daIframe,daWin,daToolbar,daKey",function(){
 			hideuserinfo();
 		});
 		
+		// da(".userinfo_list").bgiframe();
+		// da("#menumorebox").bgiframe();
+
 		scrolltop("#scrolltop");
 	});
 });

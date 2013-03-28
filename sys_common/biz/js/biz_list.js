@@ -262,7 +262,7 @@ function assignbiz( obj, tcid ){
 */
 function tools( fld, val, row, ds ){
 	var toolhtml = [];
-	
+	// toolhtml.push( row["tc_puname"] );
 	return toolhtml.join("");
 }
 
@@ -322,7 +322,6 @@ function loaddata(){
 		},
 		loaded: function( idx, xml, json, ds ){
 			//link_click("#tb_list tbody[name=details_auto] tr");
-			// toExcel();
 			autoframeheight();
 		},
 		error: function(code,msg,ex){

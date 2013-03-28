@@ -5794,13 +5794,14 @@ var daRe_until = /Until$/,
 			value: style样式属性值
 		*/
 		css: function(name, value ) {
-			return da.access( this, function( elem, name, value ) {
+			var ret = da.access( this, function( elem, name, value ) {
 				return value !== undefined ?
 					da.style( elem, name, value ) :			//set操作
 					da.css( elem, name );					//get操作
 					
 			}, name, value, arguments.length > 1 );
 			
+			return ret;
 		}
 	});
 	
@@ -5959,6 +5960,7 @@ var daRe_until = /Until$/,
 				return Math.max(0, Math.round(val));
 			}
 	
+			da.out(obj.id+"---da.css:"+da.curCSS( obj, name ));
 			return da.curCSS( obj, name );
 		},
 	
@@ -7200,12 +7202,13 @@ var daRe_until = /Until$/,
 					height: "auto",
 					opacity: true,
 					src: "about:blank"
-		    };
+				};
 		    
 		    params = da.extend( {}, def, params );
 		    
-				var iframeObj, overObj, doc,
-						css = "display:block;position:absolute;z-index:-1;background:transparent;top:0px;left:0px;width:100%;height:100%;" ;
+			var iframeObj, overObj, doc,
+				css = "display:block; position:absolute; z-index:-1; background:transparent; top:0px; left:0px; width:100%; height:100%;" ;
+			
 		    this.each( function(){
                     doc = this.ownerDocument;
                     
@@ -7244,7 +7247,6 @@ var daRe_until = /Until$/,
 //							";"
 //						].join("");
 
-       
 		        if( 0 === da(this).children('iframe.daBgIframe').dom.length ){
 		        	this.insertBefore( overObj, this.firstChild );
 		        	this.insertBefore( iframeObj, this.firstChild );

@@ -506,7 +506,7 @@ var daTable = (function(){
 			}
 			
 			if ( setting.count && 1 < this.pageCount && "undefined" !== typeof daPage) {
-				pageparent.innerHTML = "";							//清除
+				da(pageparent).empty();							//清除
 				this.daPageObj = daPage({							//创建分页工具条
 					parent: pageparent,
 					countPage: this.pageCount,
@@ -524,6 +524,9 @@ var daTable = (function(){
 					}
 				});
 			}
+			// else{
+				// da(pageparent).empty();							//清除
+			// }
 		},
 		
 		/**高亮特效
