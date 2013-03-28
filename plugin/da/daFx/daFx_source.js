@@ -597,10 +597,9 @@ if ( da.expr && da.expr.filters ) {
 function defaultDisplay( nodeName ) {
 
 	if ( !elemdisplay[ nodeName ] ) {
-
-		var elem = da( "<" + nodeName + ">" ).appendTo( "body" ),
+		var elem = da( "<" + nodeName + ">" ).appendTo(body),
 			display = elem.css( "display" );
-		
+
 		elem.remove();
 
 		// If the simple way fails,
@@ -678,7 +677,6 @@ da.fnStruct.extend({
 					display = elem.style.display;
 
 					if ( display === "" || display === "none" ) {
-						da.out("olddisplay:"+da.data(elem, "olddisplay"));
 						elem.style.display = da.data(elem, "olddisplay") || "";
 					}
 				}

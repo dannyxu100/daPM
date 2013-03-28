@@ -1311,7 +1311,7 @@
 			boxModel: null,									//盒子模型支持
 			inlineBlockNeedsLayout: false,					//inline-block支持
 			shrinkWrapBlocks: false,						//拆封块支持
-			reliableHiddenOffsets: true,					//隐藏元素可靠性支持
+			// reliableHiddenOffsets: true,					//隐藏元素可靠性支持
 			
 			scriptEval: false,								//判断是否支持script元素引入并执行自定义代码
 			deleteExpando: true,												
@@ -1415,7 +1415,8 @@
 	
 		// Check if empty table cells still have offsetWidth/Height
 		// (IE < 8 fail this test)
-		support.reliableHiddenOffsets = isSupported && ( tds[ 0 ].offsetHeight === 0 );
+		support.reliableHiddenOffsets = isSupported && ( tds[ 0 ].offsetHeight === 0 );		//隐藏元素可靠性支持
+
 		div.innerHTML = "";
 	
 		// Check if div with explicit width and no margin-right incorrectly
@@ -4769,7 +4770,7 @@
 			var width = elem.offsetWidth,
 				height = elem.offsetHeight;
 
-			return (width === 0 && height === 0) || (!da.support.reliableHiddenOffsets && (elem.style.display || da.css( elem, "display" )) === "none");
+			return (width === 0 && height === 0) || (!da.support.reliableHiddenOffsets && (elem.style.display || da.curCSS( elem, "display" )) === "none");
 		};
 
 		/**Sizzle选择器扩展visible属性值判断
@@ -5490,7 +5491,7 @@ var daRe_until = /Until$/,
 			else {
 				for ( var i = 0, l = insert.dom.length; i < l; i++ ) {
 					var elems = (i > 0 ? this.clone(true) : this).get();
-					da( insert[i] )[ original ]( elems );
+					da( insert.dom[i] )[ original ]( elems );
 					ret = ret.concat( elems );
 				}
 	
@@ -5960,7 +5961,6 @@ var daRe_until = /Until$/,
 				return Math.max(0, Math.round(val));
 			}
 	
-			da.out(obj.id+"---da.css:"+da.curCSS( obj, name ));
 			return da.curCSS( obj, name );
 		},
 	

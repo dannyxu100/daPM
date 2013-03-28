@@ -139,15 +139,15 @@ function viewtran( obj, wfcid, tcid ){
 	if( 0>=nexttrObj.dom.length ){
 		alert("后台没有配置，显示业务进度面板");
 	}
-	
-	if( !nexttrObj.is(":hidden")){
+
+	if( "none" == nexttrObj.css("display")){
+		nexttrObj.show();
+	}
+	else{
 		nexttrObj.hide();
 		return;
 	}
-	else{
-		nexttrObj.show();
-	}
-		
+
 	wfpadObj.empty();
 	
 	var tranlist = da("#tb_list_tran").dom[0].cloneNode(true);

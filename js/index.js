@@ -120,9 +120,7 @@ function loadmenu(){
 				num_show = 5;
 			
 			if( num_show < data.length ){		//超过默认显示一级菜单数，显示更多
-				da.out("----------------");
 				da("#menumorebox").show();
-				da.out("----------------");
 			}
 			
 			g_toolbar = daToolbar({

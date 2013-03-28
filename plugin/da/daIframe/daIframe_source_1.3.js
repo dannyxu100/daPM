@@ -86,6 +86,7 @@ var daIframe = (function(){
 		find: function ( type, winObj ){
 			winObj = winObj || win;
 			var cache = winObj.daIframeCache;
+			if( !cache ) return null;
 			
 			for( var i=0,len=cache.length; i<len; i++ ){
 				if( type === cache[i].status )
