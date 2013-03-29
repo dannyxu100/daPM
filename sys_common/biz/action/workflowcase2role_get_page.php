@@ -63,13 +63,17 @@
 	(";
 	
 	if( "true" == $enassign &&  "" == $status  ){		//拥有分单权限，且查看全部
-		$sql4 .= "select * from da_workflow.w_trancase  
-		where w_trancase.tc_wfid='".$wfid."' group by tc_wfcid ";
+		$sql4 .= "select * from da_workflow.w_transition, 
+		( select * from da_workflow.w_trancase order by tc_enabledate desc) as w_trancase 
+		where w_transition.t_id=w_trancase.tc_tid 
+		and w_trancase.tc_wfid='".$wfid."' group by tc_wfcid ";		//按工作流实例分组，取最新一条事务变迁
 		
 	}
 	else{			//没有分单权限，或查看待处理、处理中、已处理
-		$sql4 .= "select * from da_workflow.w_trancase 
-		where w_trancase.tc_wfid='".$wfid."' ";
+		$sql4 .= "select * from da_workflow.w_transition, 
+		( select * from da_workflow.w_trancase order by tc_enabledate desc) as w_trancase 
+		where w_transition.t_id=w_trancase.tc_tid 
+		and w_trancase.tc_wfid='".$wfid."' ";
 		
 		if( "" != $status ){
 			$sql4 .= "and w_trancase.tc_status='".$status."' ";

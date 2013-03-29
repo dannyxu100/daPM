@@ -19,6 +19,7 @@
 		<div class="list_top_tools">
 			<select id="fld_search" style="float:left;">
 				<option value="ws_cstname">客户名称</option>
+				<option value="tc_puname">执行人</option>
 				<option value="ws_code">合同号</option>
 				<option value="ws_solename">销售人员</option>
 				<option value="ws_connphone">手机号码</option>

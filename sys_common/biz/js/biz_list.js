@@ -139,15 +139,15 @@ function viewtran( obj, wfcid, tcid ){
 	if( 0>=nexttrObj.dom.length ){
 		alert("后台没有配置，显示业务进度面板");
 	}
-
-	if( "none" == nexttrObj.css("display")){
-		nexttrObj.show();
-	}
-	else{
+	
+	if( !nexttrObj.is(":hidden")){
 		nexttrObj.hide();
 		return;
 	}
-
+	else{
+		nexttrObj.show();
+	}
+		
 	wfpadObj.empty();
 	
 	var tranlist = da("#tb_list_tran").dom[0].cloneNode(true);
@@ -262,7 +262,11 @@ function assignbiz( obj, tcid ){
 */
 function tools( fld, val, row, ds ){
 	var toolhtml = [];
-	// toolhtml.push( row["tc_puname"] );
+	// toolhtml.push( row["t_name"] );
+	// toolhtml.push( "(" );
+	// toolhtml.push( '<span style="color:#999;">'+ row["tc_puname"] +'</span>' );
+	// toolhtml.push( ")" );
+	
 	return toolhtml.join("");
 }
 
@@ -307,7 +311,11 @@ function loaddata(){
 				+ row[g_dbfld] +'\', '
 				+ row["bc_id"] +', '
 				+ row["wfc_id"] +', '
-				+ row["tc_id"] +')" >'+ val +'</a>';
+				+ row["tc_id"] +')" >'+ val +'</a> ';
+				
+				if( "" == g_transtatus || "FI" == g_transtatus ){
+					val += '<span style="color:#999">('+ row["t_name"] +'-'+ (row["tc_puname"]?row["tc_puname"]:"未接单") +')</span>';
+				}
 				
 				val += '<img style="margin-left:10px; vertical-align:middle;" src="/images/sys_icon/down.png" onclick="viewtran(this, '+ row["wfc_id"] +', '+ row["tc_id"] +')" />';
 				
