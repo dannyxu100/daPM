@@ -1,6 +1,6 @@
 <?php 
-	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
-	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
 
 	$sql = "delete from p_role where pr_id=".$_POST["prid"];
 	

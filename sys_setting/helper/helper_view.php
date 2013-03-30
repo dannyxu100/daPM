@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <HEAD>
-	<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
+	<?include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
 	
 	<TITLE>查看帮助文档</TITLE>
 	<link rel="stylesheet" href="/plugin/prettify/prettify.css"/>

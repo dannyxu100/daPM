@@ -1,7 +1,7 @@
 ﻿<?php 
-	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
-	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
-	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
+	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 	
 	$sql = "insert into p_user(pu_name, pu_code, pu_pwd, pu_oid, pu_phone, pu_telephone, pu_address, pu_remark) values(";
 	$sql .= "'".$_POST["pu_name"]."',";

@@ -65,7 +65,7 @@
 				location.href = "/index.php";
 			}
 			else{
-				alert(res);
+				alert("登陆失败。");
 			}
 		});
 	}

@@ -1,8 +1,8 @@
 <?php 
-	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
-	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
-	include_once $_SERVER['DOCUMENT_ROOT']."action/fn.php";
-	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/fn.php";
+	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 
 	date_default_timezone_set("Asia/Hong_Kong");
 	

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <HEAD>
-	<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
+	<?include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
 	
 	<TITLE>工作流管理</TITLE>
 	<link rel="stylesheet" href="/css/base.css"/>
@@ -62,6 +62,12 @@
 							<tr>
 								<td class="header" style="width:60px;">名称</td>
 								<td colspan="3"><input id="wf_name" style="width:200px;" /><span class="must">*</span></td>
+							</tr>
+							<tr>
+								<td class="header" style="width:60px;">图标</td>
+								<td colspan="3">
+									<img id="wf_icon" src="/uploads/userico/default.png" style="width:50px; height:50px;" title="点击上传" onclick="" />
+								</td>
 							</tr>
 							<tr>
 								<td class="header">排序</td>
@@ -216,7 +222,7 @@
 								<tr value="{t_id}" title="{t_remark}">
 									<td style="text-align:center;"><input type="checkbox" name="chkitem_tran" value="{t_id}" /></td>
 									<td name="order">{order}</td>
-									<td name="t_name" >{t_name}</td>
+									<td name="t_name" title="{t_id}">{t_name}</td>
 									<td name="t_sort" >{t_sort}</td>
 									<td name="t_type" >{t_type}</td>
 									<td name="t_limit" >{t_limit}</td>

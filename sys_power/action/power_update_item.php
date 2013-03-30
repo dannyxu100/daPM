@@ -1,6 +1,6 @@
 <?php 
-	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
-	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
 	//error_reporting(-1);
 
 	$sql = "update p_power set ";

@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="/css/jquery-ui-1.9.2.custom.min.css">
 
-<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
+<?include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
 <?include_once("./action/sys/db.php");?>
 
 <?

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <HEAD>
-	<?php include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php" ?>
+	<?php include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php" ?>
 	<TITLE>业务单管理</TITLE>
 	<link rel="stylesheet" href="/css/base.css"/>
 	<link rel="stylesheet" href="/plugin/ztree/zTreeStyle.css" type="text/css"/>

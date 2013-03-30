@@ -1,7 +1,7 @@
 <?php 
-	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
-	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
-	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
+	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 
 	$db = new DB("da_workflow");
 	$sql1 = "select w_arc.*, p_name, t_name from w_arc, w_place, w_transition where a_pid=p_id and a_tid=t_id ";

@@ -1,7 +1,7 @@
 ﻿<?php 
-	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
-	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
-	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
+	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 
 	$sql = "insert into w_transition(t_name, t_wfid, t_type, t_sort, t_firetaskid, t_limit, t_remark) values(";
 	$sql .= "'".$_POST["t_name"]."',";

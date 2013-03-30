@@ -3,7 +3,7 @@
 <head>
 <title>项目进度管理-修改密码</title>
 <link rel="stylesheet" href="/css/base.css">
-<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
+<?include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
 </head>
 
 <body style="background:#f9f9f9;">

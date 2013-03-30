@@ -1,8 +1,8 @@
 <?php 
-	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
-	include_once $_SERVER['DOCUMENT_ROOT']."action/fn.php";
-	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
-	// include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/fn.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
+	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 	
 	$tcid = $_POST["tcid"];				//事务变迁实例id
 	$newpuid = $_POST["newpuid"];

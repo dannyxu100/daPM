@@ -1,5 +1,5 @@
 <?php 
-	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
 	include_once "../../../action/sys/db.php";
 	// include_once "../../action/sys/log.php";
 	

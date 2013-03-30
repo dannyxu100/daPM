@@ -1,7 +1,7 @@
 <?php
 //验证登陆信息
-include_once $_SERVER['DOCUMENT_ROOT']."action/fn.php";
-include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
+include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/fn.php";
+include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
 session_start();
 
 	date_default_timezone_set("Asia/Hong_Kong");

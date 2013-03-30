@@ -1,8 +1,8 @@
 ﻿<?php 
-	include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";
-	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/db.php";
-	include_once $_SERVER['DOCUMENT_ROOT']."action/fn.php";
-	include_once $_SERVER['DOCUMENT_ROOT']."action/sys/log.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/fn.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 	
 	$puid = fn_getcookie("puid");
 	$wfid = $_POST["wfid"];
@@ -12,6 +12,7 @@
 	
 	$searchfld = $_POST["searchfld"];
 	$searchkey = $_POST["searchkey"];
+	$searchtran = $_POST["searchtran"];
 	
 	$enassign = isset($_POST["enassign"])?$_POST["enassign"]:"false";		//是否拥有分单权限
 	
@@ -95,6 +96,11 @@
 		array_push($param31, array(":searchkey", "%".$searchkey."%"));
 		array_push($param32, array(":searchkey", "%".$searchkey."%"));
 		
+	}
+	if( "" != $searchtran ){
+		$sql4 .= "and tc_tid=:searchtran ";
+		array_push($param31, array(":searchtran", $searchtran));
+		array_push($param32, array(":searchtran", $searchtran));
 	}
 	
 	$sql31 .= $sql4;

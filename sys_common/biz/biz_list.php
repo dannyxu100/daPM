@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <HEAD>
-	<?include_once $_SERVER['DOCUMENT_ROOT']."action/logincheck.php";?>
+	<?include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
 	
 	<TITLE>业务处理-列表页</TITLE>
 	<link rel="stylesheet" href="/css/base.css" >
@@ -23,6 +23,13 @@
 				<option value="ws_code">合同号</option>
 				<option value="ws_solename">销售人员</option>
 				<option value="ws_connphone">手机号码</option>
+			</select>
+			<select id="tran_search" style="float:left;">
+				<option value="">全部</option>
+				<option value="5">填写企业建站单</option>
+				<option value="14">网页设计</option>
+				<option value="15">编写程序</option>
+				<option value="9">技术总监审核</option>
 			</select>
 			<input id="key_search" style="float:left; height:20px;"/>
 			<a class="item" style="float:left;" href="javascript:void(0)" onclick="clearkey()">清空</a>

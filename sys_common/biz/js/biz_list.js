@@ -140,7 +140,7 @@ function viewtran( obj, wfcid, tcid ){
 		alert("后台没有配置，显示业务进度面板");
 	}
 	
-	if( !nexttrObj.is(":hidden")){
+	if( "none" != nexttrObj.css("display")){
 		nexttrObj.hide();
 		return;
 	}
@@ -293,6 +293,7 @@ function loaddata(){
 			
 			searchfld: g_searchfld,
 			searchkey: g_searchkey,
+			searchtran: g_searchtran,
 			
 			enassign: g_enassign		//是否拥有分单权限
 			
@@ -314,7 +315,7 @@ function loaddata(){
 				+ row["tc_id"] +')" >'+ val +'</a> ';
 				
 				if( "" == g_transtatus || "FI" == g_transtatus ){
-					val += '<span style="color:#999">('+ row["t_name"] +'-'+ (row["tc_puname"]?row["tc_puname"]:"未接单") +')</span>';
+					val += '<span style="color:#999">('+ row["t_name"] +'-'+ (row["tc_puname"]?row["tc_puname"]:'<span style="color:#900">未接单</span>') +')</span>';
 				}
 				
 				val += '<img style="margin-left:10px; vertical-align:middle;" src="/images/sys_icon/down.png" onclick="viewtran(this, '+ row["wfc_id"] +', '+ row["tc_id"] +')" />';
@@ -368,12 +369,14 @@ function loadtemplet(){
 }
 
 var g_searchfld="",
-	g_searchkey="";
+	g_searchkey="",
+	g_searchtran="";
 /**搜索筛选
 */
 function searchkey(){
 	g_searchfld = da("#fld_search").val();
 	g_searchkey = da("#key_search").val();
+	g_searchtran = da("#tran_search").val();
 	
 	loaddata();
 }
@@ -480,6 +483,9 @@ function listenKey(){
 		keyup: function(keyName, ctrlKey, altKey, shiftKey){
 			if( g_isctrl ){
 				g_isctrl = ctrlKey;
+			}
+			if( "Enter" == keyName){
+				searchkey();
 			}
 		}
 	});
