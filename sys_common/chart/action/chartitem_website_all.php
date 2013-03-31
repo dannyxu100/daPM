@@ -2,7 +2,7 @@
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/fn.php";
-	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
+	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 	
 	// $dbsource = $_POST["dbsource"];
 	// $dbfld = $_POST["dbfld"];
@@ -10,13 +10,16 @@
 	
 	$db = new DB("da_userform");
 	/******************* 查询数据源记录集 ***************************************************/
-	$sql1 = "select tc_status, tc_id sum_count ";
+	$sql1 = "select t_name, count(tc_id) sum_count ";
 	$param1 = array();
 	
 	$sql2 = "select count(tc_id) as Column1 ";
 	$param2 = array();
 	
-	$sql3 = " from da_workflow.w_trancase where tc_wfid=".$wfid." ";
+	$sql3 = " from da_workflow.w_trancase, da_workflow.w_transition 
+	where t_id=tc_tid 
+	and tc_wfid=".$wfid." 
+	group by t_id order by t_sort";
 	
 	$sql1 .= $sql3;
 	$sql2 .= $sql3;

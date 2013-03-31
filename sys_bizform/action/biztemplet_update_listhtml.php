@@ -6,10 +6,12 @@
 	$db = new DB("da_bizform");
 	
 	$sql = "update b_biztemplet 
-	set bt_listhtml=:bt_listhtml, 
+	set bt_listsearch=:bt_listsearch, 
+	bt_listhtml=:bt_listhtml, 
 	bt_listscript=:bt_listscript 
 	where bt_id=:bt_id ";
 	
+	$db->param(":bt_listsearch", urldecode($_POST['bt_listsearch']));
 	$db->param(":bt_listhtml", urldecode($_POST['bt_listhtml']));
 	$db->param(":bt_listscript", urldecode($_POST['bt_listscript']));
 	$db->param(":bt_id", $_POST['bt_id']);

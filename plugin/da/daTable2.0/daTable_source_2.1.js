@@ -159,7 +159,7 @@ var daTable = (function(){
 				this.fmtBody = fmtBody.dom[0];
 				this.fmtHTML = this.fmtBody.innerHTML.replace(/[\r\t\n]/g, "");
 				
-				if(!da(this.fmtBody).is(":hidden")){
+				if("none" != da(this.fmtBody).css("display")){
 					da(this.fmtBody).hide();
 				}
 				

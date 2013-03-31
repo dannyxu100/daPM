@@ -27,7 +27,7 @@ function loadinfo(){
 		dataType: "json",
 		hid: g_hid
 		
-	},function(data){
+	},function(data){debugger;
 		if("FALSE" != data){
 			for(var k in data){
 				da("#"+k).val(data[k]);
@@ -36,7 +36,7 @@ function loadinfo(){
 			g_editor.html(data["h_content"]);
 		}
 	},function(code,msg,ex){
-		// debugger;
+		debugger;
 	});
 }
 

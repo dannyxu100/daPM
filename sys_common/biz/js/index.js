@@ -38,7 +38,11 @@ function loadworkflow(){
 			var listObj = da("#workflow_list");
 			
 			for(var i=0; i<data.length; i++){
-				listObj.append('<a class="bt_menu" href="javascript:void(0)" onclick="clickworkflow(\''+data[i].wf_id+'\', \''+data[i].wf_btid+'\', this)"><img src=""/> '+ data[i].wf_name +'</a>');
+				listObj.append('<a class="bt_menu" href="javascript:void(0)" onclick="clickworkflow(\''
+				+data[i].wf_id+'\', \''
+				+data[i].wf_btid+'\', this)"><img src="'
+				+ (data[i].wf_icon?data[i].wf_icon:"/uploads/workflowico/default.png") +'"/> '
+				+ data[i].wf_name +'</a>');
 
 			}
 			

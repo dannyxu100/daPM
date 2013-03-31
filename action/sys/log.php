@@ -74,7 +74,8 @@ class Log {
      */
     public function write($log) {
 		$url = $_SERVER['PHP_SELF']; 
-		$filename = end(explode('/',$url)); 
+		$arr = explode('/',$url);
+		$filename = end($arr); 
 	
         //传入的数组记录
         $str = "【FROM '".$filename."' log】: ";

@@ -115,6 +115,9 @@
 								<a class="item" href="javascript:void(0)" onclick="updatelisthtml();" ><img src="/images/sys_icon/save.png" /> 保存</a>
 							</div>
 						</div>
+						搜索条：
+						<textarea id="bt_listsearch" name="bt_listhtml" style="width:99%;"></textarea>
+						表单代码：
 						<textarea id="bt_listhtml" name="bt_listhtml" style="width:99%;height:300px;"></textarea>
 						自定义脚本：
 						<textarea id="bt_listscript" name="bt_listscript" style="width:99%;height:300px;"></textarea>
@@ -128,6 +131,7 @@
 								<a class="item" href="javascript:void(0)" onclick="updateformhtml();" ><img src="/images/sys_icon/save.png" /> 保存</a>
 							</div>
 						</div>
+						表单代码：
 						<textarea id="bt_formhtml" name="bt_formhtml" style="width:99%;height:800px;"></textarea>
 						自定义脚本：
 						<textarea id="bt_formscript" name="bt_formscript" style="width:99%;height:300px;"></textarea>

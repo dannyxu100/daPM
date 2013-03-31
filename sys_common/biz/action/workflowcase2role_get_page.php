@@ -10,9 +10,9 @@
 	$dbfld = $_POST["dbfld"];
 	$status = $_POST["status"];
 	
-	$searchfld = $_POST["searchfld"];
-	$searchkey = $_POST["searchkey"];
-	$searchtran = $_POST["searchtran"];
+	$searchfld = isset($_POST["searchfld"])?$_POST["searchfld"]:"";
+	$searchkey = isset($_POST["searchkey"])?$_POST["searchkey"]:"";
+	$searchtran = isset($_POST["searchtran"])?$_POST["searchtran"]:"";
 	
 	$enassign = isset($_POST["enassign"])?$_POST["enassign"]:"false";		//是否拥有分单权限
 	

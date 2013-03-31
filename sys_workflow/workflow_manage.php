@@ -64,18 +64,18 @@
 								<td colspan="3"><input id="wf_name" style="width:200px;" /><span class="must">*</span></td>
 							</tr>
 							<tr>
-								<td class="header" style="width:60px;">图标</td>
-								<td colspan="3">
-									<img id="wf_icon" src="/uploads/userico/default.png" style="width:50px; height:50px;" title="点击上传" onclick="" />
-								</td>
-							</tr>
-							<tr>
 								<td class="header">排序</td>
 								<td style="width:250px;"><input type="text" id="wf_sort" value="0" style="width:50px;" /></td>
 								<td class="header" style="width:80px;">启用</td>
 								<td>
 									<label><input name="wf_isrun" type="radio" value="1"/>是</label>
 									<label><input name="wf_isrun" type="radio" checked="true" value="0"/>否</label>
+								</td>
+							</tr>
+							<tr>
+								<td class="header" style="width:60px;">图标</td>
+								<td colspan="3">
+									<img id="wf_icon" src="/uploads/userico/default.png" style="width:50px; height:50px;" title="点击上传" onclick="updateicon()" />
 								</td>
 							</tr>
 							<tr>
@@ -314,6 +314,7 @@
 <script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="/js/jquery.ui.datepicker-zh-CN.js"></script>
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
+<script type="text/javascript" src="/js/fn.js"></script>
 <script type="text/javascript" src="js/workflow_manage.js"></script>
 
 <script charset="utf-8" src="/plugin/kindeditor/kindeditor-min.js"></script>

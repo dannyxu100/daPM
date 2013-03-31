@@ -10,13 +10,13 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 
 function makeDir($path) {
 	//根目录物理路径
-	$root = str_replace(array('/', '\\', '//', '\\\\'), DIRECTORY_SEPARATOR, $_SERVER['DOCUMENT_ROOT']);
-	
+	$root = str_replace(array('/', '\\', '//', '\\\\'), DIRECTORY_SEPARATOR, rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/");
+
 	//如果有根目录前缀，去掉网站根路径
     $path = str_replace($_SERVER['DOCUMENT_ROOT'], '', $path);
     $path = str_replace(array('/', '\\', '//', '\\\\'), DIRECTORY_SEPARATOR, $path);	//替换斜杠为 分斜杠
     $dirs = explode(DIRECTORY_SEPARATOR, $path); 										//通过反斜杠分隔为数组
-	
+
     $relativePath = '';											//相对路径
     foreach ($dirs as $dir) {
         if ($dir) {  
@@ -41,7 +41,7 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
 	$fileType = preg_replace("/^.*\./", "", strtolower($_FILES['Filedata']['name']));
 	
 	$targetPath = trim($targetFolder, '/');
-	$targetFile = $_SERVER['DOCUMENT_ROOT'].$targetPath.'/'.$filename.'.'.$fileType;
+	$targetFile = rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/".$targetPath.'/'.$filename.'.'.$fileType;
 	// Log::out($targetFile);
 	
 	move_uploaded_file($tempFile, iconv("UTF-8","gb2312", $targetFile));	//swf编码问题，需要转一次编码

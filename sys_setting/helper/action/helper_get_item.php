@@ -1,7 +1,7 @@
 ﻿<?php 
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
-	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
+	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 	
 	$db = new DB("da_setting");
 	$sql = "select * from s_helper ";
@@ -18,7 +18,7 @@
 	
 	
 	$set = $db->getone($sql);
-	Log::out($sql);
+	// Log::out($sql);
 	// Log::out($db->geterror());
 	
 	$db->close();

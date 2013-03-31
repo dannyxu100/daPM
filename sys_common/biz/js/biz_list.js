@@ -278,26 +278,25 @@ function loaddata(){
 		return;
 	}
 	
+	var param = {
+		// opt: "qry",
+		dataType: "json",
+		wfid: g_wfid,
+		status: g_transtatus,
+		dbsource: g_dbsource,
+		dbfld: g_dbfld,
+		enassign: g_enassign		//是否拥有分单权限
+	}
+	
+	if( "undefined" != typeof setuserparam && da.isFunction(setuserparam) ){
+		setuserparam( param );
+	}
+	
 	var idxfld = 0;
-
 	daTable({
 		id: "tb_list",
 		url: "/sys_common/biz/action/workflowcase2role_get_page.php",
-		data: {
-			// opt: "qry",
-			dataType: "json",
-			wfid: g_wfid,
-			status: g_transtatus,
-			dbsource: g_dbsource,
-			dbfld: g_dbfld,
-			
-			searchfld: g_searchfld,
-			searchkey: g_searchkey,
-			searchtran: g_searchtran,
-			
-			enassign: g_enassign		//是否拥有分单权限
-			
-		},
+		data: param,
 		//loading: false,
 		//page: false,
 		pageSize: 20,
@@ -315,7 +314,7 @@ function loaddata(){
 				+ row["tc_id"] +')" >'+ val +'</a> ';
 				
 				if( "" == g_transtatus || "FI" == g_transtatus ){
-					val += '<span style="color:#999">('+ row["t_name"] +'-'+ (row["tc_puname"]?row["tc_puname"]:'<span style="color:#900">未接单</span>') +')</span>';
+					val += '<span style="color:#999">('+ row["t_name"] +'-'+ (row["tc_puname"]?row["tc_puname"]:'<span style="color:#900">未分配</span>') +')</span>';
 				}
 				
 				val += '<img style="margin-left:10px; vertical-align:middle;" src="/images/sys_icon/down.png" onclick="viewtran(this, '+ row["wfc_id"] +', '+ row["tc_id"] +')" />';
@@ -339,10 +338,25 @@ function loaddata(){
 	}).load();
 }
 
+/**加载自定义脚本
+*/
+function loadscript( jstxt ){
+    var daHead = da("head"),
+		oScript= document.createElement("script"); 
+    oScript.type = "text/javascript"; 
+    // oScript.src="test.js"; 
+	
+	da(oScript).html(jstxt);
+    daHead.append( oScript ); 
+}
+
 /**加载工作流对应 表单列表页模板
 */
 function loadtemplet(){
-	var listObj = da("#templet_list");
+	var searchObj = da("#templet_search"),
+		listObj = da("#templet_list");
+		
+	searchObj.empty();
 	listObj.empty();
 	
 	if( "" == g_wfid ){
@@ -360,7 +374,10 @@ function loadtemplet(){
 			g_dbsource = data[0].bt_dbsource;
 			g_dbfld = data[0].bt_dbfld;
 			
-			listObj.append( data[0].bt_listhtml );
+			searchObj.append( data[0].bt_listsearch );	//加载自定义列表模板
+			listObj.append( data[0].bt_listhtml );		//加载自定义列表模板
+			loadscript( data[0].bt_listscript );		//加载自定义脚本
+			
 			da("#biz_title").text(data[0].bt_name);
 			
 			loaddata();				//加载列表模板完毕，再加载数据
@@ -368,26 +385,6 @@ function loadtemplet(){
 	});
 }
 
-var g_searchfld="",
-	g_searchkey="",
-	g_searchtran="";
-/**搜索筛选
-*/
-function searchkey(){
-	g_searchfld = da("#fld_search").val();
-	g_searchkey = da("#key_search").val();
-	g_searchtran = da("#tran_search").val();
-	
-	loaddata();
-}
-
-function clearkey(){
-	g_searchfld = "";
-	g_searchkey = "";
-	
-	da("#key_search").val("");
-	loaddata();
-}
 
 /**加载分页按钮
 */

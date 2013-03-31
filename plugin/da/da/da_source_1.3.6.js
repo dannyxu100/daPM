@@ -5062,6 +5062,7 @@ var daRe_until = /Until$/,
 		daRe_tagName = /<([\w:]+)/,
 		daRe_tbody = /<tbody/i,										//判断是否有tbody标签
 		daRe_scriptType = /\/(java|ecma)script/i,					//判断是否有脚步标签
+		daRe_cleanScript = /^\s*<!(?:\[CDATA\[|\-\-)|[\]\-]{2}>\s*$/g,
 		
 		daRe_nocache = /<(?:script|object|embed|option|style)/i,	//?????????
 		daRe_checked = /checked\s*(?:[^=]|=\s*.checked.)/i,
@@ -5307,7 +5308,28 @@ var daRe_until = /Until$/,
 				}
 	
 				if ( scripts.length ) {
-					da.each( scripts, evalScript );
+					da.each( scripts, function( i, elem ) {
+						if ( elem.src ) {
+							if ( da.ajax ) {
+								da.ajax({
+									url: elem.src,
+									type: "GET",
+									dataType: "script",
+									async: false,
+									global: false,
+									"throws": true
+								});
+							} else {
+								da.error("no ajax");
+							}
+						} else {
+							da.globalEval( ( elem.text || elem.textContent || elem.innerHTML || "" ).replace( daRe_cleanScript, "" ) );
+						}
+
+						if ( elem.parentNode ) {
+							elem.parentNode.removeChild( elem );
+						}
+					});
 				}
 			}
 	

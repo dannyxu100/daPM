@@ -4,6 +4,7 @@
 	<?include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
 	
 	<TITLE>查看帮助文档</TITLE>
+	<link rel="stylesheet" href="/css/base.css"/>
 	<link rel="stylesheet" href="/plugin/prettify/prettify.css"/>
  
 	<style type="text/css">
@@ -24,12 +25,6 @@
  </HEAD>
 <BODY>
 <div>
-	<!--<div class="list_top_bar">
-		<div class="list_top_title">基本信息</div>
-		<div class="list_top_tools">
-			<a class="item" href="javascript:void(0)" onclick="savehelper();" ><img src="/images/sys_icon/save.png" /> 保存</a>
-		</div>
-	</div>-->
 	<div class="doc_pad">
 		<div class="doc_title" id="h_name"></div>
 		<div class="doc_infobar">

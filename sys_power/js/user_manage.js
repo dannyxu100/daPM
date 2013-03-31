@@ -65,10 +65,15 @@ function loadtree(){
 
 
 function adduser(){
+	if(""==g_curoid){
+		alert("请先选择部门。");
+		return;
+	}
+
 	daWin({
 		width: 400,					//窗口宽
 		height: 600,				//窗口高
-		url: "/sys_power/user_add.php",		//url地址
+		url: "/sys_power/user_add.php?oid="+ g_curoid,	//url地址
 		title: "添加人员",			//caption标题
 		// before: null,			//窗口内页加载前执行
 		// load: null,				//窗口内页加载完毕执行
@@ -138,7 +143,7 @@ $(document).ready(function(){
 });
 
 
-daLoader("daTable,daWin", function(){
+daLoader("daMsg,daTable,daWin", function(){
 	//da.out("加载成功");
 
 	da(function(){

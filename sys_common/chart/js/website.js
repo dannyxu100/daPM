@@ -1,4 +1,6 @@
 ﻿
+/**显示数据表
+*/
 function showtable(){
 	var chkobj = da("#bt_showtable");
 
@@ -12,8 +14,12 @@ function showtable(){
 		chkobj.dom[0].checked = true;
 		da("#templet_sublist").show();
 	}
+	
+	autoframeheight();
 }
 
+/**生产随机颜色
+*/
 function getRandomColor()
 {
 	var r = Math.floor(Math.random() * 255).toString(16);
@@ -25,6 +31,8 @@ function getRandomColor()
 	return "#" + r + g + b;
 }
 
+/**开始统计分析
+*/
 function runchart(){
 	loading(true);
 	loaddata(function(ds){
@@ -33,29 +41,29 @@ function runchart(){
 		var data = [];
 		for(var i=0; i<ds.length; i++){
 			data.push({
-				name: ds[i].tc_status,
+				name: ds[i].t_name,
 				value: ds[i].sum_count,
 				color: getRandomColor()
 			});
 		}
 		
-		var chart = new iChart.Bar2D({
-			render : 'viewchart',		//渲染的Dom目标,canvasDiv为Dom的ID
-			data: data,					//绑定数据
-			title : '网建业务统计',		//设置标题
-			width : 800,				//设置宽度，默认单位为px
-			height : 400,				//设置高度，默认单位为px
-			shadow:true,				//激活阴影
-			shadow_color:'#c7c7c7',		//设置阴影颜色
-			coordinate:{				//配置自定义坐标轴
-				scale:[{					//配置自定义值轴
-					 position:'bottom',		//配置左值轴	
-					 start_scale:0,			//设置开始刻度为0
-					 end_scale:50,			//设置结束刻度为26
-					 scale_space:2,			//设置刻度间距
-					 listeners:{			//配置事件
-						parseText:function(t,x,y){		//设置解析值轴文本
-							return {text:t+" 次"}
+		var chart = new iChart.Column2D({
+			render : 'viewchart',//渲染的Dom目标,canvasDiv为Dom的ID
+			data: data,//绑定数据
+			title : '网建业务统计',//设置标题
+			width : 800,//设置宽度，默认单位为px
+			height : 400,//设置高度，默认单位为px
+			shadow:true,//激活阴影
+			shadow_color:'#c7c7c7',//设置阴影颜色
+			coordinate:{//配置自定义坐标轴
+				scale:[{//配置自定义值轴
+					 position:'left',//配置左值轴	
+					 start_scale:0,//设置开始刻度为0
+					 // end_scale:60,//设置结束刻度为60s
+					 scale_space:2,//设置刻度间距
+					 listeners:{//配置事件
+						parseText:function(t,x,y){//设置解析值轴文本
+							return {text:t}
 						}
 					}
 				}]
@@ -69,6 +77,8 @@ function runchart(){
 	});
 }
 
+/**加载数据
+*/
 function loaddata(fn){
 	daTable({
 		id: "tb_list",
@@ -92,7 +102,7 @@ function loaddata(fn){
 			fn(ds);
 		},
 		error: function(code,msg,ex){
-			debugger;
+			// debugger;
 		}
 	}).load();
 }

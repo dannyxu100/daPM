@@ -322,6 +322,7 @@ function loadinfo(){
 				da("#"+fld).val(res[fld]);
 			}
 			
+			da("#wf_icon").dom[0].src= res.wf_icon?res.wf_icon:"/uploads/workflowico/default.png";
 			da("[name=wf_isrun][value="+ res.wf_isrun +"]").attr("checked",true).dom[0].checked=true;
 			g_editor.html(res.wf_remark);
 		}
@@ -700,6 +701,38 @@ function updateplace( pid ){
 		after: function(){
 			loadplace();
 		}
+	});
+}
+
+/** 上传工作流图标
+*/
+function updateicon(){
+	if( "" == g_wfid ){
+		alert("请先选择一个工作流。");
+		return;
+	}
+
+	var newfilename = g_wfid;
+
+	fn_uploadfile("上传文件尺寸为50x50像素。", {
+        "fileTypeDesc": "图片文件",
+		// "multi": true,
+		"fileTypeExts": "*.gif; *.jpg; *.png",
+		"formData": {
+			"folder": "/uploads/workflowico",
+			"name": newfilename
+		}
+	},function(files){
+		var imgurl = "";
+		for( var k in files ){
+			imgurl = "/uploads/workflowico/"+ newfilename + files[k].type;
+		}
+		
+		da.runDB("/sys_workflow/action/workflow_update_wficon.php",{
+			dataType: "json",
+			wfid: g_wfid,
+			wficon: imgurl
+		});
 	});
 }
 

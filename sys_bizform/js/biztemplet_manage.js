@@ -180,6 +180,7 @@ function loadinfo(){
 				da("#"+fld).val(res[0][fld]);
 			}
 			
+			g_editorSearch.html(res[0].bt_listsearch);
 			g_editorList.html(res[0].bt_listhtml);
 			g_editorForm.html(res[0].bt_formhtml);
 			da("#bt_listscript").val(res[0].bt_listscript);
@@ -247,11 +248,13 @@ function viewlisthtml(){
 */
 function updatelisthtml(){
 	// 将编辑器的HTML数据同步到textarea
+	g_editorSearch.sync();
 	g_editorList.sync();
 
 	da.runDB("/sys_bizform/action/biztemplet_update_listhtml.php",{
 		dataType: "json",
 		bt_id: g_btid,
+		bt_listsearch: encodeURIComponent(da("#bt_listsearch").val()),
 		bt_listhtml: encodeURIComponent(da("#bt_listhtml").val()),
 		bt_listscript: encodeURIComponent(da("#bt_listscript").val())
 		
@@ -528,10 +531,31 @@ function loadtree(){
 	});
 }
 
-var g_editorList, g_editorForm;
+var g_editorSearch, g_editorList, 
+	g_editorForm;
 /**加载在线编辑器
 */
 function loadeditor(){
+	g_editorSearch = KindEditor.create('#bt_listsearch', {
+		resizeType: 1,
+		filterMode: false,		//不过滤危险标签
+		newlineTag: "br",
+		allowPreviewEmoticons : false,
+		fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
+		allowFileManager : true,
+		items : [
+			'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+			'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+			'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+			'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+			'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
+			'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+			'anchor', 'link', 'unlink', '/',
+			'da_list_fld'
+		]
+	});
+	
 	g_editorList = KindEditor.create('#bt_listhtml', {
 		resizeType: 1,
 		filterMode: false,		//不过滤危险标签

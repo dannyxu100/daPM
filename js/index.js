@@ -1,4 +1,3 @@
-
 function scrolltop(obj){
 	var daObj = da(obj);
 	if (0 != document.body.scrollTop) {
