@@ -99,6 +99,6 @@ function loaddata(fn){
 daLoader("daMsg,daTable,daIframe",function(){
 	
 	da(function(){
-		
+		runchart();
 	});
 });

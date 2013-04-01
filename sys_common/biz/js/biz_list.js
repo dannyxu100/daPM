@@ -341,12 +341,8 @@ function loaddata(){
 /**加载自定义脚本
 */
 function loadscript( jstxt ){
-    var daHead = da("head"),
-		oScript= document.createElement("script"); 
-    oScript.type = "text/javascript"; 
-    // oScript.src="test.js"; 
-	
-	da(oScript).html(jstxt);
+    var daHead = da("head");
+	oScript = '<script type="text/javascript">'+jstxt+'</script>';
     daHead.append( oScript ); 
 }
 

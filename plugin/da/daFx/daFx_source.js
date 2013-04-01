@@ -597,7 +597,7 @@ if ( da.expr && da.expr.filters ) {
 function defaultDisplay( nodeName ) {
 
 	if ( !elemdisplay[ nodeName ] ) {
-		var elem = da( "<" + nodeName + ">" ).appendTo(body),
+		var elem = da( "<" + nodeName + ">" ).appendTo(document.body),
 			display = elem.css( "display" );
 
 		elem.remove();
@@ -932,8 +932,7 @@ easeInOut：前半段从0开始加速，后半段减速到0的缓动。
 
 // t: , b: , c: , d: 
 daFx.easing['jswing'] = daFx.easing['swing'];
-da.extend( daFx.easing,
-{
+da.extend( daFx.easing,{
 	def: 'easeOutQuad',
 	/**
 	* params {float} x 已执行时长占总时长比例
