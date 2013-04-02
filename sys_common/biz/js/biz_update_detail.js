@@ -23,7 +23,6 @@ function submitworkflow(){
 /**创建业务
 */
 function savebiz(){
-	//goto("");
 	for(var id in g_editors){		//同步在线编辑器的内容
 		g_editors[ id ].sync();
 	}
@@ -34,7 +33,9 @@ function savebiz(){
 		dataType: "json",
 		wfid: g_wfid,
 		btid: g_btid,
-		dbsource: g_dbsource
+		dbsource: g_dbsource,
+		dbfld: g_dbfld,
+		dbfldid: g_dbfldid
 	};
 
 	da("input,textarea", "#templet_form").each(function(idx, obj){
@@ -52,7 +53,7 @@ function savebiz(){
 			alert("操作失败。");
 		}
 	},function(res, msg, ex){		//错误信息
-		// debugger;
+		debugger;
 	});
 }
 
@@ -81,7 +82,6 @@ function loaddata(){
 				da("#"+key).val(data[key]);
 			}
 		}
-		
 		autoframeheight();
 	});
 }

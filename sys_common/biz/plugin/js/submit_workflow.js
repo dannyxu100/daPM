@@ -5,23 +5,25 @@ var g_wfid = "",
 /**提交业务流程
 */
 function updatetran(){
-	da.runDB( "/sys_common/biz/action/trancase_submit_item.php", {
-		dataType: "json",
-		wfid: g_wfid,
-		wfcid: g_wfcid,
-		aid: da("#arclist").val(),
-		remark: da("#remark").val()
-	},
-	function(data){
-		// debugger;
-		if( "FALSE" != data ){
-			alert("提交成功。");
-		}
-		else{
-			alert("操作失败。");
-		}
-	},function(a,b,c){
-		// debugger;
+	confirm(function(){
+		da.runDB( "/sys_common/biz/action/trancase_submit_item.php", {
+			dataType: "json",
+			wfid: g_wfid,
+			wfcid: g_wfcid,
+			aid: da("#arclist").val(),
+			remark: da("#remark").val()
+		},
+		function(data){
+			// debugger;
+			if( "FALSE" != data ){
+				alert("提交成功。");
+			}
+			else{
+				alert("操作失败。");
+			}
+		},function(a,b,c){
+			// debugger;
+		});
 	});
 }
 

@@ -7,8 +7,8 @@
 	$sql .= "'".$_POST["p_name"]."',";
 	$sql .= "'".$_POST["p_wfid"]."',";
 	$sql .= "50,";							//过程库所类型
-	$sql .= "'".$_POST["p_remark"]."',";
-	$sql .= "'".$_POST["p_sort"]."')";
+	$sql .= "'".$_POST["p_sort"]."',";
+	$sql .= "'".$_POST["p_remark"]."')";
 	
 	
 	$db = new DB("da_workflow");
