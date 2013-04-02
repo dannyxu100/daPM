@@ -16,7 +16,6 @@
 	
 	/************************** 创建表单数据源 记录 ***************************************/
 	$flds = array();
-	$flds2 = array();
 	$param_db = array();
 	
 	foreach($_POST as $key=>$value){
@@ -28,22 +27,18 @@
 				continue;
 				
 			default:
-				array_push( $flds, $key );
-				array_push( $flds2, ":".$key );
+				array_push( $flds, $key."=:".$key );
 				
-				array_push($param_db, array(":".$key, $value));
+				array_push($param_db, array(":".$key, urldecode($value)));
 		}
 		
 	}
-	$sql_db = "insert into ".$dbsource."(".implode(", ", $flds).") values(".implode(", ", $flds2).")";
+	$sql_db = "update ".$dbsource." set ".implode(", ", $flds)." where ";
 	
 	$db->paramlist($param_db);
 	$res = $db->insert($sql_db);
 	
 	$dbitem = $db->getone("select @@IDENTITY as dbsourceid");		//获取刚添加的表单数据源 记录id
-	
-	$db->paramlist($param_bc);
-	$res = $db->insert($sql_bc);
 	
 	// Log::out($db->geterror());
 	

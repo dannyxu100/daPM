@@ -28,6 +28,32 @@ function savebiz(){
 		g_editors[ id ].sync();
 	}
 	
+	if( !daValid.all() ) return;
+	
+	var data = {
+		dataType: "json",
+		wfid: g_wfid,
+		btid: g_btid,
+		dbsource: g_dbsource
+	};
+
+	da("input,textarea", "#templet_form").each(function(idx, obj){
+		data[obj.id] = encodeURIComponent(da(obj).val());
+	});
+	
+	da.runDB("/sys_common/biz/action/biz_update_item.php", data, 
+	function(res){
+		// debugger;
+		if("FALSE" != res ){
+			alert("保存成功。");
+			// iframeBack();
+		}
+		else{
+			alert("操作失败。");
+		}
+	},function(res, msg, ex){		//错误信息
+		// debugger;
+	});
 }
 
 

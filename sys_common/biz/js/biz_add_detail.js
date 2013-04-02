@@ -25,7 +25,7 @@ function savebiz(){
 	};
 
 	da("input,textarea", "#templet_form").each(function(idx, obj){
-		data[obj.id] = da(obj).val();
+		data[obj.id] = encodeURIComponent(da(obj).val());
 	});
 	
 	da.runDB("/sys_common/biz/action/biz_add_item.php", data, 

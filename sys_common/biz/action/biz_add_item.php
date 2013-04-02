@@ -86,7 +86,7 @@
 				array_push( $flds, $key );
 				array_push( $flds2, ":".$key );
 				
-				array_push($param_db, array(":".$key, $value));
+				array_push($param_db, array(":".$key, urldecode($value)));
 		}
 		
 	}
