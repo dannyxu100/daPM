@@ -270,6 +270,7 @@ function tools( fld, val, row, ds ){
 	return toolhtml.join("");
 }
 
+var g_key="";
 /**加载表单数据
 */
 function loaddata(){
@@ -300,7 +301,6 @@ function loaddata(){
 		//loading: false,
 		//page: false,
 		pageSize: 20,
-		
 		field: function( fld, val, row, ds ){
 			if( "order" == fld ){
 				idxfld = 0;
@@ -314,10 +314,13 @@ function loaddata(){
 				+ row[g_dbfld] +'\', '
 				+ row["bc_id"] +', '
 				+ row["wfc_id"] +', '
-				+ row["tc_id"] +')" >'+ val +'</a> ';
+				+ row["tc_id"] +')" >'
+				+ (g_key?val.replace(new RegExp(g_key, "g"),'<span style="color:#900">'+g_key+'</span>'):val) +'</a> ';
 				
 				if( "" == g_transtatus || "FI" == g_transtatus ){
-					val += '<span style="color:#999">('+ row["t_name"] +'-'+ (row["tc_puname"]?row["tc_puname"]:'<span style="color:#900">未分配</span>') +')</span>';
+					val += '<span style="color:#999">('
+					+ row["t_name"] +'-'
+					+ (row["tc_puname"]?row["tc_puname"]:'<span style="color:#222">未分配</span>') +')</span>';
 				}
 				
 				val += '<img style="margin-left:10px; vertical-align:middle;" src="/images/sys_icon/down.png" onclick="viewtran(this, '+ row["wfc_id"] +', '+ row["tc_id"] +')" />';

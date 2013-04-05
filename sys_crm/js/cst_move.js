@@ -115,7 +115,7 @@ var setting = {
 		}
 	},
 	callback: {
-		beforeMouseUp: clicknode,
+		beforeMouseUp: clicknode
 	}
 };
 /*加载左边部门数据*/

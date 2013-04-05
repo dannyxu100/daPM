@@ -8315,11 +8315,10 @@ da.extend({
 		if( "string" === typeof pid && 0 !== pid.indexOf("#") )		//修正id未加"#"
 			pid = "#" + pid;
 		
-		var parent = da( pid );
-		if( 0 >= parent.dom.length ) return;
-		parent = parent.dom[0];
+		var parentObj = da( pid );
+		if( 0 >= parentObj.dom.length ) return;
 		
-		var tmpHTML = parent.innerHTML.replace(/[\r\t\n]/g, ""),
+		var tmpHTML = parentObj.html().replace(/[\r\t\n]/g, ""),
 			fmtMap = {};
 			
 		var name="", fmt="", txt="", key, obj;
@@ -8377,7 +8376,8 @@ da.extend({
 					return val_format;
 				}
 			});
-			parent.innerHTML = tmpHTML;
+			parentObj.empty();
+			parentObj.html(tmpHTML);
 			fnLoaded && fnLoaded( data1 );
 		},
 		function( msg, code, content ){

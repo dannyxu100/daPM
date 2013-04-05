@@ -20,7 +20,7 @@ function scrolltop(obj){
 	daObj.click(function() {
 		da("html,body").act({
 			scrollTop: 0
-		});
+		},100);
 	});
 }
 

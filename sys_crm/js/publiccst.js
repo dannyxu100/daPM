@@ -24,6 +24,24 @@ function viewcst(cid){
 	}
 }
 
+/**抓取公海客户
+*/
+function catchcst(cid){
+	confirm("你确定要抓取该客户到自己的客户库内？",
+	function(){
+		da.runDB("/sys_crm/action/catchcst_add_item.php",{
+			cid: cid
+		},function(res){
+			if( "FALSE" != res ){
+				alert("抓取客户成功。");
+			}
+			else{
+				alert("操作失败。");
+			}
+			loadlist();
+		});
+	});
+}
 
 /**加载客户信息列表
 */
@@ -45,7 +63,7 @@ function loadlist(){
 		field: function( fld, val, row, ds ){
 			if("c_name"==fld){
 				val ='<a href="javascript:void(0)" onclick="viewcst('+row.c_id+')">'+val+'</a>';
-				val +=' <a href="javascript:void(0)" class="txt_tool" >抓取客户</a>';
+				val +=' <a href="javascript:void(0)" class="txt_tool" onclick="catchcst('+row.c_id+')">抓取客户</a>';
 			}
 			return val;
 		},
@@ -73,7 +91,7 @@ function listenKey(){
 	});
 }
 
-daLoader("daTable,daIframe,daWin,daToolbar,daKey",function(){
+daLoader("daMsg,daTable,daIframe,daWin,daToolbar,daKey",function(){
 	da(function(){
 		var arrParam = da.urlParams();
 		
