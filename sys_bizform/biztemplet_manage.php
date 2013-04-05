@@ -37,7 +37,7 @@
 		<tr>
 			<td style="vertical-align:top;">
 				<div class="list_top_bar">
-					<div class="list_top_title"><a id="wft_title" href="javascript:void(0)" onclick="updateformtype()" value=""></a></div>
+					<div class="list_top_title"><a id="btt_title" href="javascript:void(0)" onclick="updateformtype()" value=""></a></div>
 					<div class="list_top_tools">
 						<a class="item" href="javascript:void(0)" onclick="addform();" ><img src="/images/sys_icon/add.png" /> 新建</a>
 					</div>
@@ -135,6 +135,20 @@
 						<textarea id="bt_formhtml" name="bt_formhtml" style="width:99%;height:800px;"></textarea>
 						自定义脚本：
 						<textarea id="bt_formscript" name="bt_formscript" style="width:99%;height:300px;"></textarea>
+					</div>
+					
+					<div id="pad_form2" style="display:none;">
+						<div class="list_top_bar">
+							<div class="list_top_title"></div>
+							<div class="list_top_tools">
+								<a class="link" href="javascript:void(0)" onclick="fn_helper('form_templet_code');" title="帮助文档" ><img src="/images/sys_icon/help.png" /> </a>
+								<a class="item" href="javascript:void(0)" onclick="updateform2html();" ><img src="/images/sys_icon/save.png" /> 保存</a>
+							</div>
+						</div>
+						表单代码：
+						<textarea id="bt_form2html" name="bt_formhtml" style="width:99%;height:800px;"></textarea>
+						自定义脚本：
+						<textarea id="bt_form2script" name="bt_formscript" style="width:99%;height:300px;"></textarea>
 					</div>
 				</div>
 				

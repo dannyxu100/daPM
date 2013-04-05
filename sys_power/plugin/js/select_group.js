@@ -98,6 +98,7 @@ function loaduserlist(){
 		loaded: function( idx, xml, json, ds ){
 			//link_click("#tb_list tbody[name=details_auto] tr");
 			// toExcel();
+			autoframeheight();
 		}
 	}).load();
 
@@ -123,6 +124,7 @@ function showitem(){
 	}
 	
 	outObj.html(strHTML);
+	autoframeheight();
 }
 
 /**返回选择结果
@@ -138,7 +140,7 @@ function clear(){
 }
 
 
-daLoader("daTable,daWin", function(){
+daLoader("daTable,daWin,daIframe", function(){
 	//da.out("加载成功");
 	da(function(){
 		//alert(1);

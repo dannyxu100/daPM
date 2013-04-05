@@ -8331,7 +8331,7 @@ da.extend({
 			
 			key = name || txt.replace(/\{|\}/g, "");
 			if( key ){
-				context.fmtMap[key] = fmt;
+				fmtMap[key] = fmt;
 			}
 			// if ((s1 == "sum") || (s1 == "avg") || (s1 == "min") || (s1 == "max") || (s1 == "count")) {
 				// s1 = obj1.html().replace("{", "").replace("}", "") ;

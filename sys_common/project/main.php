@@ -7,8 +7,8 @@
 
 
 <title>项目进度管理-主页面</title>
-<?include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
-<?include_once("action/sys/db.php");?>
+<?php include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
+<?php include_once("action/sys/db.php");?>
 </head>
 
 <body>

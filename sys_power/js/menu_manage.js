@@ -51,7 +51,8 @@ function beforeRemove(treeId, treeNode) {
 	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 	zTree.selectNode(treeNode);
 	
-	if(confirm("确认删除部门【" + treeNode.name + "】吗？")){
+	confirm("确认删除部门【" + treeNode.name + "】吗？", 
+	function(){
 		da.runDB("action/menu_get_list.php",{			//检查是否拥有下级部门
 			pmpid: treeNode.id
 		},
@@ -74,10 +75,11 @@ function beforeRemove(treeId, treeNode) {
 		});
 	
 		return true;
-	}
-	else{
+	},
+	function(){
 		return false;
-	}
+	});
+	
 }
 function onRemove(e, treeId, treeNode) {
 	
@@ -139,10 +141,13 @@ function addHoverDom(treeId, treeNode) {
 			pid: treeNode.id,
 			name: "新建菜单"
 		},
-		function(res){
+		function(res){debugger;
 			if("FALSE"!=res){
 				zTree.addNodes(treeNode, {id:res, pId:treeNode.id, name:"新建菜单"});
 			}
+		},
+		function(code,msg,ex){
+			debugger;
 		});
 		
 		return false;
@@ -152,11 +157,6 @@ function addHoverDom(treeId, treeNode) {
 function removeHoverDom(treeId, treeNode) {
 	$("#addBtn_"+treeNode.id).unbind().remove();
 };
-/**/
-function selectAll() {
-	var zTree = $.fn.zTree.getZTreeObj("treeDemo");
-	zTree.setting.edit.editNameSelectAll =  $("#selectAll").attr("checked");
-}
 
 /**点击树节点事件
 */
@@ -217,14 +217,14 @@ function loadtree(){
 		}
 		
 		$.fn.zTree.init($("#treeDemo"), setting, zNodes);
-		$("#selectAll").bind("click", selectAll);
+		
 	});
 }
 
 
 
 
-daLoader("daUI,daDate,daMsg", function(){
+daLoader("daMsg,daDate,daWin", function(){
 	//daUI();
 	$( "#pp_date" ).datepicker({
 	  defaultDate: "+1w",

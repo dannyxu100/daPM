@@ -1,27 +1,27 @@
 ﻿
-var g_bftid = "";
+var g_bttid = "";
 
 function loadtype(){
-	da.runDB("action/businessformtype_get_item.php",{
+	da.runDB("action/biztemplettype_get_item.php",{
 		dataType: "json",
-		bft_id: g_bftid
-	},function(res){
-		if("FALSE"!= res && res[0]){
-			for(var fld in res[0]){
-				da("#"+fld).val(res[0][fld]);
+		btt_id: g_bttid
+	},function(data){
+		if("FALSE"!= data){
+			for(var fld in data){
+				da("#"+fld).val(data[fld]);
 			}
 		}
 	});
 }
 
-function updatebft(){
-	da.runDB("action/businessformtype_update_item.php",{
-		bft_id: g_bftid,
+function updatebtt(){
+	da.runDB("action/biztemplettype_update_item.php",{
+		btt_id: g_bttid,
 		
-		bft_name: da("#bft_name").val(),
-		bft_date: da("#bft_date").val(),
-		bft_sort: da("#bft_sort").val(),
-		bft_remark: da("#bft_remark").val()
+		btt_name: da("#btt_name").val(),
+		btt_date: da("#btt_date").val(),
+		btt_sort: da("#btt_sort").val(),
+		btt_remark: da("#btt_remark").val()
 	},function(res){
 		if(res=="FALSE"){
 			alert("对不起，修改失败。");
@@ -35,12 +35,12 @@ function updatebft(){
 daLoader("daTable,daWin,daMsg", function(){
 	//da.out("加载成功");
 	var arrParam = da.urlParams();
-	g_bftid = arrParam["bftid"];
+	g_bttid = arrParam["bttid"];
 
 	da(function(){
 		loadtype();
 		
-		$( "#bft_date" ).datepicker({
+		$( "#btt_date" ).datepicker({
 		  defaultDate: "+1w",
 		  changeMonth: true
 		});

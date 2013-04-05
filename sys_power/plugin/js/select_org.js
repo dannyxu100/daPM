@@ -33,12 +33,13 @@ function loadtree(){
 				});
 			}
 			$.fn.zTree.init($("#orgtree"), setting, zNodes);
+			autoframeheight();
 	   }
 	 });
 }
 
 
-daLoader("daMsg",function(){
+daLoader("daMsg,daIframe",function(){
 	arrParams = da.urlParams();
 	g_poid = arrParams["poid"];
 	//alert(g_poid);

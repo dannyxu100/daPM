@@ -303,9 +303,9 @@ function loadworkflowpower(){
 						break;
 				}
 			}
-			da("#new_rolename").val(newrole.join(","));
-			da("#assign_rolename").val(assignrole.join(","));
-			da("#del_rolename").val(delrole.join(","));
+			da("#new_rolename").text(newrole.join(","));
+			da("#assign_rolename").text(assignrole.join(","));
+			da("#del_rolename").text(delrole.join(","));
 		}
 	});
 }
@@ -455,7 +455,7 @@ function workflow2role( opttype, obj ){
 				wfid: g_wfid
 			},function(res){
 				if("FALSE"!=res){
-					da(obj).val( rnames );
+					da(obj).text( rnames );
 				}
 			},function(code, msg, ex){
 				// debugger;

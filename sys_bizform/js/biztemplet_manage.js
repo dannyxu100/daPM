@@ -183,8 +183,11 @@ function loadinfo(){
 			g_editorSearch.html(res[0].bt_listsearch);
 			g_editorList.html(res[0].bt_listhtml);
 			g_editorForm.html(res[0].bt_formhtml);
+			g_editorForm2.html(res[0].bt_form2html);
+			
 			da("#bt_listscript").val(res[0].bt_listscript);
 			da("#bt_formscript").val(res[0].bt_formscript);
+			da("#bt_form2script").val(res[0].bt_form2script);
 
 			loaddbsource(function(dbObj){		//加载数据源下拉
 				dbObj.val(res[0].bt_dbsource);
@@ -271,7 +274,7 @@ function updatelisthtml(){
 	});
 }
 
-/** 修改表单详细页代码
+/** 修改表单编辑页代码
 */
 function updateformhtml(){
 	// 将编辑器的HTML数据同步到textarea
@@ -293,6 +296,31 @@ function updateformhtml(){
 		}
 	},function(code,msg,ex){
 		// debugger;
+	});
+}
+
+/** 修改表单查看页代码
+*/
+function updateform2html(){
+	// 将编辑器的HTML数据同步到textarea
+	g_editorForm2.sync();
+	
+	da.runDB("/sys_bizform/action/biztemplet_update_form2html.php",{
+		dataType: "json",
+		bt_id: g_btid,
+		bt_form2html: encodeURIComponent(da("#bt_form2html").val()),
+		bt_form2script: encodeURIComponent(da("#bt_form2script").val())
+		
+	},function(data){
+		debugger;
+		if("FALSE" != data){
+			alert("修改成功。");
+		}
+		else{
+			alert("操作失败！");
+		}
+	},function(code,msg,ex){
+		debugger;
 	});
 }
 
@@ -469,6 +497,7 @@ function loadtab(){
 			da("#pad_list").hide();
 			da("#pad_form").hide();
 			da("#pad_db").hide();
+			da("#pad_form2").hide();
 			da("#pad_info").show();
 			
 			autoframeheight();
@@ -480,6 +509,7 @@ function loadtab(){
 			da("#pad_info").hide();
 			da("#pad_list").hide();
 			da("#pad_form").hide();
+			da("#pad_form2").hide();
 			da("#pad_db").show();
 			
 			autoframeheight();
@@ -491,18 +521,31 @@ function loadtab(){
 			da("#pad_info").hide();
 			da("#pad_form").hide();
 			da("#pad_db").hide();
+			da("#pad_form2").hide();
 			da("#pad_list").show();
 			
 			autoframeheight();
 		}
 	});
 	
-	daTab0.appendItem("item04","详细页","",{
+	daTab0.appendItem("item04","编辑页","",{
 		click:function(){
 			da("#pad_info").hide();
 			da("#pad_list").hide();
 			da("#pad_db").hide();
+			da("#pad_form2").hide();
 			da("#pad_form").show();
+			
+			autoframeheight();
+		}
+	});
+	daTab0.appendItem("item05","查看页","",{
+		click:function(){
+			da("#pad_info").hide();
+			da("#pad_list").hide();
+			da("#pad_db").hide();
+			da("#pad_form").hide();
+			da("#pad_form2").show();
 			
 			autoframeheight();
 		}
@@ -532,7 +575,7 @@ function loadtree(){
 }
 
 var g_editorSearch, g_editorList, 
-	g_editorForm;
+	g_editorForm, g_editorForm2;
 /**加载在线编辑器
 */
 function loadeditor(){
@@ -577,6 +620,25 @@ function loadeditor(){
 	});
 	
 	g_editorForm = KindEditor.create('#bt_formhtml', {
+		resizeType : 1,
+		filterMode : false,		//不过滤危险标签
+		newlineTag: "br",
+		allowPreviewEmoticons : false,
+		fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
+		allowFileManager : true,
+		items : [
+			'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+			'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+			'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+			'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/',
+			'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'multiimage',
+			'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+			'anchor', 'link', 'unlink', '|'
+		]
+	});
+	
+	g_editorForm2 = KindEditor.create('#bt_form2html', {
 		resizeType : 1,
 		filterMode : false,		//不过滤危险标签
 		newlineTag: "br",

@@ -256,9 +256,9 @@ daLoader.def('daSelect', {path: _p+'/daSelect/daSelect_source_2.0.js', need:"da,
 daLoader.def('daTab_CSS', {path: _p+'/daTab2.0/daTab.css' });
 daLoader.def('daTab', {path: _p+'/daTab2.0/daTab_source.js', need:"da,daTab_CSS" });								//Tab按钮 控件类
 //-------------------------------------
-daLoader.def('daTip_CSS', {path: _p+'/daTip2.0/daTip.css' });
+daLoader.def('daTip_CSS', {path: _p+'/daTip2.0/daTip2.0.css' });
 daLoader.def('daTip', {path: _p+'/daTip2.0/daTip_source_2.0.js', need:"da,daTip_CSS" });								//ToolTip类
-daLoader.def('daMenu', {path: _p+'/daTip/daMenu_source.js', need:"da,daTip" });								//右键菜单类
+daLoader.def('daMenu', {path: _p+'/daTip2.0/daMenu_source2.0.js', need:"da,daTip" });								//右键菜单类
 //-------------------------------------
 daLoader.def('daLunar', {path: _p+'/daDate_3.0/daLunar_source.js', need:"da" });	
 daLoader.def('daDate_CSS', {path: _p+'/daDate_3.0/daDate.css' });

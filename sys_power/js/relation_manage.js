@@ -136,7 +136,7 @@ function loaduserlist(leaderid, obj){
 	
 	daTable({
 		id: "tbuser_list",
-		url: "/sys_power/action/relation_get_userlist.php",
+		url: "/sys_power/action/relation_get_userpage.php",
 		data: {
 			dataType: "json",
 			poid: g_poid,
@@ -147,11 +147,14 @@ function loaduserlist(leaderid, obj){
 		pageSize: 999999,
 		
 		field: function( fld, val, row, ds ){
+			if("order"==fld){
+				val = '<label><input type="checkbox" name="chkitem" value="'+ row["pu_id"] +'" /> '+ val +'</label>';
+			}
 			return val;
 		},
 		loaded: function( idx, xml, json, ds ){
 			//link_click("#tb_list tbody[name=details_auto] tr");
-			// toExcel();
+			//toExcel();
 		}
 	}).load();
 }

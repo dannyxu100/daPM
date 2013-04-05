@@ -253,9 +253,9 @@ var daValid = (function(){
 		valid: function(){
 			var val = this.targetObj.value,
 				fnValid = this.setting.valid;
-					
+
 			if( !fnValid ){ return;};
-			
+	
 			var reValid = fnValid.call( this.targetObj, val, this.setting.empty, this.setting.regexp );
 			if( !reValid ) this.show();
 			else this.hide();
@@ -398,7 +398,7 @@ daValid.mapFnValid = {
 	name: da.isName,								//只能中文字符串、26个英文字母 或者下划线（一般的名称验证）
 	account: da.isAccount,							//只能中文字符串、数字、26个英文字母 或者下划线（一般的账号验证）
 	phone: da.isPhone,								//判断是否电话号码（包括手机）
-	mobile: da.ismobile,							//判断是否手机号码
+	mobile: da.isMobile,							//判断是否手机号码
 	email: da.isEmail,								//判断是否电子邮件地址
 	http: da.isHTTP,								//判断是否是IP地址
 	html: da.isHTML,								//判断是否是HTML代码

@@ -1,7 +1,7 @@
 <?php 
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
-	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
+	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 
 	$db = new DB("da_setting");
 	$db->param(":itid", $_POST["itid"]);
@@ -12,8 +12,7 @@
 	$res = $db->insert("insert into s_item(i_itid, i_name, i_value, i_sort, i_remark) values(:itid, :iname, :ivalue, :isort, :iremark)");
 	
 	$db->close();
-	$log = new Log();
-	$log->write($db->geterror());
+	// Log::out($db->geterror());
 
 	echo $res?$res:"FALSE";
 ?>

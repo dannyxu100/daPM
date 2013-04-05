@@ -4,7 +4,7 @@ include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/fn.php";
 include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
 session_start();
 
-	date_default_timezone_set("Asia/Hong_Kong");
+	date_default_timezone_set('ETC/GMT-8');
 	
 //if($_POST['submit']){
 	$note=$_POST['l_note'];

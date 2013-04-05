@@ -146,6 +146,14 @@ function init(){
 	});
 }
 
+/**加载自定义脚本
+*/
+function loadscript( jstxt ){
+    var daHead = da("head");
+	oScript = '<script type="text/javascript">'+jstxt+'</script>';
+    daHead.append( oScript ); 
+}
+
 /**加载工作流对应 表单列表页模板
 */
 function loadtemplet(){
@@ -165,6 +173,7 @@ function loadtemplet(){
 			
 			var formObj = da("#templet_form");
 			formObj.append( data[0].bt_formhtml );
+			loadscript( data[0].bt_formscript );		//加载自定义脚本
 			
 			init();
 			autoframeheight();

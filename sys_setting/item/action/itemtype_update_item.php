@@ -1,7 +1,7 @@
 <?php 
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
-	//error_reporting(-1);
+	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 
 	$db = new DB("da_setting");
 	
@@ -11,6 +11,11 @@
 	{
 		$sql .= " it_name=:itname ";
 		$db->param(":itname", $_POST["itname"]);
+	}
+	if( isset($_POST["itcode"]) )
+	{
+		$sql .= ", it_code=:itcode ";
+		$db->param(":itcode", $_POST["itcode"]);
 	}
 	if( isset($_POST["itsort"]) )
 	{
@@ -27,9 +32,7 @@
 	$db->param(":itid", $_POST["itid"]);
 	
 	$res = $db->update($sql);
-	// print_r($param);
-	// print_r($sql);
-	// echo $db->geterror();
+	// Log::out($db->geterror());
 
 	$db->close();
 

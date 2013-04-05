@@ -9,7 +9,7 @@
 	$res = $db->insert("insert into s_itemtype(it_pid, it_name) values(:itpid, :name)");
 	
 	$db->close();
-	$log = new Log();
+	// $log = new Log();
 	// $log->write($db->geterror());
 
 	echo $res?$res:"FALSE";

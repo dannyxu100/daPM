@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <HEAD>
-	<?include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
+	<?php include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
 	
 	<TITLE>工作流管理</TITLE>
 	<link rel="stylesheet" href="/css/base.css"/>
@@ -125,21 +125,21 @@
 							<tr>
 								<td class="header">新 建</td>
 								<td>
-									<input id="new_rolename" disabled="true" style="width:200px"/>
+									<div id="new_rolename" style="float:left;padding:2px; margin:2px; border:1px solid #ccc;"></div>
 									<a href="javascript:void(0)" onclick="selectnewrole()">选择</a>
 								</td>
 							</tr>
 							<tr>
 								<td class="header">分 单</td>
 								<td>
-									<input id="assign_rolename" disabled="true" style="width:200px"/>
+									<div id="assign_rolename" style="float:left;padding:2px; margin:2px; border:1px solid #ccc;"></div>
 									<a href="javascript:void(0)" onclick="selectassignrole()">选择</a>
 								</td>
 							</tr>
 							<tr>
 								<td class="header">删 除</td>
 								<td>
-									<input id="del_rolename" disabled="true" style="width:200px"/>
+									<div id="del_rolename" style="float:left;padding:2px; margin:2px; border:1px solid #ccc;"></div>
 									<a href="javascript:void(0)" onclick="selectdelrole()">选择</a>
 								</td>
 							</tr>

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<?include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
+	<?php include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
 	<title>日志管理页面</title>
 	<link rel="stylesheet" href="/css/base.css" />
 
@@ -14,7 +14,7 @@
 		</div>
 		<div class="list_top_tools">
 			<a class="item" href="javascript:void(0)" onclick="addlog();" ><img src="/images/sys_icon/add.png" /> 添加日志</a>
-			<a class="item" href="javascript:void(0)" ><img src="/images/sys_icon/delete.png" /> 删除</a>
+			<!--<a class="item" href="javascript:void(0)" ><img src="/images/sys_icon/delete.png" /> 删除</a>-->
 		</div>
 	</div>
 	

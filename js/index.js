@@ -70,7 +70,7 @@ function updatepwd(){
 function showmorelist(){
 	var listObj = da("#list_menumore");
 	if( listObj.is(":hidden") ){
-		listObj.show();
+		listObj.slideDown(100);
 	}
 }
 
@@ -110,7 +110,7 @@ var g_toolbar;
 /**加载菜单
 */
 function loadmenu(){
-	da.runDB("/sys_power/action/menu_get_list.php",{
+	da.runDB("/sys_power/action/menu_get_byrole.php",{
 		dataType: "json",
 		pmlevel: 1
 	},function(data){

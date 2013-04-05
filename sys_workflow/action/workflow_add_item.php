@@ -4,7 +4,7 @@
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
 	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 
-	date_default_timezone_set("Asia/Hong_Kong");
+	date_default_timezone_set('ETC/GMT-8');
 	
 	$db = new DB("da_workflow");
 	$sql = "insert into w_workflow(wf_name, wf_wftid, wf_sort, wf_isrun, wf_starttaskid, wf_user, wf_date, wf_edituser, wf_editdate, wf_remark) 
@@ -24,6 +24,7 @@
 	$db->param(":wf_editdate", $_POST["wf_editdate"]);
 	$db->param(":wf_remark", $_POST["wf_remark"]);
 	
+	$db->tran();		//启动事务
 	$res = $db->insert($sql);
 	$workflow = $db->getone("select @@IDENTITY as wf_id");
 	
@@ -41,7 +42,6 @@
 	
 	// $log->write($sql2.time());
 	// $log->write($sql3.time());
-	$db->tran();		//启动事务
 	
 	$res = $db->insert($sql2);
 	$res = $db->insert($sql3);

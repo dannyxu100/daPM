@@ -8,9 +8,9 @@
 	.no_multiple{text-overflow:ellipsis;white-space:nowrap;}
 </style>
 <div style="display:none;">
-<?include_once("./action/sessioncheck.php");?>
-<?include_once("./action/fn.php");?>
-<?include_once("./action/sys/db.php");?>
+<?php include_once("./action/sessioncheck.php");?>
+<?php include_once("./action/fn.php");?>
+<?php include_once("./action/sys/db.php");?>
 </div>
 <?
 	date_default_timezone_set('ETC/GMT-8');

@@ -4,7 +4,7 @@
 	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 	// error_reporting(-1);
 
-	date_default_timezone_set("Asia/Hong_Kong");
+	date_default_timezone_set('ETC/GMT-8');
 
 	$sql = "insert into b_biztemplet(bt_name, bt_bttid, bt_sort, bt_user, bt_date, bt_remark) values(";
 	$sql .= "'".$_POST["bt_name"]."',";
@@ -17,10 +17,9 @@
 	// $log = new Log();
 	// $log->write($sql.time());
 	
-	$db = new DB(3);
-	$res = $db->Query($sql);
-	//echo $db->error_message;
-	$db->Destroy();
-	//print_r($set);
+	$db = new DB("da_bizform");
+	$res = $db->insert($sql);
+	
+	$db->close();
 	echo $res?$res:"FALSE";
 ?>

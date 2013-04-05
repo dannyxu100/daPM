@@ -12,7 +12,8 @@ class DB{
 		"da_powersys" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_powersys"),
 		"da_workflow" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_workflow"),
 		"da_bizform" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_bizform"),
-		"da_userform" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_userform")
+		"da_userform" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_userform"),
+		"da_crm" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_crm")
 	);
 	
 	private $m_host;

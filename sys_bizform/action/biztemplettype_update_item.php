@@ -14,10 +14,9 @@
 	// $log = new Log();
 	// $log->write($sql.time());
 	
-	$db = new DB(3);
-	$res = $db->Query($sql);
-	//echo $db->error_message;
-	$db->Destroy();
-	//print_r($set);
+	$db = new DB("da_bizform");
+	$res = $db->update($sql);
+	$db->close();
+	
 	echo $res?$res:"FALSE";
 ?>

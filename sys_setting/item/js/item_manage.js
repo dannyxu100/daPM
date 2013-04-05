@@ -231,6 +231,7 @@ function updateitemtype(){
 	da.runDB("/sys_setting/item/action/itemtype_update_item.php",{
 		itid: da("#it_id").val(),
 		itname: da("#it_name").val(),
+		itcode: da("#it_code").val(),
 		itsort: da("#it_sort").val(),
 		itremark: da("#it_remark").val()
 	},
@@ -284,7 +285,7 @@ function loadtab(){
 		}
 	});
 	
-	daTab0.click("item01");
+	daTab0.click("item02");
 }
 
 

@@ -1,17 +1,16 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<?include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
-	<?include_once("action/fn.php");?>
-	<?include_once("action/sys/db.php");?>
-
-	<link rel="icon" href="/image/pm_ico.jpg" type="image/x-icon" />
+	<?php include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
+	<?php include_once("action/fn.php");?>
+	<?php include_once("action/sys/db.php");?>
+	
+	<link rel="icon" href="/images/pm_ico.gif" type="image/x-icon" />
 	<link rel="stylesheet" href="/css/base.css"/>
 
-	<title>项目进度管理-桌面</title>
+	<title>项目进度管理</title>
 
 	</head>
-
 <body>
 <div id="title_bar">
 	<img src="images/logo.jpg"/>
@@ -44,7 +43,7 @@
 
 <iframe id="mainframe" src="" frameborder="0" style="width:100%; height:500px;" defaultHeight="600"></iframe>
 
-<div id="scrolltop">＾</div>
+<div id="scrolltop"></div>
 </body>
 </html>
 

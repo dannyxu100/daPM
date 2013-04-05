@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <HEAD>
   <TITLE>权限管理</TITLE>
-	<?include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
+	<?php include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
 	
 	<link rel="stylesheet" href="/css/base.css"/>
 	<link rel="stylesheet" href="/plugin/ztree/zTreeStyle.css" type="text/css"/>

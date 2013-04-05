@@ -72,6 +72,8 @@ function listenKey(){
 
 daLoader("daMsg,daKey,daTable,daIframe,daWin",function(){
 	da(function(){
+		daFrame.shandowborder(".frame_slide", "left");
+		
 		loadworkflow();
 		
 		listenKey();

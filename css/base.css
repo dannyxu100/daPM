@@ -1,9 +1,13 @@
 @charset "utf-8";
 
-.tablesolid { border-right:1px solid #f0f0f0; border-top:1px solid #f0f0f0; }
-.tablesolid>tbody>tr>td { border-left:1px solid #f0f0f0; border-bottom:1px solid #f0f0f0; }
+.tablesolid, .grid{ border-right:1px solid #f0f0f0; border-top:1px solid #f0f0f0; }
+.tablesolid>tbody>tr>td, 
+.grid>tbody>tr>td { border-left:1px solid #f0f0f0; border-bottom:1px solid #f0f0f0; }
 
-td.header { padding:0px 10px; background:#f5f5f5; text-align:right; vertical-align:top}
+.grid>tbody>tr>td { padding:3px; }
+
+td.classheader { padding:3px; color:#ccc; font-style:italic;}
+td.header { padding:0px 10px; color:#666; background:#f5f5f5; text-align:right; vertical-align:top; font-weight:bold;}
 
 .shandowbox{
 	-moz-box-shadow: 0px 2px 10px #999;	
@@ -41,23 +45,18 @@ td.header { padding:0px 10px; background:#f5f5f5; text-align:right; vertical-ali
 #userico{position:absolute; top:0px; left:-40px; vertical-align:middle; margin-right:10px;width:32px;height:32px;border:1px solid #fff;}
 #userico #puicon{width:30px;height:30px; position:absolute; z-index:3;border:1px solid #666;cursor:pointer;}
 #userico .userinfo_list{ display:none; position:absolute; top:-1px; right:-1px; z-index:2; width:200px; padding:5px; border:1px solid #666; background:#fff; cursor:pointer;}
-#userico .userinfo_list ul{ height:22px; font-weight:bold;}
+#userico .userinfo_list ul{ height:22px; line-height:22px; font-weight:bold;}
 
 /***** 置顶按钮 *******/
 #scrolltop {
 	display:none; position:fixed; bottom:10px; right:10px;
-	font-size:100px; line-height:100px;
-	width:100px; height:100px; background-color: #eee;
-	text-align:center; cursor:pointer; color:#444; border:1px solid #000000;
+	width:80px; height:50px;
+	background:url(/images/top.gif);
+	cursor:pointer;
 	/* 兼容多浏览器 半透明特效 */
 	filter:alpha(opacity=20);	/*值域为[0, 100] */
 	-moz-opacity:0.2;			/*值域为[0, 1]	 */
 	opacity:0.2;				/*值域为[0, 1] 	 */
-	/* 圆角 */
-	-moz-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;s
 }
 #scrolltop:hover {
 	filter:alpha(opacity=80);
@@ -73,7 +72,7 @@ a.curmenu, a.curmenu:hover { background:#1a4bfe url(/images/bar_bg.jpg) 0px -35p
 a.curmenu2, a.curmenu2:hover { background:#222; border:1px solid #000; color:#f5f5f5; }
 
 /******** 框架左栏滑动按钮 *********/
-.frame_slide{vertical-align:top; width:10px; padding:0px;cursor:pointer; background:#f5f5f5;}
+.frame_slide{vertical-align:top; width:10px; padding:0px;cursor:pointer; background:#f7f7f7;}
 .frame_slide .bt_slideleft{ width:10px;height:50px;cursor:pointer; border:1px solid #ddd; background:#ddd url(/images/bt_slide.jpg) }
 .frame_slide .bt_slideright{ width:10px;height:50px;cursor:pointer; border:1px solid #ddd; background:#ddd url(/images/bt_slide.jpg) -10px 0px; }
 
@@ -91,11 +90,12 @@ a.curmenu2, a.curmenu2:hover { background:#222; border:1px solid #000; color:#f5
 .list_top_tools a.link img{vertical-align:middle;}
 
 /******** 业务单公共页面 *********/
-.itemHover td a.txt_tool{display:inline; margin-right:5px;}
+.itemHover td a.txt_tool{display:inline; margin-left:10px;}
 a.txt_tool{display:none;}
 
-.itemHover td a.ico_tool{display:inline-block; vertical-align:middle; width:16px; height:16px; }
+.itemHover td a.ico_tool{display:inline-block; vertical-align:middle; margin-left:10px; width:16px; height:16px; }
 a.ico_tool{display:none;}
+
 
 /******** 业务单日志列表 *********/
 .logitem{padding-left:100px; width:800px; position:relative; overflow:hidden;}

@@ -68,6 +68,8 @@ function listenKey(){
 
 daLoader("daKey,daIframe,daWin,daToolbar",function(){
 	da(function(){
+		daFrame.shandowborder(".frame_slide", "left");
+		
 		var arrParam = da.urlParams();
 		level2menu = arrParam["menu"];
 

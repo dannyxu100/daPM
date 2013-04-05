@@ -43,6 +43,7 @@ function loadtree(){
 				g_ds[data[i].pr_id] = data[i];
 			}
 			$.fn.zTree.init($("#roletree"), setting, zNodes);
+			autoframeheight();
 	   }
 	 });
 }
@@ -74,6 +75,7 @@ function showitem(){
 	}
 	
 	outObj.html(strHTML);
+	autoframeheight();
 }
 
 /**返回选择结果
@@ -90,7 +92,7 @@ function clearitem(){
 	showitem();
 }
 
-daLoader("daMsg", function(){
+daLoader("daMsg,daIframe", function(){
 	arrParams = da.urlParams();
 	g_prid = arrParams["prid"];
 	g_ismulti = !!arrParams["ismulti"];

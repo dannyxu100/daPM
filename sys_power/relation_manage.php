@@ -2,11 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <HEAD>
   <TITLE>上下属管理</TITLE>
-	<?include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
+	<?php include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
 	
 	<link rel="stylesheet" href="/css/base.css"/>
 	<link rel="stylesheet" href="/plugin/ztree/zTreeStyle.css" type="text/css"/>
-<link rel="stylesheet" href="/css/jquery-ui-1.9.2.custom.min.css"/>
+	<link rel="stylesheet" href="/css/jquery-ui-1.9.2.custom.min.css"/>
  
 	<style type="text/css">
 		.ztree li span.button.add {
@@ -50,7 +50,6 @@
 					<table id="tbuser_list" style="width:100%;">
 						<tbody name="head">
 							<tr>
-								<td style="width:20px;"></td>
 								<td style="width:20px;">序</td>
 								<td style="width:50px;">名称</td>
 								<td style="width:80px;">手机</td>
@@ -58,7 +57,6 @@
 						</tbody>
 						<tbody name="body" style="display:none">
 							<tr value="{pu_id}">
-								<td name="checkbox"><input type="checkbox" name="chkitem" value="{pu_id}" /></td>
 								<td name="order">{order}</td>
 								<td name="pu_name" >{pu_name}</td>
 								<td name="pu_phone" >{pu_phone}</td>
@@ -66,7 +64,7 @@
 						</tbody>
 						<tbody name="foot">
 							<tr>
-								<td  colspan="4" name="sum_order">
+								<td  colspan="3" name="sum_order">
 									共<span id="tbuser_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条，
 									共<span id="tbuser_list_pagecount2" style="color:#c26220">0</span>&nbsp;页，
 									当前在第<span id="tbuser_list_pageindex2" style="color:#c26220">0</span>&nbsp;页　

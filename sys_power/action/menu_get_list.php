@@ -6,20 +6,18 @@
 	//error_reporting(-1);
 	
 	$db = new DB("da_powersys");
-	$sql = "select * from p_menu,p_menu2role 
-	where pm_id=m2r_pmid 
-	and m2r_prid in (".fn_getcookie("roleid").")";
+	$sql = "select * from p_menu ";
 	
 	if(isset($_POST["pmid"])){
-		$sql .= " and pm_id=:pmid ";
+		$sql .= " where pm_id=:pmid ";
 		$db->param(":pmid", $_POST["pmid"]);
 	}
 	else if(isset($_POST["pmpid"])){
-		$sql .= " and pm_pid=:pmpid ";
+		$sql .= " where pm_pid=:pmpid ";
 		$db->param(":pmpid", $_POST["pmpid"]);
 	}
 	else if(isset($_POST["pmlevel"])){
-		$sql .= " and pm_level=:pmlevel ";
+		$sql .= " where pm_level=:pmlevel ";
 		$db->param(":pmlevel", $_POST["pmlevel"]);
 	}
 	$sql .= " group by pm_id order by pm_sort asc, pm_pid asc";

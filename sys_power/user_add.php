@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
  <HEAD>
-	<?include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
+	<?php include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
 	
   <TITLE>添加人员</TITLE>
 	<link rel="stylesheet" href="/css/base.css">
@@ -12,11 +12,17 @@
  </HEAD>
 <BODY>
 <div>
-	<div style="height:30px;line-height:30px; border-bottom:#999; text-align:right; padding:0px 20px;">
-		<a href="javascript:void(0)" onclick="saveuser();" >保存</a> |
+	<div class="list_top_bar">
+		<div class="list_top_title"></div>
+		<div class="list_top_tools">
+			<a class="item" href="javascript:void(0)" onclick="saveuser();" ><img src="/images/sys_icon/save.png" /> 保存</a>
+		</div>
 	</div>
-	<span style="padding:0px 3px;color:#999;">账号信息</span>
-	<table class="tablesolid" style="width:100%">
+	
+	<table class="grid" style="width:100%">
+		<tr>
+			<td colspan="2" class="classheader" >账号信息</td>
+		</tr>
 		<tr>
 			<td class="header" style="width:60px;">姓名</td>
 			<td><input id="pu_name" /><span class="must">*</span></td>
@@ -30,7 +36,7 @@
 			<td><input type="text" id="pu_pwd" value="666" /><span class="must">*</span></td>
 		</tr>
 		<tr>
-			<td colspan="2" style="border-bottom:1px solid #f0f0f0; color:#999;" >权限信息</td>
+			<td colspan="2" class="classheader" >权限信息</td>
 		</tr>
 		<tr>
 			<td class="header">部门</td>
@@ -47,7 +53,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2" style="border-bottom:1px solid #f0f0f0;color:#999;">详细信息</td>
+			<td colspan="2" class="classheader">详细信息</td>
 		</tr>
 		<tr>
 			<td class="header">手机</td>

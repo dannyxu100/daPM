@@ -99,7 +99,7 @@ function viewbiz( dbfldid, bcid, wfcid, tcid ){
 		daWin({
 			width: 800,
 			height: 500,
-			url: "/sys_common/biz/biz_update_detail.php?wfid="+ g_wfid 
+			url: "/sys_common/biz/biz_detail.php?wfid="+ g_wfid 
 			+"&wfcid="+ wfcid 
 			+"&btid="+ g_btid 
 			+"&bcid="+ bcid 
@@ -110,7 +110,7 @@ function viewbiz( dbfldid, bcid, wfcid, tcid ){
 		});
 	}
 	else{
-		goto("/sys_common/biz/biz_update_detail.php?wfid="+ g_wfid 
+		goto("/sys_common/biz/biz_detail.php?wfid="+ g_wfid 
 		+"&wfcid="+ wfcid 
 		+"&btid="+ g_btid 
 		+"&bcid="+ bcid 
@@ -304,7 +304,10 @@ function loaddata(){
 		field: function( fld, val, row, ds ){
 			if( "order" == fld ){
 				idxfld = 0;
-				val = '<label><input type="checkbox" name="chkitem" value="'+ row["bc_id"] +'" onclick="selectitem(this)" /> ' + val +'</label>';
+				
+				if( g_endel ){		//用于删除的复选框
+					val = '<label><input type="checkbox" name="chkitem" value="'+ row["bc_id"] +'" onclick="selectitem(this)" /> ' + val +'</label>';
+				}
 			}
 			else if( 1 == idxfld ){
 				val = '<a href="javascript:void(0)" onclick="viewbiz(\''

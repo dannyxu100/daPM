@@ -1,8 +1,9 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>项目进度管理-登陆页面</title>
-<link rel="stylesheet" href="css/base.css">
+	<title>项目进度管理-登陆页面</title>
+	<link rel="stylesheet" href="css/base.css">
+	<link rel="icon" href="/images/pm_ico.gif" type="image/x-icon" />
 </head>
 <body>
 	<div style="width:900px; margin:50px auto; position:relative;">

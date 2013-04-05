@@ -4,7 +4,7 @@
 	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 	
 
-	date_default_timezone_set("Asia/Hong_Kong");
+	date_default_timezone_set('ETC/GMT-8');
 	
 	$sql = "update b_biztemplet set ";
 	$sql .= " bt_name='".$_POST["bt_name"]."',";

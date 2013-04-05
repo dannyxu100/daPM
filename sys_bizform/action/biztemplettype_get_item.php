@@ -4,24 +4,16 @@
 	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 
 	$sql = "select * from b_biztemplettype where btt_id=".$_POST["btt_id"];
-	// $log = new Log();
-	// $log->write($sql);
 	
-	$db = new DB(3);
-	$set = $db->GetAll($sql);
-	//echo $db->error_message;
-	$db->Destroy();
-	//print_r($set);
+	$db = new DB("da_bizform");
+	$set = $db->getone($sql);
+	$db->close();
 	
 	if(is_array($set)){
-		for($i=0; $i<count($set); $i++){
-			foreach ( $set[$i] as $key => $value ) {
-				$set[$i][$key] = urlencode( $value );   
-			}
-
-		}
+		echo json_encode($set);
+	}
+	else{
+		echo "FALSE";
 	}
 	
-	// $log->write($res);
-	echo urldecode(json_encode($set));
 ?>
