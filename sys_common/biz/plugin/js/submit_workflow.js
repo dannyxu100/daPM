@@ -5,7 +5,7 @@ var g_wfid = "",
 /**提交业务流程
 */
 function updatetran(){
-	confirm(function(){
+	confirm("您是否确定已经完成业务？", function(){
 		da.runDB( "/sys_common/biz/action/trancase_submit_item.php", {
 			dataType: "json",
 			wfid: g_wfid,
@@ -50,7 +50,7 @@ function loadarclist(){
 	});
 }
 
-daLoader("daMsg,daIframe",function(){
+daLoader("daMsg,daIframe,daWin",function(){
 	da(function(){
 		var arrparam = da.urlParams();
 		g_wfid = arrparam["wfid"];

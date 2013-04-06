@@ -14,6 +14,7 @@
 		</div>
 		<div class="list_top_tools">
 			<a class="item" href="javascript:void(0)" onclick="viewbizlog();" >查看日志</a>
+			<a class="item" href="javascript:void(0)" onclick="submitworkflow();" ><img src="/images/sys_icon/email_go.png" /> 提交流程</a>
 		</div>
 	</div>
 	
