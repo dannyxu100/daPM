@@ -11,13 +11,15 @@
 		<div class="list_top_title">业务名称</div>
 		<div class="list_top_tools" style="float:left;">
 			<a class="item" href="javascript:void(0)" onclick="iframeBack();" ><img src="/images/sys_icon/arrow_back.png" /> 返回</a>
+			<a class="item" href="javascript:void(0)" onclick="uploadattach();" ><img src="/images/sys_icon/attach.png" /> 上传附件</a>
 		</div>
 		<div class="list_top_tools">
-			<a class="item" href="javascript:void(0)" onclick="viewbizlog();" >查看日志</a>
+			<a class="item" href="javascript:void(0)" onclick="viewbizlog();" ><img src="/images/sys_icon/message.png" /> 查看日志</a>
 			<a class="item" href="javascript:void(0)" onclick="submitworkflow();" ><img src="/images/sys_icon/email_go.png" /> 提交流程</a>
 		</div>
 	</div>
 	
+	<div id="attach_bar" style="padding:10px;background:#f7f7f7;">附件：<span id="attach_list"></span></div>
 	<div id="templet_form" style="padding:5px;display:none;"></div>
 </BODY>
 </HTML>

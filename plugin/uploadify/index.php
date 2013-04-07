@@ -34,6 +34,7 @@
 		"buttonText": "请点击选择文件",
 		"fileSizeLimit": "2MB",							//文件的极限大小(php默认上传2MB)
 		"removeCompleted": false,
+		// "removeTimeout": 3,
 		"multi": false,
 		"overrideEvents": ["onSelectError", "onDialogClose"],		//返回一个错误，选择文件的时候触发        
 		'onSelectError': function (file, errorCode, errorMsg) {

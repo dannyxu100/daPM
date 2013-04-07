@@ -96,6 +96,7 @@ a.txt_tool{display:none;}
 .itemHover td a.ico_tool{display:inline-block; vertical-align:middle; margin-left:10px; width:16px; height:16px; }
 a.ico_tool{display:none;}
 
+a.attachitem{ text-decoration:underline; margin-left:10px;}
 
 /******** 业务单日志列表 *********/
 .logitem{padding-left:100px; width:800px; position:relative; overflow:hidden;}

@@ -8258,7 +8258,7 @@ da.extend({
 					code = xhr.status,
 					content = xhr.responseText;
 					
-				fnError && fnError( msg, code, content );
+				fnError && fnError( msg, code, content, xhr );
 			},
 			success: function( data, status, xhr ) {
 				var dataType = xhr.getResponseHeader("content-type").match(/html|xml|json|script/).toString(),

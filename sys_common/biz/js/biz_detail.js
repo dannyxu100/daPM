@@ -7,6 +7,90 @@ var g_wfid = "",	//工作流id
 	g_dbfldid = "";		//数据源主键id
 
 
+/**上传附件
+*/
+function uploadattach(){
+	if( !g_btid || !g_bcid ){
+		alert("未传入表单编号");
+		return;
+	}
+	
+	var folder = "/uploads/attach/biztemplet_"+ g_btid +"/"+ g_bcid;
+	
+	fn_uploadfile("可上传文件格式：txt, rar, zip, doc(docx), xls(xlsx)", {
+        "fileTypeDesc": "附件文件",
+		"multi": true,
+		"fileTypeExts": "*.txt; *.rar; *.zip; *.doc; *.docx; *.xls; *.xlsx",
+		"formData": {
+			"folder": folder
+		}
+	},function(files){
+		var arrname=[], arrurl = [];
+		for( var k in files ){
+			arrname.push( files[k].name );
+			arrurl.push( folder +"/"+ files[k].name );
+			
+			delete files[k];
+		}
+		
+		if( 0<arrname.length && 0<arrurl.length && arrname.length==arrurl.length){
+			da.runDB("/sys_setting/filemanager/action/attach_add_list.php",{
+				dataType: "json",
+				type: "biztemplet_"+ g_btid,
+				code: "bcid_"+ g_bcid,
+				names: arrname.join("|"),
+				urls: arrurl.join("|")
+			
+			},function(res){
+				if("FALSE" != res){
+					loadattach();
+				}
+				this.closeWin();
+				
+			},function(code,msg,ex){
+				// debugger;
+			});
+		}
+	});
+	
+}
+
+/**加载附件信息附件
+*/
+function loadattach(){
+	if( !g_btid || !g_bcid ){
+		alert("未传入表单编号");
+		return;
+	}
+
+	var listobj = da("#attach_list");
+
+	da.runDB("/sys_setting/filemanager/action/attach_get_list.php",{
+		dataType: "json",
+		type: "biztemplet_"+ g_btid,
+		code: "bcid_"+ g_bcid
+	
+	},function(data){
+		if( "FALSE" != data){
+			listobj.empty();
+			
+			for(var i=0; i<data.length; i++){
+				listobj.append('<a class="attachitem" href="'
+				+ data[i].a_url 
+				+'" title="'
+				+ data[i].a_puname 
+				+'"><img src="/images/sys_icon/attach.png" style="vertical-align:middle" /> '
+				+ data[i].a_name +'</a> ');
+			}
+			
+			autoframeheight();
+		}
+	
+	},function(code,msg,ex){
+		// debugger;
+	});
+}
+
 /**提交业务流程
 */
 function submitworkflow(){
@@ -151,6 +235,7 @@ function loadtemplet(){
 			init();
 			autoframeheight();
 			loaddata();
+			loadattach();
 		}
 	});
 }

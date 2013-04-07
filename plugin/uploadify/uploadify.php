@@ -37,11 +37,11 @@ if (!empty($_FILES) && $_POST['token'] == $verifyToken) {
 	makeDir($targetFolder);						//如果目录不存在，就创建目录
 
 	$tempFile = $_FILES['Filedata']['tmp_name'];
-	$filename = $_POST['name']?$_POST['name']:$_FILES['Filedata']['name'];
 	$fileType = preg_replace("/^.*\./", "", strtolower($_FILES['Filedata']['name']));
+	$filename = $_POST['name']?($_POST['name'].'.'.$fileType):$_FILES['Filedata']['name'];
 	
 	$targetPath = trim($targetFolder, '/');
-	$targetFile = rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/".$targetPath.'/'.$filename.'.'.$fileType;
+	$targetFile = rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/".$targetPath.'/'.$filename;
 	// Log::out($targetFile);
 	
 	move_uploaded_file($tempFile, iconv("UTF-8","gb2312", $targetFile));	//swf编码问题，需要转一次编码
