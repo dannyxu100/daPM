@@ -1,15 +1,11 @@
 function scrolltop(obj){
 	var daObj = da(obj);
-	if (0 != document.body.scrollTop) {
+	if (0 != da(window).scrollTop()) {
 		daObj.fadeIn()
 	}
 	
 	da(window).scroll(function(){
-		// alert(scrolltop = (((t = document.documentElement) || (t = document.body.parentNode)) && typeof t.scrollTop == "number" ? t : document.body).scrollTop);
-		var scrolltop = window.pageYOffset || (document.documentElement || document.body.parentNode).scrollTop;
-		// alert(scrolltop);
-		
-		if(0 != scrolltop){
+		if(0 != da(window).scrollTop()){
 			daObj.fadeIn();
 		}
 		else{

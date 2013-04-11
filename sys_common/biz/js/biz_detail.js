@@ -222,7 +222,7 @@ function loadtemplet(){
 	da.runDB("/sys_bizform/action/biztemplet_get_item.php",{
 		dataType: "json",
 		bt_id: g_btid
-		
+
 	},function(data){
 		if("FALSE" != data ){
 			g_dbsource = data[0].bt_dbsource;

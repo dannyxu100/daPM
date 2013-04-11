@@ -349,13 +349,17 @@ var daWin = (function(){
 				this.hideCnt();
 			
 			if( !setting.act ){
+				if( this.isDialog ){
 					this.setSize( this.dwSize.w, this.dwSize.h );
-					// this.setPos( this.dwSize.top, this.dwSize.right, this.dwSize.bottom, this.dwSize.left );
 					this.setPos( ( da(win).height() - this.dwSize.h )/2, this.dwSize.right, this.dwSize.bottom, ( da(win).width() - this.dwSize.w )/2 );
-					if( !this.isDialog ){
-						this.setCnt( setting );												//设置iframe
-						
-					}
+				
+				}
+				else{
+					this.setSize( this.dwSize.w, this.dwSize.h );
+					this.setPos( this.dwSize.top, this.dwSize.right, this.dwSize.bottom, this.dwSize.left );
+					
+					this.setCnt( setting );												//设置iframe
+				}
 			}
 			else if( setting.act && "image" != setting.type ){
 				var context = this,

@@ -33,6 +33,10 @@ var daWheel = (function(){
 		*/
 		setting: {
 			target: null, 
+			
+			noParent: false,
+			noDefault: false,
+			
 			before: null, 
 			up: null, 
 			down: null, 
@@ -54,35 +58,35 @@ var daWheel = (function(){
 		*/
 		bind: function(){
 			var context = this,
-					fnBefore = this.setting.before,
-					fnUp = this.setting.up,
-					fnDown = this.setting.down,
-					fnAfter = this.setting.after,
-					mousewheel = da.browser.firefox ? "DOMMouseScroll" : "mousewheel";
+				fnBefore = this.setting.before,
+				fnUp = this.setting.up,
+				fnDown = this.setting.down,
+				fnAfter = this.setting.after,
+				mousewheel = da.browser.firefox ? "DOMMouseScroll" : "mousewheel";
 
 			this.daWheelSrc.bind( mousewheel, this.eventWheel = function(evt){			//滚轮事件
 				//执行滚动前回调事件
 				if( fnBefore ) fnBefore.call( this, evt, context );
-				
-        if (evt.wheelDelta) { //IE
-        	if(evt.wheelDelta > 0 && fnUp )									//↑滚轮向上滚
-        		fnUp.call( this, evt, evt.wheelDelta/120, context );
-        	else if( fnDown )																//↓滚轮向下滚
-        		fnDown.call( this, evt, -evt.wheelDelta/120, context );
-     
-        }
-        else if (evt.detail) { //firefox
-        	if(evt.detail < 0 && fnUp)
-        		fnUp.call( this, evt, -evt.detail/3, context );
-        	else if( fnDown )
-        		fnDown.call( this, evt, evt.detail/3, context );
-        }
+						
+				if (evt.wheelDelta) { //IE
+					if(evt.wheelDelta > 0 && fnUp )									//↑滚轮向上滚
+						fnUp.call( this, evt, evt.wheelDelta/120, context );
+					else if( fnDown )																//↓滚轮向下滚
+						fnDown.call( this, evt, -evt.wheelDelta/120, context );
+			 
+				}
+				else if (evt.detail) { //firefox
+					if(evt.detail < 0 && fnUp)
+						fnUp.call( this, evt, -evt.detail/3, context );
+					else if( fnDown )
+						fnDown.call( this, evt, evt.detail/3, context );
+				}
         
 				//执行滚动后回调事件
 				if( fnAfter ) fnAfter.call( this, evt, context );
 			
-				evt.stopPropagation();
-				evt.preventDefault();
+				if( context.setting.noDefault ) evt.preventDefault();						//阻止浏览器默认事件
+				if( context.setting.noParent ) evt.stopPropagation();						//阻止浏览器默认快捷键
 			});
 			
 			this.daWheelSrc.daWheelObj = this;									//在DOM对象的属性中缓存daWheel地址，方便之后调用daWheel.unbind()函数，事件的释放，避免内存泄露

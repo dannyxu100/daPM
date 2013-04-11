@@ -9,17 +9,48 @@
 <body >
 	<table style="width:100%;">
 		<tr>
-			<td style="width:500px;">
-				<div id="listPad" style="padding:5px;"></div>
+			<td style="width:770px; vertical-align:top;">
+				<div id="shadowbox1" style="margin:5px;">
+					<div id="logbox" style="border:1px solid #f0f0f0;height:800px; overflow:scroll; position:relative">
+						<div style="padding:10px; background:#eee; text-align:center;font-weight:bold;color:#fff;">最新网建日志</div>
+						<div id="logpad" style="width:740px; overflow:hidden; position:relative">
+							<div id="listPad" style="padding:5px;"></div>
+							<div id="loadingbar">
+								<div id="loadingmsg" style="display:none; height:50px; line-height:50px; background:#fff281; text-align:center;">
+									<img src="/images/loading.gif" style="vertical-align:middle;"/> 数据加载中...
+								</div>
+								<a href="javascript:void(0)" class="bt_menu" style="text-align:center;" onclick="loadloglist()">显示更多</a>
+							</div>
+						</div>
+						<div id="scrolltop"></div>
+					</div>
+				</div>
+				
 			</td>
-			<td style="width:500px; padding:5px;">
+			<td style="width:500px; vertical-align:top;">
+				<div id="shadowbox2" style="margin:5px;">
+					<div id="msgbox">
+						<div style="padding:10px; background:#eee; text-align:center;font-weight:bold;color:#fff;">我的备忘录</div>
+						<div style="height:250px; padding:5px">
+							忘记吃早饭了
+						</div>
+					</div>
+				</div>
+				
+				<div id="shadowbox3" style="margin:5px;">
+					<div id="msgbox">
+						<div style="padding:10px; background:#eee; text-align:center;font-weight:bold;color:#fff;">通知公告</div>
+						<div style="height:250px; padding:5px">
+							翻滚吧，金正恩.....
+						</div>
+					</div>
+				</div>
 			</td>
 		</tr>
 	</table>
-	
-	
+
 	<div id="logtemplet" style="display:none;">
-		<ul id="log_{l_id}" class="logitem" >
+		<ul id="log_{l_id}" class="logitem" style="padding-left:10px" >
 			<div class="ico" >
 				<img src="{userico}"/>
 				<div class="txt">{puname}</div>
@@ -28,11 +59,13 @@
 				<div class="pl_img"></div>
 			</div>
 			<div class="content" >
-				<div class="ldate">{l_date}</div>
-				{l_content}
+				<span style="margin-right:20px; font-weight:bold; color:#666">({ws_cstname})</span>
+				<span style="color:#ccc">{l_date}</span>
+				<div style="margin-top:10px;">{l_content}</div>
 			</div>
 			<div style="clear:both;"></div>
 			<div class="logtoolbar" >
+				<a href="javascript:void(0);" onclick="viewlog('{bc_id}', '{ws_cstname}')">查看全部</a>
 				<a href="javascript:void(0);" onclick="addreply('{l_id}')">回复</a>
 			</div>
 			<div id="reply_{l_id}" class="logreply" ></div>
@@ -58,93 +91,4 @@
 </html>
 
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
-<script>
-
-function addreply(){
-
-}
-
-/**加载日志列表
-*/
-function loadreplylist(lids){
-	da.runDB("/sys_common/bizlog/action/reply2log_get_list.php", {
-		dataType: "json",
-		lids: lids
-		
-	},function(data){
-		if("FALSE"!=data){
-			var replyhtml = da("#replytemplet").html();
-			
-			for(var i=0; i<data.length; i++){
-				da( "#reply_"+ data[i].r_lid ).append(replyhtml.replace(/{\w*}/g, 
-				function( match, idx, self ){					//替换日志模板内容
-					switch(match){
-						case "{userico}":
-							return data[i].pu_icon?data[i].pu_icon:"/uploads/userico/default.png";
-						case "{puname}":
-							return data[i].pu_name;
-						case "{r_content}":
-							return data[i].r_content;
-						case "{r_date}":
-							return data[i].r_date;
-					}
-				}));
-			}
-			
-			autoframeheight();
-		}
-	},function(msg, code, ex){
-		// debugger;
-	});
-}
-
-/**加载日志列表
-*/
-function loadloglist(){
-	var objlist = da("#listPad");
-	objlist.empty();
-	da.runDB("/sys_common/bizlog/action/log_get_top20.php", {
-		dataType: "json"
-		
-	},function(data){
-		if("FALSE"!=data){
-			var lids = [];
-			
-			var loghtml = da("#logtemplet").html();
-			
-			for(var i=0; i<data.length; i++){
-				lids.push(data[i].l_id);
-			
-				objlist.append(loghtml.replace(/{\w*}/g, 
-				function( match, idx, self ){					//替换日志模板内容
-					switch(match){
-						case "{l_id}":
-							return data[i].l_id;
-						case "{userico}":
-							return data[i].pu_icon?data[i].pu_icon:"/uploads/userico/default.png";
-						case "{puname}":
-							return data[i].pu_name;
-						case "{l_content}":
-							return data[i].l_content;
-						case "{l_date}":
-							return data[i].l_date;
-					}
-				}));
-			}
-			
-			loadreplylist(lids.join(","));
-		}
-	},function(msg, code, ex){
-		// debugger;
-	});
-}
-
-daLoader("daMsg,daIframe,daWin",function(){
-	da(function(){
-		var arrparam = da.urlParams();
-		g_bcid = arrparam["bcid"];
-		
-		loadloglist();
-	});
-});
-</script>
+<script type="text/javascript" src="js/mydesk.js"></script>

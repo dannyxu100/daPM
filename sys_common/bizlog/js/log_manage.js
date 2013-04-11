@@ -1,10 +1,11 @@
-﻿var g_bcid = "";
+﻿var g_bcid = "",
+	g_title = "";
 
 /**添加日志
 */
 function addlog(){
 	daWin({
-		width:800,
+		width:590,
 		height:600,
 		url: "/sys_common/bizlog/log_add_item.php?bcid="+ g_bcid,
 		back: function(){
@@ -17,7 +18,7 @@ function addlog(){
 */
 function addreply(lid){
 	daWin({
-		width:600,
+		width:590,
 		height:500,
 		url: "/sys_common/bizlog/reply_add_item.php?bcid="+ g_bcid +"&lid="+ lid,
 		back: function(){
@@ -52,6 +53,7 @@ function loadreplylist(){
 					}
 				}));
 			}
+			autoframeheight();
 		}
 	},function(msg, code, ex){
 		// debugger;
@@ -90,6 +92,7 @@ function loadloglist(){
 					}
 				}));
 			}
+			autoframeheight();
 			loadreplylist();
 		}
 	},function(msg, code, ex){
@@ -101,7 +104,11 @@ daLoader("daMsg,daIframe,daWin",function(){
 	da(function(){
 		var arrparam = da.urlParams();
 		g_bcid = arrparam["bcid"];
+		g_title = arrparam["title"];
 		
+		if( g_title ){
+			da("#log_title").text( decodeURIComponent(g_title) );
+		}
 		loadloglist();
 	});
 });

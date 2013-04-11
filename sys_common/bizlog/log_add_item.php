@@ -35,7 +35,7 @@
 		</tr>
 		<tr >
 			<td colspan="4">
-				<textarea id="l_conent" name="l_conent" style="width:100%;height:350px;"></textarea>
+				<textarea id="l_conent" name="l_conent" style="width:100%;height:450px;"></textarea>
 			</td>
 		</tr>
 		<tr >

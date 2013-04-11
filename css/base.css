@@ -107,6 +107,7 @@ a.attachitem{ text-decoration:underline; margin-left:10px;}
 .logitem .pl .pl_img{position:absolute; top:5px; left:2px; width:15px;height:12px;background:url(/images/log_pointer.jpg) 0px 0px no-repeat;}
 .logitem .content{float:left; width:550px; border:1px solid #666; padding:5px; overflow:hidden;}
 .logitem .logtoolbar{ width:625px; text-align:right; margin-bottom:15px;}
+.logitem .logtoolbar a{margin-right:10px;}
 
 .logreply{width:705px;}
 .logreply .item{width:705px; margin:10px 5px;}
@@ -120,7 +121,7 @@ a.attachitem{ text-decoration:underline; margin-left:10px;}
 
 .logitem .line {position:absolute; left:15px; top:0px; width:2px; background:#b6e1a5; height:5000px;}
 .logitem .line .dot{position:absolute; left:-7px; top:0px; width:16px; height:16px;}
-.logitem .line .txt{position:absolute; left:12px; top:0px; width:80px; color:#58c82b; font-weight:bold;}
+.logitem .line .txt{position:absolute; left:12px; top:0px; width:80px; color:#58c82b; font-weight:bold; font-size:10px; -webkit-text-size-adjust:none;}
 
 
 /********** 帮助文档 ************/

@@ -6804,103 +6804,40 @@ var daRe_until = /Until$/,
 			}
 	
 	});
-	/*
-	if ( "getBoundingClientRect" in document.documentElement ) {
-		jQuery.fn.offset = function( options ) {
-			var elem = this[0];
 	
-			if ( options ) { 
-				return this.each(function( i ) {
-					jQuery.offset.setOffset( this, options, i );
-				});
-			}
-	
-			if ( !elem || !elem.ownerDocument ) {
-				return null;
-			}
-	
-			if ( elem === elem.ownerDocument.body ) {
-				return jQuery.offset.bodyOffset( elem );
-			}
-	
-			var box = elem.getBoundingClientRect(), doc = elem.ownerDocument, body = doc.body, docElem = doc.documentElement,
-				clientTop = docElem.clientTop || body.clientTop || 0, clientLeft = docElem.clientLeft || body.clientLeft || 0,
-				top  = box.top  + (self.pageYOffset || jQuery.support.boxModel && docElem.scrollTop  || body.scrollTop ) - clientTop,
-				left = box.left + (self.pageXOffset || jQuery.support.boxModel && docElem.scrollLeft || body.scrollLeft) - clientLeft;
-	
-			return { top: top, left: left };
+	da.each( {scrollLeft: "pageXOffset", scrollTop: "pageYOffset"}, function( method, prop ) {
+		var top = /Y/.test( prop );
+
+		da.fnStruct[ method ] = function( val ) {
+			return da.access( this, function( elem, method, val ) {
+				var win = getWindow( elem );
+
+				if ( val === undefined ) {
+					return win ? (prop in win) ? win[ prop ] :
+						win.document.documentElement[ method ] :
+						elem[ method ];
+				}
+
+				if ( win ) {
+					win.scrollTo(
+						!top ? val : da( win ).scrollLeft(),
+						 top ? val : da( win ).scrollTop()
+					);
+
+				} else {
+					elem[ method ] = val;
+				}
+			}, method, val, arguments.length, null );
 		};
-	
-	} 
-	else {
-		jQuery.fn.offset = function( options ) {
-			var elem = this[0];
-	
-			if ( options ) { 
-				return this.each(function( i ) {
-					jQuery.offset.setOffset( this, options, i );
-				});
-			}
-	
-			if ( !elem || !elem.ownerDocument ) {
-				return null;
-			}
-	
-			if ( elem === elem.ownerDocument.body ) {
-				return jQuery.offset.bodyOffset( elem );
-			}
-	
-			jQuery.offset.initialize();
-	
-			var offsetParent = elem.offsetParent, prevOffsetParent = elem,
-				doc = elem.ownerDocument, computedStyle, docElem = doc.documentElement,
-				body = doc.body, defaultView = doc.defaultView,
-				prevComputedStyle = defaultView ? defaultView.getComputedStyle( elem, null ) : elem.currentStyle,
-				top = elem.offsetTop, left = elem.offsetLeft;
-	
-			while ( (elem = elem.parentNode) && elem !== body && elem !== docElem ) {
-				if ( jQuery.offset.supportsFixedPosition && prevComputedStyle.position === "fixed" ) {
-					break;
-				}
-	
-				computedStyle = defaultView ? defaultView.getComputedStyle(elem, null) : elem.currentStyle;
-				top  -= elem.scrollTop;
-				left -= elem.scrollLeft;
-	
-				if ( elem === offsetParent ) {
-					top  += elem.offsetTop;
-					left += elem.offsetLeft;
-	
-					if ( jQuery.offset.doesNotAddBorder && !(jQuery.offset.doesAddBorderForTableAndCells && /^t(able|d|h)$/i.test(elem.nodeName)) ) {
-						top  += parseFloat( computedStyle.borderTopWidth  ) || 0;
-						left += parseFloat( computedStyle.borderLeftWidth ) || 0;
-					}
-	
-					prevOffsetParent = offsetParent, offsetParent = elem.offsetParent;
-				}
-	
-				if ( jQuery.offset.subtractsBorderForOverflowNotVisible && computedStyle.overflow !== "visible" ) {
-					top  += parseFloat( computedStyle.borderTopWidth  ) || 0;
-					left += parseFloat( computedStyle.borderLeftWidth ) || 0;
-				}
-	
-				prevComputedStyle = computedStyle;
-			}
-	
-			if ( prevComputedStyle.position === "relative" || prevComputedStyle.position === "static" ) {
-				top  += body.offsetTop;
-				left += body.offsetLeft;
-			}
-	
-			if ( jQuery.offset.supportsFixedPosition && prevComputedStyle.position === "fixed" ) {
-				top  += Math.max( docElem.scrollTop, body.scrollTop );
-				left += Math.max( docElem.scrollLeft, body.scrollLeft );
-			}
-	
-			return { top: top, left: left };
-		};
+	});
+
+	function getWindow( elem ) {
+		return da.isWin( elem ) ?
+			elem :
+			elem.nodeType === 9 ?
+				elem.defaultView || elem.parentWindow :
+				false;
 	}
-	*/
 
 })(da);
 
