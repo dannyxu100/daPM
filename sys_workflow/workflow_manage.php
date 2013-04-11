@@ -123,6 +123,14 @@
 								<td colspan="2">&nbsp;</td>
 							</tr>
 							<tr>
+								<td class="header">仅 看</td>
+								<td>
+									<span id="read_rolename" style="float:left; padding:2px; margin:2px; border:1px solid #ccc;"></span>
+									<a href="javascript:void(0)" onclick="selectreadrole()">选择</a>
+									<span style="color:#900; margin-left:10px;">(注：查看全部信息)</span>
+								</td>
+							</tr>
+							<tr>
 								<td class="header">新 建</td>
 								<td>
 									<div id="new_rolename" style="float:left;padding:2px; margin:2px; border:1px solid #ccc;"></div>

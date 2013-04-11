@@ -1,5 +1,6 @@
 var g_wfid = "",	//工作流id
 	g_wfcid = "",	//工作流实例id
+	g_tcid = "",	//当前事务变迁id
 	g_btid = "",	//业务单模板id
 	g_bcid = "",	//业务单实例id
 	g_dbsource = "",	//数据源名称
@@ -240,6 +241,62 @@ function loadtemplet(){
 	});
 }
 
+var g_onlyread = false,		//允许查看
+	g_ennew = false,		//允许新建
+	g_enassign = false,		//允许分单
+	g_endel = false,		//允许删除
+	g_jointran = false;		//参与了业务流程
+	
+/**初始化当前人员可操作权限
+*/
+function loadoptpower( fn ){
+	da.runDB("action/biz2role_get_dataset.php",{
+		dataType: "json",
+		wfid: g_wfid,
+		tcid: g_tcid
+		
+	},function(data){
+		if("FALSE"!= data){
+			for(var i=0; i<data.ds1.length; i++){
+				switch( data.ds1[i].wf2r_type ){
+					case "READ":
+						if( !g_onlyread ) g_onlyread = true;
+						break;
+					case "NEW":
+						if( !g_ennew ) g_ennew = true;
+						break;
+					case "ASSIGN":
+						if( !g_enassign ) g_enassign = true;
+						break;
+					case "DELETE":
+						if( !g_endel ) g_endel = true;
+						break;
+				}
+			}
+
+			if( data.ds2 && g_tcid == data.ds2.tc_id ){
+				g_jointran = true;
+			}
+
+			var left_tools = da("#lefttools"),
+				right_tools = da("#righttools");
+
+			//参与管理 或参与业务流程
+			if( g_ennew || g_enassign || g_endel || g_jointran ){
+				left_tools.append('<a class="item" href="javascript:void(0)" onclick="uploadattach();" ><img src="/images/sys_icon/attach.png" /> 上传附件</a>');
+				
+				if( g_jointran ){
+					right_tools.append('<a class="item" href="javascript:void(0)" onclick="submitworkflow();" ><img src="/images/sys_icon/email_go.png" /> 提交流程</a>');
+				}
+			}
+			
+			if(da.isFunction(fn)) fn();
+		}
+	},function(code,msg,ex){
+		// debugger;
+	});
+
+}
 
 var g_isctrl = false;
 /**监听按键
@@ -269,10 +326,13 @@ daLoader("daMsg,daKey,daValid,daDate,daIframe,daWin",function(){
 		g_bcid = arrparam["bcid"];
 		g_wfid = arrparam["wfid"];
 		g_wfcid = arrparam["wfcid"];
+		g_tcid = arrparam["tcid"];
 		g_dbfldid = arrparam["dbfldid"];
 				
 		listenKey();
 		
-		loadtemplet();
+		loadoptpower(function(){
+			loadtemplet();
+		});
 	});
 });

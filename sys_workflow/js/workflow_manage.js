@@ -286,12 +286,15 @@ function loadworkflowpower(){
 	da.runDB("action/workflow2role_get_list.php",{
 		dataType: "json",
 		wfid: g_wfid
-	},function(data){
+	},function(data){debugger;
 		if("FALSE"!= data){
-			var newrole = [], assignrole = [], delrole = [];
+			var readrole = [], newrole = [], assignrole = [], delrole = [];
 			
 			for(var i=0; i<data.length; i++){
 				switch( data[i].wf2r_type ){
+					case "READ":
+						readrole.push( data[i].pr_name );
+						break;
 					case "NEW":
 						newrole.push( data[i].pr_name );
 						break;
@@ -303,6 +306,7 @@ function loadworkflowpower(){
 						break;
 				}
 			}
+			da("#read_rolename").text(readrole.join(","));
 			da("#new_rolename").text(newrole.join(","));
 			da("#assign_rolename").text(assignrole.join(","));
 			da("#del_rolename").text(delrole.join(","));
@@ -480,6 +484,10 @@ function selectassignrole(){
 */
 function selectnewrole(){
 	workflow2role( "NEW", "#new_rolename" );
+}
+
+function selectreadrole(){
+	workflow2role( "READ", "#read_rolename" );
 }
 
 /**为工作流 选择主表单

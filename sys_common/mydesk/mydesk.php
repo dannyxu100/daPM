@@ -12,7 +12,10 @@
 			<td style="width:770px; vertical-align:top;">
 				<div id="shadowbox1" style="margin:5px;">
 					<div id="logbox" style="border:1px solid #f0f0f0;height:800px; overflow:scroll; position:relative">
-						<div style="padding:10px; background:#eee; text-align:center;font-weight:bold;color:#fff;">最新网建日志</div>
+						<div class="list_top_bar" style="padding:10px; background:#f5f5f5;">
+							<div class="list_top_title" style="font-weight:bold;color:#69c; font-size:14px">最新网建日志</div>
+							<div id="righttools" class="list_top_tools"></div>
+						</div>
 						<div id="logpad" style="width:740px; overflow:hidden; position:relative">
 							<div id="listPad" style="padding:5px;"></div>
 							<div id="loadingbar">
@@ -30,7 +33,10 @@
 			<td style="width:500px; vertical-align:top;">
 				<div id="shadowbox2" style="margin:5px;">
 					<div id="msgbox">
-						<div style="padding:10px; background:#eee; text-align:center;font-weight:bold;color:#fff;">我的备忘录</div>
+						<div class="list_top_bar" style="padding:10px; background:#f5f5f5;">
+							<div class="list_top_title" style="font-weight:bold;color:#69c; font-size:14px">我的备忘录</div>
+							<div id="righttools" class="list_top_tools"></div>
+						</div>
 						<div style="height:250px; padding:5px">
 							忘记吃早饭了
 						</div>
@@ -39,7 +45,10 @@
 				
 				<div id="shadowbox3" style="margin:5px;">
 					<div id="msgbox">
-						<div style="padding:10px; background:#eee; text-align:center;font-weight:bold;color:#fff;">通知公告</div>
+						<div class="list_top_bar" style="padding:10px; background:#f5f5f5;">
+							<div class="list_top_title" style="font-weight:bold;color:#69c; font-size:14px">通知公告</div>
+							<div id="righttools" class="list_top_tools"></div>
+						</div>
 						<div style="height:250px; padding:5px">
 							翻滚吧，金正恩.....
 						</div>
@@ -60,7 +69,7 @@
 			</div>
 			<div class="content" >
 				<span style="margin-right:20px; font-weight:bold; color:#666">({ws_cstname})</span>
-				<span style="color:#ccc">{l_date}</span>
+				<span style="color:#aaa">{l_date}</span>
 				<div style="margin-top:10px;">{l_content}</div>
 			</div>
 			<div style="clear:both;"></div>

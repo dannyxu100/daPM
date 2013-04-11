@@ -14,6 +14,7 @@
 	$searchkey = isset($_POST["searchkey"])?$_POST["searchkey"]:"";
 	$searchtran = isset($_POST["searchtran"])?$_POST["searchtran"]:"";
 	
+	$onlyread = isset($_POST["onlyread"])?$_POST["onlyread"]:"false";		//是否拥有查看权限
 	$enassign = isset($_POST["enassign"])?$_POST["enassign"]:"false";		//是否拥有分单权限
 	
 	$db = new DB("da_userform");
@@ -63,11 +64,11 @@
 	$sql4 = "da_bizform.b_bizcase, da_workflow.w_workflowcase, 
 	(";
 	
-	if( "true" == $enassign &&  "" == $status  ){		//拥有分单权限，且查看全部
+	if( ( "true"==$onlyread || "true" == $enassign ) &&  "" == $status  ){	//拥有分单或查看权限，且查看全部
 		$sql4 .= "select * from da_workflow.w_transition, 
 		( select * from da_workflow.w_trancase order by tc_enabledate desc) as w_trancase 
 		where w_transition.t_id=w_trancase.tc_tid 
-		and w_trancase.tc_wfid='".$wfid."' group by tc_wfcid ";		//按工作流实例分组，取最新一条事务变迁
+		and w_trancase.tc_wfid='".$wfid."' group by tc_wfcid ";				//按工作流实例分组，取最新一条事务变迁
 		
 	}
 	else{			//没有分单权限，或查看待处理、处理中、已处理

@@ -101,6 +101,7 @@ function viewbiz( dbfldid, bcid, wfcid, tcid ){
 			height: 500,
 			url: "/sys_common/biz/biz_detail.php?wfid="+ g_wfid 
 			+"&wfcid="+ wfcid 
+			+"&tcid="+ tcid 
 			+"&btid="+ g_btid 
 			+"&bcid="+ bcid 
 			+"&dbfldid="+ dbfldid,
@@ -112,6 +113,7 @@ function viewbiz( dbfldid, bcid, wfcid, tcid ){
 	else{
 		goto("/sys_common/biz/biz_detail.php?wfid="+ g_wfid 
 		+"&wfcid="+ wfcid 
+		+"&tcid="+ tcid 
 		+"&btid="+ g_btid 
 		+"&bcid="+ bcid 
 		+"&dbfldid="+ dbfldid);
@@ -286,6 +288,7 @@ function loaddata(){
 		status: g_transtatus,
 		dbsource: g_dbsource,
 		dbfld: g_dbfld,
+		onlyread: g_onlyread,		//是否拥有查看权限
 		enassign: g_enassign		//是否拥有分单权限
 	}
 	
@@ -391,7 +394,13 @@ function loadtemplet(){
 /**加载分页按钮
 */
 function loadtab(){
+	if( g_onlyread ){		//只读权限
+		return;
+	}
+	
+	//参与管理 或参与业务流程
 	var daTab0 = daTab(da("#tabbar").dom[0],"daTab0","myname","",true);
+	
 	daTab0.appendItem("item01","待处理","/images/sys_icon/email_open.png",{
 		click:function(){
 			g_transtatus = "EN";	//事务变迁为EN(启动状态)
@@ -424,7 +433,8 @@ function loadtab(){
 }
 
 
-var g_ennew = false,		//允许新建
+var g_onlyread = false,		//允许查看
+	g_ennew = false,		//允许新建
 	g_enassign = false,		//允许分单
 	g_endel = false;		//允许删除
 /**初始化当前人员可操作权限
@@ -437,6 +447,9 @@ function loadoptpower( fn ){
 		if("FALSE"!= data){
 			for(var i=0; i<data.length; i++){
 				switch( data[i].wf2r_type ){
+					case "READ":
+						if( !g_onlyread ) g_onlyread = true;
+						break;
 					case "NEW":
 						if( !g_ennew ) g_ennew = true;
 						break;
