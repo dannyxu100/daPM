@@ -1,26 +1,26 @@
-
+var g_ntid="";
 
 /**新建公海客户
+*/
+
+/**新建我的便签
 */
 function addnote(){
 	goto("/sys_common/note/note_add_item.php");
 }
 
-/**查看客户详细信息
+/**查看便签详细信息
 */
-function viewcst(cid){
+function viewnote( nid ){
 	if( g_isctrl ){
 		daWin({
-			width: 800,
-			height: 600,
-			url: "",
-			back: function(){
-			
-			}
+			width: 600,
+			height: 400,
+			url: "/sys_common/note/note_detail.php?nid="+ nid
 		});
 	}
 	else{
-		goto("/sys_crm/viewcst.php?cid="+ cid);
+		goto("/sys_common/note/note_detail.php?nid="+ nid);
 	}
 }
 
@@ -30,22 +30,20 @@ function viewcst(cid){
 function loadlist(){
 	var data1 = {
 			dataType: "json",
-			// opt: "qry",
-			puid: fn_getcookie("puid")
+			ntid: g_ntid
 		};
 	
-
 	daTable({
-		id: "cst_list",
-		url: "/sys_crm/action/mycst_get_list.php",
+		id: "note_list",
+		url: "/sys_common/note/action/note_get_page.php",
 		data: data1,
 		//loading: false,
 		//page: false,
 		pageSize: 20,
 		
 		field: function( fld, val, row, ds ){
-			if("c_name"==fld){
-				return '<a href="javascript:void(0)" onclick="viewcst('+row.c_id+')">'+val+'</a>';
+			if("n_title"==fld){
+				return '<a href="javascript:void(0)" onclick="viewnote('+row.n_id+')">'+val+'</a>';
 			}
 			return val;
 		},
@@ -54,41 +52,38 @@ function loadlist(){
 			// toExcel();
 		},
 		error: function(code,msg,ex){
-			debugger;
+			// debugger;
 		}
 	}).load();
 }
 
 
-/**加载分页按钮
+/**加载便签簿分页按钮
 */
 function loadtab(){
-	var daTab0 = daTab(da("#tabbar").dom[0],"daTab0","myname","",true);
-	daTab0.appendItem("item01","便签分类1","/images/sys_icon/error.png",{
-		click:function(){
+	da.runDB("/sys_common/note/action/notetype2user_get_list.php",{
+		dataType: "json"
 		
-		}
+	},function(data){
+		if("FALSE"!=data){
+			g_notetypedata={};
+			var daTab0 = daTab(da("#tabbar").dom[0],"daTab0","myname","",true);
+			
+			for(var i=0; i<data.length; i++){
+				daTab0.appendItem("item_"+data[i].nt_id, data[i].nt_name, null, {
+					click:function(){
+						g_ntid = this.id.replace("item_", "");
+						loadlist();
+					}
+				});
+			}
+			
+			daTab0.click("item_"+data[0].nt_id);
+		}	
+	},function(msg, code, ex){
+		// debugger;
 	});
 
-	daTab0.appendItem("item02","便签分类2","/images/sys_icon/message.png",{
-		click:function(){
-		
-		}
-	});
-	
-	daTab0.appendItem("item03","便签分类3","/images/sys_icon/ok.png",{
-		click:function(){
-		
-		}
-	});
-	
-	daTab0.appendItem("item04","全部","/images/sys_icon/tables.png",{
-		click:function(){
-		
-		}
-	});
-	
-	daTab0.click("item01");
 }
 
 
@@ -112,6 +107,5 @@ daLoader("daTable,daIframe,daWin,daTab,daKey",function(){
 		
 		listenKey();
 		loadtab();
-		loadlist();
 	});
 });

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<?php include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
-	<title>添加我的便签</title>
+	<title>我的便签</title>
 	<link rel="stylesheet" href="/css/base.css" />
 	<style>
 		td{padding:3px;}
@@ -16,38 +16,35 @@
 		<div class="list_top_tools" style="float:left;">
 			<a class="item" href="javascript:void(0)" onclick="iframeBack();" ><img src="/images/sys_icon/arrow_back.png" /> 返回</a>
 		</div>
-		<div class="list_top_tools">
-			<a class="item" href="javascript:void(0)" onclick="savenote();" ><img src="/images/sys_icon/save.png" /> 保存</a>
-		</div>
+		<div class="list_top_tools"></div>
 	</div>
-	<table class="grid" style="width:100%; height:50px;">
+	<table id="noteform" class="grid" style="display:none; width:100%; height:50px;">
 		<tr >
 			<td class="header" style="width:80px;">标 题</td>
-			<td colspan="3">
-				<input id="n_title" type="text" style="width:300px;" valid="anything,false" validinfo="不能为空"/>
-				<select id="n_ntid"></select>
-				<a href="javascript:void(0)" style="margin-left:10px;" onclick="addnotetype()">添加便签本</a>
+			<td>
+				{n_title}
+			</td>
+			<td class="header" style="width:80px;">便签簿</td>
+			<td>
+				{nt_name}
 			</td>
 		</tr>
 		<tr >
 			<td class="header" >摘 要</td>
 			<td colspan="3">
-				<textarea id="n_abstract" style="width:600px;height:100px;"></textarea>
+				{n_abstract}
 			</td>
 		</tr>
 		<tr >
 			<td class="header" >详细内容</td>
 			<td colspan="3">
-				<textarea id="n_conent" name="n_conent" style="width:600px;height:400px;"></textarea>
+				{n_conent}
 			</td>
 		</tr>
 	</table>
 </body>
 
-<script charset="utf-8" src="/plugin/kindeditor/kindeditor-min.js"></script>
-<script charset="utf-8" src="/plugin/kindeditor/lang/zh_CN.js"></script>
-
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
-<script type="text/javascript" src="js/note_add_item.js"></script>
+<script type="text/javascript" src="js/note_detail.js"></script>
 
 </html>

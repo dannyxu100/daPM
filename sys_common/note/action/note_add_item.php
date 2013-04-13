@@ -2,70 +2,45 @@
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/fn.php";
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
-	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 	
 	date_default_timezone_set('ETC/GMT-8');
 	
 	$puid = fn_getcookie("puid");
-	$puname = fn_getcookie("puname");
+	$ntid = $_POST["n_ntid"];
+	$abstract = isset($_POST["n_abstract"])?$_POST["n_abstract"]:"122";
+	$content = isset($_POST["n_content"])?urldecode($_POST["n_content"]):"122";
 	
-	$db = new DB("da_crm");
+	$db = new DB("da_common");
 	
-	$flds = array();
-	$flds2 = array();
-	
-	foreach($_POST as $key=>$value){
-		switch( $key ){
-			case "dataType":
-			case "wfid":
-			case "btid":
-			case "dbsource":
-				continue;
-				
-			default:
-				array_push( $flds, $key );
-				array_push( $flds2, ":".$key );
-				// Log::out(":".$key."----".urldecode($value));
-				$db->param(":".$key, urldecode($value));
-		}
+	if( 0 == $ntid){
+		$sql = "insert into comm_notetype(nt_name, nt_puid) values('我的便签', :puid)";
+		$db->param(":puid", $puid);
 		
+		$res = $db->insert($sql);
+		$notetype = $db->getone("select @@IDENTITY as nt_id");
+		$ntid = $notetype["nt_id"];
 	}
-	array_push( $flds, "c_createpuid" );
-	array_push( $flds2, ":c_createpuid" );
-	$db->param(":c_createpuid", $puid);
-	array_push( $flds, "c_createpuname" );
-	array_push( $flds2, ":c_createpuname" );
-	$db->param(":c_createpuname", $puname);
-	array_push( $flds, "c_createdate" );
-	array_push( $flds2, ":c_createdate" );
-	$db->param(":c_createdate", date("Y-m-d H:i:s"));
 	
-	$sql = "insert into crm_customer(".implode(", ", $flds).") values(".implode(", ", $flds2).")";
-	// Log::out($sql);
-
-	$db->tran();		//启动事务
+	$sql = "insert into comm_note(n_ntid, n_title, n_abstract, n_content, n_puid, n_date) 
+	values(:n_ntid, :n_title, :n_abstract, :n_content, :puid, :n_date)";
+	$db->param(":n_ntid", $ntid);
+	$db->param(":n_title", $_POST["n_title"]);
+	$db->param(":n_abstract", $abstract);
+	$db->param(":n_content", $content);
+	$db->param(":puid", $puid);
+	$db->param(":n_date", date("Y-m-d H:i:s"));
+	
+	Log::out($ntid);
+	Log::out($_POST["n_title"]);
+	Log::out($abstract);
+	Log::out($content);
+	Log::out($puid);
+	Log::out(date("Y-m-d H:i:s"));
+	Log::out($sql);
 	$res = $db->insert($sql);
-	$cst = $db->getone("select @@IDENTITY as c_id");
-	// Log::out($db->geterror());
+	Log::out($db->geterror());
 	
-	$sql2 = "insert into crm_cst2user(c2u_cid, c2u_puid) values(:cid, :puid)";
-	$param2 = array();
-	array_push( $param2, array(":cid", $cst["c_id"]) );
-	array_push( $param2, array(":puid", $puid) );
-	
-	$db->paramlist($param2);
-	$res = $db->insert($sql2);
-	// Log::out($sql2);
-	// Log::out($db->geterror());
-	
-	if($db->geterror()){
-		$db->back();
-		$db->close();
-		echo 'FALSE';
-	}
-	else{
-		$db->commit();
-		$db->close();
-		echo $res;
-	}
+	$db->close();
+	echo $res?$res:"FALSE";
 ?>

@@ -13,6 +13,7 @@ class DB{
 		"da_workflow" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_workflow"),
 		"da_bizform" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_bizform"),
 		"da_userform" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_userform"),
+		"da_common" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_common"),
 		"da_crm" => Array("host"=>"localhost", "user"=>"root", "pwd"=>"", "db"=>"da_crm")
 	);
 	

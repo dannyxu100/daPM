@@ -5,11 +5,13 @@
 function savelog(){
 	var persent = da("#p_persent").val();
 	
+	g_editor.sync();
+
 	da.runDB("/sys_common/bizlog/action/log_add_item.php",{
 		dataType: "json",
 		bcid: g_bcid,
 		tagname: da("[name=chktag]:checked").val(),
-		content: encodeURIComponent(g_editor.html())
+		content: encodeURIComponent(da("#l_content").val())
 		
 	},function(res){
 		if("FALSE"!=res){
@@ -56,11 +58,26 @@ function initform(){
 	});
 }
 
+var g_editor;
+function loadeditor(){
+	g_editor = KindEditor.create('#l_content', {
+		resizeType : 1,
+		allowPreviewEmoticons : false,
+		fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
+		allowFileManager : true,
+		items : [
+			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+	});
+}
+
 daLoader("daMsg,daIframe,daWin",function(){
 	da(function(){
 		var arrparam = da.urlParams();
 		g_bcid = arrparam["bcid"];
 		
 		initform();
+		loadeditor();
 	});
 });

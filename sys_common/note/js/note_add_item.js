@@ -1,66 +1,93 @@
-﻿var g_bcid = "";
+﻿var g_ntid = "";
+
+/**添加便签簿
+*/
+function addnotetype(){
+	daWin({
+		width: 400,
+		height: 150,
+		title: "添加便签簿",
+		url: "/sys_common/note/notetype_add_item.php",
+		after: function(){
+			loadnotetype();
+		}
+	});
+}
+
 
 /**添加日志
 */
 function savenote(){
-	var persent = da("#p_persent").val();
+	if( !daValid.all() ){
+		return;
+	}
 	
-	da.runDB("/sys_common/bizlog/action/log_add_item.php",{
+	g_editor.sync();
+
+	da.runDB("/sys_common/note/action/note_add_item.php",{
 		dataType: "json",
-		bcid: g_bcid,
-		tagname: da("[name=chktag]:checked").val(),
-		content: encodeURIComponent(g_editor.html())
+		n_title: da("#n_title").val(),
+		n_ntid: da("#n_ntid").val(),
+		n_abstract: da("#n_abstract").val(),
+		n_content: encodeURIComponent(g_editor.html())
 		
 	},function(res){
 		if("FALSE"!=res){
 			alert("添加成功。");
-			back();
+			loadnotetype();
 		}	
 	},function(msg, code, ex){
-		alert(code);
+		// debugger;
 	});
 	
 }
 
-/**初始化控件
+/**加载便签簿下拉
 */
-function initform(){
-	var p_persent=0,
-		obj = da("#p_persent");
+function loadnotetype(){
+	var ntype = da("#n_ntid");
+	ntype.empty();
 	
-	obj.empty();
-	for(var num=p_persent+5; num<105; num=num+5){
-		obj.append('<option>'+ num +'</option>');
-	}
-
-	da("#loguser").text(fn_getcookie("puname"));
-	da("#logdate").text(new Date().format("yyyy-mm-dd hh:nn:ss"));
-	
-	//加载标签可选项
-	da.runDB("/sys_setting/item/action/item_get_list.php",{
-		dataType: "json",
-		itcode: "bizlog_tagtype" 
+	da.runDB("/sys_common/note/action/notetype2user_get_list.php",{
+		dataType: "json"
 		
 	},function(data){
-		if("FALSE"!=data){
-			var objtags = da("#tags");
+		if("FALSE"!=data && 0<data.length){
 			for(var i=0; i<data.length; i++){
-				objtags.append([
-					'<label style="margin-right:5px;">',
-						'<input type="radio" name="chktag" ', 0==i?'checked="true"':'' ,' value="'+ data[i].i_value +'">',
-						data[i].i_name,
-					'</label>'
-				].join(''));
+				ntype.append('<option value="'+ data[i].nt_id +'">'+ data[i].nt_name +'</option>');
 			}
-		}	
+		}
+		else{
+			ntype.append('<option value="0">我的便签</option>');
+		}
+	},function(msg, code, ex){
+		ntype.append('<option value="0">我的便签</option>');
+		// debugger;
 	});
 }
 
-daLoader("daMsg,daIframe,daWin",function(){
+var g_editor;
+/**加载在线编辑器
+*/
+function loadeditor(){
+	g_editor = KindEditor.create('#n_conent', {
+		resizeType : 1,
+		allowPreviewEmoticons : false,
+		fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
+		allowFileManager : true,
+		items : [
+			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+			'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+	});
+}
+
+daLoader("daMsg,daIframe,daWin,daValid",function(){
 	da(function(){
 		var arrparam = da.urlParams();
-		g_bcid = arrparam["bcid"];
+		g_ntid = arrparam["ntid"];
 		
-		initform();
+		loadnotetype();
+		loadeditor();
 	});
 });

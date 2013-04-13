@@ -155,9 +155,18 @@
 			icoPath:	tab按钮小图标路径
 			fnEvents:	tab按钮自定义事件可以以键值对的方式绑定多个{ click:function(){}, mouseover:function(){} }
 		*/
-		appendItem: function( sId, title, icoPath, fnEvents, noClose ){
+		appendItem: function( sId, title, icoPath, fnEvents, noClose/*, data*/){
+			// if( da.isPlainObj(sId) ){
+				// title = sId.title?sId.title:"";
+				// icoPath = sId.icon?sId.icon:"";
+				// fnEvents = sId.event?sId.event:null;
+				// noClose = da.firstValue(sId.close, noClose);
+				// data = sId.data?sId.data:null;
+				// sId = sId.id?sId.id:"";
+			// }
+		
 			var objItem = doc.getElementById( sId ),
-					noClose = ( "undefined" === typeof noClose ) ? this.noClose : noClose;
+				noClose = ( "undefined" === typeof noClose ) ? this.noClose : noClose;
 			
 			if( null != objItem ) return null; 					//alert("daTab提示：daTab可选项对象id重复，请更换。");
 

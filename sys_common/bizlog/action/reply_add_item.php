@@ -8,7 +8,7 @@
 	
 	$bcid=$_POST['bcid'];
 	$lid=$_POST['lid'];
-	$content=$_POST['content'];
+	$content=urldecode($_POST['content']);
 	$puid=fn_getcookie('puid');
 	$puname=fn_getcookie('puname');
 	$nowdate = date("Y-m-d H:i:s");

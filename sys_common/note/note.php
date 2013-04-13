@@ -21,11 +21,6 @@
 <div class="list_top_bar">
 	<div class="list_top_title"></div>
 	<div class="list_top_tools">
-		<select id="tran_search" style="float:left;">
-			<option value="">全部</option>
-		</select>
-		<select id="fld_search" style="float:left;">
-		</select>
 		<input id="key_search" style="float:left;height:20px;" />
 		<a class="item" style="float:left;" href="javascript:void(0)" onclick="clearkey()">清空</a>
 		<a class="item" style="float:left;" href="javascript:void(0)" onclick="searchkey()"><img src="/images/sys_icon/search.png" />搜索</a>
@@ -36,28 +31,24 @@
 	<tbody name="head">
 		<tr>
 			<td style="width:30px;">序</td>
-			<td>客户名称</td>
-			<td style="width:120px;">类型</td>
-			<td style="width:80px;">负责人</td>
-			<td style="width:80px;">手机</td>
-			<td style="width:80px;">电话</td>
+			<td style="width:200px;">标题</td>
+			<td>摘要</td>
+			<td style="width:80px;">日期</td>
 			<td style="width:100px;">&nbsp;</td>
 		</tr>
 	</tbody>
 	<tbody name="body" style="display:none">
 		<tr>
 			<td name="order">{order}</td>
-			<td>{c_name}</td>
-			<td>{c_type}</td>
-			<td>{c_user}</td>
-			<td>{c_phone}</td>
-			<td>{c_telephone}</td>
+			<td>{n_title}</td>
+			<td>{n_abstract}</td>
+			<td fmt="yyyy-mm-dd hh:nn:ss/p">{n_date}</td>
 			<td>{tools}</td>
 		</tr>
 	</tbody>
 	<tbody>
 		<tr>
-			<td colspan="7">
+			<td colspan="5">
 				共<span id="note_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条， 
 				共<span id="note_list_pagecount2" style="color:#c26220;">0</span>&nbsp;页， 
 				当前在第<span id="note_list_pageindex2" style="color:#c26220;">0</span>&nbsp;页　&nbsp; 

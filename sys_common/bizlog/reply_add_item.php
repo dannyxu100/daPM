@@ -34,25 +34,11 @@
 	</table>
 </body>
 
+<script charset="utf-8" src="/plugin/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="/plugin/kindeditor/lang/zh_CN.js"></script>
+
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
 <script type="text/javascript" src="/js/fn.js"></script>
 <script type="text/javascript" src="js/reply_add_item.js"></script>
 
-<script charset="utf-8" src="/plugin/kindeditor/kindeditor-min.js"></script>
-<script charset="utf-8" src="/plugin/kindeditor/lang/zh_CN.js"></script>
-<script>
-	var g_editor;
-	KindEditor.ready(function(K) {
-		g_editor = K.create('#r_conent', {
-			resizeType : 1,
-			allowPreviewEmoticons : false,
-			fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
-			allowFileManager : true,
-			items : [
-				'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-				'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-				'insertunorderedlist', '|', 'emoticons', 'image', 'link']
-		});
-	});
-</script>
 </html>

@@ -1,4 +1,50 @@
 
+/**新建我的便签
+*/
+function addnote(){
+	goto("/sys_common/note/note_add_item.php");
+}
+
+/**查看便签详细信息
+*/
+function viewnote( nid ){
+	daWin({
+		width: 600,
+		height: 400,
+		url: "/sys_common/note/note_detail.php?nid="+ nid
+	});
+}
+
+/**加载我的便签
+*/
+function loadnote(){
+	daTable({
+		id: "note_list",
+		url: "/sys_common/note/action/note_get_page.php",
+		data: {
+			dataType: "json"
+		},
+		//loading: false,
+		//page: false,
+		pageSize: 20,
+		
+		field: function( fld, val, row, ds ){
+			if("n_title"==fld){
+				return '<a href="javascript:void(0)" onclick="viewnote('+row.n_id+')" title="'+ row.n_abstract +'">'+val+'</a>';
+			}
+			return val;
+		},
+		loaded: function( idx, xml, json, ds ){
+			//link_click("#tb_list tbody[name=details_auto] tr");
+			// toExcel();
+		},
+		error: function(code,msg,ex){
+			// debugger;
+		}
+	}).load();
+}
+
+
 function scrolltop(obj){
 	var daObj = da(obj);
 	if (0 != da(window).scrollTop()) {
@@ -163,12 +209,13 @@ function scrollevent(){
 	});
 }
 
-daLoader("daMsg,daIframe,daWin,daWheel",function(){
+daLoader("daMsg,daIframe,daWin,daWheel,daTable",function(){
 	da(function(){
 		var arrparam = da.urlParams();
 		g_bcid = arrparam["bcid"];
 		
 		loadloglist();
+		loadnote();
 		
 		scrollevent();
 		// scrolltop("#scrolltop");
