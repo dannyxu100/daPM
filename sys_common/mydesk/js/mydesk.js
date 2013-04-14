@@ -23,10 +23,12 @@ function scrolltop(obj){
 
 var g_noticetimer = null;
 function noticescroll() {
-	da("#noticelist").act({
+	da("#noticelist").stop(true,true).act({
 		marginTop: "-30px"
 		
-	}, 200, function() {
+	}, 
+	200, 
+	function() {
 		da(this).css({ marginTop: "0px" });
 		da( "li:first", this ).appendTo(this);
 	});
