@@ -1,19 +1,23 @@
-<?php 
+﻿<?php 
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
 	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 	
-	$lids = $_POST["lids"];
+	$db = new DB("da_common");
+	$sql = "select * from comm_noticetype ";
 	
-	$db = new DB("da_bizform");
-	$sql = "select * from b_bizreply, da_powersys.p_user 
-	where r_puid=pu_id 
-	and r_lid in (".$lids.") 
-	order by r_lid desc, r_id desc";
+	if(isset($_POST["ntid"])){
+		$sql .= " where nt_id=:ntid ";
+		$db->param(":ntid", $_POST["ntid"]);
+	}
+	else if(isset($_POST["ntpid"])){
+		$sql .= " where nt_pid=:ntpid ";
+		$db->param(":ntpid", $_POST["ntpid"]);
+	}
+	$sql .= " order by nt_sort asc, nt_pid asc";
 	
 	$set = $db->getlist($sql);
-	// $log = new Log();
-	// $log->write($db->geterror());
+	// Log::out($db->geterror());
 	
 	$db->close();
 

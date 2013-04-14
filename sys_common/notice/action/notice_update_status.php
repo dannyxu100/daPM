@@ -4,22 +4,16 @@
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
 	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 
-	$puid = fn_getcookie("puid");
+	date_default_timezone_set('ETC/GMT-8');
 	
 	$db = new DB("da_common");
+	$db->param(":status", $_POST["status"]);
+	$db->param(":nid", $_POST["nid"]);
 	
-	$sql = "select * from comm_notetype where nt_puid=:puid order by nt_id desc";
-	
-	$db->param(":puid", $puid);
-	$set = $db->getlist($sql);
+	$res = $db->update("update comm_notice set n_status=:status where n_id=:nid");
 	
 	$db->close();
-	
-	// $log->write(var_export($set,true));
-	if( is_array($set) && 0<count($set)){
-		echo json_encode($set);
-	}
-	else{
-		echo "FALSE";
-	}
+	// Log::out($db->geterror());
+
+	echo $res?$res:"FALSE";
 ?>

@@ -26,19 +26,21 @@
 			<td colspan="3">
 				<input id="n_title" type="text" style="width:300px;" valid="anything,false" validinfo="不能为空"/>
 				<select id="n_ntid"></select>
-				<a href="javascript:void(0)" style="margin-left:10px;" onclick="addnotetype()">添加便签本</a>
+				<a href="javascript:void(0)" onclick="addnotetype();" > 添加便签本</a>
 			</td>
 		</tr>
 		<tr >
 			<td class="header" >摘 要</td>
 			<td colspan="3">
 				<textarea id="n_abstract" style="width:600px;height:100px;"></textarea>
+				<br/>
+				(注: 摘要限1000字内)
 			</td>
 		</tr>
 		<tr >
 			<td class="header" >详细内容</td>
 			<td colspan="3">
-				<textarea id="n_conent" name="n_conent" style="width:600px;height:400px;"></textarea>
+				<textarea id="n_content" name="n_content" style="width:600px;height:400px;"></textarea>
 			</td>
 		</tr>
 	</table>

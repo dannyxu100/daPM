@@ -229,16 +229,20 @@
 		//item绑定事件
 		bindEvent: function(obj,fnEvents,isMiniBt){
 			for(var evtName in fnEvents){								//绑定自定义事件函数
-				//da( obj ).bind( evtName, fnEvents[evtName] );
-				daEventBind(obj,evtName,fnEvents[evtName],false);
+				// daEventBind(obj, evtName, fnEvents[evtName], false);
+				da(obj).bind(evtName, fnEvents[evtName]);
 			}
 			
 			if(!isMiniBt){
 					var context = this;						//获取上下文对象
-					daEventBind(obj,"click",function(){
+					
+					// daEventBind(obj, "click", function(){
+						// context.selectItem(obj);		//给选项卡对象绑定动态样式点击事件
+					// },false);
+					
+					da(obj).bind("click", function(){
 						context.selectItem(obj);		//给选项卡对象绑定动态样式点击事件
-						
-					},false);
+					});
 			}
 		},
 		

@@ -3,7 +3,7 @@
  <HEAD>
 	<?php include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
 	
-	<TITLE>系统常量可选项管理</TITLE>
+	<TITLE>通知公告管理</TITLE>
 	<link rel="stylesheet" href="/css/base.css"/>
 	<link rel="stylesheet" href="/plugin/ztree/zTreeStyle.css" type="text/css"/>
 	<link rel="stylesheet" href="/css/jquery-ui-1.9.2.custom.min.css"/>
@@ -16,20 +16,15 @@
 			vertical-align:top;
 			*vertical-align:middle
 		}
-		
-		.header {height:30px; line-height:30px; padding:0px 15px; font-weight:bold; border-bottom:1px solid #ccc; background:#f0f0f0;}
-		.tableform>tbody>tr>td{padding:3px; vertical-align:top;}
-		
-		#tabbar{padding-top:5px;}
-		
+		.topheader {height:30px; line-height:30px; padding:0px 15px; font-weight:bold; border-bottom:1px solid #ccc; background:#f0f0f0;}
 	</style>
  </HEAD>
 <BODY>
 <div>
-	<div class="header">可选项管理</div>
+	<div class="topheader">通知公告管理</div>
 	<table class="tablesolid" style="width:100%">
 		<tr>
-			<td rowspan="4" style="width:250px;vertical-align:top;"><ul id="treeitemtype" class="ztree"></ul></td>
+			<td rowspan="4" style="width:250px;vertical-align:top;"><ul id="treenoticetype" class="ztree"></ul></td>
 		</tr>
 		<tr>
 			<td style="vertical-align:top;">
@@ -40,25 +35,25 @@
 						<div class="list_top_bar">
 							<div class="list_top_title">基本信息</div>
 							<div class="list_top_tools">
-								<a class="item" href="javascript:void(0)" onclick="updateitemtype();" ><img src="/images/sys_icon/save.png" /> 保存</a>
+								<a class="item" href="javascript:void(0)" onclick="updatenoticetype();" ><img src="/images/sys_icon/save.png" /> 保存</a>
 							</div>
 						</div>
 						
 						<table class="tablesolid" style="width:;">
 							<tr>
 								<td class="header" style="width:60px;">名称</td>
-								<td><input id="it_name" style="width:200px;" /><input id="it_id" type="hidden"/></td>
+								<td><input id="nt_name" style="width:200px;" /><input id="nt_id" type="hidden"/></td>
 								<td class="header" style="width:80px;">排序</td>
-								<td><input id="it_sort"/></td>
+								<td><input id="nt_sort"/></td>
 							</tr>
 							<tr>
 								<td class="header">编码</td>
-								<td colspan="3"><input id="it_code" style="width:200px;"/></td>
+								<td colspan="3"><input id="nt_code" style="width:200px;"/></td>
 							</tr>
 							<tr>
 								<td class="header">备注</td>
 								<td colspan="3">
-									<textarea id="it_remark" name="wf_remark" style="width:500px; height:150px;" ></textarea>
+									<textarea id="nt_remark" name="nt_remark" style="width:500px; height:150px;" ></textarea>
 								</td>
 							</tr>
 						</table>
@@ -69,35 +64,32 @@
 						<div class="list_top_bar">
 							<div class="list_top_title">列表信息</div>
 							<div class="list_top_tools">
-								<a class="item" href="javascript:void(0)" onclick="additem();" ><img src="/images/sys_icon/add.png" /> 添加</a>
-								<a class="item" href="javascript:void(0)" onclick="deleteitem();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
+								<a class="item" href="javascript:void(0)" onclick="addnotice();" ><img src="/images/sys_icon/add.png" /> 添加</a>
 							</div>
 						</div>
 						
 						<table id="tb_list" style="width:100%;">
 							<tbody name="head">
 								<tr>
-									<td style="text-align:center; width:20px;"><input type="checkbox" /></td>
 									<td style="width:20px;">序</td>
-									<td style="width:200px;">名称</td>
-									<td style="width:100px;">选项值</td>
+									<td style="width:200px;">标题</td>
 									<td style="width:50px;">排序</td>
-									<td>备注</td>
+									<td>摘要</td>
+									<td style="width:80px">&nbsp;</td>
 								</tr>
 							</tbody>
 							<tbody name="body" style="display:none">
-								<tr value="{p_id}">
-									<td style="text-align:center;"><input type="checkbox" name="chkitem" value="{i_id}" /></td>
+								<tr value="{n_id}">
 									<td name="order">{order}</td>
-									<td name="i_name" >{i_name}</td>
-									<td name="i_value" >{i_value}</td>
-									<td name="i_sort" >{i_sort}</td>
-									<td name="i_remark">{i_remark}</td>
+									<td name="n_title" >{n_title}</td>
+									<td name="n_sort" >{n_sort}</td>
+									<td name="n_abstract" >{n_abstract}</td>
+									<td name="n_remark">{tools}</td>
 								</tr>
 							</tbody>
 							<tbody name="foot">
 								<tr>
-									<td colspan="6">
+									<td colspan="5">
 										共<span id="tb_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条，
 										共<span id="tb_list_pagecount2" style="color:#c26220">0</span>&nbsp;页，
 										当前在第<span id="tb_list_pageindex2" style="color:#c26220">0</span>&nbsp;页　
@@ -124,4 +116,4 @@
 <script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="/js/jquery.ui.datepicker-zh-CN.js"></script>
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
-<script type="text/javascript" src="js/item_manage.js"></script>
+<script type="text/javascript" src="js/notice_manage.js"></script>

@@ -18,6 +18,7 @@
 		</div>
 	</div>
 	<table class="tablesolid" style="width:100%; height:50px;">
+		<!--
 		<tr >
 			<td class="header" style="width:50px;">进&nbsp;&nbsp;&nbsp;&nbsp;度:</td>
 			<td colspan="3">
@@ -27,6 +28,7 @@
 				</select> ％
 			</td>
 		</tr>
+		-->
 		<tr >
 			<td class="header" >标&nbsp;&nbsp;&nbsp;&nbsp;签:</td>
 			<td colspan="3">

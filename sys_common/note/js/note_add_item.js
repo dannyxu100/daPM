@@ -5,7 +5,7 @@
 function addnotetype(){
 	daWin({
 		width: 400,
-		height: 150,
+		height: 400,
 		title: "添加便签簿",
 		url: "/sys_common/note/notetype_add_item.php",
 		after: function(){
@@ -29,7 +29,7 @@ function savenote(){
 		n_title: da("#n_title").val(),
 		n_ntid: da("#n_ntid").val(),
 		n_abstract: da("#n_abstract").val(),
-		n_content: encodeURIComponent(g_editor.html())
+		n_content: encodeURIComponent(da("#n_content").val())
 		
 	},function(res){
 		if("FALSE"!=res){
@@ -70,7 +70,7 @@ var g_editor;
 /**加载在线编辑器
 */
 function loadeditor(){
-	g_editor = KindEditor.create('#n_conent', {
+	g_editor = KindEditor.create('#n_content', {
 		resizeType : 1,
 		allowPreviewEmoticons : false,
 		fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',

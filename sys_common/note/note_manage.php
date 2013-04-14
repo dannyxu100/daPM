@@ -63,5 +63,5 @@
 
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
 <script type="text/javascript" src="/js/fn.js"></script>
-<script type="text/javascript" src="js/note.js"></script>
+<script type="text/javascript" src="js/note_manage.js"></script>
 

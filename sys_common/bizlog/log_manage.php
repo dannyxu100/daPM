@@ -18,7 +18,7 @@
 		</div>
 	</div>
 	
-	<div id="listPad" style="padding:5px;"></div>
+	<div id="listPad" style="padding:5px;background:#f7f7f7;"></div>
 	
 	<div id="logtemplet" style="display:none;">
 		<ul id="log_{l_id}" class="logitem" >
@@ -34,13 +34,13 @@
 			<div class="pl" >
 				<div class="pl_img"></div>
 			</div>
-			<div class="content" >
+			<div class="content daRadius" >
 				{l_content}
+				<div class="logtoolbar" >
+					<a href="javascript:void(0)" onclick="addreply('{l_bcid}',{l_id})">留言</a>
+				</div>
 			</div>
 			<div style="clear:both;"></div>
-			<div class="logtoolbar" >
-				<a href="javascript:void(0)" onclick="addreply({l_id})">回复</a>
-			</div>
 			<div id="reply_{l_id}" class="logreply" ></div>
 		</ul>
 	</div>
@@ -53,9 +53,12 @@
 			<div class="pr">
 				<div class="pr_img"></div>
 			</div>
-			<div class="content" >
+			<div class="content daRadius" >
 				<div class="rdate">{r_date}</div>
 				{r_content}
+				<div class="replytoolbar" >
+					<a href="javascript:void(0);" onclick="addreply('{r_bcid}','{r_lid}')">回复</a>
+				</div>
 			</div>
 			<div style="clear:both;"></div>
 		</ul>

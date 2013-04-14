@@ -1,4 +1,4 @@
-﻿var g_itid = "";
+﻿var g_ntid = "";
 
 var setting = {
 	view: {
@@ -27,23 +27,23 @@ var setting = {
 };
 
 function beforeEditName(treeId, treeNode) {
-	var zTree = $.fn.zTree.getZTreeObj("treeitemtype");
+	var zTree = $.fn.zTree.getZTreeObj("treenoticetype");
 	zTree.selectNode(treeNode);
 	return true; //confirm("进入【" + treeNode.name + "】的编辑状态吗？");
 }
 function beforeRemove(treeId, treeNode) {
-	var zTree = $.fn.zTree.getZTreeObj("treeitemtype");
+	var zTree = $.fn.zTree.getZTreeObj("treenoticetype");
 	zTree.selectNode(treeNode);
 	
 	confirm("确认删除分类【" + treeNode.name + "】吗？",
 	function(){
-		da.runDB("/sys_setting/item/action/itemtype_get_list.php",{			//检查是否拥有下级部门
-			itpid: treeNode.id
+		da.runDB("/sys_common/notice/action/noticetype_get_list.php",{			//检查是否拥有下级部门
+			ntpid: treeNode.id
 		},
-		function(res){debugger;
+		function(res){
 			if('FALSE'==res){
-				da.runDB("/sys_setting/item/action/itemtype_delete_item.php",{
-				 itid: treeNode.id
+				da.runDB("/sys_common/notice/action/noticetype_delete_item.php",{
+					ntid: treeNode.id
 				},
 				function(res){
 					if("FALSE"==res){
@@ -71,7 +71,7 @@ function beforeRename(treeId, treeNode, newName) {
 	className = (className === "dark" ? "":"dark");
 	if (newName.length == 0) {
 		alert("节点名称不能为空.");
-		var zTree = $.fn.zTree.getZTreeObj("treeitemtype");
+		var zTree = $.fn.zTree.getZTreeObj("treenoticetype");
 		zTree.editName(treeNode)
 		// setTimeout(function(){zTree.editName(treeNode)}, 10);
 		return false;
@@ -104,10 +104,10 @@ function addHoverDom(treeId, treeNode) {
 	
 	var btn = $("#addBtn_"+treeNode.id);				//"添加按钮" click事件
 	if (btn) btn.bind("click", function(){
-		var zTree = $.fn.zTree.getZTreeObj("treeitemtype");
+		var zTree = $.fn.zTree.getZTreeObj("treenoticetype");
 
-		da.runDB("/sys_setting/item/action/itemtype_add_item.php",{
-			itpid: treeNode.id,
+		da.runDB("/sys_common/notice/action/noticetype_add_item.php",{
+			ntpid: treeNode.id,
 			name: "新建分类"
 		},
 		function(res){
@@ -127,17 +127,17 @@ function removeHoverDom(treeId, treeNode) {
 
 /**添加可选项
 */
-function additem(){
-	if(""==g_itid){
+function addnotice(){
+	if(""==g_ntid){
 		alert("请先选择分类。");
 		return;
 	}
 
 	daWin({
-		width: 600,
-		height: 420,
-		url: "/sys_setting/item/item_add.php?itid="+ g_itid,
-		title: "新添加可选项",
+		width: 800,
+		height: 600,
+		url: "/sys_common/notice/notice_add.php?ntid="+ g_ntid,
+		title: "新建通知公告",
 		after: function(){
 			loadlist();
 		}
@@ -146,8 +146,8 @@ function additem(){
 
 /**删除可选项
 */
-function deleteitem(){
-	if(!g_itid){
+function deletenotice(){
+	if(!g_ntid){
 		alert("请先选择分类。");
 		return;
 	}
@@ -159,8 +159,8 @@ function deleteitem(){
 	
 	if( iids ){
 		confirm("确认删除选中的可选项吗？",function(){
-			da.runDB("/sys_setting/item/action/item_delete_list.php",{
-				itid: g_itid,
+			da.runDB("/sys_common/notice/action/notice_delete_list.php",{
+				itid: g_ntid,
 				iids: iids.join(",")
 			},function(res){
 				if("FALSE" == res){
@@ -175,28 +175,82 @@ function deleteitem(){
 	}
 }
 
-/**加载可选项列表
+/**查看通知公告详细信息
+*/
+function viewnotice(nid){
+	daWin({
+		width: 800,
+		height: 600,
+		title: "通知公告详细信息",
+		url: "/sys_common/notice/notice_detail.php?nid="+ nid,
+		after: function(){
+		
+		}
+	});
+}
+
+function closenotice(obj, nid){
+	da.runDB("/sys_common/notice/action/notice_update_status.php",{
+		nid: nid,
+		status: "CLOSE"
+		
+	},function(res){
+		if("FALSE" != res){
+			alert("禁用成功");
+			loadlist();
+		}
+	});
+}
+
+function opennotice(obj, nid){
+	da.runDB("/sys_common/notice/action/notice_update_status.php",{
+		nid: nid,
+		status: "OPEN"
+		
+	},function(res){
+		if("FALSE" != res){
+			alert("启用成功");
+			loadlist();
+		}
+	});
+}
+
+/**加载通知公告列表
 */
 function loadlist(){
 	daTable({
 		id: "tb_list",
-		url: "/sys_setting/item/action/item_get_page.php",
+		url: "/sys_common/notice/action/notice_get_page.php",
 		data: {
 			dataType: "json",
-			// opt: "qry",
-			itid: g_itid
+			ntid: g_ntid
 		},
 		//loading: false,
 		//page: false,
 		pageSize: 20,
 		
 		field: function( fld, val, row, ds ){
+			if( "n_title" == fld ){
+				val = '<a href="javascript:void(0)" onclick="viewnotice('
+				+ row.n_id +')" title="'+ row.n_subhead +'">'+ val +'</a>';
+			}
+			else if( "tools" ==fld){
+				if( "OPEN" == row.n_status ){
+					val = '<a href="javascript:void(0)" onclick="closenotice(this,'+ row.n_id +')">已启用</a>';
+				}
+				else{
+					val = '<a href="javascript:void(0)" style="color:#f00;" onclick="opennotice(this,'+ row.n_id +')">已禁用</a>';
+				}
+			}
 			return val;
 		},
 		loaded: function( idx, xml, json, ds ){
 			//link_click("#tb_list tbody[name=details_auto] tr");
 			// toExcel();
 			autoframeheight();
+		},
+		error: function(code,msg,ex){
+			debugger;
 		}
 	}).load();
 }
@@ -204,9 +258,9 @@ function loadlist(){
 /**加载分类基本信息
 */
 function loadinfo(){
-	da.runDB("/sys_setting/item/action/itemtype_get_item.php",{
+	da.runDB("/sys_common/notice/action/noticetype_get_item.php",{
 		dataType: "json",
-		itid: g_itid
+		ntid: g_ntid
 	},
 	function(res){
 		if("FALSE"!= res){
@@ -220,21 +274,21 @@ function loadinfo(){
 /**点击树节点事件
 */
 function clicknode(treeId, treeNode){
-	g_itid = treeNode.id;
+	g_ntid = treeNode.id;
 
 	loadinfo();
 	loadlist();
 }
 
-/** 修改部门信息
+/** 修改公告分类基本信息
 */
-function updateitemtype(){
-	da.runDB("/sys_setting/item/action/itemtype_update_item.php",{
-		itid: da("#it_id").val(),
-		itname: da("#it_name").val(),
-		itcode: da("#it_code").val(),
-		itsort: da("#it_sort").val(),
-		itremark: da("#it_remark").val()
+function updatenoticetype(){
+	da.runDB("/sys_common/notice/action/noticetype_update_item.php",{
+		ntid: da("#nt_id").val(),
+		ntname: da("#nt_name").val(),
+		ntcode: da("#nt_code").val(),
+		ntsort: da("#nt_sort").val(),
+		ntremark: da("#nt_remark").val()
 	},
 	function(res){
 		if(res=="FALSE"){
@@ -247,23 +301,24 @@ function updateitemtype(){
 	});
 }
 
-/*加载左边部门数据*/
+/**加载公告分类树
+*/
 function loadtree(){
-	da.runDB("/sys_setting/item/action/itemtype_get_list.php",{
-		dataType: "json",
+	da.runDB("/sys_common/notice/action/noticetype_get_list.php",{
+		dataType: "json"
 	},
 	function(data){
 		var zNodes = [];
 		for(var i=0; i<data.length; i++){
 			zNodes.push({
-				id: data[i].it_id,
-				pId: data[i].it_pid,
-				name: data[i].it_name,
+				id: data[i].nt_id,
+				pId: data[i].nt_pid,
+				name: data[i].nt_name,
 				open: true
 			});
 		}
 		
-		$.fn.zTree.init($("#treeitemtype"), setting, zNodes);
+		$.fn.zTree.init($("#treenoticetype"), setting, zNodes);
 		
 	});
 }
@@ -279,7 +334,7 @@ function loadtab(){
 		}
 	});
 
-	daTab0.appendItem("item02","可选项列表","",{
+	daTab0.appendItem("item02","公告列表","",{
 		click:function(){
 			da("#pad_type").hide();
 			da("#pad_list").show();

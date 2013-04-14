@@ -5,7 +5,7 @@
 */
 function addlog(){
 	daWin({
-		width:590,
+		width:600,
 		height:600,
 		url: "/sys_common/bizlog/log_add_item.php?bcid="+ g_bcid,
 		back: function(){
@@ -16,11 +16,11 @@ function addlog(){
 
 /**添加日志回复
 */
-function addreply(lid){
+function addreply(bcid, lid){
 	daWin({
-		width:590,
+		width:550,
 		height:500,
-		url: "/sys_common/bizlog/reply_add_item.php?bcid="+ g_bcid +"&lid="+ lid,
+		url: "/sys_common/bizlog/reply_add_item.php?bcid="+ bcid +"&lid="+ lid,
 		back: function(){
 			loadloglist();
 		}
@@ -42,6 +42,10 @@ function loadreplylist(){
 				da( "#reply_"+ data[i].r_lid ).append(replyhtml.replace(/{\w*}/g, 
 				function( match, idx, self ){					//替换日志模板内容
 					switch(match){
+						case "{r_bcid}":
+							return data[i].r_bcid;
+						case "{r_lid}":
+							return data[i].r_lid;
 						case "{userico}":
 							return data[i].pu_icon?data[i].pu_icon:"/uploads/userico/default.png";
 						case "{puname}":
@@ -78,7 +82,9 @@ function loadloglist(){
 				function( match, idx, self ){					//替换日志模板内容
 					switch(match){
 						case "{dot}":
-							return 0==i?'<img src="/images/sys_icon/dot1.png" />':'<img src="/images/sys_icon/dot0.png" />';
+							return 0==i?'<img src="/images/dot1.png" />':'<img src="/images/dot0.png" />';
+						case "{l_bcid}":
+							return data[i].l_bcid;
 						case "{l_id}":
 							return data[i].l_id;
 						case "{userico}":

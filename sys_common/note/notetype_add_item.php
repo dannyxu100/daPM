@@ -11,15 +11,41 @@
 
 </head>
 <body>
-	<table class="tablesolid" style="width:100%; margin-top:10px;">
+	<table class="grid" style="width:100%; margin-top:10px;">
 		<tr >
-			<td class="header" style="width:40px;">名 称</td>
+			<td id="tagtxt" class="header" style="width:80px;">新建便签簿</td>
 			<td>
-				<input id="nt_name" type="text" style="margin-right:10px; width:200px;"/>
+				<input id="nt_name" type="text" style="margin-right:10px; width:160px;"/>
 				<a class="bt_menu" style="display:inline-block; padding:2px 5px;" href="javascript:void(0)" 
 				onclick="savenotetype();" ><img src="/images/sys_icon/save.png" /> 保存</a>
 			</td>
 		</tr>
+	</table>
+	<table id="notetype_list" style="width:100%;">
+		<tbody name="head">
+			<tr>
+				<td style="width:30px;">序</td>
+				<td>便签簿</td>
+				<td style="width:80px">&nbsp;</td>
+			</tr>
+		</tbody>
+		<tbody name="body" style="display:none">
+			<tr>
+				<td>{order}</td>
+				<td>{nt_name}</td>
+				<td>{tools}</td>
+			</tr>
+		</tbody>
+		<tbody>
+			<tr>
+				<td colspan="3">
+					共<span id="notetype_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条， 
+					共<span id="notetype_list_pagecount2" style="color:#c26220;">0</span>&nbsp;页， 
+					当前在第<span id="notetype_list_pageindex2" style="color:#c26220;">0</span>&nbsp;页　&nbsp; 
+					<span id="notetype_list_pageinfo" style="color:#c26220;">&nbsp;</span> 
+				</td>
+			</tr>
+		</tbody>
 	</table>
 </body>
 

@@ -4,7 +4,7 @@
 	description:	分页条daPage样式
 
 */
-.daPage { display:inline-block; vertical-align:middle; font-size: 12px; margin:2px 0px;}
+.daPage {display:inline-block; *zoom:1; *display:inline; vertical-align:middle; font-size: 12px; margin:2px 0px;}
         
 .daPage a {
 	text-decoration: none;

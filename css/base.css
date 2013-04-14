@@ -1,4 +1,8 @@
 @charset "utf-8";
+/* 要注意表单元素并不继承父级 font 的问题 */
+body,button,input,select,textarea{
+	font:12px/1.5 tahoma,arial,\5b8b\4f53;
+}
 
 .tablesolid, .grid{ border-right:1px solid #f0f0f0; border-top:1px solid #f0f0f0; }
 .tablesolid>tbody>tr>td, 
@@ -48,7 +52,7 @@ td.header { padding:0px 10px; color:#666; background:#f5f5f5; text-align:right; 
 #userico .userinfo_list ul{ height:22px; line-height:22px; font-weight:bold;}
 
 /***** 置顶按钮 *******/
-#scrolltop {
+#scrolltop,#scrolltop2 {
 	display:none; position:fixed; bottom:10px; right:10px;
 	width:80px; height:50px;
 	background:url(/images/top.gif);
@@ -58,12 +62,17 @@ td.header { padding:0px 10px; color:#666; background:#f5f5f5; text-align:right; 
 	-moz-opacity:0.2;			/*值域为[0, 1]	 */
 	opacity:0.2;				/*值域为[0, 1] 	 */
 }
-#scrolltop:hover {
+#scrolltop:hover,#scrolltop2:hover {
 	filter:alpha(opacity=80);
 	-moz-opacity:0.8;
 	opacity:0.8;
 }
 
+#scrolltop2 {
+	display:none; position:absolute; bottom:60px; right:20px;
+	background:url(/images/top2.gif);
+	width:40px; height:25px;
+}
 /******** 按钮 *********/
 a.bt_menu{display:block;margin:2px;padding:5px; font-weight:bold; color:#444; border:1px solid #999;background:#ddd url(/images/bar_bg.jpg);}
 a.bt_menu:hover { text-decoration:none;background-image:none;background-color:#fff;}
@@ -99,25 +108,27 @@ a.ico_tool{display:none;}
 a.attachitem{ text-decoration:underline; margin-left:10px;}
 
 /******** 业务单日志列表 *********/
-.logitem{padding-left:100px; width:800px; position:relative; overflow:hidden;}
-.logitem .ico{float:left;width:50px; height:80px;}
-.logitem .ico img {width:50px; height:50px;border:1px solid #666;}
-.logitem .ico .txt {width:50px; height:22px; line-height:22px; font-weight:bold; text-align:center; overflow:hidden;}
+.logitem{padding-left:100px; width:700px; position:relative; overflow:hidden;}
+.logitem .ico{float:left;width:50px;}
+.logitem .ico img {width:50px; height:50px; border:1px solid #666;}
+.logitem .ico .txt {width:50px; font-weight:bold; text-align:center; overflow:hidden;}
 .logitem .pl{float:left; position:relative; width:16px; height:50px;}
-.logitem .pl .pl_img{position:absolute; top:5px; left:2px; width:15px;height:12px;background:url(/images/log_pointer.jpg) 0px 0px no-repeat;}
-.logitem .content{float:left; width:550px; border:1px solid #666; padding:5px; overflow:hidden;}
-.logitem .logtoolbar{ width:625px; text-align:right; margin-bottom:15px;}
+.logitem .pl .pl_img{position:absolute; top:10px; left:2px; width:15px;height:12px;background:url(/images/log_pointer.gif) 0px 0px no-repeat;}
+.logitem .content{width:550px; padding:5px; margin-bottom:10px; overflow:hidden; border:1px solid #999; background:#fff; }
+.logitem .logtoolbar{ width:550px; text-align:right; margin-top:5px;}
 .logitem .logtoolbar a{margin-right:10px;}
 
-.logreply{width:705px;}
-.logreply .item{width:705px; margin:10px 5px;}
-.logreply .ico{float:right;width:50px; height:80px;}
+.logreply{width:695px; padding-bottom:30px; margin-bottom:30px; border-bottom:1px dashed #ddd;}
+.logreply .item{width:695px;}
+.logreply .ico{float:right;width:50px;}
 .logreply .ico img {width:50px; height:50px;}
-.logreply .ico .txt {width:50px; height:22px; line-height:22px; font-weight:bold; text-align:center; overflow:hidden;}
+.logreply .ico .txt {width:50px; font-weight:bold; text-align:center; overflow:hidden;}
 .logreply .pr{float:right; position:relative; width:16px; height:50px;}
-.logreply .pr .pr_img{position:absolute; top:5px; left:-2px; width:15px;height:12px;background:url(/images/log_pointer.jpg) -15px 0px no-repeat;}
-.logreply .content{float:right; width:570px; border:1px solid #ccc; padding:5px; overflow:hidden;}
-.logreply .content .rdate{color:#aaa; border-bottom:1px #eee dashed; margin-bottom:10px;}
+.logreply .pr .pr_img{position:absolute; top:10px; left:-1px; width:15px;height:12px;background:url(/images/log_pointer.gif) -15px 0px no-repeat;}
+.logreply .content{float:right; width:500px; padding:5px; margin-bottom:10px; overflow:hidden; border:1px solid #ccc; background:#fff;}
+.logreply .replytoolbar{ width:500px; text-align:right; margin-top:5px;}
+.logreply .replytoolbar a{margin-right:10px;}
+.logreply .content .rdate{color:#aaa; margin-bottom:10px;}
 
 .logitem .line {position:absolute; left:15px; top:0px; width:2px; background:#b6e1a5; height:5000px;}
 .logitem .line .dot{position:absolute; left:-7px; top:0px; width:16px; height:16px;}
@@ -128,3 +139,17 @@ a.attachitem{ text-decoration:underline; margin-left:10px;}
 .doc_pad{padding:5px;}
 .doc_title { font-size:22px; font-weight:bold;}
 .doc_infobar{ font-size:14px; color:#999; margin:5px 0px 10px 0px; border-bottom:1px dashed #ccc;}
+
+/********** 我的桌面 ************/
+.shadowbox{margin:5px;}
+.shadowbox .list_top_bar {padding:5px 10px; background:#f5f5f5;}
+.shadowbox .list_top_bar .list_top_title{font-weight:bold;color:#444; font-size:14px}
+
+#logbox{border:1px solid #f0f0f0; background:#f7f7f7;height:800px; overflow:scroll; position:relative}
+#logpad{width:740px; overflow:hidden; position:relative;}
+#loadingmsg{display:none; height:50px; line-height:50px; background:#fff281; text-align:center;}
+
+#notice_scrollpad{height:280px; overflow:hidden;}
+#noticelist{height:280px; padding:5px; }
+#noticelist li {padding:5px 0px; line-height:22px; border-bottom:1px dashed #ddd;}
+#noticelist li:first-child{padding:5px 0px 5px 20px; font-weight:bold; background:url(/images/menu_icon/speaker.png) 0px 8px no-repeat;}

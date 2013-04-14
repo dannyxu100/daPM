@@ -10,76 +10,74 @@
 	<table style="width:100%;">
 		<tr>
 			<td style="width:770px; vertical-align:top;">
-				<div id="shadowbox1" style="margin:5px;">
-					<div id="logbox" style="border:1px solid #f0f0f0;height:800px; overflow:scroll; position:relative">
-						<div class="list_top_bar" style="padding:5px 10px; background:#f5f5f5;">
-							<div class="list_top_title" style="font-weight:bold;color:#69c; font-size:14px">最新网建日志</div>
+				<div id="shadowbox1" class="shadowbox">
+					<div id="logbox">
+						<div class="list_top_bar">
+							<div class="list_top_title">最新日志</div>
 							<div id="righttools" class="list_top_tools"></div>
 						</div>
-						<div id="logpad" style="width:740px; overflow:hidden; position:relative">
+						<div id="logpad">
 							<div id="listPad" style="padding:5px;"></div>
 							<div id="loadingbar">
-								<div id="loadingmsg" style="display:none; height:50px; line-height:50px; background:#fff281; text-align:center;">
+								<div id="loadingmsg">
 									<img src="/images/loading.gif" style="vertical-align:middle;"/> 数据加载中...
 								</div>
-								<a href="javascript:void(0)" class="bt_menu" style="text-align:center;" onclick="loadloglist()">显示更多</a>
+								<a href="javascript:void(0)" class="bt_menu" style="text-align:center;" onclick="loadloglist()">点击显示更多</a>
 							</div>
 						</div>
-						<div id="scrolltop"></div>
 					</div>
+					
+					<div id="scrolltop2"></div>
 				</div>
 				
 			</td>
 			<td style="width:500px; vertical-align:top;">
-				<div id="shadowbox2" style="margin:5px;">
-					<div id="msgbox">
-						<div class="list_top_bar" style="padding:5px 10px; background:#f5f5f5;">
-							<div class="list_top_title" style="font-weight:bold;color:#69c; font-size:14px">我的备忘录</div>
-							<div id="righttools" class="list_top_tools">
-								<a class="item" href="javascript:void(0)" onclick="addnote();" ><img src="/images/sys_icon/add.png" /> 新建便签</a>
-							</div>
+				<div id="shadowbox2" class="shadowbox">
+					<div class="list_top_bar">
+						<div class="list_top_title">我的备忘录</div>
+						<div id="righttools" class="list_top_tools">
+							<a class="item" href="javascript:void(0)" onclick="addnote();" ><img src="/images/sys_icon/add.png" /> 新建便签</a>
 						</div>
-						<div style="height:250px;">
-							<table id="note_list" style="width:100%;">
-								<!--<tbody name="head">
-									<tr>
-										<td>标题</td>
-										<td>便签本</td>
-										<td>日期</td>
-									</tr>
-								</tbody>
-								-->
-								<tbody name="body" style="display:none">
-									<tr>
-										<td>{n_title}</td>
-										<td style="width:100px;">{nt_name}</td>
-										<td style="width:80px;" fmt="yyyy-mm-dd hh:nn:ss/p">{n_date}</td>
-									</tr>
-								</tbody>
-								<tbody>
-									<tr>
-										<td colspan="3">
-											共<span id="note_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条， 
-											共<span id="note_list_pagecount2" style="color:#c26220;">0</span>&nbsp;页， 
-											当前在第<span id="note_list_pageindex2" style="color:#c26220;">0</span>&nbsp;页　&nbsp; 
-											<span id="note_list_pageinfo" style="color:#c26220;">&nbsp;</span> 
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+					</div>
+					<div style="height:260px; overflow:hidden;">
+						<table id="note_list" style="width:100%;">
+							<!--<tbody name="head">
+								<tr>
+									<td>序</td>
+									<td>标题</td>
+									<td>便签本</td>
+									<td>日期</td>
+								</tr>
+							</tbody>
+							-->
+							<tbody name="body" style="display:none">
+								<tr>
+									<td style="width:30px;">{order}</td>
+									<td>{n_title}</td>
+									<td style="width:100px;">{nt_name}</td>
+									<td style="width:80px;" fmt="yyyy-mm-dd/p">{n_date}</td>
+								</tr>
+							</tbody>
+							<tbody>
+								<tr>
+									<td colspan="4">
+										共<span id="note_list_recordcount2" style="color:#c26220;">0</span>&nbsp;条， 
+										共<span id="note_list_pagecount2" style="color:#c26220;">0</span>&nbsp;页， 
+										当前在第<span id="note_list_pageindex2" style="color:#c26220;">0</span>&nbsp;页&nbsp;<span id="note_list_pageinfo" style="color:#c26220;">&nbsp;</span> 
+									</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 				</div>
 				
-				<div id="shadowbox3" style="margin:5px;">
-					<div id="msgbox">
-						<div class="list_top_bar" style="padding:5px 10px; background:#f5f5f5;">
-							<div class="list_top_title" style="font-weight:bold;color:#69c; font-size:14px">通知公告</div>
-							<div id="righttools" class="list_top_tools"></div>
-						</div>
-						<div style="height:250px; padding:5px">
-							翻滚吧，金正恩.....
-						</div>
+				<div id="shadowbox3" class="shadowbox">
+					<div class="list_top_bar">
+						<div class="list_top_title">通知公告</div>
+						<div id="righttools" class="list_top_tools"></div>
+					</div>
+					<div id="notice_scrollpad">
+						<ul id="noticelist"></ul>
 					</div>
 				</div>
 			</td>
@@ -95,16 +93,16 @@
 			<div class="pl" >
 				<div class="pl_img"></div>
 			</div>
-			<div class="content" >
+			<div class="content daRadius">
 				<span style="margin-right:20px; font-weight:bold; color:#666">({ws_cstname})</span>
 				<span style="color:#aaa">{l_date}</span>
 				<div style="margin-top:10px;">{l_content}</div>
+				<div class="logtoolbar" >
+					<a href="javascript:void(0);" onclick="viewlog('{bc_id}', '{ws_cstname}')">查看全部</a>
+					<a href="javascript:void(0);" onclick="addreply('{l_bcid}','{l_id}')">留言</a>
+				</div>
 			</div>
 			<div style="clear:both;"></div>
-			<div class="logtoolbar" >
-				<a href="javascript:void(0);" onclick="viewlog('{bc_id}', '{ws_cstname}')">查看全部</a>
-				<a href="javascript:void(0);" onclick="addreply('{l_id}')">回复</a>
-			</div>
 			<div id="reply_{l_id}" class="logreply" ></div>
 		</ul>
 	</div>
@@ -117,9 +115,12 @@
 			<div class="pr">
 				<div class="pr_img"></div>
 			</div>
-			<div class="content" >
+			<div class="content daRadius" >
 				<div class="rdate">{r_date}</div>
 				{r_content}
+				<div class="replytoolbar" >
+					<a href="javascript:void(0);" onclick="addreply('{r_bcid}','{r_lid}')">回复</a>
+				</div>
 			</div>
 			<div style="clear:both;"></div>
 		</ul>

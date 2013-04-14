@@ -6935,10 +6935,10 @@ var daRe_until = /Until$/,
 				
 				var timeNow = new Date().getTime(),
 					item;
-				
+
 				for(var i=0,len=da.queueHandle.length; i<len; i++){			//循环timer队列
 					item = da.queueHandle[i];
-
+					
 					if( item && item.delay <= (timeNow - item.prevTime ) ){
 						item.handle.apply( context, item.params );
 						
@@ -6950,7 +6950,7 @@ var daRe_until = /Until$/,
 						}
 					}
 				}
-			});
+			},1);
 		},
 		
 		stopHandle: function(){

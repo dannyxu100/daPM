@@ -32,8 +32,8 @@ function loadeditor(){
 		allowFileManager : true,
 		items : [
 			'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
-			'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
-			'insertunorderedlist', '|', 'emoticons', 'image', 'link']
+			'removeformat', '|', 'emoticons', 'image', 'link', '|', 'justifyleft', 'justifycenter', 
+			'justifyright', 'insertorderedlist','insertunorderedlist']
 	});
 }
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<?php include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
-	<title>我的便签</title>
+	<title>通知公告</title>
 	<link rel="stylesheet" href="/css/base.css" />
 	<style>
 		td{padding:3px;}
@@ -12,39 +12,39 @@
 </head>
 <body>
 	<div class="list_top_bar">
-		<div class="list_top_title"><span id="title">我的便签</span></div>
+		<div class="list_top_title"><span id="title">通知公告</span></div>
 		<div class="list_top_tools" style="float:left;">
 			<a class="item" href="javascript:void(0)" onclick="iframeBack();" ><img src="/images/sys_icon/arrow_back.png" /> 返回</a>
 		</div>
 		<div class="list_top_tools"></div>
 	</div>
-	<table id="noteform" class="grid" style="display:none; width:670px; height:50px;">
-		<tr >
-			<td class="header" style="width:80px;">标 题</td>
-			<td style="width:300px;">
-				{n_title}
-			</td>
-			<td class="header" style="width:80px;">便签簿</td>
-			<td>
-				{nt_name}
+	
+	<table id="noticeform" class="grid" style="display:none; width:100%;">
+		<tr>
+			<td colspan="2">
+				<div style="text-align:center; font-size:16px; font-weight:bold;">{n_title}</div>
+				<div style="text-align:center; font-size:14px; font-weight:bold;">{n_subhead}</div>
+				<div style="text-align:center; color:#ccc; margin:10px;">撰稿人: {pu_name} | 日期: {n_date}</div>
 			</td>
 		</tr>
-		<tr >
-			<td class="header" >摘 要</td>
-			<td colspan="3">
-				{n_abstract}
-			</td>
+		<tr>
+			<td class="header" style="width:80px;">摘 要</td>
+			<td><div>{n_abstract}</div></td>
 		</tr>
-		<tr >
-			<td class="header" >详细内容</td>
-			<td colspan="3">
-				{n_content}
-			</td>
+		<!--
+		<tr>
+			<td class="header">附 件</td>
+			<td>&nbsp;</td>
+		</tr>
+		-->
+		<tr>
+			<td colspan="2">{n_content}</td>
 		</tr>
 	</table>
+	
 </body>
 
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
-<script type="text/javascript" src="js/note_detail.js"></script>
+<script type="text/javascript" src="js/notice_detail.js"></script>
 
 </html>

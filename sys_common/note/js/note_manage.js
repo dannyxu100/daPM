@@ -14,8 +14,8 @@ function addnote(){
 function viewnote( nid ){
 	if( g_isctrl ){
 		daWin({
-			width: 600,
-			height: 400,
+			width: 700,
+			height: 600,
 			url: "/sys_common/note/note_detail.php?nid="+ nid
 		});
 	}
