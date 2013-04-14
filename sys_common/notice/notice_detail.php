@@ -29,7 +29,7 @@
 		</tr>
 		<tr>
 			<td class="header" style="width:80px;">摘 要</td>
-			<td><div>{n_abstract}</div></td>
+			<td><div style="">{n_abstract}</div></td>
 		</tr>
 		<!--
 		<tr>
@@ -38,7 +38,8 @@
 		</tr>
 		-->
 		<tr>
-			<td colspan="2">{n_content}</td>
+			<td class="header">内 容</td>
+			<td><div style="">{n_content}</div></td>
 		</tr>
 	</table>
 	

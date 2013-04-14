@@ -2,8 +2,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<?php include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";?>
-	<?php include_once("action/fn.php");?>
-	<?php include_once("action/sys/db.php");?>
 	
 	<link rel="icon" href="/images/pm_ico.gif" type="image/x-icon" />
 	<link rel="stylesheet" href="/css/base.css"/>

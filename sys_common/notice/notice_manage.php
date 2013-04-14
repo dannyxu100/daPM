@@ -72,7 +72,7 @@
 							<tbody name="head">
 								<tr>
 									<td style="width:20px;">序</td>
-									<td style="width:200px;">标题</td>
+									<td style="width:250px;">标题</td>
 									<td style="width:50px;">排序</td>
 									<td>摘要</td>
 									<td style="width:80px">&nbsp;</td>

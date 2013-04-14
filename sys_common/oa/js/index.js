@@ -29,7 +29,7 @@ function clickmenu( url, obj ){
 /**加载菜单
 */
 function loadlevel2menu(){
-	da.runDB("/sys_power/action/menu_get_list.php",{
+	da.runDB("/sys_power/action/menu_get_byrole.php",{
 		dataType: "json",
 		pmpid: level2menu
 	},function(data){
