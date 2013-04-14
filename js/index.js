@@ -151,7 +151,7 @@ function loadmenu(){
 			g_toolbar.select("bt_menu"+data[0].pm_id);
 		}
 	},function(res, msg, ex){
-		//debugger;
+		// debugger;
 	});
 }
 
