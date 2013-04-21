@@ -10,21 +10,25 @@
 	</style>
  </HEAD>
 <BODY>
-	<div style="height:30px;line-height:30px; border-bottom:#999; text-align:right; padding:0px 20px;">
-		<a href="javascript:void(0)" onclick="saveform();" >保存</a> |
+	<div class="list_top_bar">
+		<div class="list_top_title"></div>
+		<div class="list_top_tools">
+			<a class="item" href="javascript:void(0)" onclick="saveform();" ><img src="/images/sys_icon/save.png" /> 保存</a>
+		</div>
 	</div>
+
 	<table class="tablesolid" style="width:100%">
 		<tr>
 			<td class="header" style="width:60px;">名称</td>
-			<td><input id="bf_name" /><span class="must">*</span></td>
+			<td><input id="bt_name" /><span class="must">*</span></td>
 		</tr>
 		<tr>
 			<td class="header">排序</td>
-			<td><input type="text" id="bf_sort" value="0" /></td>
+			<td><input type="text" id="bt_sort" value="0" /></td>
 		</tr>
 		<tr>
 			<td class="header">备注</td>
-			<td><textarea style="width:200px; height:100px;" id="bf_remark" ></textarea></td>
+			<td><textarea style="width:200px; height:100px;" id="bt_remark" ></textarea></td>
 		</tr>
 	</table>
 	

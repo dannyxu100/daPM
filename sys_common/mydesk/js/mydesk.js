@@ -224,16 +224,18 @@ var g_num = 0,
 function loadloglist(){
 	if( g_loadlock ) return;
 	g_loadlock = true;
+	
 	da("#loadingmsg").fadeIn();
 	autoframeheight();
 
 	var objlist = da("#listPad");
 	// objlist.empty();
 	
-	da.runDB("/sys_common/bizlog/action/log_get_top20.php", {
+	da.runDB("/sys_common/bizlog/action/log_get_top5.php", {
 		dataType: "json",
 		dbsource: "td_website",
 		dbfld: "ws_id",
+		type: da("#logtype").val(),
 		num: g_num
 		
 	},function(data){
@@ -298,6 +300,24 @@ function scrollevent(){
 			}
 		}
 	});
+}
+
+/**改变查看日志类型
+*/
+function changelogtype(){
+	var objlist = da("#listPad");
+	objlist.empty();
+	g_num = 0;
+	loadloglist();
+}
+
+/**刷新日志
+*/
+function refreshlog(){
+	var objlist = da("#listPad");
+	objlist.empty();
+	g_num = 0;
+	loadloglist();
 }
 
 daLoader("daMsg,daIframe,daWin,daWheel,daTable",function(){

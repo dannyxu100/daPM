@@ -38,6 +38,23 @@
 	$db->paramlist($param2);
 	$res = $db->update($sql2);
 	
+	/************* 为发送邮件提醒做准备 *****************/
+	$sql_email = "select pu_email 
+	from da_powersys.p_user, da_workflow.w_trancase, da_bizform.b_bizcase
+	where pu_id=tc_puid 
+	and tc_wfcid=bc_wfcid 
+	and bc_id=:bcid";
+	$param_email = array();
+	array_push($param_email, array(":bcid", $bcid));
+	
+	$db->paramlist($param_email);
+	$set_email = $db->getlist($sql_email);
+	
+	$emails = array();
+	for( $i=0; $i<count($set_email); $i++){
+		array_push( $emails, $set_email[$i]["pu_email"] );
+	}
+	$emails = implode(',', $emails);
 	// $log = new Log();
 	// $log->write($db->geterror());
 	
@@ -49,7 +66,7 @@
 	else{
 		$db->commit();
 		$db->close();
-		echo $res;
+		echo $emails;
 	}
 
 ?>

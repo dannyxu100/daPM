@@ -6,21 +6,21 @@
 	date_default_timezone_set('ETC/GMT-8');
 	
 	$nowdate = date("Y-m-d H:i:s");
-	$wfid = $_POST["wfid"];		//¹¤×÷Á÷id
-	$wfcid = $_POST["wfcid"];	//¹¤×÷Á÷ÊµÀıid
-	$aid = $_POST["aid"];		//µ±Ç°ÊÂÎñ±äÇ¨µÄOUTÏò»¡(Ö¸ÏòÏÂÒ»¸ö¿âËù)id
-	$remark = $_POST["remark"];	//Ìá½»±¸×¢ÁôÑÔ
+	$wfid = $_POST["wfid"];		//å·¥ä½œæµid
+	$wfcid = $_POST["wfcid"];	//å·¥ä½œæµå®ä¾‹id
+	$aid = $_POST["aid"];		//å½“å‰äº‹åŠ¡å˜è¿çš„OUTå‘å¼§(æŒ‡å‘ä¸‹ä¸€ä¸ªåº“æ‰€)id
+	$remark = $_POST["remark"];	//æäº¤å¤‡æ³¨ç•™è¨€
 	
 	$db = new DB("da_workflow");
 	
-	/***************** ¸ù¾İÏò»¡idÕÒ³öÁ´½ÓµÄÊÂÎñ±äÇ¨£¨¹¤×÷Ïî£©ÊµÀı *********************************/
+	/***************** æ ¹æ®å‘å¼§idæ‰¾å‡ºé“¾æ¥çš„äº‹åŠ¡å˜è¿ï¼ˆå·¥ä½œé¡¹ï¼‰å®ä¾‹ *********************************/
 	$sql_tc = "select tc_id from w_arc, w_transition, w_trancase 
 	where a_id=:aid 
 	and a_tid=t_id 
 	and t_id=tc_tid 
 	and tc_wfcid=:wfcid 
-	and (tc_status='EN' or tc_status='IP') ";	//Í¨¹ı¹¤×÷Á÷ÊµÀıwfcidËõĞ¡·¶Î§¡£
-												//ÊÂÎñ±äÇ¨£¨¹¤×÷Ïî£©×´Ì¬£»EN£ºÆôÓÃ£»IP£º´¦ÀíÖĞ£»CA£ºÈ¡Ïû£» FI£ºÍê³É
+	and (tc_status='EN' or tc_status='IP') ";	//é€šè¿‡å·¥ä½œæµå®ä¾‹wfcidç¼©å°èŒƒå›´ã€‚
+												//äº‹åŠ¡å˜è¿ï¼ˆå·¥ä½œé¡¹ï¼‰çŠ¶æ€ï¼›ENï¼šå¯ç”¨ï¼›IPï¼šå¤„ç†ä¸­ï¼›CAï¼šå–æ¶ˆï¼› FIï¼šå®Œæˆ
 	
 	$param_tc = array();
 	array_push($param_tc, array(":wfcid", $wfcid));
@@ -35,7 +35,7 @@
 	// $log->write($wfcid);
 	// $log->write($set_tc["tc_id"]);
 	
-	/***************** ¸üĞÂÊÂÎñ±äÇ¨ÊµÀı×´Ì¬ ºÍÍê³ÉÈÕÆÚ ***********************************************/
+	/***************** æ›´æ–°äº‹åŠ¡å˜è¿å®ä¾‹çŠ¶æ€ å’Œå®Œæˆæ—¥æœŸ ***********************************************/
 	$sql_tc2 = "update w_trancase 
 	set tc_status='FI', 
 	tc_puid=:puid, 
@@ -55,12 +55,12 @@
 	$res = $db->update($sql_tc2);
 	
 	
-	////////////////// ÒÔÏÂ²¿·ÖÎªÊÂÎñ±äÇ¨ ÅĞ¶¨ÊÇ·ñ·¢Éä£¨´¥·¢£©ÓëÖ´ĞĞ´úÂë /////////////////////////////
+	////////////////// ä»¥ä¸‹éƒ¨åˆ†ä¸ºäº‹åŠ¡å˜è¿ åˆ¤å®šæ˜¯å¦å‘å°„ï¼ˆè§¦å‘ï¼‰ä¸æ‰§è¡Œä»£ç  /////////////////////////////
 	
-	$db->tran();	//Æô¶¯ÊÂÎñ
+	$db->tran();	//å¯åŠ¨äº‹åŠ¡
 	
-	/***************** ¸ù¾İµ±Ç°ÊÂÎñ±äÇ¨£¨¹¤×÷Ïî£©ÊµÀı, ÕÒ³öÇ°ºó¿âËù *********************************/
-	//IN¿âËù
+	/***************** æ ¹æ®å½“å‰äº‹åŠ¡å˜è¿ï¼ˆå·¥ä½œé¡¹ï¼‰å®ä¾‹, æ‰¾å‡ºå‰ååº“æ‰€ *********************************/
+	//INåº“æ‰€
 	$sql_p = "select p_id from w_place, w_arc, w_trancase 
 	where p_id=a_pid 
 	and a_tid=tc_tid 
@@ -73,13 +73,13 @@
 	$db->paramlist($param_p);
 	$set_pIN = $db->getlist($sql_p);
 	
-	$pINids = array();				//IN¿âËùid¼ÇÂ¼¼¯¡£
+	$pINids = array();				//INåº“æ‰€idè®°å½•é›†ã€‚
 	for( $i=0; $i<count($set_pIN); $i++){
 		array_push( $pINids, $set_pIN[$i]["p_id"] );
 	}
 	$pINids = implode(',', $pINids);
 	
-	//OUT¿âËù
+	//OUTåº“æ‰€
 	$sql_p2 = "select p_id from w_place, w_arc, w_trancase 
 	where p_id=a_pid 
 	and a_tid=tc_tid 
@@ -92,10 +92,10 @@
 	$db->paramlist($param_p2);
 	$set_pOUT = $db->getlist($sql_p2);
 	
-	/********************* ¼ìÑéIN¿âÊÇ·ñ¶¼ÓĞÁîÅÆ(ÀàËÆÓÚ»áÇ©ÒµÎñ) *********************************/
+	/********************* æ£€éªŒINåº“æ˜¯å¦éƒ½æœ‰ä»¤ç‰Œ(ç±»ä¼¼äºä¼šç­¾ä¸šåŠ¡) *********************************/
 	$sql_t = "select t_id from w_token 
 	where t_wfcid=:wfcid 
-	and t_id in (".$pINids.")";			//Í¨¹ı¹¤×÷Á÷ÊµÀıwfcidËõĞ¡·¶Î§¡£
+	and t_id in (".$pINids.")";			//é€šè¿‡å·¥ä½œæµå®ä¾‹wfcidç¼©å°èŒƒå›´ã€‚
 	
 	$param_t = array();
 	array_push($param_t, array(":wfcid", $wfcid));
@@ -103,19 +103,19 @@
 	$db->paramlist($param_t);
 	$set_t = $db->getlist($sql_t);
 	
-	if( count($set_pIN) != count($set_t) ){			//ÊıÁ¿²»Æ¥Åä£¬·µ»ØÊÂÎñ±äÇ¨ÊµÀı¸üĞÂ½á¹û£¬È¡Ïû¼ÌĞøÖ´ĞĞ
+	if( count($set_pIN) != count($set_t) ){			//æ•°é‡ä¸åŒ¹é…ï¼Œè¿”å›äº‹åŠ¡å˜è¿å®ä¾‹æ›´æ–°ç»“æœï¼Œå–æ¶ˆç»§ç»­æ‰§è¡Œ
 		echo $res?$res:"FALSE";
 	}
 	
-	/********************* ¼ìÑéÍ¨¹ı£¬ÊÂÎñ±äÇ¨¿ÉÒÔ·¢Éä£¬¼ÌĞøÖ´ĞĞ£¬ÒÆ½»¿âËùÁîÅÆ *********************************/
-	//ÏûºÄIN¿âÁîÅÆ
+	/********************* æ£€éªŒé€šè¿‡ï¼Œäº‹åŠ¡å˜è¿å¯ä»¥å‘å°„ï¼Œç»§ç»­æ‰§è¡Œï¼Œç§»äº¤åº“æ‰€ä»¤ç‰Œ *********************************/
+	//æ¶ˆè€—INåº“ä»¤ç‰Œ
 	$sql_t2 = "update w_token 
 	set t_status='CONS', 
 	t_consumedate=:date 
 	
 	where t_wfcid=:wfcid 
-	and t_id in (".$pINids.")";		//Í¨¹ı¹¤×÷Á÷ÊµÀıwfcidËõĞ¡·¶Î§¡£
-									//ÁîÅÆ×´Ì¬£»FREE£º×ÔÓÉ£»LOCK£ºËø¶¨£»CONS£ºÏûºÄ£»CANS£ºÈ¡Ïû
+	and t_id in (".$pINids.")";		//é€šè¿‡å·¥ä½œæµå®ä¾‹wfcidç¼©å°èŒƒå›´ã€‚
+									//ä»¤ç‰ŒçŠ¶æ€ï¼›FREEï¼šè‡ªç”±ï¼›LOCKï¼šé”å®šï¼›CONSï¼šæ¶ˆè€—ï¼›CANSï¼šå–æ¶ˆ
 	$param_t2 = array();
 	array_push($param_t2, array(":date", $nowdate));
 	array_push($param_t2, array(":wfcid", $wfcid));
@@ -123,7 +123,7 @@
 	$db->paramlist($param_t2);
 	$res = $db->update($sql_t2);
 	
-	//Ìí¼ÓËùÓĞOUT¿âÁîÅÆ
+	//æ·»åŠ æ‰€æœ‰OUTåº“ä»¤ç‰Œ
 	for($i=0; $i<count($set_pOUT); $i++){
 		$sql_t3 = "insert into w_token( t_wfid, t_wfcid, t_pid, t_status, t_createdate, t_context ) 
 		value( :wfid, :wfcid, :pid, :status, :createdate, :context )";
@@ -132,14 +132,14 @@
 		array_push($param_t3, array(":wfid", $wfid));
 		array_push($param_t3, array(":wfcid", $wfcid));
 		array_push($param_t3, array(":pid", $set_pOUT[$i]["p_id"]));
-		array_push($param_t3, array(":status", "FREE"));			//ÁîÅÆ×´Ì¬£»FREE£º×ÔÓÉ£»LOCK£ºËø¶¨£»CONS£ºÏûºÄ£»CANS£ºÈ¡Ïû
+		array_push($param_t3, array(":status", "FREE"));			//ä»¤ç‰ŒçŠ¶æ€ï¼›FREEï¼šè‡ªç”±ï¼›LOCKï¼šé”å®šï¼›CONSï¼šæ¶ˆè€—ï¼›CANSï¼šå–æ¶ˆ
 		array_push($param_t3, array(":createdate", $nowdate));
 		array_push($param_t3, array(":context", ""));
 		$db->paramlist($param_t3);
 		$res = $db->insert($sql_t3);
 		
 		
-		/************************** ´´½¨ÏÂÒ»²½ÊÂÎñ±äÇ¨(¹¤×÷Ïî)  ÊµÀı***************************************/
+		/************************** åˆ›å»ºä¸‹ä¸€æ­¥äº‹åŠ¡å˜è¿(å·¥ä½œé¡¹)  å®ä¾‹***************************************/
 		$sql_tc3 = "insert into da_workflow.w_trancase( tc_wfid, tc_tid, tc_wfcid, tc_type, tc_limit, 
 		tc_firetaskid, tc_context, tc_status, tc_enabledate, tc_puid, tc_puname ) 
 		
@@ -147,19 +147,56 @@
 		t_firetaskid, :context, :status, :enabledate, :userid, :username 
 		
 		from da_workflow.w_transition, da_workflow.w_arc 
-		where t_wfid=:wfid and t_id=a_tid and a_direction='IN' and a_pid=:pid";		//Í¨¹ıINÏò»¡£¬ÕÒ³ö¿ªÊ¼¿âËùÏÂÒ»²½µÄÊÂÎñ±äÇ¨(¹¤×÷Ïî)
+		where t_wfid=:wfid and t_id=a_tid and a_direction='IN' and a_pid=:pid";		//é€šè¿‡INå‘å¼§ï¼Œæ‰¾å‡ºå¼€å§‹åº“æ‰€ä¸‹ä¸€æ­¥çš„äº‹åŠ¡å˜è¿(å·¥ä½œé¡¹)
 		
 		$param_tc3 = array();
 		array_push($param_tc3, array(":wfid", $wfid));
 		array_push($param_tc3, array(":wfcid", $wfcid));
 		array_push($param_tc3, array(":pid", $set_pOUT[$i]["p_id"]));
-		array_push($param_tc3, array(":status", "EN"));				//ÊÂÎñ±äÇ¨(¹¤×÷Ïî)×´Ì¬£»EN£ºÆôÓÃ£»IP£º´¦ÀíÖĞ£»CA£ºÈ¡Ïû£» FI£ºÍê³É
+		array_push($param_tc3, array(":status", "EN"));				//äº‹åŠ¡å˜è¿(å·¥ä½œé¡¹)çŠ¶æ€ï¼›ENï¼šå¯ç”¨ï¼›IPï¼šå¤„ç†ä¸­ï¼›CAï¼šå–æ¶ˆï¼› FIï¼šå®Œæˆ
 		array_push($param_tc3, array(":enabledate", $nowdate));
 		array_push($param_tc3, array(":context", ""));
 		array_push($param_tc3, array(":userid", ""));
 		array_push($param_tc3, array(":username", ""));
 		$db->paramlist($param_tc3);
 		$res = $db->insert($sql_tc3);
+		
+		
+		/************* ä¸ºå‘é€é‚®ä»¶æé†’åšå‡†å¤‡ *****************/
+		$sql_email = "select pu_email 
+		from da_powersys.p_user, da_powersys.p_user2role, da_workflow.w_tran2role, da_workflow.w_arc 
+		where pu_id=u2r_puid 
+		and u2r_prid=t2r_prid 
+		and t2r_tid=a_tid 
+		and a_direction='IN' 
+		and a_pid=:pid";
+		
+		$param_email = array();
+		array_push($param_email, array(":pid", $set_pOUT[$i]["p_id"]));
+		
+		$db->paramlist($param_email);
+		$set_email = $db->getlist($sql_email);
+		
+		$emails = array();
+		for( $i=0; $i<count($set_email); $i++){
+			array_push( $emails, $set_email[$i]["pu_email"] );
+		}
+		
+		
+		$sql_email2 = "select pu_email 
+		from da_powersys.p_user, da_workflow.w_trancase 
+		where pu_id=tc_puid 
+		and tc_wfcid=:wfcid";
+		$param_email2 = array();
+		array_push($param_email2, array(":wfcid", $wfcid));
+		
+		$db->paramlist($param_email2);
+		$set_email2 = $db->getlist($sql_email2);
+		
+		for( $i=0; $i<count($set_email2); $i++){
+			array_push( $emails, $set_email2[$i]["pu_email"] );
+		}
+		$emails = implode(',', $emails);
 	}
 	
 	
@@ -174,6 +211,6 @@
 	else{
 		$db->commit();
 		$db->close();
-		echo $res;
+		echo $emails;
 	}
 ?>

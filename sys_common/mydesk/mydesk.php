@@ -14,7 +14,15 @@
 					<div id="logbox">
 						<div class="list_top_bar">
 							<div class="list_top_title">最新日志</div>
-							<div id="righttools" class="list_top_tools"></div>
+							<div class="list_top_tools" style="float:left;">
+								<select id="logtype" onchange="changelogtype()">
+									<option value="0">全部</option>
+									<option value="1">我的日志</option>
+								</select>
+							</div>
+							<div class="list_top_tools">
+								<a class="item" href="javascript:void(0)" onclick="refreshlog();" ><img src="/images/sys_icon/refresh.png" /> 刷新</a>
+							</div>
 						</div>
 						<div id="logpad">
 							<div id="listPad" style="padding:5px;"></div>

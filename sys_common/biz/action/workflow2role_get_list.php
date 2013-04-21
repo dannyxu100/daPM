@@ -16,8 +16,7 @@
 
 	$db = new DB("da_workflow");
 	$set = $db->getlist($sql);
-	// $log = new Log();
-	// $log->write($db->geterror());
+	// Log::out($sql);
 	
 	$db->close();
 	

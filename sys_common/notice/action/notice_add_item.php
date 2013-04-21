@@ -27,8 +27,19 @@
 	values(:n_ntid, :n_title, :n_sort, :n_subhead, 
 	:n_abstract, :n_content, :n_status, :n_puid, :n_date)");
 	
+	
+	/************* 为发送邮件提醒做准备 *****************/
+	$sql_email = "select pu_email from da_powersys.p_user";
+	$set_email = $db->getlist($sql_email);
+
+	$emails = array();
+	for( $i=0; $i<count($set_email); $i++){
+		array_push( $emails, $set_email[$i]["pu_email"] );
+	}
+	$emails = implode(',', $emails);
+	
 	$db->close();
 	// Log::out($db->geterror());
 
-	echo $res?$res:"FALSE";
+	echo $res?$emails:"FALSE";
 ?>

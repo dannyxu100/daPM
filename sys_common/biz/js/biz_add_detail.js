@@ -23,9 +23,16 @@ function savebiz(){
 		btid: g_btid,
 		dbsource: g_dbsource
 	};
-
-	da("input,textarea", "#templet_form").each(function(idx, obj){
+	
+	da("input:text,textarea", "#templet_form").each(function(idx, obj){
 		data[obj.id] = encodeURIComponent(da(obj).val());
+		// da.out(da(obj).val());
+	});
+	
+	da("input:radio,input:checkbox", "#templet_form").each(function(idx, obj){
+		if( !data[obj.name] ){
+			data[obj.name] = encodeURIComponent(da("[name="+ obj.name +"]:checked").val());
+		}
 	});
 	
 	da.runDB("/sys_common/biz/action/biz_add_item.php", data, 
@@ -52,6 +59,15 @@ function init(){
 		var source = daObj.attr("source");
 
 		switch( source ){
+			case "puid":
+				daObj.val(fn_getcookie("puid"));
+				break;
+			case "puname":
+				daObj.val(fn_getcookie("puname"));
+				break;
+			case "now":
+				daObj.val(new Date().format("yyyy-mm-dd hh:nn:ss"));
+				break;
 			case "date":
 				daDate({
 					target: tag, 
@@ -99,6 +115,24 @@ function init(){
 				g_editors[ tag.id ]=g_editor;		//保存线编辑器对象（保存表单前需要同步内容）
 				
 				break;
+			case "editorboxsimple":
+				var g_editor;
+				g_editor = KindEditor.create("#"+tag.id, {
+					resizeType : 1,
+					// filterMode : false,		//不过滤危险标签
+					newlineTag: "br",
+					allowPreviewEmoticons : false,
+					fileManagerJson : '/plugin/kindeditor/php/file_manager_json.php',
+					allowFileManager : true,
+					items : [
+						'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+						'removeformat', '|', 'emoticons', 'image', 'link', '|', 'justifyleft', 'justifycenter', 
+						'justifyright', 'insertorderedlist','insertunorderedlist']
+				});
+				g_editors[ tag.id ]=g_editor;		//保存线编辑器对象（保存表单前需要同步内容）
+				
+				break;
+			
 		}
 	});
 }

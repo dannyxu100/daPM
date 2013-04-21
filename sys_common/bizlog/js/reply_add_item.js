@@ -7,16 +7,26 @@ function savereply(){
 	g_editor.sync();
 	
 	da.runDB("/sys_common/bizlog/action/reply_add_item.php",{
-		dataType: "json",
+		dataType: "text",
 		bcid: g_bcid,
 		lid: g_lid,
 		content: encodeURIComponent(da("#r_conent").val())
 		
-	},function(res){
-		if("FALSE"!=res){
+	},function(emails){
+		if("FALSE"!=emails){
 			alert("添加成功。");
+			
+			/*发送个邮件提醒*/
+			fn_sendemail( emails, 
+				"PM留言("+ fn_getcookie("puname") +")", 
+				da("#r_conent").val()
+			);
+			
 			back();
-		}	
+		}
+		else{
+			alert("操作失败。");
+		}
 	},function(msg, code, ex){
 		// debugger;
 	});

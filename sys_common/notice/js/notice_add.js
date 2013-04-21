@@ -102,9 +102,21 @@ function savenotice(){
 		n_sort: da("#n_sort").val(),
 		n_abstract: da("#n_abstract").val(),
 		n_content: encodeURIComponent(da("#n_content").val())
-	},function(res){
-		if("FALSE"!=res){
+	},function(emails){
+		if("FALSE"!=emails){
 			alert("添加成功");
+			
+			/*发送个邮件提醒*/
+			fn_sendemail( emails, 
+				"PM通知公告("+ fn_getcookie("puname") +")", 
+				'<div>'+da("#n_title").val()+'</div><br/><br/>'
+				+'<div>'+da("#n_subhead").val()+'</div><br/><br/>'
+				+'<div>'+da("#n_abstract").val()+'</div><br/><br/>'
+				+'<div>'+da("#n_content").val()+'</div>'
+			);
+		}
+		else{
+			alert("操作失败。");
 		}
 	});
 }

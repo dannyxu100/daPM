@@ -68,6 +68,14 @@
 			<td><input id="pu_address" /></td>
 		</tr>
 		<tr>
+			<td class="header">电子邮箱</td>
+			<td><input id="pu_email" /></td>
+		</tr>
+		<tr>
+			<td class="header">QQ</td>
+			<td><input id="pu_qq" /></td>
+		</tr>
+		<tr>
 			<td class="header">最后登陆</td>
 			<td><input id="pu_lastlogin" /></td>
 		</tr>

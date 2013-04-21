@@ -1,5 +1,4 @@
 <?php
-	
 	/**获取cookie值
 	*/
 	function fn_getcookie( $name ){
@@ -14,4 +13,5 @@
 		}
 		return "null";
 	}
+	
 ?>

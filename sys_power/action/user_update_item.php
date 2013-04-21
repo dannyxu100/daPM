@@ -11,6 +11,8 @@
 	$sql .= "pu_phone='".$_POST["pu_phone"]."',";
 	$sql .= "pu_telephone='".$_POST["pu_telephone"]."',";
 	$sql .= "pu_address='".$_POST["pu_address"]."',";
+	$sql .= "pu_email='".$_POST["pu_email"]."',";
+	$sql .= "pu_qq='".$_POST["pu_qq"]."',";
 	$sql .= "pu_remark='".$_POST["pu_remark"]."' ";
 	$sql .= " where pu_id='".$_POST["pu_id"]."'";
 	

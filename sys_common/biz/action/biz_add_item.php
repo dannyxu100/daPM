@@ -1,9 +1,9 @@
 <?php 
 	// json_encode($arr);
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
-	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."//action/fn.php";
-	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."//action/sys/db.php";
-	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."//action/sys/log.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/fn.php";
+	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
+	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 	date_default_timezone_set('ETC/GMT-8');
 	
 	$nowdate = date("Y-m-d H:i:s");
@@ -27,6 +27,7 @@
 	array_push($param_wfc, array(":context", ""));
 	$db->paramlist($param_wfc);
 	$db->insert($sql_wfc);
+	// Log::out($db->geterror());
 	
 	$wfcase = $db->getone("select @@IDENTITY as wfc_id");		//获取刚添加的工作流实例id
 	$place = $db->getone("select p_id from da_workflow.w_place 
@@ -46,6 +47,7 @@
 	array_push($param_token, array(":context", ""));
 	$db->paramlist($param_token);
 	$db->insert($sql_token);
+	// Log::out($db->geterror());
 	
 	/************************** 创建下一步事务变迁(工作项)  实例***************************************/
 	$sql_tc = "insert into da_workflow.w_trancase( tc_wfid, tc_tid, tc_wfcid, tc_type, tc_limit, 
@@ -68,6 +70,7 @@
 	array_push($param_tc, array(":username", fn_getcookie("puname")));
 	$db->paramlist($param_tc);
 	$db->insert($sql_tc);
+	// Log::out($db->geterror());
 	
 	/************************** 创建表单数据源 记录 ***************************************/
 	$flds = array();
@@ -94,6 +97,7 @@
 	
 	$db->paramlist($param_db);
 	$res = $db->insert($sql_db);
+	// Log::out($db->geterror());
 	
 	$dbitem = $db->getone("select @@IDENTITY as dbsourceid");		//获取刚添加的表单数据源 记录id
 	
@@ -108,7 +112,6 @@
 	
 	$db->paramlist($param_bc);
 	$res = $db->insert($sql_bc);
-	
 	// Log::out($db->geterror());
 	
 	if($db->geterror()){

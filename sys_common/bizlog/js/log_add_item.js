@@ -8,18 +8,28 @@ function savelog(){
 	g_editor.sync();
 
 	da.runDB("/sys_common/bizlog/action/log_add_item.php",{
-		dataType: "json",
+		dataType: "text",
 		bcid: g_bcid,
 		tagname: da("[name=chktag]:checked").val(),
 		content: encodeURIComponent(da("#l_content").val())
 		
-	},function(res){
-		if("FALSE"!=res){
+	},function(emails){
+		if("FALSE"!=emails){
 			alert("添加成功。");
+			
+			/*发送个邮件提醒*/
+			fn_sendemail( emails, 
+				"PM日志("+ fn_getcookie("puname") +")", 
+				da("#l_content").val()
+			);
+			
 			back();
-		}	
+		}
+		else{
+			alert("操作失败。");
+		}
 	},function(msg, code, ex){
-		alert(code);
+		//debugger;
 	});
 	
 }

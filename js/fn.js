@@ -55,3 +55,20 @@ function fn_uploadfile( info, param, fn ){
 		}
 	});
 }
+
+/**发送邮件
+*/
+function fn_sendemail( emails, title, content){
+	da.runDB("/sys_common/email/action/sendmail.php",{
+		dataType: "text",
+		emails: emails,
+		title: title,
+		content: content
+		
+	},function(res){
+		// debugger;
+	},function(a,b,c){
+		// debugger;
+	});
+}
+

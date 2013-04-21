@@ -37,6 +37,8 @@ function updateuser(){
 		pu_phone: da("#pu_phone").val(),
 		pu_telephone: da("#pu_telephone").val(),
 		pu_address: da("#pu_address").val(),
+		pu_email: da("#pu_email").val(),
+		pu_qq: da("#pu_qq").val(),
 		pu_remark: da("#pu_remark").val()
 	},function(res){
 		if(res=="FALSE"){

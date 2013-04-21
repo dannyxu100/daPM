@@ -66,4 +66,5 @@
 <script charset="utf-8" src="/plugin/kindeditor/lang/zh_CN.js"></script>
 
 <script type="text/javascript" src="/plugin/da/daLoader_source_1.1.js"></script>
+<script type="text/javascript" src="/js/fn.js"></script>
 <script type="text/javascript" src="js/notice_add.js"></script>
