@@ -56,12 +56,13 @@
 		if( !chkdata() ){
 			return;
 		}
-	
+		loading(true);
 		da.runDB("/action/login.php",{
 			u_code: da("#u_code").val(),
 			u_pwd: da("#u_pwd").val()
 			
 		},function(res){
+			loading(false);
 			if("1"==res){
 				location.href = "/index.php";
 			}
@@ -83,7 +84,7 @@
 		}
 	}
 	
-	daLoader("daMsg,daKey",function(){
+	daLoader("daMsg,daKey,daLoading",function(){
 		inputfocus();
 		
 		daKey({
