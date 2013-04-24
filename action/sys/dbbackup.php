@@ -98,7 +98,7 @@
 		//一季度，一月，一周各备份一个
 		$date = getdate();
 		$month = $date['mon'];
-		$quarter = (floor($month/3)*3);		//计算当前月是第几个季度
+		$quarter = ceil($month/3);		//计算当前月是第几个季度
 		
 		$old_quarter_folder = rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/backup_dbsql/".($quarter-1)."/";
 		$old_month_folder = rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/backup_dbsql/".date("Y_m_d", strtotime("-1 month"))."/";
