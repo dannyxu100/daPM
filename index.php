@@ -42,6 +42,9 @@
 <iframe id="mainframe" src="" frameborder="0" style="width:100%; height:500px;" defaultHeight="600"></iframe>
 
 <div id="scrolltop"></div>
+<div id="gamebg" style="position:absolute; z-index:999; top:0px; left:0px; background:#f0f0f0;"></div>
+<div id="gamefly" style="position:absolute; z-index:1000; top:300px; left:200px; width:50px; height:50px; background:#fff;" ></div>
+<div id="gamepointer" style="position:absolute; z-index:1000; top:300px; left:200px; width:50px; height:50px; background:#f00;" ></div>
 </body>
 </html>
 

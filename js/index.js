@@ -211,5 +211,37 @@ daLoader("daMsg,daIframe,daWin,daToolbar,daKey",function(){
 		// da("#menumorebox").bgiframe();
 
 		scrolltop("#scrolltop");
+		
+		gamestart();
 	});
 });
+
+
+function gamestart(){
+	var objgamebg = da("#gamebg"),
+		objgamefly = da("#gamefly"),
+		objgamepointer = da("#gamepointer"),
+		winsize = {
+		width: da(window).width(),
+		height: da(window).height()
+	};
+	
+	objgamebg.width(winsize.width);
+	objgamebg.height(winsize.height);
+	objgamebg.bind("mousemove",function(evt){
+		objgamepointer.css({
+			top: (evt.pageY-25) +"px",
+			left: (evt.pageX-25) +"px"
+		});
+	});
+	
+	objgamepointer.bind("mouseup",function(){
+		da.out(1111);
+	});
+	
+	// objgamefly.act({
+		
+	// },function(){
+	
+	// });
+}
