@@ -212,7 +212,7 @@ daLoader("daMsg,daIframe,daWin,daToolbar,daKey",function(){
 
 		scrolltop("#scrolltop");
 		
-		gamestart();
+		// gamestart();
 	});
 });
 

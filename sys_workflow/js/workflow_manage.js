@@ -163,6 +163,31 @@ function clicknode(treeId, treeNode){
 	loadworkflowlist();
 }
 
+
+function viewlimitedit( obj, tid ){
+	var trObj = da(obj).parents("tr"),
+		nexttrObj = trObj.next("tr[name=limiteditpad]"),
+		padObj = da("div[name=limiteditlist]", nexttrObj);
+
+	if( "none" != nexttrObj.css("display")){
+		nexttrObj.hide();
+		return;
+	}
+	else{
+		nexttrObj.show();
+	}
+
+	padObj.empty();
+	
+	
+	var limiteditlist = da("#tb_limiteditlist").dom[0].cloneNode(true);
+	limiteditlist.id = "tb_limiteditlist_"+tid;
+	limiteditlist.setAttribute("id", "tb_limiteditlist_"+tid);
+	padObj.append(limiteditlist);
+	
+	autoframeheight();
+}
+
 /**加载路由向弧列表
 */
 function loadarc(){
@@ -280,13 +305,43 @@ function loadplace(){
 	}).load();
 }
 
+/**加载主表单字段列表
+*/
+function loadmainformfld(){
+	if( !g_wfid ) return;
+
+	daTable({
+		id: "tb_limiteditlist",
+		url: "/sys_userform/action/tbcolumns2workflow_get_page.php",
+		data: {
+			dataType: "json",
+			// opt: "qry",
+			wfid: g_wfid
+		},
+		//loading: false,
+		//page: false,
+		pageSize: 9999,
+		
+		field: function( fld, val, row, ds ){
+			return val;
+		},
+		loaded: function( idx, xml, json, ds ){
+			//link_click("#tb_list tbody[name=details_auto] tr");
+			//toExcel();
+		},
+		error: function(code,msg,ex){
+			debugger;
+		}
+	}).load();
+}
+
 /**加载工作流操作权限信息
 */
 function loadworkflowpower(){
 	da.runDB("action/workflow2role_get_list.php",{
 		dataType: "json",
 		wfid: g_wfid
-	},function(data){debugger;
+	},function(data){
 		if("FALSE"!= data){
 			var readrole = [], newrole = [], assignrole = [], delrole = [];
 			
@@ -329,6 +384,7 @@ function loadinfo(){
 			da("#wf_icon").dom[0].src= res.wf_icon?res.wf_icon:"/uploads/workflowico/default.png";
 			da("[name=wf_isrun][value="+ res.wf_isrun +"]").attr("checked",true).dom[0].checked=true;
 			g_editor.html(res.wf_remark);
+			
 		}
 	});
 }
@@ -347,6 +403,7 @@ function loadworkflow(wfid, obj){
 
 	loadinfo();
 	loadworkflowpower();
+	loadmainformfld();
 	loadplace();
 	loadtran();
 	loadarc();
@@ -494,7 +551,6 @@ function selectreadrole(){
 */
 function selectmainform(){
 	daWin({
-	
 		width: 600,
 		height:400,
 		url: "/sys_bizform/plugin/select_biztemplet.htm",
@@ -513,6 +569,8 @@ function selectmainform(){
 			},function(res){
 				da("#wf_btid").val(btid?btid:"");
 				da("#wf_btname").val(btname?btname:"");
+				
+				loadmainformfld();
 			});
 			
 		}
@@ -884,7 +942,7 @@ function loadeditor(){
 	});
 };
 
-daLoader("daDate,daMsg,daTab,daTable,daWin,daButton", function(){
+daLoader("daDate,daMsg,daTab,daTable,daIframe,daWin,daButton", function(){
 	//daUI();
 	
 	/*页面加载完毕*/

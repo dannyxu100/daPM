@@ -223,7 +223,8 @@
 									<td style="width:60px;">时限</td>
 									<td style="width:80px;">完毕任务</td>
 									<td>执行角色</td>
-									<td>表单</td>
+									<td style="width:50px;">可编辑</td>
+									<td>附表单</td>
 								</tr>
 							</tbody>
 							<tbody name="body" style="display:none">
@@ -236,12 +237,22 @@
 									<td name="t_limit" >{t_limit}</td>
 									<td name="t_firetaskid" >{t_firetaskid}</td>
 									<td name="t_rolename" >{t_rolename}</td>
+									<td name="limitedit" ><img style="margin-left:10px; vertical-align:middle;" src="/images/sys_icon/down.png" onclick="viewlimitedit(this,{t_id})" /></td>
 									<td name="t_formname" >{t_formname}</td>
+								</tr>
+								<tr name="limiteditpad" style="display:none;background-color:#444;">
+									<td colspan="6" style="border-right:0px;">
+										&nbsp;
+									</td>
+									<td colspan="3" style="padding:0px;padding-bottom:10px;border-right:0px;">
+										<div name="limiteditlist">未设置</div>
+									</td>
+									<td>&nbsp;</td>
 								</tr>
 							</tbody>
 							<tbody name="foot">
 								<tr>
-									<td  colspan="9" name="sum_order">
+									<td  colspan="10" name="sum_order">
 										共<span id="tb_tranlist_recordcount2" style="color:#c26220;">0</span>&nbsp;条，
 										共<span id="tb_tranlist_pagecount2" style="color:#c26220">0</span>&nbsp;页，
 										当前在第<span id="tb_tranlist_pageindex2" style="color:#c26220">0</span>&nbsp;页　
@@ -250,6 +261,26 @@
 								</tr>
 							</tbody>
 						</table>
+						<div style="display:none;">
+							<table id="tb_limiteditlist" style="width:100%;background:#fff;">
+								<tbody name="head">
+									<tr>
+										<td style="width:20px;">序</td>
+										<td>可编辑项</td>
+										<td style="width:120px;">编码</td>
+										<td style="width:50px;">&nbsp;</td>
+									</tr>
+								</tbody>
+								<tbody name="body" style="display:none">
+									<tr>
+										<td name="order">{order}</td>
+										<td name="COLUMN_COMMENT" >{COLUMN_COMMENT}</td>
+										<td name="COLUMN_NAME" >{COLUMN_NAME}</td>
+										<td ><input type="checkbox" name="chkitem_limitedit" value="{COLUMN_NAME}" /></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 					
 					<div id="pad_arclist">
