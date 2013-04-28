@@ -24,7 +24,7 @@ function scrolltop(obj){
 var g_noticetimer = null;
 function noticescroll() {
 	da("#noticelist").stop(true,true).act({
-		marginTop: "-30px"
+		marginTop: "-50px"
 		
 	}, 
 	200, 
@@ -79,7 +79,7 @@ function loadnotice(){
 			
 			for(var i=0; i<data.length; i++){
 				listObj.append('<li>'+ '<a href="javascript:void(0)" onclick="viewnotice('
-				+ data[i].n_id +')" style="margin-right:20px;">'
+				+ data[i].n_id +')" style="margin-right:20px;"><img class="noticeimg"/>'
 				+ da.limitStr(data[i].n_title, 20) 
 				+'</a><span style="font-size:12px; color:#999;">'
 				+ da.fmtDate(data[i].n_date, "yyyy-mm-dd/p") +'/ '
