@@ -5148,7 +5148,7 @@ var daRe_until = /Until$/,
 			} 
 			else if ( arguments.length ) {
 				var set = da(arguments[0]);
-				set.push.apply( set, this.toArray() );
+				set.dom.push.apply( set, this.toArray() );
 				return this.pushStack( set, "before", arguments );
 			}
 		},
@@ -5160,7 +5160,7 @@ var daRe_until = /Until$/,
 				});
 			} else if ( arguments.length ) {
 				var set = this.pushStack( this.dom, "after", arguments );
-				set.push.apply( set, da(arguments[0]).toArray() );
+				set.dom.push.apply( set, da(arguments[0]).toArray() );
 				return set;
 			}
 		},
@@ -5213,6 +5213,40 @@ var daRe_until = /Until$/,
 			}
 	
 			return this;
+		},
+		
+		replaceWith: function( value ) {
+			if ( !isDisconnected( this[0] ) ) {
+				// Make sure that the elements are removed from the DOM before they are inserted
+				// this can help fix replacing a parent with child elements
+				if ( jQuery.isFunction( value ) ) {
+					return this.each(function(i) {
+						var self = jQuery(this), old = self.html();
+						self.replaceWith( value.call( this, i, old ) );
+					});
+				}
+
+				if ( typeof value !== "string" ) {
+					value = jQuery( value ).detach();
+				}
+
+				return this.each(function() {
+					var next = this.nextSibling,
+						parent = this.parentNode;
+
+					jQuery( this ).remove();
+
+					if ( next ) {
+						jQuery(next).before( value );
+					} else {
+						jQuery(parent).append( value );
+					}
+				});
+			}
+
+			return this.length ?
+				this.pushStack( jQuery(jQuery.isFunction(value) ? value() : value), "replaceWith", value ) :
+				this;
 		},
 		
 		/**移除元素 或移除某元素内部匹配子元素

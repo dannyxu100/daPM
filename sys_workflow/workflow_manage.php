@@ -228,7 +228,7 @@
 								</tr>
 							</tbody>
 							<tbody name="body" style="display:none">
-								<tr value="{t_id}" title="{t_remark}">
+								<tr value="{t_id}">
 									<td style="text-align:center;"><input type="checkbox" name="chkitem_tran" value="{t_id}" /></td>
 									<td name="order">{order}</td>
 									<td name="t_name" title="{t_id}">{t_name}</td>
@@ -245,7 +245,7 @@
 										&nbsp;
 									</td>
 									<td colspan="3" style="padding:0px;padding-bottom:10px;border-right:0px;">
-										<div name="limiteditlist">未设置</div>
+										<div name="limiteditlist" value="{t_id}" >未设置</div>
 									</td>
 									<td>&nbsp;</td>
 								</tr>
@@ -276,7 +276,7 @@
 										<td name="order">{order}</td>
 										<td name="COLUMN_COMMENT" >{COLUMN_COMMENT}</td>
 										<td name="COLUMN_NAME" >{COLUMN_NAME}</td>
-										<td ><input type="checkbox" name="chkitem_limitedit" value="{COLUMN_NAME}" /></td>
+										<td ><input type="checkbox" name="chklimitedit" field="{COLUMN_NAME}" onclick="selectlimitedit(this)" /></td>
 									</tr>
 								</tbody>
 							</table>

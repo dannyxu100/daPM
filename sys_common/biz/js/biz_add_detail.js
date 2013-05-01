@@ -24,7 +24,7 @@ function savebiz(){
 		dbsource: g_dbsource
 	};
 	
-	da("input:text,textarea", "#templet_form").each(function(idx, obj){
+	da("input:text,textarea,select", "#templet_form").each(function(idx, obj){
 		data[obj.id] = encodeURIComponent(da(obj).val());
 		// da.out(da(obj).val());
 	});
@@ -53,12 +53,12 @@ function savebiz(){
 var g_editors = {};
 /**初始化表单控件
 */
-function init(){
-	da("input[source],textarea[source]").each(function(idx, tag){
+function loadsource(){
+	da("input[source],textarea[source],select[source]").each(function(idx, tag){
 		var daObj = da(tag);
-		var source = daObj.attr("source");
+		var source = daObj.attr("source").split(",");
 
-		switch( source ){
+		switch( source[0] ){
 			case "puid":
 				daObj.val(fn_getcookie("puid"));
 				break;
@@ -88,6 +88,25 @@ function init(){
 							}
 						}
 					});
+				});
+				break;
+			case "list":
+				if(1 > source.length) return;
+			
+				//加载系统可选项
+				da.runDB("/sys_setting/item/action/item_get_list.php",{
+					dataType: "json",
+					// async: false,
+					itcode: source[1]
+					
+				},function(data){
+					if("FALSE"!=data){
+						for(var i=0; i<data.length; i++){
+							daObj.append([
+								'<option value="', data[i].i_value,'">', data[i].i_name, '</option>'
+							].join(''));
+						}
+					}	
 				});
 				break;
 			case "editorbox":
@@ -155,7 +174,7 @@ function loadtemplet(){
 			formObj.append( data[0].bt_formhtml );
 			g_dbsource = data[0].bt_dbsource;
 			
-			init();
+			loadsource();
 			autoframeheight();
 		}
 	});

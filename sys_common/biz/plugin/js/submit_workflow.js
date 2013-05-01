@@ -10,7 +10,7 @@ function updatetran(){
 			dataType: "text",
 			wfid: g_wfid,
 			wfcid: g_wfcid,
-			aid: da("#arclist").val(),
+			aid: da("[name=chkarclist]:checked").val(),
 			remark: da("#remark").val()
 		},
 		function(emails){
@@ -29,7 +29,7 @@ function updatetran(){
 				);
 			}
 			else{
-				alert("操作失败。");
+				alert("对不起，操作失败。");
 			}
 		},function(a,b,c){
 			// debugger;
@@ -47,13 +47,39 @@ function loadarclist(){
 		wfcid: g_wfcid
 	},
 	function(data){
-		// debugger;
-		if( "FALSE" != data ){
+		debugger;
+		if( "FALSE" != data && 0 < data.length ){
 			var arcObj = da("#arclist");
-			
-			for(var i=0; i<data.length; i++){
-				arcObj.append('<option value="'+ data[i].a_id +'">'+ data[i].a_name +'</option>');
+			switch( data[0].a_type ){
+				// SEQ：一般顺序流类型；
+				// Explicit Or Split：显示条件分支；
+				// Implicit Or Split：隐式条件分支； 
+				// Or Join：条件汇聚(显示和隐式)；
+				// And Split：并行分支； 
+				// And Join：并行汇聚
+				case "SEQ":
+				case "And Join":
+				case "Explicit Or Split":
+					for(var i=0; i<data.length; i++){
+						arcObj.append('<label ><input type="radio" name="chkarclist" '
+						+ ( 0==i ?' checked="true" ':'') 
+						+' value="'+ data[i].a_id +'"/>'+ data[i].a_name +'</label>');
+					}
+					break;
+					
+				case "And Split":
+					da("#acrtype").text("并行处理");
+				
+					var item = [];
+					for(var i=0; i<data.length; i++){
+						item.push(data[i].a_name);
+					}
+					arcObj.append('<label ><input type="radio" name="chkarclist" checked="true" value="'+ data[0].a_id +'"/>'+ item.join("; ") +'</label>');
+					break;
+					
+				
 			}
+			
 		}
 	},function(a,b,c){
 		// debugger;

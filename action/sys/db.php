@@ -255,19 +255,43 @@ class DB{
 	/**启动事务处理
 	*/
 	function tran(){
-		$this->m_pdo->beginTransaction();
+		//数据库引擎必须为InnoDB格式(支持事务处理)
+		try {
+			$this->m_pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, 0);	//关闭自动提交属性
+			return $this->m_pdo->beginTransaction();
+		}
+		catch (pdoException $e) {
+			$this->seterror($e->getMessage());
+			return false;
+		}
 	}
 	
 	/**提交事务处理
 	*/
 	function commit(){
-		$this->m_pdo->commit();
+		try {
+			$res = $this->m_pdo->commit();
+			$this->m_pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, 1);	//关闭自动提交属性
+			return $res;
+		}
+		catch (pdoException $e) {
+			$this->seterror($e->getMessage());
+			return false;
+		}
 	}
 	
 	/**回滚事务处理
 	*/
 	function back(){
-		$this->m_pdo->rollBack();
+		try {
+			$res = $this->m_pdo->rollBack();
+			$this->m_pdo->setAttribute(PDO::ATTR_AUTOCOMMIT, 1);	//关闭自动提交属性
+			return $res;
+		}
+		catch (pdoException $e) {
+			$this->seterror($e->getMessage());
+			return false;
+		}
 	}
 }
 ?>

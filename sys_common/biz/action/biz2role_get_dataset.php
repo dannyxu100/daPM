@@ -7,15 +7,19 @@
 	$roleid = fn_getcookie("roleid");
 	$wfid = $_POST["wfid"];
 	$tcid = $_POST["tcid"];
+	$tid = $_POST["tid"];
 	
 	$db = new DB("da_workflow");
 	
 	$sql = "select * from w_workflow2role 
 	where wf2r_wfid=:wfid 
 	and wf2r_prid in (".$roleid.") 
-	order by wf2r_prid asc";
+	order by wf2r_prid asc";				//工作流总参与权限
 	
-	$db->param(":wfid", $wfid);
+	$param1 = array();
+	array_push($param1, array(":wfid", $wfid));
+	
+	$db->paramlist($param1);
 	$set1 = $db->getlist($sql);
 	
 	$sql = "select w_trancase.* 
@@ -25,28 +29,30 @@
 	and tc_id=:tcid 
 	and tc_tid=t2r_tid 
 	and t2r_prid in(".$roleid.") 
-	order by wf_sort asc, wf_id asc";		//参与业务流程和 管理业务流程的角色
+	order by wf_sort asc, wf_id asc";		//参与事务变迁的角色
 
-	$db->param(":wfid", $wfid);
-	$db->param(":tcid", $tcid);
+	$param2 = array();
+	array_push($param2, array(":wfid", $wfid));
+	array_push($param2, array(":tcid", $tcid));
+	
+	$db->paramlist($param2);
 	$set2 = $db->getone($sql);
-	// $log = new Log();
-	// $log->write($db->geterror());
+	
+	$sql = "select * from w_tran2limitedit 
+	where tle_tid=:tle_tid";				//字段编辑权限
+	
+	$param3 = array();
+	array_push($param3, array(":tle_tid", $tid));
+	
+	$db->paramlist($param3);
+	$set3 = $db->getlist($sql);
 	
 	$db->close();
 	
 	echo json_encode(array(
-			"ds1"=>$set1,
-			"ds2"=>$set2
+			"opt"=>$set1,
+			"tran"=>$set2,
+			"fld"=>$set3
 		));
-			
-	// if(is_array($set1) && is_array($set2)){
-		// echo json_encode(array(
-				// "ds1"=>$set1,
-				// "ds2"=>$set2
-			// ));
-	// }
-	// else{
-		// echo "FALSE";
-	// }
+	
 ?>

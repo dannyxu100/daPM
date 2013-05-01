@@ -1,6 +1,7 @@
 var g_wfid = "",	//工作流id
 	g_wfcid = "",	//工作流实例id
-	g_tcid = "",	//当前事务变迁id
+	g_tcid = "",	//当前事务变迁实例id
+	g_tid = "",		//当前事务变迁id
 	g_btid = "",	//业务单模板id
 	g_bcid = "",	//业务单实例id
 	g_dbsource = "",	//数据源名称
@@ -162,6 +163,18 @@ function viewbizlog(){
 	
 }
 
+/**进入编辑模式
+*/
+function updatebiz(){
+	goto("/sys_common/biz/biz_update_detail.php?wfid="+ g_wfid 
+	+"&wfcid="+ g_wfcid 
+	+"&tcid="+ g_tcid 
+	+"&tid="+ g_tid 
+	+"&btid="+ g_btid 
+	+"&bcid="+ g_bcid 
+	+"&dbfldid="+ g_dbfldid);
+}
+
 /**加载表单数据
 */
 function loaddata(){
@@ -183,6 +196,7 @@ function loaddata(){
 	},function( data ){
 		//debugger;
 		da("#templet_form").show();
+		loading(false);
 		autoframeheight();
 		
 	},function( msg, code, content ){
@@ -245,7 +259,8 @@ var g_onlyread = false,		//允许查看
 	g_ennew = false,		//允许新建
 	g_enassign = false,		//允许分单
 	g_endel = false,		//允许删除
-	g_jointran = false;		//参与了业务流程
+	g_jointran = false,		//参与了业务流程
+	g_editfield = {};		//可编辑字段
 	
 /**初始化当前人员可操作权限
 */
@@ -253,12 +268,13 @@ function loadoptpower( fn ){
 	da.runDB("action/biz2role_get_dataset.php",{
 		dataType: "json",
 		wfid: g_wfid,
-		tcid: g_tcid
+		tcid: g_tcid,
+		tid: g_tid
 		
 	},function(data){
 		if("FALSE"!= data){
-			for(var i=0; i<data.ds1.length; i++){
-				switch( data.ds1[i].wf2r_type ){
+			for(var i=0; i<data.opt.length; i++){
+				switch( data.opt[i].wf2r_type ){
 					case "READ":
 						if( !g_onlyread ) g_onlyread = true;
 						break;
@@ -273,14 +289,25 @@ function loadoptpower( fn ){
 						break;
 				}
 			}
-
-			if( data.ds2 && g_tcid == data.ds2.tc_id ){
+			
+			if( data.tran && g_tcid == data.tran.tc_id ){
 				g_jointran = true;
 			}
 
+			if( data.fld ){
+				for(var i=0; i<data.fld.length; i++){
+					g_editfield[data.fld[i].tle_field] = true;
+				}
+			}
+	
 			var left_tools = da("#lefttools"),
 				right_tools = da("#righttools");
 
+			//有可编辑项
+			if( data.fld.length ){
+				right_tools.append('<a class="item" href="javascript:void(0)" onclick="updatebiz();" ><img src="/images/sys_icon/email_edit.png" /> 编辑</a>');
+			}
+			
 			//参与管理 或参与业务流程
 			if( g_ennew || g_enassign || g_endel || g_jointran ){
 				left_tools.append('<a class="item" href="javascript:void(0)" onclick="uploadattach();" ><img src="/images/sys_icon/attach.png" /> 上传附件</a>');
@@ -327,10 +354,12 @@ daLoader("daMsg,daKey,daValid,daDate,daIframe,daWin",function(){
 		g_wfid = arrparam["wfid"];
 		g_wfcid = arrparam["wfcid"];
 		g_tcid = arrparam["tcid"];
+		g_tid = arrparam["tid"];
 		g_dbfldid = arrparam["dbfldid"];
 				
 		listenKey();
 		
+		loading(true);
 		loadoptpower(function(){
 			loadtemplet();
 		});

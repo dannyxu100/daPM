@@ -94,7 +94,7 @@ function viewbizlog( bcid ){
 * wfcid: 工作流实例 id
 * tcid: 事务变迁实例 id
 */
-function viewbiz( dbfldid, bcid, wfcid, tcid ){
+function viewbiz( dbfldid, bcid, wfcid, tcid, tid ){
 	if( g_isctrl ){
 		daWin({
 			width: 800,
@@ -102,6 +102,7 @@ function viewbiz( dbfldid, bcid, wfcid, tcid ){
 			url: "/sys_common/biz/biz_detail.php?wfid="+ g_wfid 
 			+"&wfcid="+ wfcid 
 			+"&tcid="+ tcid 
+			+"&tid="+ tid 
 			+"&btid="+ g_btid 
 			+"&bcid="+ bcid 
 			+"&dbfldid="+ dbfldid,
@@ -114,6 +115,7 @@ function viewbiz( dbfldid, bcid, wfcid, tcid ){
 		goto("/sys_common/biz/biz_detail.php?wfid="+ g_wfid 
 		+"&wfcid="+ wfcid 
 		+"&tcid="+ tcid 
+		+"&tid="+ tid 
 		+"&btid="+ g_btid 
 		+"&bcid="+ bcid 
 		+"&dbfldid="+ dbfldid);
@@ -179,8 +181,10 @@ function viewtran( obj, wfcid, tcid ){
 					return ('<a href="javascript:void(0)" onclick="assignbiz(this, '+ row["tc_id"] +')">'
 					+ (row["tc_puname"]?row["tc_puname"]:"未分配") +'</a>');
 					
-				}//待处理，且无人接单
-				else if( "EN" == g_transtatus && ("" == row["tc_puid"] || 0 == row["tc_puid"]) ){
+				}//待处理，且无人接单，且参与事务处理
+				else if( "EN" == g_transtatus 
+				&& ("" == row["tc_puid"] || 0 == row["tc_puid"]) 
+				&& g_trans[row["tc_tid"]] ){
 					return '<a href="javascript:void(0)" onclick="handlebiz('+ row["tc_id"] +')">接单</a>';
 				}
 				else{
@@ -292,8 +296,8 @@ function loaddata(){
 		enassign: g_enassign		//是否拥有分单权限
 	}
 	
-	if( "undefined" != typeof setuserparam && da.isFunction(setuserparam) ){
-		setuserparam( param );
+	if( "undefined" != typeof sys_setparam && da.isFunction(sys_setparam) ){
+		sys_setparam( param );
 	}
 	
 	var idxfld = 0;
@@ -305,6 +309,10 @@ function loaddata(){
 		//page: false,
 		pageSize: 20,
 		field: function( fld, val, row, ds ){
+			if( "undefined" != typeof sys_fld && da.isFunction(sys_fld) ){
+				val = sys_fld( fld, val, row, ds );
+			}
+			
 			if( "order" == fld ){
 				idxfld = 0;
 				
@@ -317,7 +325,8 @@ function loaddata(){
 				+ row[g_dbfld] +'\', '
 				+ row["bc_id"] +', '
 				+ row["wfc_id"] +', '
-				+ row["tc_id"] +')" >'
+				+ row["tc_id"] +', '
+				+ row["tc_tid"] +')" >'
 				+ (g_key?val.replace(new RegExp(g_key, "g"),'<span style="color:#900">'+g_key+'</span>'):val) +'</a> ';
 				
 				if( "" == g_transtatus || "FI" == g_transtatus ){
@@ -436,7 +445,9 @@ function loadtab(){
 var g_onlyread = false,		//允许查看
 	g_ennew = false,		//允许新建
 	g_enassign = false,		//允许分单
-	g_endel = false;		//允许删除
+	g_endel = false,		//允许删除
+	g_trans = {};			//参与的事务变迁
+	
 /**初始化当前人员可操作权限
 */
 function loadoptpower( fn ){
@@ -445,8 +456,14 @@ function loadoptpower( fn ){
 		wfid: g_wfid
 	},function(data){
 		if("FALSE"!= data){
-			for(var i=0; i<data.length; i++){
-				switch( data[i].wf2r_type ){
+			if( data.tran ){
+				for(var i=0; i<data.tran.length; i++){
+					g_trans[data.tran[i].t_id] = true;
+				}
+			}
+		
+			for(var i=0; i<data.opt.length; i++){
+				switch( data.opt[i].wf2r_type ){
 					case "READ":
 						if( !g_onlyread ) g_onlyread = true;
 						break;

@@ -1,7 +1,7 @@
 <?php
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/logincheck.php";
 	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/db.php";
-	include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
+	// include_once rtrim($_SERVER['DOCUMENT_ROOT'],"/")."/action/sys/log.php";
 	
 	$wfid = $_POST["wfid"];
 	
@@ -36,7 +36,7 @@
 	
 	$db->paramlist($param1);
 	$set = $db->getlist($sql1);
-	Log::out($sql1);
+	// Log::out($sql1);
 	
 	$db->paramlist($param2);
 	$count = $db->getlist($sql2);

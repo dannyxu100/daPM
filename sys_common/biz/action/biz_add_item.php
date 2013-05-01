@@ -21,12 +21,17 @@
 	
 	$param_wfc = array();
 	array_push($param_wfc, array(":wfid", $wfid));
-	array_push($param_wfc, array(":wfid", $wfid));
 	array_push($param_wfc, array(":status", "OP"));			//工作流实例当前状态；OP：开放；CL：关闭；SU：挂起；CA：取消；
 	array_push($param_wfc, array(":date", $nowdate));
 	array_push($param_wfc, array(":context", ""));
 	$db->paramlist($param_wfc);
-	$db->insert($sql_wfc);
+	$res = $db->insert($sql_wfc);
+	// Log::out($sql_wfc);
+	// Log::out("wfid: ".$wfid);
+	// Log::out("status: "."OP");
+	// Log::out("date: ".$nowdate);
+	// Log::out("context: "."");
+	// Log::out($res);
 	// Log::out($db->geterror());
 	
 	$wfcase = $db->getone("select @@IDENTITY as wfc_id");		//获取刚添加的工作流实例id

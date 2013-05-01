@@ -163,7 +163,66 @@ function clicknode(treeId, treeNode){
 	loadworkflowlist();
 }
 
+/**设置主表单字段权限
+*/
+function selectlimitedit( obj ){
+	var daObj = da(obj),
+		fld = daObj.attr("field"),
+		tid = daObj.parents("[name=limiteditlist]").attr("value");
+	
+	if(obj.checked){
+		da.runDB("/sys_workflow/action/tran2limitedit_add_item.php",{
+			tid: tid,
+			fld: fld
+			
+		},function(res){
+			if("FALSE" == res){
+				alert("设置失败");
+			}else{
+				alert("设置成功");
+			}
+		});
+	}
+	else{
+		da.runDB("/sys_workflow/action/tran2limitedit_delete_item.php",{
+			tid: tid,
+			fld: fld
+			
+		},function(res){
+			if("FALSE" == res){
+				alert("设置失败");
+			}else{
+				alert("设置成功");
+			}
+		});
+	}
+}
 
+
+/**加载主表单字段权限
+*/
+function loadlimitedit( tid ){
+	da.runDB("/sys_workflow/action/tran2limitedit_get_list.php",{
+		dataType: "json",
+		tid: tid
+		
+	},function(data){
+		var tbid = "#tb_limiteditlist_"+tid,
+			chkObj;
+
+		for(var i=0; i<data.length; i++){
+			chkObj = da("input[field="+ data[i].tle_field +"]", tbid);
+
+			chkObj.dom[0].checked = true;
+			chkObj.attr("checked","true");
+		}
+	},function(code,msg,ex){
+		// debugger;
+	});
+}
+
+/**显示主表单字段权限
+*/
 function viewlimitedit( obj, tid ){
 	var trObj = da(obj).parents("tr"),
 		nexttrObj = trObj.next("tr[name=limiteditpad]"),
@@ -184,6 +243,8 @@ function viewlimitedit( obj, tid ){
 	limiteditlist.id = "tb_limiteditlist_"+tid;
 	limiteditlist.setAttribute("id", "tb_limiteditlist_"+tid);
 	padObj.append(limiteditlist);
+	
+	loadlimitedit(tid);
 	
 	autoframeheight();
 }

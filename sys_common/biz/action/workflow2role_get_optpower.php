@@ -14,17 +14,23 @@
 	order by wf2r_prid asc";
 	
 	$db->param(":wfid", $wfid);
-	
 	$set = $db->getlist($sql);
-	// $log = new Log();
-	// $log->write($db->geterror());
+	
+	
+	$sql2 = "select t_id from w_tran2role, w_transition 
+	where t2r_prid in (".$roleid.") 
+	and t2r_tid=t_id 
+	and t_wfid=:wfid";
+	
+	$db->param(":wfid", $wfid);
+	$set2 = $db->getlist($sql2);
 	
 	$db->close();
 	
-	if(is_array($set)){
-		echo json_encode($set);
-	}
-	else{
-		echo "FALSE";
-	}
+	$res = array(
+		"opt"=>$set,
+		"tran"=>$set2							//记录集
+	);
+	
+	echo json_encode($res);
 ?>

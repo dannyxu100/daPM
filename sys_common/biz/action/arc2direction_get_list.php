@@ -22,7 +22,7 @@
 	$tids = array();					//事务变迁id记录集。
 	for( $i=0; $i<count($set_tran); $i++){
 		array_push( $tids, $set_tran[$i]["t_id"] );
-	}	
+	}
 	
 	/**************** 根据可参与事务变迁处理中状态的实例 找出下一步指向库所的 可选择向弧（路由） *****************/
 	$sql2 = "select w_arc.* from w_arc, w_trancase 
@@ -41,6 +41,8 @@
 	
 	$db->paramlist($param2);
 	$set = $db->getlist($sql2);
+	// Log::out($wfcid);
+	// Log::out($sql2);
 	
 	// Log::out($db->geterror());	
 	

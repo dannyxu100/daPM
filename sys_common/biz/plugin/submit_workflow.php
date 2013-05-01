@@ -17,7 +17,7 @@
 	</div>
 	
 	<div style="padding:5px;">
-		提交: <select id="arclist"></select>
+		<span id="acrtype">提交</span>: <span id="arclist"></span>
 	</div>
 	<div style="padding:5px;">
 		备注: <textarea id="remark" style="width:100%;height:100px;"></textarea>
