@@ -39,25 +39,6 @@
 	
 	$db->tran();	//启动事务
 	
-	/***************** 更新事务变迁实例状态 和完成日期 ***********************************************/
-	$sql_tc2 = "update w_trancase 
-	set tc_status='FI', 
-	tc_puid=:puid, 
-	tc_puname=:puname, 
-	tc_finishdate=:date, 
-	tc_remark=:remark 
-	where tc_id=:tcid";
-	
-	$param_tc2 = array();
-	array_push($param_tc2, array(":puid", fn_getcookie("puid")));
-	array_push($param_tc2, array(":puname", fn_getcookie("puname")));
-	array_push($param_tc2, array(":date", $nowdate));
-	array_push($param_tc2, array(":remark", $remark));
-	array_push($param_tc2, array(":tcid", $set_tc["tc_id"]));
-	
-	$db->paramlist($param_tc2);
-	$res = $db->update($sql_tc2);
-	
 	////////////////// 以下部分为事务变迁 判定是否发射（触发）与执行代码 /////////////////////////////
 	/***************** 根据当前事务变迁（工作项）实例, 找出前后库所 *********************************/
 	//IN库所
@@ -115,6 +96,25 @@
 		echo "FALSE";
 		return;
 	}
+	
+	/***************** 更新事务变迁实例状态 和完成日期 ***********************************************/
+	$sql_tc2 = "update w_trancase 
+	set tc_status='FI', 
+	tc_puid=:puid, 
+	tc_puname=:puname, 
+	tc_finishdate=:date, 
+	tc_remark=:remark 
+	where tc_id=:tcid";
+	
+	$param_tc2 = array();
+	array_push($param_tc2, array(":puid", fn_getcookie("puid")));
+	array_push($param_tc2, array(":puname", fn_getcookie("puname")));
+	array_push($param_tc2, array(":date", $nowdate));
+	array_push($param_tc2, array(":remark", $remark));
+	array_push($param_tc2, array(":tcid", $set_tc["tc_id"]));
+	
+	$db->paramlist($param_tc2);
+	$res = $db->update($sql_tc2);
 	
 	/********************* 检验通过，事务变迁可以发射，继续执行，移交库所令牌 *********************************/
 	//消耗IN库令牌
