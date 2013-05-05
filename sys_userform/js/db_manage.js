@@ -12,6 +12,12 @@ var setting = {
 };
 
 
+/**添加字段
+*/
+function addfeild(){
+	
+}
+
 /**创建用户自定义表单
 */
 function addform(){

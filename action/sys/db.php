@@ -294,4 +294,13 @@ class DB{
 		}
 	}
 }
+
+
+
+//兼容魔术引号， 适用各个 PHP 版本的用法
+if (get_magic_quotes_gpc()) {
+	foreach($_POST as $key=>$value){
+		$_POST[$key] = stripslashes($_POST[$key]);
+	}
+}
 ?>

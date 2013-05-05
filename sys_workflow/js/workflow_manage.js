@@ -485,7 +485,7 @@ function loadworkflowlist(){
 			for( var i=0; i<data.length; i++ ){
 				//delegate
 				listObj.append('<a href="javascript:void(0)" class="bt_menu" style="float:left;" onclick="loadworkflow('
-				+ data[i].wf_id +', this)">'+ (i+1)+"、"+data[i].wf_name +'</a>');
+				+ data[i].wf_id +', this)" title="'+ data[i].wf_id +'">'+ (i+1)+"、"+data[i].wf_name +'</a>');
 			}
 			
 			da(da(".bt_menu").dom[0]).click();

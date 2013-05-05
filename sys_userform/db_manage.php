@@ -75,8 +75,8 @@
 					<div class="list_top_bar">
 						<div class="list_top_title">数据表所包含的字段信息</div>
 						<div class="list_top_tools">
-							<a class="item" href="javascript:void(0)" onclick="addtran();" ><img src="/images/sys_icon/add.png" /> 添加</a>
-							<a class="item" href="javascript:void(0)" onclick="deleteg2r();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
+							<a class="item" href="javascript:void(0)" onclick="addfeild();" ><img src="/images/sys_icon/add.png" /> 添加</a>
+							<a class="item" href="javascript:void(0)" onclick="deletefeild();" ><img src="/images/sys_icon/delete.png" /> 删除</a>
 						</div>
 					</div>
 					

@@ -177,7 +177,7 @@
 							<tbody name="body" style="display:none">
 								<tr value="{p_id}">
 									<td style="text-align:center;">{checkbox}</td>
-									<td name="order">{order}</td>
+									<td name="order" title="{p_id}">{order}</td>
 									<td name="p_name" >{p_name}</td>
 									<td name="p_sort" >{p_sort}</td>
 									<td name="p_type" >{p_type}</td>
@@ -230,7 +230,7 @@
 							<tbody name="body" style="display:none">
 								<tr value="{t_id}">
 									<td style="text-align:center;"><input type="checkbox" name="chkitem_tran" value="{t_id}" /></td>
-									<td name="order">{order}</td>
+									<td name="order" title="{t_id}">{order}</td>
 									<td name="t_name" title="{t_id}">{t_name}</td>
 									<td name="t_sort" >{t_sort}</td>
 									<td name="t_type" >{t_type}</td>
@@ -309,7 +309,7 @@
 							<tbody name="body" style="display:none">
 								<tr value="{a_id}">
 									<td style="text-align:center;"><input type="checkbox" name="chkitem_arc" value="{a_id}" /></td>
-									<td name="order">{order}</td>
+									<td name="order" title="{a_id}">{order}</td>
 									<td name="a_name" style="font-weight:bold;" >{a_name}</td>
 									<td name="p_name" >{p_name}</td>
 									<td name="a_direction" >{a_direction}</td>
